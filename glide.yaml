@@ -1,0 +1,6 @@
+package: server-api-go
+import:
+- package: github.com/gin-gonic/gin
+  version: v1.1.4
+- package: github.com/jinzhu/gorm
+- package: github.com/lib/pq
