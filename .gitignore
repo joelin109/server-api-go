@@ -1,3 +1,8 @@
 # Distribution / packaging
 vendor/
-.idea
+.idea/
+*.xml
+.DS_Store
+webapp/.DS_Store
+
+
