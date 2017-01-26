@@ -14,7 +14,7 @@ type WordAPI struct {
 func (self *WordAPI) New(c *gin.Context) {
 
 	//model.InitGormDB()
-	var _handler = logic.DictionaryHandler{}
+	var _handler = &logic.DictionaryHandler{}
 
 	var body RequestBody
 	body.Parse(c.Request)

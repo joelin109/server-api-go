@@ -8,7 +8,7 @@ import (
 )
 
 func APIRegisterRoute(router *gin.Engine) {
-	word := WordAPI{}
+	word := &WordAPI{}
 	word.registerRoute(router)
 
 	//routing.Handlers(router)
