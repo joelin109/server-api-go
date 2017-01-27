@@ -8,12 +8,10 @@ const (
 	ArticleStatusNew = iota
 	ArticleStatusOnline
 	ArticleStatusOffline
-	Gorm_C = "gorm:\"column:id2\""
-	Gorm_D = "column:Wort"
 )
 
 type ContentWord struct {
-	ID          int8        `&Gorm_C          json:"id"`
+	ID          int8        `gorm:"column:id"           json:"id"`
 	Wort        string      `gorm:"column:wort"         json:"Wort"      sql:"not null;unique"  binding:"required"`
 	WortSex     string      `gorm:"column:wort_sex"     json:"WortSex"   sql:"not_null"   binding:"required"`
 	Plural      string      `gorm:"column:plural"       json:"Plural2"    sql:"not null"   binding:"required"`

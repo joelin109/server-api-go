@@ -15,15 +15,10 @@ type WordAPI struct {
 
 func (self *WordAPI) New(c *gin.Context) {
 
-	//model.InitGormDB()
-	//_handler := new(logic.DictionaryHandler)
+	_handler := new(logic.DictionaryHandler)
 	_body := new(RequestBody).Parse(c.Request)
-	//_word := &model.ContentWord{}
 	_word := new(model.ContentWord)
-	fmt.Println(_word)
-	fmt.Println(&_word)
 	_body.ReadData(_word)
-
 	fmt.Println(_body)
 	fmt.Println(_word)
 
@@ -32,9 +27,9 @@ func (self *WordAPI) New(c *gin.Context) {
 	response.Desc = "Successful"
 	response.Resource = "Postgres"
 	response.Result = ResponseResult{}
-	response.Result.Rows = _word
-	//response.Result.Rows, _ = _handler.GetDetail(_body.Data) // model.InitGormDB()
-	response.Result.Detail = _body
+	//response.Result.Rows = _word
+	response.Result.Rows, _ = _handler.GetDetail(_body.Data) // model.InitGormDB()
+	response.Result.Detail = _word
 
 	c.JSON(400, response)
 }

@@ -74,7 +74,6 @@ func Models2Intslice(models interface{}, idField string) []int {
 }
 
 // 驼峰式写法转为下划线写法
-// 驼峰式写法转为下划线写法
 func UnderscoreName(name string) string {
 	buffer := NewBuffer()
 	for i, r := range name {

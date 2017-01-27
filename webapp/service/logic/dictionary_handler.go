@@ -47,7 +47,7 @@ func (*DictionaryHandler) GetList(param string, limit int8) ([]*model.ContentWor
 	//_words := []&model.ContentWord{}
 
 	fmt.Println(_words)
-	msql.Query( &_words, _filter, nil)
+	msql.Query(&_words, _filter, nil)
 
 	fmt.Println("DictionaryHandler.GetList")
 	for _, _word := range _words {
