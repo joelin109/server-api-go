@@ -4,6 +4,9 @@ import (
 	"strconv"
 	"log"
 	"bytes"
+	//"math/big"
+
+
 )
 // 内嵌bytes.Buffer，支持连写
 type Buffer struct {

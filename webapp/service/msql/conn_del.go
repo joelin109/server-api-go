@@ -108,7 +108,7 @@ func InitGoDB() []model.ContentWord {
 			defer rows.Close()
 			for rows.Next() {
 
-				err := rows.Scan(&word.Id, &word.Wort, &word.WortSex, &s, &word.IsRegel, &updatedate)
+				err := rows.Scan(&word.ID, &word.Wort, &word.WortSex, &s, &word.IsRegel, &updatedate)
 
 				word.UpdateDate = updatedate.Format("2006-01-02 15:04:05")
 				word.En = ""

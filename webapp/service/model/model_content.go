@@ -13,16 +13,16 @@ const (
 )
 
 type ContentWord struct {
-	Id          int8        `&Gorm_C          json:"id"`
+	ID          int8        `&Gorm_C          json:"id"`
 	Wort        string      `gorm:"column:wort"         json:"Wort"      sql:"not null;unique"  binding:"required"`
 	WortSex     string      `gorm:"column:wort_sex"     json:"WortSex"   sql:"not_null"   binding:"required"`
-	Plural      string      `gorm:"column:plural"       json:"Plural"    sql:"not null"   binding:"required"`
+	Plural      string      `gorm:"column:plural"       json:"Plural2"    sql:"not null"   binding:"required"`
 	Zh          string      `gorm:"column:zh"           json:"Zh"`
-	En          string      `gorm:"column:en"           json:"En2" `
+	En          string      `gorm:"column:en"           json:"En" `
 	Level       string      `gorm:"column:level"        json:"Level"`
 	Type        string      `gorm:"column:type"         json:"Type"`
-	IsRegel     int8        `gorm:"column:is_regel"     json:"IsRegel"`
-	IsRecommend int8        `gorm:"column:is_recommend" json:"IsRecommend2"`
+	IsRegel     int8        `gorm:"column:is_regel"     json:"IsRegel"`  // <=127
+	IsRecommend int8        `gorm:"column:is_recommend" json:"IsRecommend"`
 	CreateDate  time.Time   `gorm:"column:create_date"  json:"-"`
 	UpdateDate  string      `json:"CreateDate"`
 }

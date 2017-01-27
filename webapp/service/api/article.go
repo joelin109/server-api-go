@@ -1,15 +1,49 @@
 package api
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"server-api-go/webapp/service/logic"
+	"fmt"
+)
 
-func API_ContentArticle_List(c *gin.Context) {
+type ArticleAPI struct {
+}
+
+func API_ContentArticle_New(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Im Joe",
 	})
 }
 
-func API_ContentArticle_Detail(c *gin.Context) {
+func (self *ArticleAPI) List(c *gin.Context) {
+	//model.InitGormDB()
+	var _handler = &logic.DictionaryHandler{}
+
+	var body RequestBody
+	body.Parse(c.Request)
+	fmt.Println(body.Data)
+
+	/*_test := make(map[string]interface{}, 0)
+util.Struct2Map(_test, _body)
+fmt.Println(_test)*/
+
+	var response Response
+
+	response.Code = "1"
+	response.Desc = "Successful"
+	response.Resource = "Postgres"
+	response.Result = ResponseResult{}
+	response.Result.Rows, _ = _handler.GetList("dfd", 10) // model.InitGormDB() // model.InitGoDB()
+	response.Result.Detail = body
+
+	c.JSON(400, response)
+}
+
+func (self *ArticleAPI) Detail(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "Im Joe",
+		"message": "API_ContentDiction_Post",
 	})
 }
+
+
+

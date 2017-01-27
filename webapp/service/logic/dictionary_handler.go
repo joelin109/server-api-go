@@ -19,6 +19,25 @@ type DictionaryHandler struct{}
 	return words, err
 }*/
 
+func (*DictionaryHandler) GetDetail(data map[string]interface{}) (*model.ContentWord, error) {
+
+	fmt.Println(util.UnderscoreName("DictionaryHandler.GetDetail"))
+
+	_word := new(model.ContentWord)
+	_word.ID = 82
+
+	//msql.QueryFirst(&_word, "wort = 'beeilen'")
+	msql.First(&_word, _word.ID)
+
+	fmt.Println(_word)
+	fmt.Println(util.RandomKey("cw"))
+	fmt.Println(util.RandomToken())
+
+	_word.UpdateDate = _word.CreateDate.Format("2006-01-02 15:04:05")
+
+	return _word, nil
+}
+
 func (*DictionaryHandler) GetList(param string, limit int8) ([]*model.ContentWord, error) {
 
 	fmt.Println(util.UnderscoreName("DictionaryHandler.GetList"))
@@ -28,7 +47,7 @@ func (*DictionaryHandler) GetList(param string, limit int8) ([]*model.ContentWor
 	//_words := []&model.ContentWord{}
 
 	fmt.Println(_words)
-	msql.Query(_filter, nil, limit, &_words)
+	msql.Query( &_words, _filter, nil)
 
 	fmt.Println("DictionaryHandler.GetList")
 	for _, _word := range _words {

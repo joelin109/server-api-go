@@ -9,7 +9,7 @@ func main() {
 	// initialize gin
 	router := gin.Default()
 
-	api.APIRegisterRoute(router)
+	api.RegisterRoutes(router)
 
-	router.Run(":8082")
+	router.Run(":8083")
 }

@@ -7,13 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func APIRegisterRoute(router *gin.Engine) {
-	word := &WordAPI{}
-	word.registerRoute(router)
-
-	//routing.Handlers(router)
-	router.POST(conf.APIURL_Content_Article_List, API_ContentArticle_List)
-	router.POST(conf.APIURL_Content_Article_Detail, API_ContentArticle_Detail)
+func RegisterRoutes(router *gin.Engine) {
+	new(WordAPI).registerRoute(router)
+	new(ArticleAPI).registerRoute(router)
 
 	router.GET("/user/:name", func(c *gin.Context) {
 		name := c.Param("name")
@@ -23,13 +19,19 @@ func APIRegisterRoute(router *gin.Engine) {
 
 func (self *WordAPI)registerRoute(router *gin.Engine) {
 
-	//routing.Handlers(router)
 	router.POST(conf.APIURL_Content_Dictionary_Post, self.New)
 	router.POST(conf.APIURL_Content_Dictionary_Detail, self.Detail)
 	router.POST(conf.APIURL_Content_Dictionary_List, self.List)
 
 }
 
+func (self *ArticleAPI)registerRoute(router *gin.Engine) {
+
+	router.POST(conf.APIURL_Content_Article_Post, API_ContentArticle_New)
+	router.POST(conf.APIURL_Content_Article_List, self.Detail)
+	router.POST(conf.APIURL_Content_Article_Detail, self.List)
+
+}
 
 
 
