@@ -20,7 +20,7 @@ func (self *ArticleAPI) List(c *gin.Context) {
 	var _handler = &logic.DictionaryHandler{}
 
 	var body RequestBody
-	body.Parse(c.Request)
+	body.Read(c.Request)
 	fmt.Println(body.Data)
 
 	/*_test := make(map[string]interface{}, 0)

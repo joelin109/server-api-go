@@ -5,9 +5,10 @@ import (
 	"reflect"
 	"strings"
 	"unicode"
+	"errors"
 )
 
-func Struct2Map(dest map[string]interface{}, src interface{}) error {
+func Struct2Map(src interface{}, dest map[string]interface{}) error {
 	if dest == nil {
 		return fmt.Errorf("Struct2Map(dest is %v)", dest)
 	}
@@ -38,6 +39,82 @@ func Struct2Map(dest map[string]interface{}, src interface{}) error {
 	}
 	return nil
 }
+
+func Map2Struct(src map[string]interface{}, out interface{}) error {
+
+	for k, v := range src {
+		err := setField(out, k, v)
+		if err != nil {
+			fmt.Println("match failed field:", k, v)
+		}
+	}
+
+	return nil
+}
+
+func setField(out interface{}, mapName string, mapValue interface{}) error {
+	structObject := reflect.ValueOf(out).Elem()
+	structFieldName := matchFieldName(out, mapName)
+	structFieldValue := structObject.FieldByName(structFieldName)
+
+	var mapFieldValue reflect.Value
+	switch mapValue.(type) {
+	case float64:
+		_v_flt, _ := mapValue.(float64)
+		_typeString := fmt.Sprintf("%s", structFieldValue.Type())
+
+		switch _typeString {
+		case "int8":
+			mapFieldValue = reflect.ValueOf(int8(_v_flt))
+		case "int16":
+			mapFieldValue = reflect.ValueOf(int16(_v_flt))
+		default:
+			mapFieldValue = reflect.ValueOf(int(_v_flt))
+		}
+
+	default:
+		mapFieldValue = reflect.ValueOf(mapValue)
+	}
+
+	if !structFieldValue.IsValid() {
+		return fmt.Errorf("No such field: %s in obj", mapName)
+	}
+	if !structFieldValue.CanSet() {
+		return fmt.Errorf("Cannot set %s field value", mapName)
+	}
+
+	if structFieldValue.Type() != mapFieldValue.Type() {
+		return errors.New("Provided value type didn't match obj field type")
+	}
+
+	structFieldValue.Set(mapFieldValue)
+	return nil
+}
+
+func matchFieldName(obj interface{}, name string) string {
+	structObject := reflect.ValueOf(obj).Elem()
+	_fieldName := name
+	_fieldValue := structObject.FieldByName(_fieldName)
+
+	if !_fieldValue.IsValid() {
+
+		_r := strings.NewReplacer("_", "")
+		_fieldCount := structObject.NumField()
+		for i := 0; i < _fieldCount; i++ {
+			_tempName := structObject.Type().Field(i).Name
+			if _r.Replace(strings.ToLower(_tempName)) == _r.Replace(strings.ToLower(name)) {
+				//structFieldName = tempFieldName
+				//structFieldValue = structObject.FieldByName(structFieldName)
+				return _tempName
+				//break
+			}
+		}
+
+	}
+
+	return name
+}
+
 
 // model中类型提取其中的 idField(int 类型) 属性组成 slice 返回
 func Models2Intslice(models interface{}, idField string) []int {
