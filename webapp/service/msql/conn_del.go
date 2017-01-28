@@ -60,7 +60,7 @@ func InitGormDB() []model.ContentWord {
 	fmt.Println("InitGormDB")
 	var _new_words = []model.ContentWord{}
 	for _, word := range words {
-		word.UpdateDate = word.CreateDate.Format("2006-01-02 15:04:05")
+		word.CreatedAt = word.CreateDate.Format("2006-01-02 15:04:05")
 		_new_words = append(_new_words, word)
 	}
 	return _new_words
@@ -110,7 +110,7 @@ func InitGoDB() []model.ContentWord {
 
 				err := rows.Scan(&word.ID, &word.Wort, &word.WortSex, &s, &word.IsRegel, &updatedate)
 
-				word.UpdateDate = updatedate.Format("2006-01-02 15:04:05")
+				word.CreatedAt = updatedate.Format("2006-01-02 15:04:05")
 				word.En = ""
 				if s.Valid {
 					word.En = s.String

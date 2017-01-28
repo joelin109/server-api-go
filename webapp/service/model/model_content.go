@@ -11,7 +11,7 @@ const (
 )
 
 type ContentWord struct {
-	ID          int         `gorm:"column:id"           json:"id"`
+	ID          int         `gorm:"primary_key"         json:"id"`
 	Wort        string      `gorm:"column:wort"         json:"Wort"      sql:"not null;unique"  binding:"required"`
 	WortSex     string      `gorm:"column:wort_sex"     json:"WortSex"   sql:"not_null"   binding:"required"`
 	Plural      string      `gorm:"column:plural"       json:"Plural2"    sql:"not null"   binding:"required"`
@@ -21,8 +21,10 @@ type ContentWord struct {
 	Type        string      `gorm:"column:type"         json:"Type"`
 	IsRegel     int8        `gorm:"column:is_regel"     json:"IsRegel"`  // <=127
 	IsRecommend int8        `gorm:"column:is_recommend" json:"IsRecommend"`
+	IsIgnore    int8        `gorm:"column:is_ignore"    json:"IsIgnore"`
 	CreateDate  time.Time   `gorm:"column:create_date"  json:"-"`
-	UpdateDate  string      `json:"CreateDate"`
+	UpdateDate  time.Time   `gorm:"column:update_date"  json:"-"`
+	CreatedAt   string      `gorm:"-"                   json:"CreateDate"`
 }
 
 func (*ContentWord) TableName() string {

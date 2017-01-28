@@ -7,6 +7,8 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_"github.com/lib/pq"
+	"strings"
+
 )
 
 
@@ -22,13 +24,17 @@ func Create(model interface{}) {
 	}
 }
 
-func Update(model interface{}) {
+func Update(in interface{}, update map[string]interface{}) {
 
 	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
 	defer db.Close()
 
 	if isPass(err) {
-		db.Save(&model)
+		if update == nil {
+			db.Save(in)
+		} else {
+			db.Model(in).Updates(update)
+		}
 	}
 }
 
@@ -39,7 +45,7 @@ func Delete(model interface{}) {
 
 	//var _models = models
 	if isPass(err) {
-		db.Save(&model)
+		db.Save(model)
 	}
 
 }
@@ -55,6 +61,7 @@ func execute(model interface{}) {
 	}
 }
 
+// Search - First: one record
 func First(out interface{}, where ...interface{}) {
 
 	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
@@ -96,6 +103,34 @@ func QueryPaginate(out interface{}, filter string, orderBy *string, curPage, lim
 	}
 }
 
+func Count(model interface{}, filter string) (int, error) {
+
+	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	defer db.Close()
+
+	var count int
+	if isPass(err) {
+		db.Model(model).Where(filter).Count(&count)
+	}
+	return count, err
+}
+
+func Filter(format string, v interface{}) string {
+	var _format string
+
+	switch v.(type) {
+	case string:
+		_r := strings.NewReplacer("?", "'%s'")
+		_format = _r.Replace(format)
+	default:
+		_format = strings.Replace(format, "?", "%v", -1)
+	}
+
+	return fmt.Sprintf(_format, v)
+}
+
+
+// Check Error
 func isPass(err error) bool {
 	if err != nil {
 		fmt.Println(err)

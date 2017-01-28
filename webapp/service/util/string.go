@@ -3,6 +3,8 @@ package util
 import (
 	"crypto/rand"
 	"math/big"
+	"fmt"
+	"strings"
 )
 
 
@@ -20,4 +22,18 @@ func String(n int, charset string) (string, error) {
 		randstr[i] = charset[r]
 	}
 	return string(randstr), nil
+}
+
+func Merge(format string, v interface{}) string {
+	var _format string
+
+	switch v.(type) {
+	case string:
+		_r := strings.NewReplacer("?", "'%s'")
+		_format = _r.Replace(format)
+	default:
+		_format = strings.Replace(format, "?", "%v", -1)
+	}
+
+	return fmt.Sprintf(_format, v)
 }
