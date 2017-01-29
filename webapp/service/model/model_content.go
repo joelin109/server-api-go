@@ -31,6 +31,10 @@ func (*ContentWord) TableName() string {
 	return "content_dictionary_de"
 }
 
+func (self *ContentWord) FormatDate()  {
+	self.CreatedAt = self.CreateDate.Format("2006-01-02 15:04:05")
+}
+
 
 // 抓取的文章信息
 type Article struct {

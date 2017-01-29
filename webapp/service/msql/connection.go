@@ -14,13 +14,14 @@ import (
 
 // var Db gorm.DB []interface{}
 
-func Create(model interface{}) {
+func Create(in interface{}) {
 
 	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
 	defer db.Close()
 
 	if isPass(err) {
-		db.Create(model)
+		db.Create(in)
+		//db.NewRecord(in)
 	}
 }
 
@@ -77,8 +78,6 @@ func QueryFirst(out interface{}, filter string) {
 	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
 	defer db.Close()
 
-	//var _models = models
-	fmt.Println(filter)
 	if isPass(err) {
 		db.Where(filter).First(out)
 	}
