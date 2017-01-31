@@ -3,9 +3,9 @@ package logic
 import (
 	"fmt"
 
-	"server-api-go/webapp/service/msql"
-	"server-api-go/webapp/service/model"
-	"server-api-go/webapp/service/util"
+	"server-api-go/src/service/msql"
+	"server-api-go/src/service/model"
+	"server-api-go/src/service/util"
 	//"os/user"
 	"time"
 )

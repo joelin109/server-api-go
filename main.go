@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"server-api-go/webapp/service/api"
+	"server-api-go/src/service/api"
 )
 
 func main() {
@@ -11,5 +11,5 @@ func main() {
 
 	api.RegisterRoutes(router)
 
-	router.Run(":8083")
+	router.Run(":8088")
 }

@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"server-api-go/webapp/service/logic"
+	"server-api-go/src/service/logic"
 	"fmt"
 )
 

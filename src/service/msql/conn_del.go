@@ -1,9 +1,9 @@
 package msql
 
 import (
-	"server-api-go/webapp/service/model"
+	"server-api-go/src/service/model"
 	"github.com/jinzhu/gorm"
-	"server-api-go/webapp/service/conf"
+	"server-api-go/src/service/conf"
 	"fmt"
 	"database/sql"
 	"time"

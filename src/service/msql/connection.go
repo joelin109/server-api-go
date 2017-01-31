@@ -3,7 +3,7 @@ package msql
 import (
 	"fmt"
 
-	"server-api-go/webapp/service/conf"
+	"server-api-go/src/service/conf"
 
 	"github.com/jinzhu/gorm"
 	_"github.com/lib/pq"

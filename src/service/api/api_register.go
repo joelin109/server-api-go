@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"server-api-go/webapp/service/conf"
+	"server-api-go/src/service/conf"
 	"github.com/gin-gonic/gin"
 )
 
