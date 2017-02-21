@@ -9,12 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type WordAPI struct {
+type WordHandler struct {
 }
 
-func (self *WordAPI) New(c *gin.Context) {
+func (self *WordHandler) New(c *gin.Context) {
 
-	_handler := new(logic.DictionaryHandler)
+	_logic := new(logic.DictionaryLogic)
 	_body := new(RequestBody).Read(c.Request)
 	_word := new(model.ContentWord)
 	_body.FillData(_word)
@@ -25,33 +25,33 @@ func (self *WordAPI) New(c *gin.Context) {
 	response.Resource = "Postgres"
 	response.Result = ResponseResult{}
 	response.Result.Rows = _word
-	response.Result.Detail, _ = _handler.Post(_word)
+	response.Result.Detail, _ = _logic.Post(_word)
 
 	c.JSON(400, response)
 }
 
-func (self *WordAPI) List(c *gin.Context) {
+func (self *WordHandler) List(c *gin.Context) {
 	//model.InitGormDB()
-	var _handler = &logic.DictionaryHandler{}
+	//var _logic = &logic.DefaultDictionary
 
-	var body RequestBody
-	body.Read(c.Request)
-	fmt.Println(body.Data)
+	var _body RequestBody
+	_body.Read(c.Request)
+	fmt.Println(_body.Data)
 
-	var response Response
+	var _response Response
 
-	response.Code = "1"
-	response.Desc = "Successful"
-	response.Resource = "Postgres"
-	response.Result = ResponseResult{}
-	response.Result.Rows, _ = _handler.GetList("dfd", 10) // model.InitGormDB() // model.InitGoDB()
-	response.Result.Detail = body
+	_response.Code = "1"
+	_response.Desc = "Successful"
+	_response.Resource = "Postgres"
+	_response.Result = ResponseResult{}
+	_response.Result.Rows, _ = logic.DefaultDictionary.GetList("dfd", 1, 20) // model.InitGormDB() // model.InitGoDB()
+	_response.Result.Detail = _body
 
-	c.JSON(400, response)
+	c.JSON(400, _response)
 }
 
-func (self *WordAPI) Detail(c *gin.Context) {
-	_handler := new(logic.DictionaryHandler)
+func (self *WordHandler) Detail(c *gin.Context) {
+	_logic := new(logic.DictionaryLogic)
 	_body := new(RequestBody).Read(c.Request)
 	_word := new(model.ContentWord)
 	_body.FillData(_word)
@@ -62,7 +62,7 @@ func (self *WordAPI) Detail(c *gin.Context) {
 	response.Resource = "Postgres"
 	response.Result = ResponseResult{}
 	response.Result.Rows = _word
-	response.Result.Detail, _ = _handler.GetDetail(_word)
+	response.Result.Detail, _ = _logic.GetDetail(_word)
 
 	c.JSON(400, response)
 }

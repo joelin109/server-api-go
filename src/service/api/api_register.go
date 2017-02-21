@@ -8,7 +8,7 @@ import (
 )
 
 func RegisterRoutes(router *gin.Engine) {
-	new(WordAPI).registerRoute(router)
+	new(WordHandler).registerRoute(router)
 	new(ArticleAPI).registerRoute(router)
 
 	router.GET("/user/:name", func(c *gin.Context) {
@@ -17,7 +17,7 @@ func RegisterRoutes(router *gin.Engine) {
 	})
 }
 
-func (self *WordAPI)registerRoute(router *gin.Engine) {
+func (self *WordHandler)registerRoute(router *gin.Engine) {
 
 	router.POST(conf.APIURL_Content_Dictionary_Post, self.New)
 	router.POST(conf.APIURL_Content_Dictionary_Detail, self.Detail)

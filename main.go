@@ -18,6 +18,6 @@ func main() {
 		c.HTML(http.StatusOK, "index.html", nil)
 	})
 
-	router.Run(":8095")
+	router.Run(":8088")
 
 }

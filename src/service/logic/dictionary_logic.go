@@ -10,9 +10,11 @@ import (
 	"time"
 )
 
-type DictionaryHandler struct{}
+type DictionaryLogic struct{}
 
-func (*DictionaryHandler) Post(word *model.ContentWord) (*model.ContentWord, error) {
+var DefaultDictionary = DictionaryLogic{}
+
+func (*DictionaryLogic) Post(word *model.ContentWord) (*model.ContentWord, error) {
 
 	util.Log(util.UnderscoreName("DictionaryHandler.Post"))
 
@@ -44,9 +46,9 @@ func (*DictionaryHandler) Post(word *model.ContentWord) (*model.ContentWord, err
 	return _detail, nil
 }
 
-func (*DictionaryHandler) GetDetail(word *model.ContentWord) (*model.ContentWord, error) {
+func (*DictionaryLogic) GetDetail(word *model.ContentWord) (*model.ContentWord, error) {
 
-	fmt.Println(util.UnderscoreName("DictionaryHandler.GetDetail"))
+	fmt.Println(util.UnderscoreName("DictionaryLogic.GetDetail"))
 
 	_word := new(model.ContentWord)
 	_word.ID = word.ID
@@ -63,11 +65,11 @@ func (*DictionaryHandler) GetDetail(word *model.ContentWord) (*model.ContentWord
 	return _word, nil
 }
 
-func (*DictionaryHandler) GetList(param string, limit int8) ([]*model.ContentWord, error) {
+func (*DictionaryLogic) GetList(param string, page int8, size int8) ([]*model.ContentWord, error) {
 
-	fmt.Println(util.UnderscoreName("DictionaryHandler.GetList"))
+	fmt.Println(util.UnderscoreName("DictionaryLogic.GetList"))
 
-	_filter := msql.Filter("is_recommend = ?", 1)
+	_filter := msql.Filter("is_recommend = ?", 0)
 	_words := make([]*model.ContentWord, 0)
 	msql.Query(&_words, _filter, nil)
 

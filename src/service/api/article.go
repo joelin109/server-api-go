@@ -17,7 +17,7 @@ func API_ContentArticle_New(c *gin.Context) {
 
 func (self *ArticleAPI) List(c *gin.Context) {
 	//model.InitGormDB()
-	var _handler = &logic.DictionaryHandler{}
+	var _handler = logic.DefaultDictionary
 
 	var body RequestBody
 	body.Read(c.Request)
@@ -33,7 +33,7 @@ fmt.Println(_test)*/
 	response.Desc = "Successful"
 	response.Resource = "Postgres"
 	response.Result = ResponseResult{}
-	response.Result.Rows, _ = _handler.GetList("dfd", 10) // model.InitGormDB() // model.InitGoDB()
+	response.Result.Rows, _ = _handler.GetList("dfd", 10, 20) // model.InitGormDB() // model.InitGoDB()
 	response.Result.Detail = body
 
 	c.JSON(400, response)

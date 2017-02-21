@@ -85,7 +85,7 @@ func QueryFirst(out interface{}, filter string) {
 
 func Query(out interface{}, filter string, orderBy *string) {
 
-	QueryPaginate(out, filter, orderBy, 1, -1)
+	QueryPaginate(out, filter, orderBy, 1, conf.DB_Query_limit)
 
 }
 
@@ -98,7 +98,7 @@ func QueryPaginate(out interface{}, filter string, orderBy *string, curPage, lim
 	if isPass(err) {
 		//_offset := (curPage - 1) * limit
 		//db.Where(filter).Limit(limit, _offset).Find(out)
-		db.Where(filter).Limit(10).Find(out)
+		db.Where(filter).Limit(limit).Find(out)
 	}
 }
 
