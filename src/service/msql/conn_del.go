@@ -3,7 +3,7 @@ package msql
 import (
 	"server-api-go/src/service/model"
 	"github.com/jinzhu/gorm"
-	"server-api-go/src/service/conf"
+	"server-api-go/src/service/_conf"
 	"fmt"
 	"database/sql"
 	"time"

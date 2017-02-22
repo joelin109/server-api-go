@@ -3,7 +3,7 @@ package msql
 import (
 	"fmt"
 
-	"server-api-go/src/service/conf"
+	"server-api-go/src/service/_conf"
 
 	"github.com/jinzhu/gorm"
 	_"github.com/lib/pq"
@@ -16,7 +16,7 @@ import (
 
 func Create(in interface{}) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	if isPass(err) {
@@ -27,7 +27,7 @@ func Create(in interface{}) {
 
 func Update(in interface{}, update map[string]interface{}) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	if isPass(err) {
@@ -41,7 +41,7 @@ func Update(in interface{}, update map[string]interface{}) {
 
 func Delete(model interface{}) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	//var _models = models
@@ -54,7 +54,7 @@ func Delete(model interface{}) {
 // Update & Delete
 func execute(model interface{}) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	if isPass(err) {
@@ -65,7 +65,7 @@ func execute(model interface{}) {
 // Search - First: one record
 func First(out interface{}, where ...interface{}) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	if isPass(err) {
@@ -75,7 +75,7 @@ func First(out interface{}, where ...interface{}) {
 
 func QueryFirst(out interface{}, filter string) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	if isPass(err) {
@@ -91,7 +91,7 @@ func Query(out interface{}, filter string, orderBy *string) {
 
 func QueryPaginate(out interface{}, filter string, orderBy *string, curPage, limit int8) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	//var _models = models
@@ -104,7 +104,7 @@ func QueryPaginate(out interface{}, filter string, orderBy *string, curPage, lim
 
 func Count(model interface{}, filter string) (int, error) {
 
-	db, err := gorm.Open("postgres", conf.DB_Conn_Postgres)
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
 
 	var count int

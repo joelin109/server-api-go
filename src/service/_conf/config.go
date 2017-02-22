@@ -1,5 +1,10 @@
 package conf
 
+
+const DB_Conn_Postgres = "postgresql://postgres:123456@localhost:5432/sqlrest?sslmode=disable"
+const DB_Conn_URI = DB_Conn_Postgres
+const DB_Query_limit = 50
+
 const AuthUserKey = "user"
 const APIURL_USER_List = "/api/user/list"
 const APIURL_USER_Detail = "/api/user/detail"

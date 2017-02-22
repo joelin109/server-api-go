@@ -13,6 +13,7 @@ func main() {
 
 	router.StaticFile("asset/css/styles6.css", "./www/asset/css/styles6.css")
 	router.StaticFile("app.bundle.js", "./www/app.bundle.js")
+	router.StaticFile("app.bundle2.js", "./www/app.bundle2.js")
 	router.LoadHTMLFiles("www/index.html")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
