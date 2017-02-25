@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import DeutschListItem from './deutschListItem';
+import ArticleListItem from './articleListItem';
 
 
 class List extends React.Component {
@@ -22,25 +23,26 @@ class List extends React.Component {
 
     render() {
         let style = this.props.itemStyle;
+        let listItems = ""
         switch (style) {
             case "deutsch":
-                let listItems = this.props.value.map(item =>
-                    <DeutschListItem key={item.id} value={item} onClickTag={this.linkHandler.bind(this)}/>
-                );
-                return (
-                    <div>
-                        {listItems}
-                    </div>
+                listItems = this.props.value.map(item =>
+                    <DeutschListItem key={item.id} value={item} onClickTag={this.linkHandler.bind(this)}/>);
 
-                );
+                break;
+            case "article":
+                listItems = this.props.value.map(item =>
+                    <ArticleListItem key={item.id} value={item} onClickTag={this.linkHandler.bind(this)}/>);
                 break;
             default:
-                return (
-                    "Error Here"
-                );
                 break;
         }
 
+        return (
+            <div>
+                {listItems}
+            </div>
+        );
     }
 
 

@@ -23,7 +23,7 @@ class ListContainer extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (this.state.total != nextProps.total);
+        return true;//(this.state.total != nextProps.total);
     }
 
 

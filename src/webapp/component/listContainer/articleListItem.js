@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class DeutschListItem extends React.Component {
+class ArticleListItem extends React.Component {
 
     linkHandler(e) {
         this.props.onClickTag(e.target.innerHTML);
@@ -39,4 +39,4 @@ class DeutschListItem extends React.Component {
     }
 };
 
-export default DeutschListItem;
+export default ArticleListItem;
