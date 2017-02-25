@@ -28,7 +28,6 @@ class App extends React.Component {
     findProducts() {
        productService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page})
             .then(data => {
-               // alert(data.total)
                 this.setState({
                     products: data.products,
                     page: data.page,
@@ -38,6 +37,8 @@ class App extends React.Component {
             });
     }
 
+
+    //Action
     actionSearchKeyChange(searchKey) {
         this.setState({searchKey: searchKey, page: 1}, this.findProducts);
     }
@@ -46,16 +47,9 @@ class App extends React.Component {
         this.setState({min: values[0], max: values[1], page: 1}, this.findProducts);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        //alert("props-" + this.props.products.length)
-        //alert("nextProps-" + nextProps.products.length)
-        return (this.state.total != nextState.total);
-    }
 
 
     render() {
-        //alert('aaaaa' + this.state.total)
-        //alert("fdfgdf - " + this.state.products.length)
         return (
             <div>
                 <Header text="Joe.com"/>
