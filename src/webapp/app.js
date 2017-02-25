@@ -16,8 +16,7 @@ class App extends React.Component {
             min: 0,
             max: 30,
             products: [],
-            total: 0,
-            page: 1
+            total: 0
         }
     }
 
@@ -26,11 +25,10 @@ class App extends React.Component {
     }
 
     findProducts() {
-       productService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page})
+       productService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: 1})
             .then(data => {
                 this.setState({
                     products: data.products,
-                    page: data.page,
                     pageSize: data.pageSize,
                     total: data.total
                 });
@@ -39,14 +37,20 @@ class App extends React.Component {
 
 
     //Action
-    actionSearchKeyChange(searchKey) {
+    actionSearchChannel(searchKey) {
         this.setState({searchKey: searchKey, page: 1}, this.findProducts);
     }
 
     actionChangeRange(values) {
-        this.setState({min: values[0], max: values[1], page: 1}, this.findProducts);
+        this.state.min = values[0];
+        this.state.max = values[1];
+        this.findProducts()
     }
 
+    actionSearchTag(tag) {
+        this.state.searchKey = tag;
+        this.findProducts()
+    }
 
 
     render() {
@@ -58,7 +62,8 @@ class App extends React.Component {
                                  onChange={this.actionChangeRange.bind(this)}/>
                 </div>
                 <ListContainer value={this.state.products}
-                               total={this.state.total} min={this.state.min} max={this.state.max} tag=""/>
+                               total={this.state.total} min={this.state.min} max={this.state.max} filter={this.state.searchKey}
+                               onClickTag={this.actionSearchTag.bind(this)}/>
 
             </div>
         );

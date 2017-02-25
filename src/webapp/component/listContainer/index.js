@@ -11,15 +11,12 @@ class ListContainer extends React.Component {
 
         this.state = {
             results: [],
-            total: 0,
-            page: 1,
-            tag: ""
+            page: 1
         }
     }
 
     componentWillReceiveProps(nextProps) {
         this.state.results = nextProps.value;
-        this.state.total = nextProps.total;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -39,9 +36,7 @@ class ListContainer extends React.Component {
     }
 
     actionSearchTag(e) {
-        this.state.tag = e;
-        this.state.page = 1;
-        this.apiRequest()
+        this.props.onClickTag(e)
         return false;
     }
 
@@ -49,12 +44,12 @@ class ListContainer extends React.Component {
     //API Request&Response
     apiRequest() {
         let filter = {
-            search: this.state.tag,
+            search: this.props.filter,
             min: this.props.min,
             max: this.props.max,
             page: this.state.page
         }
-
+        
         requestProduct.findAll(filter)
             .then(result => {
                 this.apiResponse(result)
@@ -64,8 +59,7 @@ class ListContainer extends React.Component {
     apiResponse(result) {
         this.setState({
             results: result.products,
-            page: result.page,
-            total: result.total
+            page: result.page
         });
     }
 
@@ -80,7 +74,7 @@ class ListContainer extends React.Component {
                 </div>
 
                 <div>
-                    <Paginator page={this.state.page} pageSize={size} total={this.state.total}
+                    <Paginator page={this.state.page} pageSize={size} total={this.props.total}
                                onPrevious={this.actionPagePrevious.bind(this)}
                                onNext={this.actionPageNext.bind(this)}/>
                 </div>
