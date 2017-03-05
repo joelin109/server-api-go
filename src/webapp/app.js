@@ -1,11 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Header from './component/header';
+import * as productService from './service/product-service';
+import Navigator from './component/header';
 import Channel from './component/channel';
 import RangeSlider from './component/RangeSlider';
-import ListContainer from './component/listContainer';
-import * as productService from './service/product-service';
+import ListContainer from './component/list';
+import CardListExample from './component/list/cardlist';
+
+const _style = {
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+    },
+    filter: {
+        display: 'flex',
+        justifyContent: 'center',
+        width: 1024,
+    },
+
+};
 
 class App extends React.Component {
 
@@ -25,7 +40,7 @@ class App extends React.Component {
     }
 
     findProducts() {
-       productService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: 1})
+        productService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: 1 })
             .then(data => {
                 this.setState({
                     products: data.products,
@@ -38,7 +53,7 @@ class App extends React.Component {
 
     //Action
     actionSearchChannel(searchKey) {
-        this.setState({searchKey: searchKey, page: 1}, this.findProducts);
+        this.setState({ searchKey: searchKey, page: 1 }, this.findProducts);
     }
 
     actionChangeRange(values) {
@@ -55,19 +70,38 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <Header text="Joe.com"/>
-                <div className="slds-col">
-                    <RangeSlider defaultValue={[0, 26]} min={0} max={26} step={.5} withBars={true}
-                                 onChange={this.actionChangeRange.bind(this)}/>
+            <div >
+                <Navigator title="Title" />
+                <br />
+
+                <div style={_style.root}>
+
+                    <div style={_style.filter}>
+                        <RangeSlider defaultValue={[0, 26]} min={0} max={26} step={.5} withBars={true}
+                            onChange={this.actionChangeRange.bind(this)} />
+                    </div>
+                    <br />
+                    <br />
+                    <br />
                 </div>
-                <ListContainer value={this.state.products}
-                               total={this.state.total} min={this.state.min} max={this.state.max} filter={this.state.searchKey}
-                               onClickTag={this.actionSearchTag.bind(this)}/>
+
+                <div style={_style.root}>
+                    <CardListExample value="dgdfgdf" />
+                    <br />
+                    <br />
+                    <br />
+
+                    <ListContainer value={this.state.products}
+                        total={this.state.total} min={this.state.min} max={this.state.max} filter={this.state.searchKey}
+                        onClickTag={this.actionSearchTag.bind(this)} />
+
+
+                </div>
 
             </div>
         );
     }
 };
 
-ReactDOM.render(<App/>, document.getElementById("main"));
+export default App;
+//ReactDOM.render(<App />, document.getElementById("main"));

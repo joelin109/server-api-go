@@ -1,33 +1,127 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>React + API</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link href="assets/styles/salesforce-lightning-design-system.min.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
 
+    <style media="screen" type="text/css">
+        a {
+            color: #ff4081;
+            text-decoration: none;
+        }
+
+
+
+
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+
+
+
+        html {
+            font-family: 'Roboto', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+
+
+
+
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+        }
+
+
+
+
+
+        body {
+            font-size: 15px;
+            line-height: 24px;
+        }
+        /* Used in StylesOverridingCssExample.js */
+
+
+
+
+
+        .styles-overriding-css-example {
+            width: 50% !important;
+            margin: 0 auto !important;
+            border: 2px solid #FF9800 !important;
+            background-color: #ffd699 !important;
+        }
+
+
+
+
+        .mainCSS {
+            background: #E0E0E0
+        }
+
+
+
+
+        .itemCSS {
+            /*background: #E0E0E0*/
+        }
+
+
+        .itemCSS:hover {
+            /*color: #FF9800;
+            background-color: #EF5350;*/
+            border: 1px solid #EF5350; 
+            box-shadow: 5px 5px 15px #EF5350;
+        }
+    </style>
+    <script>
+        var WebFontConfig = {
+            google: { families: ['Roboto:400,300,500:latin'] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
 </head>
 
 <body>
 
 
-<div id="main"></div>
-<div class="footer slds-m-horizontal--large slds-m-top--xx-large">
+    <div id="main" class="mainCSS"></div>
+    <div class="footer slds-m-horizontal--large slds-m-top--xx-large">
 
 
-    <div>
-        Built by <a href="https://twitter.com/ccoenraets" class="quiet">@Joe</a>
-        with <a href="http://facebook.github.io/react/" class="quiet">React</a>,
-        <a href="http://nodejs.org/" class="quiet">Node.js</a> and <a href="http://www.postgresql.org/" class="quiet">Postgres SQL</a>.
-    </div>
-    <div class="slds-m-top--x-small">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.belgianbeerexplorer.com/" data-text="Belgian Beer Explorer. Sample App with React, Lightning Design System, ES6, Babel, Webpack">Tweet</a>
-        <br/>
-    </div>
+        <div>
+            Built by <a href="https://twitter.com/ccoenraets" class="quiet">@Joe</a> with
+            <a href="http://facebook.github.io/react/" class="quiet">React</a>,
+            <a href="http://nodejs.org/" class="quiet">Node.js</a> and <a href="http://www.postgresql.org/" class="quiet">Postgres SQL</a>.
+        </div>
+        <div class="slds-m-top--x-small">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.belgianbeerexplorer.com/" data-text="Belgian Beer Explorer. Sample App with React, Lightning Design System, ES6, Babel, Webpack">Tweet</a>
+            <br/>
+        </div>
 
-    <script src="app.bundle3.js"></script>
+        <script src="app.bundle.js"></script>
 
 </body>
 

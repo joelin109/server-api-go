@@ -2,8 +2,8 @@
  * Created by joe on 2/24/17.
  */
 import React from 'react';
-import DeutschListItem from './deutschListItem';
-import ArticleListItem from './articleListItem';
+import DeutschListItem from './item-article';
+import ArticleListItem from './item-deutsch';
 
 
 class List extends React.Component {
