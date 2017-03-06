@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 573);
+/******/ 	return __webpack_require__(__webpack_require__.s = 574);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23259,7 +23259,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.findById = exports.findAll = undefined;
 
-var _request = __webpack_require__(570);
+var _request = __webpack_require__(571);
 
 var _request2 = _interopRequireDefault(_request);
 
@@ -23348,25 +23348,25 @@ var _productService = __webpack_require__(232);
 
 var productService = _interopRequireWildcard(_productService);
 
-var _header = __webpack_require__(560);
+var _header = __webpack_require__(561);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _channel = __webpack_require__(559);
+var _channel = __webpack_require__(560);
 
 var _channel2 = _interopRequireDefault(_channel);
 
-var _RangeSlider = __webpack_require__(558);
+var _recommend = __webpack_require__(558);
+
+var _recommend2 = _interopRequireDefault(_recommend);
+
+var _RangeSlider = __webpack_require__(559);
 
 var _RangeSlider2 = _interopRequireDefault(_RangeSlider);
 
 var _list = __webpack_require__(564);
 
 var _list2 = _interopRequireDefault(_list);
-
-var _cardlist = __webpack_require__(563);
-
-var _cardlist2 = _interopRequireDefault(_cardlist);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -23384,10 +23384,23 @@ var _style = {
         flexWrap: 'wrap',
         justifyContent: 'center'
     },
+    root2: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: 1024 + 320 + 40
+    },
     filter: {
         display: 'flex',
         justifyContent: 'center',
         width: 1024
+    },
+    recommend: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        alignContent: 'flex-start',
+        background: '#FAFAFA'
     }
 
 };
@@ -23432,26 +23445,27 @@ var App = function (_React$Component) {
         //Action
 
     }, {
-        key: 'actionSearchChannel',
-        value: function actionSearchChannel(searchKey) {
+        key: '_actionSearchChannel',
+        value: function _actionSearchChannel(searchKey) {
             this.setState({ searchKey: searchKey, page: 1 }, this.findProducts);
         }
     }, {
-        key: 'actionChangeRange',
-        value: function actionChangeRange(values) {
+        key: '_action_list_changeRange',
+        value: function _action_list_changeRange(values) {
             this.state.min = values[0];
             this.state.max = values[1];
             this.findProducts();
         }
     }, {
-        key: 'actionSearchTag',
-        value: function actionSearchTag(tag) {
+        key: '_action_list_tag',
+        value: function _action_list_tag(tag) {
             this.state.searchKey = tag;
             this.findProducts();
         }
     }, {
         key: 'render',
         value: function render() {
+            var dd = [this.state.products[1], this.state.products[2], this.state.products[3]];
             return _react2.default.createElement(
                 'div',
                 null,
@@ -23464,22 +23478,35 @@ var App = function (_React$Component) {
                         'div',
                         { style: _style.filter },
                         _react2.default.createElement(_RangeSlider2.default, { defaultValue: [0, 26], min: 0, max: 26, step: .5, withBars: true,
-                            onChange: this.actionChangeRange.bind(this) })
+                            onChange: this._action_list_changeRange.bind(this) })
                     ),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('br', null),
+                    ' ',
                     _react2.default.createElement('br', null)
                 ),
                 _react2.default.createElement(
                     'div',
                     { style: _style.root },
-                    _react2.default.createElement(_cardlist2.default, { value: 'dgdfgdf' }),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement(_list2.default, { value: this.state.products,
-                        total: this.state.total, min: this.state.min, max: this.state.max, filter: this.state.searchKey,
-                        onClickTag: this.actionSearchTag.bind(this) })
+                    _react2.default.createElement(
+                        'div',
+                        { style: _style.root2 },
+                        _react2.default.createElement(_list2.default, { value: this.state.products, listStyle: 'card',
+                            min: this.state.min, max: this.state.max,
+                            total: this.state.total, filter: this.state.searchKey,
+                            onClickTag: this._action_list_tag.bind(this) }),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(_recommend2.default, { value: 0 })
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { style: _style.recommend },
+                    _react2.default.createElement(_list2.default, { value: dd, listStyle: '',
+                        min: this.state.min, max: this.state.max,
+                        total: this.state.total, filter: this.state.searchKey,
+                        onClickTag: this._action_list_tag.bind(this) })
                 )
             );
         }
@@ -24619,7 +24646,7 @@ __webpack_require__(106)('observable');
  */
 
 !function (root, name, definition) {
-  if (typeof module != 'undefined' && module.exports) module.exports = definition();else if (true) __webpack_require__(572)(name, definition);else root[name] = definition();
+  if (typeof module != 'undefined' && module.exports) module.exports = definition();else if (true) __webpack_require__(573)(name, definition);else root[name] = definition();
 }(undefined, 'bowser', function () {
   /**
     * See useragents.js for examples of navigator.userAgent
@@ -62774,6 +62801,110 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = __webpack_require__(14);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _style = {
+    test: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        alignContent: 'flex-start'
+    },
+    test1: {
+        height: 520,
+        width: 320,
+        background: '#BDBDBD',
+        padding: 6
+    },
+    test2: {
+        height: 520,
+        width: 320,
+        background: '#757575',
+        padding: 6
+    },
+    test3: {
+        height: 520,
+        width: 320,
+        background: '#616161',
+        padding: 6
+    }
+
+};
+
+var Recommend = function (_React$Component) {
+    _inherits(Recommend, _React$Component);
+
+    function Recommend(props) {
+        _classCallCheck(this, Recommend);
+
+        var _this = _possibleConstructorReturn(this, (Recommend.__proto__ || Object.getPrototypeOf(Recommend)).call(this, props));
+
+        _this.state = {
+            value: [0, 26]
+        };
+        return _this;
+    }
+
+    _createClass(Recommend, [{
+        key: 'shouldComponentUpdate',
+        value: function shouldComponentUpdate(nextProps, nextState) {
+            return true; //(this.state.total != nextProps.total);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'recommend' },
+                _react2.default.createElement('div', { style: _style.test1 }),
+                _react2.default.createElement('br', null),
+                ' ',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('div', { style: _style.test2 }),
+                _react2.default.createElement('br', null),
+                ' ',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('div', { style: _style.test3 })
+            );
+        }
+    }]);
+
+    return Recommend;
+}(_react2.default.Component);
+
+;
+
+exports.default = Recommend;
+
+/***/ }),
+/* 559 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
 var _reactSlider = __webpack_require__(532);
 
 var _reactSlider2 = _interopRequireDefault(_reactSlider);
@@ -62832,7 +62963,7 @@ var RangeSlider = function (_React$Component) {
 exports.default = RangeSlider;
 
 /***/ }),
-/* 559 */
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62842,7 +62973,7 @@ exports.default = RangeSlider;
 
 
 /***/ }),
-/* 560 */
+/* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62868,11 +62999,11 @@ var _notifications2 = _interopRequireDefault(_notifications);
 
 var _materialUi = __webpack_require__(417);
 
-var _navHeaderRight = __webpack_require__(561);
+var _navHeaderRight = __webpack_require__(562);
 
 var _navHeaderRight2 = _interopRequireDefault(_navHeaderRight);
 
-var _navLeft = __webpack_require__(562);
+var _navLeft = __webpack_require__(563);
 
 var _navLeft2 = _interopRequireDefault(_navLeft);
 
@@ -62949,7 +63080,7 @@ var Navigator = function (_React$Component) {
 exports.default = Navigator;
 
 /***/ }),
-/* 561 */
+/* 562 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63116,7 +63247,7 @@ var HeaderRight = function (_Component) {
 exports.default = HeaderRight;
 
 /***/ }),
-/* 562 */
+/* 563 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63144,7 +63275,7 @@ var NavLeft = function NavLeft() {
 exports.default = NavLeft;
 
 /***/ }),
-/* 563 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63160,9 +63291,23 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _itemCardMi = __webpack_require__(566);
+var _paginator = __webpack_require__(570);
 
-var _itemCardMi2 = _interopRequireDefault(_itemCardMi);
+var _paginator2 = _interopRequireDefault(_paginator);
+
+var _productService = __webpack_require__(232);
+
+var requestProduct = _interopRequireWildcard(_productService);
+
+var _listCard = __webpack_require__(568);
+
+var _listCard2 = _interopRequireDefault(_listCard);
+
+var _listDefault = __webpack_require__(569);
+
+var _listDefault2 = _interopRequireDefault(_listDefault);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63180,109 +63325,28 @@ var _style = {
         alignItems: 'flex-start',
         alignContent: 'flex-start',
         maxWidth: 1024
+    },
 
+    page: {
+        display: 'flex',
+        flexWrap: 'nowrap',
+        justifyContent: 'space-around',
+        alignItems: 'flex-start',
+        alignContent: 'center',
+        maxWidth: 1024,
+        minWidth: 320,
+        minHeight: 100
     }
 
 };
 
-var CardListExample = function (_React$Component) {
-    _inherits(CardListExample, _React$Component);
+var ListC = function (_React$Component) {
+    _inherits(ListC, _React$Component);
 
-    function CardListExample() {
-        _classCallCheck(this, CardListExample);
+    function ListC(props) {
+        _classCallCheck(this, ListC);
 
-        return _possibleConstructorReturn(this, (CardListExample.__proto__ || Object.getPrototypeOf(CardListExample)).apply(this, arguments));
-    }
-
-    _createClass(CardListExample, [{
-        key: 'shouldComponentUpdate',
-        value: function shouldComponentUpdate(nextProps, nextState) {
-            return true;
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            return _react2.default.createElement(
-                'div',
-                { style: _style.list },
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement(_itemCardMi2.default, { src: this.props.value }),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement('br', null)
-            );
-        }
-    }]);
-
-    return CardListExample;
-}(_react2.default.Component);
-
-;
-
-exports.default = CardListExample;
-
-/***/ }),
-/* 564 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _list = __webpack_require__(568);
-
-var _list2 = _interopRequireDefault(_list);
-
-var _paginator = __webpack_require__(569);
-
-var _paginator2 = _interopRequireDefault(_paginator);
-
-var _productService = __webpack_require__(232);
-
-var requestProduct = _interopRequireWildcard(_productService);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ListContainer = function (_React$Component) {
-    _inherits(ListContainer, _React$Component);
-
-    function ListContainer(props) {
-        _classCallCheck(this, ListContainer);
-
-        var _this = _possibleConstructorReturn(this, (ListContainer.__proto__ || Object.getPrototypeOf(ListContainer)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ListC.__proto__ || Object.getPrototypeOf(ListC)).call(this, props));
 
         _this.state = {
             results: [],
@@ -63291,7 +63355,7 @@ var ListContainer = function (_React$Component) {
         return _this;
     }
 
-    _createClass(ListContainer, [{
+    _createClass(ListC, [{
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
             this.state.results = nextProps.value;
@@ -63302,25 +63366,19 @@ var ListContainer = function (_React$Component) {
             return true; //(this.state.total != nextProps.total);
         }
 
-        //Action
+        //Acton
 
     }, {
-        key: 'actionPagePrevious',
-        value: function actionPagePrevious() {
+        key: '_actionPagePrevious',
+        value: function _actionPagePrevious() {
             this.state.page = this.state.page - 1;
             this.apiRequest();
         }
     }, {
-        key: 'actionPageNext',
-        value: function actionPageNext() {
+        key: '_actionPageNext',
+        value: function _actionPageNext() {
             this.state.page = this.state.page + 1;
             this.apiRequest();
-        }
-    }, {
-        key: 'actionSearchTag',
-        value: function actionSearchTag(e) {
-            this.props.onClickTag(e);
-            return false;
         }
 
         //API Request&Response
@@ -63350,35 +63408,56 @@ var ListContainer = function (_React$Component) {
             });
         }
     }, {
+        key: '_handlerList',
+        value: function _handlerList(type, value) {
+            switch (type) {
+                case "tag":
+                    this.props.onClickTag(e);
+                    break;
+                default:
+                    alert(type + ":    " + value);
+                    break;
+            }
+            return false;
+        }
+    }, {
         key: 'render',
         value: function render() {
-            //alert("ListContainer render-" + this.state.results.length)
             var size = this.state.results.length;
+
+            var list = void 0;
+            switch (this.props.listStyle) {
+                case "card":
+                    list = _react2.default.createElement(_listCard2.default, { value: this.state.results, style: _style.list,
+                        onClick: this._handlerList.bind(this) });
+                    break;
+                default:
+                    list = _react2.default.createElement(_listDefault2.default, { value: this.state.results, style: _style.list, itemStyle: 'deutsch',
+                        onClick: this._handlerList.bind(this) });
+                    break;
+            }
+
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_list2.default, { value: this.state.results, itemStyle: 'deutsch', onClickTag: this.actionSearchTag.bind(this) })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_paginator2.default, { page: this.state.page, pageSize: size, total: this.props.total,
-                        onPrevious: this.actionPagePrevious.bind(this),
-                        onNext: this.actionPageNext.bind(this) })
-                )
+                list,
+                _react2.default.createElement('br', null),
+                '  ',
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(_paginator2.default, { style: _style.page,
+                    page: this.state.page, pageSize: size, total: this.props.total,
+                    onPrevious: this._actionPagePrevious.bind(this),
+                    onNext: this._actionPageNext.bind(this) })
             );
         }
     }]);
 
-    return ListContainer;
+    return ListC;
 }(_react2.default.Component);
 
-;
+exports.default = ListC;
 
-exports.default = ListContainer;
+;
 
 /***/ }),
 /* 565 */
@@ -63417,7 +63496,7 @@ var ArticleListItem = function (_React$Component) {
     _createClass(ArticleListItem, [{
         key: 'linkHandler',
         value: function linkHandler(e) {
-            this.props.onClickTag(e.target.innerHTML);
+            this.props.onClick(e.target.innerHTML);
             return false;
         }
     }, {
@@ -63508,7 +63587,7 @@ var _FlatButton = __webpack_require__(69);
 
 var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
-var _setting = __webpack_require__(571);
+var _setting = __webpack_require__(572);
 
 var _setting2 = _interopRequireDefault(_setting);
 
@@ -63559,45 +63638,49 @@ var _style = {
     }
 };
 
-var ItemCardExample = function (_React$Component) {
-    _inherits(ItemCardExample, _React$Component);
+var ItemCard = function (_React$Component) {
+    _inherits(ItemCard, _React$Component);
 
-    function ItemCardExample(props) {
-        _classCallCheck(this, ItemCardExample);
+    function ItemCard(props) {
+        _classCallCheck(this, ItemCard);
 
-        var _this = _possibleConstructorReturn(this, (ItemCardExample.__proto__ || Object.getPrototypeOf(ItemCardExample)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ItemCard.__proto__ || Object.getPrototypeOf(ItemCard)).call(this, props));
 
         _this.state = {
             expanded: false,
             loading: true
         };
-        // this._handleAuthor = this._handleAuthor.bind(this)
-        // this._handleDetail = this._handleDetail.bind(this)
         return _this;
     }
 
-    _createClass(ItemCardExample, [{
+    _createClass(ItemCard, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.state.loading = false;
         }
     }, {
         key: '_handleAuthor',
-        value: function _handleAuthor(userID) {
-
-            alert("_handleAuthor-" + userID);
+        value: function _handleAuthor(e) {
+            this.props.onClick("Author-", e.target.id);
         }
     }, {
         key: '_handleDetail',
         value: function _handleDetail(e) {
-            //alert(this.state.rendering)
-            alert(e.target.id + "-" + e.target.src);
+            this.props.onClick("Detail-" + e.target.id, e.target.src);
         }
     }, {
         key: 'render',
         value: function render() {
             var coverID = _setting2.default[Math.floor(Math.random() * coverCount)]; //this.props.src
             var userThumb = "http://www.material-ui.com/images/jsa-128.jpg";
+
+            var pills = void 0;
+            if (this.props.value.tags) {
+                var tags = this.props.value.tags.split(', ');
+                pills = tags.map(function (tag) {
+                    return _react2.default.createElement(_FlatButton2.default, { style: _style.itemTag, label: tag });
+                });
+            }
 
             return _react2.default.createElement(
                 'div',
@@ -63609,12 +63692,12 @@ var ItemCardExample = function (_React$Component) {
                         'div',
                         { style: { position: 'relative' } },
                         _react2.default.createElement('img', { id: 'im-user-id', style: _style.itemCover, src: coverID, onClick: this._handleDetail.bind(this) }),
-                        _react2.default.createElement('img', { style: _style.itemAuthor, src: userThumb,
+                        _react2.default.createElement('img', { style: _style.itemAuthor, src: userThumb, id: '123456789',
                             onClick: this._handleAuthor.bind(this) }),
                         _react2.default.createElement('br', null),
                         _react2.default.createElement('br', null)
                     ),
-                    _react2.default.createElement(_Card.CardTitle, { title: 'Card title', subtitle: 'Card subtitle' }),
+                    _react2.default.createElement(_Card.CardTitle, { title: this.props.value.name, subtitle: parseFloat(this.props.value.alcohol) }),
                     _react2.default.createElement(
                         'div',
                         { style: { padding: 10 } },
@@ -63623,17 +63706,17 @@ var ItemCardExample = function (_React$Component) {
                     _react2.default.createElement(
                         _Card.CardActions,
                         null,
-                        _react2.default.createElement(_FlatButton2.default, { style: _style.itemTag, label: 'Action1' })
+                        pills
                     )
                 )
             );
         }
     }]);
 
-    return ItemCardExample;
+    return ItemCard;
 }(_react2.default.Component);
 
-exports.default = ItemCardExample;
+exports.default = ItemCard;
 
 /***/ }),
 /* 567 */
@@ -63670,9 +63753,9 @@ var DeutschListItem = function (_React$Component) {
     }
 
     _createClass(DeutschListItem, [{
-        key: 'linkHandler',
-        value: function linkHandler(e) {
-            this.props.onClickTag(e.target.innerHTML);
+        key: '_linkHandler',
+        value: function _linkHandler(e) {
+            this.props.onClick("tag", e.target.innerHTML);
             return false;
         }
     }, {
@@ -63689,7 +63772,7 @@ var DeutschListItem = function (_React$Component) {
                         { className: 'slds-pill', key: _this2.props.value.id + '-' + tag },
                         _react2.default.createElement(
                             'a',
-                            { href: '#', className: 'slds-pill__label', onClick: _this2.linkHandler.bind(_this2) },
+                            { href: '#', className: 'slds-pill__label', onClick: _this2._linkHandler.bind(_this2) },
                             tag
                         )
                     );
@@ -63720,7 +63803,7 @@ var DeutschListItem = function (_React$Component) {
                     _react2.default.createElement(
                         'a',
                         { href: '#',
-                            onClick: this.linkHandler.bind(this) },
+                            onClick: this._linkHandler.bind(this) },
                         this.props.value.brewery
                     ),
                     _react2.default.createElement(
@@ -63757,6 +63840,88 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _itemCardMi = __webpack_require__(566);
+
+var _itemCardMi2 = _interopRequireDefault(_itemCardMi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ListCard = function (_React$Component) {
+    _inherits(ListCard, _React$Component);
+
+    function ListCard() {
+        _classCallCheck(this, ListCard);
+
+        return _possibleConstructorReturn(this, (ListCard.__proto__ || Object.getPrototypeOf(ListCard)).apply(this, arguments));
+    }
+
+    _createClass(ListCard, [{
+        key: 'shouldComponentUpdate',
+        value: function shouldComponentUpdate(nextProps, nextState) {
+            return true;
+        }
+    }, {
+        key: '_linkHandler',
+        value: function _linkHandler(type, value) {
+            this.props.onClick(type, value);
+            return false;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var listItems = _react2.default.createElement(
+                'div',
+                { style: { height: 10, width: 1024 } },
+                ' '
+            );
+            if (this.props.value.length > 0) {
+                listItems = this.props.value.map(function (item) {
+                    return _react2.default.createElement(_itemCardMi2.default, { key: item.id, value: item,
+                        onClick: _this2._linkHandler.bind(_this2)
+                    });
+                });
+            }
+
+            return _react2.default.createElement(
+                'div',
+                { style: this.props.style },
+                listItems
+            );
+        }
+    }]);
+
+    return ListCard;
+}(_react2.default.Component);
+
+;
+
+exports.default = ListCard;
+
+/***/ }),
+/* 569 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
 var _itemArticle = __webpack_require__(565);
 
 var _itemArticle2 = _interopRequireDefault(_itemArticle);
@@ -63776,13 +63941,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-var List = function (_React$Component) {
-    _inherits(List, _React$Component);
+var ListDefault = function (_React$Component) {
+    _inherits(ListDefault, _React$Component);
 
-    function List(props) {
-        _classCallCheck(this, List);
+    function ListDefault(props) {
+        _classCallCheck(this, ListDefault);
 
-        var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ListDefault.__proto__ || Object.getPrototypeOf(ListDefault)).call(this, props));
 
         _this.state = {
             style: ""
@@ -63790,10 +63955,10 @@ var List = function (_React$Component) {
         return _this;
     }
 
-    _createClass(List, [{
-        key: 'linkHandler',
-        value: function linkHandler(e) {
-            this.props.onClickTag(e);
+    _createClass(ListDefault, [{
+        key: '_linkHandler',
+        value: function _linkHandler(e) {
+            this.props.onClick("tag", e);
             return false;
         }
     }, {
@@ -63806,13 +63971,13 @@ var List = function (_React$Component) {
             switch (style) {
                 case "deutsch":
                     listItems = this.props.value.map(function (item) {
-                        return _react2.default.createElement(_itemArticle2.default, { key: item.id, value: item, onClickTag: _this2.linkHandler.bind(_this2) });
+                        return _react2.default.createElement(_itemArticle2.default, { key: item.id, value: item, onClick: _this2._linkHandler.bind(_this2) });
                     });
 
                     break;
                 case "article":
                     listItems = this.props.value.map(function (item) {
-                        return _react2.default.createElement(_itemDeutsch2.default, { key: item.id, value: item, onClickTag: _this2.linkHandler.bind(_this2) });
+                        return _react2.default.createElement(_itemDeutsch2.default, { key: item.id, value: item, onClick: _this2._linkHandler.bind(_this2) });
                     });
                     break;
                 default:
@@ -63821,21 +63986,21 @@ var List = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                null,
+                { style: this.props.style },
                 listItems
             );
         }
     }]);
 
-    return List;
+    return ListDefault;
 }(_react2.default.Component);
 
 ;
 
-exports.default = List;
+exports.default = ListDefault;
 
 /***/ }),
-/* 569 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63875,7 +64040,7 @@ var Paginator = function (_React$Component) {
             if (pages > 1) {
                 return _react2.default.createElement(
                     "div",
-                    { className: "slds-grid slds-grid--vertical-align-center slds-m-horizontal--large" },
+                    { style: this.props.style },
                     _react2.default.createElement(
                         "button",
                         { className: "slds-button slds-button--neutral" + (this.props.page <= 1 ? " slds-hide" : ""),
@@ -63913,7 +64078,7 @@ var Paginator = function (_React$Component) {
 exports.default = Paginator;
 
 /***/ }),
-/* 570 */
+/* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63954,7 +64119,7 @@ exports.default = function (opts) {
 };
 
 /***/ }),
-/* 571 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63968,7 +64133,7 @@ var covers = ['http://www.material-ui.com/images/grid-list/00-52-29-429_640.jpg'
 exports.default = covers;
 
 /***/ }),
-/* 572 */
+/* 573 */
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -63977,7 +64142,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 573 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

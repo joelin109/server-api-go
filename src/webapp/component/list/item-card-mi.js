@@ -42,7 +42,7 @@ const _style = {
     },
 };
 
-class ItemCardExample extends React.Component {
+class ItemCard extends React.Component {
 
     constructor(props) {
         super(props);
@@ -50,8 +50,6 @@ class ItemCardExample extends React.Component {
             expanded: false,
             loading: true,
         };
-        // this._handleAuthor = this._handleAuthor.bind(this)
-        // this._handleDetail = this._handleDetail.bind(this)
     }
 
     componentDidMount() {
@@ -59,23 +57,26 @@ class ItemCardExample extends React.Component {
     }
 
 
-    _handleAuthor(userID) {
-
-        alert("_handleAuthor-" + userID)
+    _handleAuthor(e) {
+        this.props.onClick("Author-", e.target.id)
     };
 
     _handleDetail(e) {
-        //alert(this.state.rendering)
-        alert(e.target.id + "-" + e.target.src);
-
-
-
+        this.props.onClick("Detail-"+e.target.id, e.target.src)
     };
 
 
     render() {
         let coverID = covers[Math.floor(Math.random() * coverCount)]//this.props.src
         let userThumb = "http://www.material-ui.com/images/jsa-128.jpg"
+
+        let pills;
+        if (this.props.value.tags) {
+            let tags = this.props.value.tags.split(', ');
+            pills = tags.map(tag =>
+                <FlatButton style={_style.itemTag} label={tag} />
+            );
+        }
 
         return (
 
@@ -86,13 +87,13 @@ class ItemCardExample extends React.Component {
                         <img id="im-user-id" style={_style.itemCover} src={coverID} onClick={this._handleDetail.bind(this)} />
 
 
-                        <img style={_style.itemAuthor} src={userThumb}
+                        <img style={_style.itemAuthor} src={userThumb} id="123456789"
                             onClick={this._handleAuthor.bind(this)} />
 
                         <br /><br />
                     </div>
 
-                    <CardTitle title="Card title" subtitle="Card subtitle" />
+                    <CardTitle title={this.props.value.name} subtitle={parseFloat(this.props.value.alcohol)} />
 
                     <div style={{ padding: 10 }}>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -101,7 +102,7 @@ class ItemCardExample extends React.Component {
                     </div>
 
                     <CardActions>
-                        <FlatButton style={_style.itemTag} label="Action1" />
+                        {pills}
                     </CardActions>
                 </Card>
             </div>
@@ -109,4 +110,4 @@ class ItemCardExample extends React.Component {
     }
 }
 
-export default ItemCardExample;
+export default ItemCard;

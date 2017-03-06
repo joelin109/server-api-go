@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import * as productService from './service/product-service';
+
 import Navigator from './component/header';
 import Channel from './component/channel';
+import Recommend from './Component/recommend';
 import RangeSlider from './component/RangeSlider';
-import ListContainer from './component/list';
-import CardListExample from './component/list/cardlist';
+import ListC from './component/list';
 
 const _style = {
     root: {
@@ -14,10 +14,23 @@ const _style = {
         flexWrap: 'wrap',
         justifyContent: 'center',
     },
+    root2: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: 1024 + 320 + 40,
+    },
     filter: {
         display: 'flex',
         justifyContent: 'center',
         width: 1024,
+    },
+    recommend: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        alignContent: 'flex-start',
+        background: '#FAFAFA',
     },
 
 };
@@ -52,49 +65,55 @@ class App extends React.Component {
 
 
     //Action
-    actionSearchChannel(searchKey) {
+    _actionSearchChannel(searchKey) {
         this.setState({ searchKey: searchKey, page: 1 }, this.findProducts);
     }
 
-    actionChangeRange(values) {
+    _action_list_changeRange(values) {
         this.state.min = values[0];
         this.state.max = values[1];
         this.findProducts()
     }
 
-    actionSearchTag(tag) {
+    _action_list_tag(tag) {
         this.state.searchKey = tag;
         this.findProducts()
     }
 
 
     render() {
+        let dd = [this.state.products[1], this.state.products[2], this.state.products[3]]
         return (
             <div >
                 <Navigator title="Title" />
                 <br />
 
                 <div style={_style.root}>
-
                     <div style={_style.filter}>
                         <RangeSlider defaultValue={[0, 26]} min={0} max={26} step={.5} withBars={true}
-                            onChange={this.actionChangeRange.bind(this)} />
+                            onChange={this._action_list_changeRange.bind(this)} />
                     </div>
-                    <br />
-                    <br />
-                    <br />
+                    <br /><br /> <br />
                 </div>
 
                 <div style={_style.root}>
-                    <CardListExample value="dgdfgdf" />
-                    <br />
-                    <br />
-                    <br />
+                    <div style={_style.root2}>
 
-                    <ListContainer value={this.state.products}
-                        total={this.state.total} min={this.state.min} max={this.state.max} filter={this.state.searchKey}
-                        onClickTag={this.actionSearchTag.bind(this)} />
+                        <ListC value={this.state.products} listStyle="card"
+                            min={this.state.min} max={this.state.max}
+                            total={this.state.total} filter={this.state.searchKey}
+                            onClickTag={this._action_list_tag.bind(this)} />
+                        <br /><br />
 
+                        <Recommend value={0} />
+                    </div>
+                </div>
+
+                <div style={_style.recommend}>
+                    <ListC value={dd} listStyle=""
+                        min={this.state.min} max={this.state.max}
+                        total={this.state.total} filter={this.state.searchKey}
+                        onClickTag={this._action_list_tag.bind(this)} />
 
                 </div>
 

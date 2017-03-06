@@ -6,7 +6,7 @@ import DeutschListItem from './item-article';
 import ArticleListItem from './item-deutsch';
 
 
-class List extends React.Component {
+class ListDefault extends React.Component {
 
     constructor(props) {
         super(props);
@@ -16,8 +16,8 @@ class List extends React.Component {
         }
     }
 
-    linkHandler(e) {
-        this.props.onClickTag(e);
+    _linkHandler(e) {
+        this.props.onClick("tag", e);
         return false;
     }
 
@@ -27,19 +27,19 @@ class List extends React.Component {
         switch (style) {
             case "deutsch":
                 listItems = this.props.value.map(item =>
-                    <DeutschListItem key={item.id} value={item} onClickTag={this.linkHandler.bind(this)}/>);
+                    <DeutschListItem key={item.id} value={item} onClick={this._linkHandler.bind(this)}/>);
 
                 break;
             case "article":
                 listItems = this.props.value.map(item =>
-                    <ArticleListItem key={item.id} value={item} onClickTag={this.linkHandler.bind(this)}/>);
+                    <ArticleListItem key={item.id} value={item} onClick={this._linkHandler.bind(this)}/>);
                 break;
             default:
                 break;
         }
 
         return (
-            <div>
+            <div  style={this.props.style}>
                 {listItems}
             </div>
         );
@@ -49,4 +49,4 @@ class List extends React.Component {
 }
 ;
 
-export default List;
+export default ListDefault;

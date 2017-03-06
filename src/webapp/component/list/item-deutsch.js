@@ -3,8 +3,8 @@ import React from 'react';
 
 class DeutschListItem extends React.Component {
 
-    linkHandler(e) {
-        this.props.onClickTag(e.target.innerHTML);
+    _linkHandler(e) {
+        this.props.onClick("tag", e.target.innerHTML);
         return false;
     }
 
@@ -14,7 +14,7 @@ class DeutschListItem extends React.Component {
             let tags = this.props.value.tags.split(', ');
             pills = tags.map(tag =>
                 <span className="slds-pill" key={this.props.value.id + '-' + tag}>
-                    <a href="#" className="slds-pill__label" onClick={this.linkHandler.bind(this)}>{tag}</a>
+                    <a href="#" className="slds-pill__label" onClick={this._linkHandler.bind(this)}>{tag}</a>
                 </span>
             );
         }
@@ -22,7 +22,7 @@ class DeutschListItem extends React.Component {
         return (
             <div key={this.props.value.id}>
                 <div>
-                    <img src={"pics/" + this.props.value.image}/>
+                    <img src={"pics/" + this.props.value.image} />
                     <span>{this.props.value.name}</span>
                     <p className="level">{parseFloat(this.props.value.alcohol)}</p>
                 </div>
@@ -30,7 +30,7 @@ class DeutschListItem extends React.Component {
 
 
                     <a href="#"
-                       onClick={this.linkHandler.bind(this)}>{this.props.value.brewery}</a>
+                        onClick={this._linkHandler.bind(this)}>{this.props.value.brewery}</a>
                     <p>{pills}</p>
 
                 </div>

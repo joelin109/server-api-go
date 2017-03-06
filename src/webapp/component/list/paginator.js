@@ -6,7 +6,7 @@ class Paginator extends React.Component {
         let pages = Math.ceil(this.props.total / this.props.pageSize);
         if (pages > 1) {
             return (
-                <div className="slds-grid slds-grid--vertical-align-center slds-m-horizontal--large">
+                <div style={this.props.style}>
 
                     <button className={"slds-button slds-button--neutral" + (this.props.page <= 1 ? " slds-hide" : "")}
                             onClick={this.props.onPrevious}>

@@ -16,12 +16,9 @@
 
 
 
-
-
         a:hover {
             text-decoration: underline;
         }
-
 
 
 
@@ -30,7 +27,6 @@
             font-family: 'Roboto', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-
 
 
 
@@ -49,13 +45,15 @@
 
 
 
+
+
+
+
         body {
             font-size: 15px;
             line-height: 24px;
         }
         /* Used in StylesOverridingCssExample.js */
-
-
 
 
 
@@ -69,23 +67,71 @@
 
 
 
+
+
+
+
+
+
+
+
         .mainCSS {
-            background: #E0E0E0
+            background: #EEEEEE
         }
+
+
+
+
 
 
 
 
         .itemCSS {
             /*background: #E0E0E0*/
+            box-shadow: 5px 5px 15px #EF5350;
         }
+
+
+
+
+
+
 
 
         .itemCSS:hover {
             /*color: #FF9800;
             background-color: #EF5350;*/
-            border: 1px solid #EF5350; 
+            border: 1px solid #EF5350;
             box-shadow: 5px 5px 15px #EF5350;
+        }
+
+        .recommend {
+
+            background: #424242;
+            max-width: 1024px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: flex-start;
+        }
+
+        @media screen and (max-width:480px) {
+            .recommend {
+                background: transparent;
+                max-width: 350px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-content: flex-start;
+            }
+        }
+
+        @media screen and (min-width: 1450px) {
+            .recommend {
+                background: transparent;
+                max-width: 350px;
+                 padding: 6;
+            }
         }
     </style>
     <script>
@@ -106,10 +152,8 @@
 
 <body>
 
-
     <div id="main" class="mainCSS"></div>
     <div class="footer slds-m-horizontal--large slds-m-top--xx-large">
-
 
         <div>
             Built by <a href="https://twitter.com/ccoenraets" class="quiet">@Joe</a> with

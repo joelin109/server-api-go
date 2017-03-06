@@ -4,7 +4,7 @@ import React from 'react';
 class ArticleListItem extends React.Component {
 
     linkHandler(e) {
-        this.props.onClickTag(e.target.innerHTML);
+        this.props.onClick(e.target.innerHTML);
         return false;
     }
 
