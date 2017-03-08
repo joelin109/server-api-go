@@ -84,7 +84,7 @@ export default class ListC extends React.Component {
     _handlerList(type, value) {
         switch (type) {
             case "tag":
-                this.props.onClickTag(e)
+                this.props.onClickTag(value)
                 break;
             default:
                 alert(type + ":    " + value)

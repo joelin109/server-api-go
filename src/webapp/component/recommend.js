@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {cyan800, grey900, grey300, grey400 } from 'material-ui/styles/colors';
 
 const _style = {
     test: {
@@ -12,20 +13,20 @@ const _style = {
     test1: {
         height: 520,
         width: 320,
-        background: '#BDBDBD',
-        padding: 6,
+        background: cyan800,//'#BDBDBD',
+        padding: 3,
     },
     test2: {
         height: 520,
         width: 320,
-        background: '#757575',
-        padding: 6,
+        background: '#107A7B',//#757575',#007E70
+        padding: 3,
     },
     test3: {
         height: 520,
         width: 320,
-        background: '#616161',
-        padding: 6,
+        background: '#2D2D2D',//#616161',
+        padding: 3,
     },
 
 };

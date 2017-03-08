@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import ContentFilter from 'material-ui/svg-icons/content/filter-list';
-import FileFileDownload from 'material-ui/svg-icons/file/file-download';
+import { FlatButton, IconButton, RaisedButton, MenuItem, IconMenu, Badge } from 'material-ui';
+import FontIcon from 'material-ui/FontIcon';
 
-/**
- * Three controlled examples, the first allowing a single selection, the second multiple selections,
- * the third using internal state.
- */
+const _style = {
+  right: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    alignContent: 'center',
+    height: 44,
+  },
+
+};
+
 export default class HeaderRight extends Component {
   constructor(props) {
     super(props);
@@ -22,67 +24,68 @@ export default class HeaderRight extends Component {
   }
 
 
-  handleChangeSingle(event, value){
+  handleChangeSingle(event, value) {
     this.setState({
       valueSingle: value,
     });
   };
 
-  handleChangeMultiple(event, value){
+  handleChangeMultiple(event, value) {
     this.setState({
       valueMultiple: value,
     });
   };
 
-  handleOpenMenu(){
+  handleOpenMenu() {
     this.setState({
       openMenu: true,
     });
   }
 
-  handleOnRequestChange(value){
+  handleOnRequestChange(value) {
     this.setState({
       openMenu: value,
     });
   }
 
+  _linkHandler(e) {
+    this.props.onClick("login", "hello")
+  }
+  _linkHandler2(e) {
+    this.props.onClick("filter", "hello")
+  }
+
+  _newFontIcon(id) {
+    let color = "#bdbdbd"
+    let hoverColor = "#FF9800"
+    return <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>{id}</FontIcon>;
+  }
+
   render() {
+    let color = "#bdbdbd"
+    let hoverColor = "#FF9800"
+    let home = this._newFontIcon("home");
+    let search = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>search</FontIcon>;
+    let filter = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>filter_list</FontIcon>;
+    let account = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>person</FontIcon>;
+    let more = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>more_horiz</FontIcon>;
+
+    let favorite = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>favorite</FontIcon>;
+    let share = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>share</FontIcon>;
+    let thumb_up = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>thumb_up</FontIcon>;
+
     return (
-      <div>
-        <IconMenu
-          iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-          onChange={this.handleChangeSingle}
-          value={this.state.valueSingle}
-        >
-          <MenuItem value="1" primaryText="Refresh" />
-          <MenuItem value="2" primaryText="Send feedback" />
-          <MenuItem value="3" primaryText="Settings" />
-          <MenuItem value="4" primaryText="Help" />
-          <MenuItem value="5" primaryText="Sign out" />
-        </IconMenu>
-        <IconMenu
-          iconButtonElement={<IconButton><ContentFilter /></IconButton>}
-          onChange={this.handleChangeMultiple}
-          value={this.state.valueMultiple}
-          multiple={true}
-        >
-          <MenuItem value="1" primaryText="Blu-ray" />
-          <MenuItem value="2" primaryText="Cassette" />
-          <MenuItem value="3" primaryText="CD" />
-          <MenuItem value="4" primaryText="DVD Audio" />
-          <MenuItem value="5" primaryText="Hybrid SACD" />
-          <MenuItem value="6" primaryText="Vinyl" />
-        </IconMenu>
-        <IconMenu
-          iconButtonElement={<IconButton><FileFileDownload /></IconButton>}
-          open={this.state.openMenu}
-          onRequestChange={this.handleOnRequestChange}
-        >
-          <MenuItem value="1" primaryText="Windows App" />
-          <MenuItem value="2" primaryText="Mac App" />
-          <MenuItem value="3" primaryText="Android App" />
-          <MenuItem value="4" primaryText="iOS App" />
-        </IconMenu>
+      <div style={_style.right}>
+
+        <FlatButton icon={this._newFontIcon("filter_list")}
+          onTouchTap={this._linkHandler2.bind(this)} />
+        <FlatButton icon={account}
+          onTouchTap={this._linkHandler.bind(this)} />
+
+        <FlatButton icon={this._newFontIcon("home")}
+          href="https://github.com/callemall/material-ui"
+          target="_blank" />
+
 
       </div>
     );

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import covers from './../../util/setting'
+import staticData from './../../util/setting'
 
+const covers = staticData[0]
+const thumbs = staticData[1]
 const coverCount = covers.length
 const coverHeight = 200
 const _style = {
@@ -56,25 +58,33 @@ class ItemCard extends React.Component {
         this.state.loading = false
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;//(this.state.total != nextProps.total);
+    }
+
 
     _handleAuthor(e) {
         this.props.onClick("Author-", e.target.id)
     };
 
     _handleDetail(e) {
-        this.props.onClick("Detail-"+e.target.id, e.target.src)
+        this.props.onClick("Detail-" + e.target.id, e.target.src)
+    };
+
+    _handleTag(e) {
+        this.props.onClick("tag", e.target.innerHTML)
     };
 
 
     render() {
         let coverID = covers[Math.floor(Math.random() * coverCount)]//this.props.src
-        let userThumb = "http://www.material-ui.com/images/jsa-128.jpg"
+        let userThumb = thumbs[Math.floor(Math.random() * thumbs.length)]
 
         let pills;
         if (this.props.value.tags) {
             let tags = this.props.value.tags.split(', ');
             pills = tags.map(tag =>
-                <FlatButton style={_style.itemTag} label={tag} />
+                <FlatButton style={_style.itemTag} label={tag} onTouchTap={this._handleTag.bind(this)} />
             );
         }
 

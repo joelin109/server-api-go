@@ -5,7 +5,6 @@ import * as productService from './service/product-service';
 import Navigator from './component/header';
 import Channel from './component/channel';
 import Recommend from './Component/recommend';
-import RangeSlider from './component/RangeSlider';
 import ListC from './component/list';
 
 const _style = {
@@ -63,6 +62,17 @@ class App extends React.Component {
             });
     }
 
+    //Handler
+    _handler_navigator(type, value) {
+        switch (type) {
+            case "filter_beer":
+                this._action_list_changeRange(value)
+                break;
+            default:
+                break;
+        }
+        return false;
+    }
 
     //Action
     _actionSearchChannel(searchKey) {
@@ -85,16 +95,9 @@ class App extends React.Component {
         let dd = [this.state.products[1], this.state.products[2], this.state.products[3]]
         return (
             <div >
-                <Navigator title="Title" />
+                <Navigator title="Title" onClick={this._handler_navigator.bind(this)} />
                 <br />
-
-                <div style={_style.root}>
-                    <div style={_style.filter}>
-                        <RangeSlider defaultValue={[0, 26]} min={0} max={26} step={.5} withBars={true}
-                            onChange={this._action_list_changeRange.bind(this)} />
-                    </div>
-                    <br /><br /> <br />
-                </div>
+                <br />
 
                 <div style={_style.root}>
                     <div style={_style.root2}>

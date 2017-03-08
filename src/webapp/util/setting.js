@@ -19,4 +19,15 @@ const covers = [
     'https://a0.muscache.com/im/pictures/67720660/25af6e57_original.jpg',
 ];
 
-export default covers;
+const thumbs = [
+    'http://www.material-ui.com/images/ok-128.jpg',
+    'http://www.material-ui.com/images/uxceo-128.jpg',
+    'https://media.licdn.com/media/p/1/005/09c/395/349148f.jpg',
+    'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/1/005/093/07a/2e002e5.jpg',
+    'https://media.licdn.com/media/AAEAAQAAAAAAAAflAAAAJDBlMzc3Y2E5LWEzMGYtNDc1ZS04ODhmLWJkM2ViM2ZjMmM1OA.jpg',
+    'http://www.material-ui.com/images/jsa-128.jpg',
+]
+
+const staticData=[covers,thumbs]
+export default staticData;
+

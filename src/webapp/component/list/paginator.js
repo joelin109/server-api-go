@@ -16,7 +16,7 @@ class Paginator extends React.Component {
                     <div className="legend">{this.props.total} beers • page {this.props.page}/{pages}</div>
 
 
-                    <button
+                    <button href="#top"
                         className={"slds-button slds-button--neutral" + (this.props.page >= pages ? " slds-hide" : "")}
                         onClick={this.props.onNext}>
                         Next
