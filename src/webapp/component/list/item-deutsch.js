@@ -4,7 +4,7 @@ import React from 'react';
 class DeutschListItem extends React.Component {
 
     _linkHandler(e) {
-        this.props.onClick("tag", e.target.innerHTML);
+        this.props.dispatch("tag", e.target.innerHTML);
         return false;
     }
 

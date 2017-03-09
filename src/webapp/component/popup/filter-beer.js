@@ -14,11 +14,11 @@ class FilterBeer extends React.Component {
 
 
     _handleCancel() {
-        this.props.onClick("cancel", false)
+        this.props.onClick({type:"cancel"}, false)
     };
 
     _handleConfirm() {
-        this.props.onClick("confirm", this.state.stepValue)
+        this.props.onClick({type:"confirm"}, this.state.stepValue)
     };
 
     _handleStep1() {

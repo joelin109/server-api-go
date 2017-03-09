@@ -17,7 +17,7 @@ class ListDefault extends React.Component {
     }
 
     _linkHandler(e) {
-        this.props.onClick("tag", e);
+        this.props.dispatch("tag", e);
         return false;
     }
 
@@ -27,12 +27,12 @@ class ListDefault extends React.Component {
         switch (style) {
             case "deutsch":
                 listItems = this.props.value.map(item =>
-                    <DeutschListItem key={item.id} value={item} onClick={this._linkHandler.bind(this)}/>);
+                    <DeutschListItem key={item.id} value={item} dispatch={this._linkHandler.bind(this)}/>);
 
                 break;
             case "article":
                 listItems = this.props.value.map(item =>
-                    <ArticleListItem key={item.id} value={item} onClick={this._linkHandler.bind(this)}/>);
+                    <ArticleListItem key={item.id} value={item} dispatch={this._linkHandler.bind(this)}/>);
                 break;
             default:
                 break;

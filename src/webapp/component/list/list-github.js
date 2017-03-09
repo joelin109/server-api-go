@@ -1,8 +1,8 @@
 import React from 'react';
-import ItemCard from './item-card-mi';
+import ItemGithub from './item-github-mi';
 
 
-class ListCard extends React.Component {
+class ListGithub extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         return true
     }
@@ -17,7 +17,7 @@ class ListCard extends React.Component {
         let listItems = <div style={{ height: 10, width: 1024 }}> </div>;
         if (this.props.value.length > 0) {
             listItems = this.props.value.map(item =>
-                <ItemCard key={item.id} value={item}
+                <ItemGithub key={item.id} value={item}
                     dispatch={this._linkHandler.bind(this)}
                 />);
         }
@@ -30,4 +30,4 @@ class ListCard extends React.Component {
     }
 };
 
-export default ListCard;
+export default ListGithub;

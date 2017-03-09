@@ -3,29 +3,8 @@ import Paginator from './paginator';
 import * as requestProduct from './../../service/product-service';
 import ListCard from './list-card';
 import ListDefault from './list-default';
-
-const _style = {
-    list: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        alignContent: 'flex-start',
-        maxWidth: 1024,
-    },
-
-    page: {
-        display: 'flex',
-        flexWrap: 'nowrap',
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        alignContent: 'center',
-        maxWidth: 1024,
-        minWidth: 320,
-        minHeight: 100,
-    },
-
-};
+import ListGithub from './list-github'
+import Style from './../../util/style'
 
 export default class ListC extends React.Component {
 
@@ -67,7 +46,7 @@ export default class ListC extends React.Component {
             max: this.props.max,
             page: this.state.page
         }
-
+        // alert(this.props.filter + "-" + this.props.min + "-" + this.props.max + "-" + this.state.page)
         requestProduct.findAll(filter)
             .then(result => {
                 this.apiResponse(result)
@@ -81,15 +60,8 @@ export default class ListC extends React.Component {
         });
     }
 
-    _handlerList(type, value) {
-        switch (type) {
-            case "tag":
-                this.props.onClickTag(value)
-                break;
-            default:
-                alert(type + ":    " + value)
-                break;
-        }
+    _dispatch_list(action, value) {
+        this.props.dispatch(action, value)
         return false;
     }
 
@@ -99,13 +71,18 @@ export default class ListC extends React.Component {
 
         let list
         switch (this.props.listStyle) {
+            case "article":
             case "card":
-                list = <ListCard value={this.state.results} style={_style.list}
-                    onClick={this._handlerList.bind(this)} />
+                list = <ListCard value={this.state.results} style={Style.list}
+                    dispatch={this._dispatch_list.bind(this)} />
                 break;
-            default:
-                list = <ListDefault value={this.state.results} style={_style.list} itemStyle="deutsch"
-                    onClick={this._handlerList.bind(this)} />
+            case "github":
+                list = <ListGithub value={this.state.results} style={Style.list}
+                    dispatch={this._dispatch_list.bind(this)} />
+                break;
+                    default:
+                    list= <ListDefault value={this.state.results} style={Style.list} itemStyle="deutsch"
+                        dispatch={this._dispatch_list.bind(this)} />
                 break;
         }
 
@@ -115,7 +92,7 @@ export default class ListC extends React.Component {
 
                 <br />  <br />
 
-                <Paginator style={_style.page}
+                <Paginator style={Style.paginator}
                     page={this.state.page} pageSize={size} total={this.props.total}
                     onPrevious={this._actionPagePrevious.bind(this)}
                     onNext={this._actionPageNext.bind(this)} />
