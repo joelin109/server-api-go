@@ -8,6 +8,8 @@ const covers = staticData[0]
 const thumbs = staticData[1]
 const coverCount = covers.length
 
+const Action_List_Github_Repository = 'Action_Github_Repository'
+const Action_List_Github_Author = 'Action_Github_Author'
 class ItemGithub extends React.Component {
 
     constructor(props) {
@@ -23,25 +25,27 @@ class ItemGithub extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return false;//(this.state.total != nextProps.total);
+        return false; //(this.state.total != nextProps.total);
     }
 
 
-    _handleAuthor(e) {
-        this.props.dispatch({ type: "github" }, e.target.id)
-    };
-
     _handleDetail(e) {
-        this.props.dispatch({ type: "github" }, e.target.id)
+        let action = {
+            type: Action_List_Github_Repository,
+            data: e.target.id
+        }
+        this.props.dispatch(action)
     };
-
-    _handleTag(e) {
-        this.props.dispatch({ type: "tag" }, e.target.innerHTML)
+    _handleAuthor(e) {
+        let action = {
+            type: Action_List_Github_Author,
+            data: e.target.id
+        }
+        this.props.dispatch(action)
     };
-
 
     render() {
-        let coverID = covers[Math.floor(Math.random() * coverCount)]//this.props.src
+        let coverID = covers[Math.floor(Math.random() * coverCount)] //this.props.src
         let userThumb = this.props.value.owner.avatar_url;
         let dateRange = this.props.value.created_at.substring(2, 10) + " ~ " + this.props.value.updated_at.substring(2, 10);
 
@@ -52,32 +56,28 @@ class ItemGithub extends React.Component {
         let thumb_up = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>thumb_up</FontIcon>;
 
         let labelStyle = { color: '#616161', fontWeight: 'normal', };
-        let test = <a href={this.props.value.html_url} target="_blank">{this.props.value.name}</a>
 
         return (
 
             <div style={Style.item} >
-                <Card className="itemCSS">
-                    <div style={{ position: 'relative' }}>
+                <Card className="itemBox">
 
-                        <img id={this.props.value.html_url} style={Style.itemCover}
-                            src={coverID} onClick={this._handleDetail.bind(this)} />
+                    <div className="itemBox-Img">
+                        <img className="itemBox-Img-cover" id={this.props.value.html_url} src={coverID}
+                            onClick={this._handleDetail.bind(this)} />
 
-
-                        <img id={this.props.value.owner.html_url} style={Style.itemAuthor}
-                            src={userThumb} onClick={this._handleAuthor.bind(this)} />
+                        <img className="itemBox-Img-author" id={this.props.value.owner.html_url} src={userThumb}
+                            onClick={this._handleAuthor.bind(this)} />
 
                         <label style={Style.itemDate}>{dateRange}</label>
                     </div>
+                    <br />
 
-                    <br /><br />
-
-                    <CardTitle title={test} />
-
-                    <div style={Style.itemDesc}>
-                        {this.props.value.description}
+                    <div className="itemBox-Text">
+                        <p className="itemBox-Text-title"><a href={this.props.value.html_url} target="_blank">{this.props.value.name}</a></p>
+                        <p className="itemBox-Text-subTitle">{dateRange}</p>
+                        <p className="itemBox-Text-text"> {this.props.value.description}</p>
                     </div>
-
 
                     <div>
                         <FlatButton icon={thumb_up} label={this.props.value.stargazers_count} labelStyle={labelStyle} />

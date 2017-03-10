@@ -7,8 +7,8 @@ class ListGithub extends React.Component {
         return true
     }
 
-    _linkHandler(type, value) {
-        this.props.dispatch(type, value);
+    _dispatch(action) {
+        this.props.dispatch(action);
         return false;
     }
 
@@ -18,7 +18,7 @@ class ListGithub extends React.Component {
         if (this.props.value.length > 0) {
             listItems = this.props.value.map(item =>
                 <ItemGithub key={item.id} value={item}
-                    dispatch={this._linkHandler.bind(this)}
+                    dispatch={this._dispatch.bind(this)}
                 />);
         }
 

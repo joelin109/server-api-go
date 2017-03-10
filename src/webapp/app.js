@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as productService from './service/product-service';
 import * as githubService from './service/github-service';
+import * as act from './action';
 
 import Navigator from './component/header';
 import Channel from './component/channel';
@@ -40,7 +41,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            channel: "github",
+            channel: { type: act.Action_Channel_Type_Github, data: [0, 8] },
             filter: "",
             min: 0,
             max: 30,
@@ -51,8 +52,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        switch (this.state.channel) {
-            case "github":
+        switch (this.state.channel.type) {
+            case act.Action_Channel_Type_Github:
                 this._github_findProducts();
                 break;
             default:
@@ -99,19 +100,16 @@ class App extends React.Component {
         return false;
     }
 
-    _dispatch_channel(action, value) {
+    _dispatch_channel(action) {
         this.state.filter = "";
-        this.state.channel = "article"
+        this.state.channel = action
 
         switch (action.type) {
-            case "channel":
-                this._action_list_changeRange(value)
-                break;
-            case "github":
-                this.state.channel = "github"
-                this._action_github_search(value)
+            case act.Action_Channel_Type_Github:
+                this._action_github_search(action.data)
                 break;
             default:
+                this._action_list_changeRange(action.data)
                 break;
         }
         return false;
@@ -119,11 +117,14 @@ class App extends React.Component {
 
     _dispatch_list(action, value) {
         switch (action.type) {
-            case "tag":
-                this._action_list_tag(value)
+            case act.Action_List_Article_Tag:
+                this._action_list_tag(action.data)
                 break;
-            case "github":
-                window.open(value, '_blank'); 
+            case act.Action_List_Github_Author:
+                window.open(action.data, '_blank');
+                break;
+            case act.Action_List_Github_Repository:
+                window.open(action.data, '_blank');
                 break;
             default:
                 alert(action.type + "-" + value)
@@ -152,13 +153,10 @@ class App extends React.Component {
 
     render() {
 
-        let listType = "card";
-        switch (this.state.channel) {
-            case "article":
-                listType = "article"
-                break;
-            case "github":
-                listType = "github";
+        let displayType = act.Action_Display_List_Article;
+        switch (this.state.channel.type) {
+            case act.Action_Channel_Type_Github:
+                displayType = act.Action_Display_List_Github;
                 break;
             default:
                 break;
@@ -173,7 +171,7 @@ class App extends React.Component {
                 <div style={_style.root}>
                     <div style={_style.root2}>
 
-                        <ListC value={this.state.products} listStyle={listType}
+                        <ListC value={this.state.products} displayStyle={displayType}
                             min={this.state.min} max={this.state.max}
                             total={this.state.total} filter={this.state.filter}
                             dispatch={this._dispatch_list.bind(this)} />

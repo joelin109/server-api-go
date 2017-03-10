@@ -61,25 +61,6 @@ const Style = {
         overflowY: 'auto',
         padding: 6,
     },
-    itemCover: {
-        height: coverHeight,
-        width: '100%',
-        cursor: 'pointer',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    itemAuthor: {
-        width: 50,
-        height: 50,
-        position: 'absolute',
-        top: coverHeight - 20,
-        cursor: 'pointer',
-        left: 10,
-        background: '#757575',
-        borderRadius: 30,
-        border: '3px solid #FAFAFA'
-    },
     itemDate: {
         width: 150,
         height: 20,

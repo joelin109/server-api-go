@@ -55,14 +55,11 @@ class ItemCard extends React.Component {
         return (
 
             <div style={Style.item} >
-                <Card className="itemCSS">
-                    <div style={{ position: 'relative' }}>
+                <Card className="itemBox">
+                    <div className="itemBox-Img">
 
-                        <img id="im-user-id" style={Style.itemCover} src={coverID} onClick={this._handleDetail.bind(this)} />
-
-
-                        <img style={Style.itemAuthor} src={userThumb} id="123456789"
-                            onClick={this._handleAuthor.bind(this)} />
+                        <img className="itemBox-Img-cover" id="im-user-id"  src={coverID} onClick={this._handleDetail.bind(this)} />
+                        <img className="itemBox-Img-author" id="123456789" src={userThumb} onClick={this._handleAuthor.bind(this)} />
 
                         <br /><br />
                     </div>

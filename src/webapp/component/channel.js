@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatButton, IconButton, RaisedButton, MenuItem } from 'material-ui';
 import FontIcon from 'material-ui/FontIcon';
 import Style from './../util/style'
+import * as act from './../action';
 
 
 export default class Channel extends Component {
@@ -16,21 +17,30 @@ export default class Channel extends Component {
 
 
   _linkHandler(e) {
-    let value = e.target.innerHTML
-    switch (value) {
+    let _value = e.target.innerHTML
+    let _data = [0, 8];
+    let _type = act.Action_Channel_Type_Article;
+
+    switch (_value) {
       case "生活":
-        this.props.onClick({ type: "channel" }, [8, 13])
+        _data = [0, 8];
+        _type = act.Action_Channel_Type_Article;
         break;
+
       case "科技":
-        this.props.onClick({ type: "github" }, [8, 13])
+        _type = act.Action_Channel_Type_Github;
         break;
+
       case "语法":
-        this.props.onClick({ type: "channel" }, [8, 13])
+        _type = act.Action_Channel_Type_Grammar;
+        _data = [8, 13];
         break;
+
       default:
-        this.props.onClick({ type: "channel" }, [13, 26])
+        _data = [13, 26];
         break;
     }
+    this.props.onClick({ type: _type, data: _data })
     return false;
   }
 

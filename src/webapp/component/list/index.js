@@ -5,6 +5,7 @@ import ListCard from './list-card';
 import ListDefault from './list-default';
 import ListGithub from './list-github'
 import Style from './../../util/style'
+import * as act from './../../action';
 
 export default class ListC extends React.Component {
 
@@ -60,8 +61,8 @@ export default class ListC extends React.Component {
         });
     }
 
-    _dispatch_list(action, value) {
-        this.props.dispatch(action, value)
+    _dispatch_list(action) {
+        this.props.dispatch(action, action.data)
         return false;
     }
 
@@ -70,19 +71,18 @@ export default class ListC extends React.Component {
         let size = this.state.results.length
 
         let list
-        switch (this.props.listStyle) {
-            case "article":
-            case "card":
+        switch (this.props.displayStyle) {
+            case act.Action_Display_List_Article:
                 list = <ListCard value={this.state.results} style={Style.list}
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
-            case "github":
+            case act.Action_Display_List_Github:
                 list = <ListGithub value={this.state.results} style={Style.list}
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
-                    default:
-                    list= <ListDefault value={this.state.results} style={Style.list} itemStyle="deutsch"
-                        dispatch={this._dispatch_list.bind(this)} />
+            default:
+                list = <ListDefault value={this.state.results} style={Style.list} itemStyle="deutsch"
+                    dispatch={this._dispatch_list.bind(this)} />
                 break;
         }
 
