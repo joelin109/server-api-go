@@ -54,7 +54,7 @@ class ItemCard extends React.Component {
 
         return (
 
-            <div style={Style.item} >
+            <div className="itemC">
                 <Card className="itemBox">
                     <div className="itemBox-Img">
 

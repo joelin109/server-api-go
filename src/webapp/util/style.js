@@ -53,14 +53,6 @@ const Style = {
         minWidth: 320,
         minHeight: 100,
     },
-
-    item: {
-        minWidth: 258,
-        maxWidth: 318,
-        minHeight: 418,
-        overflowY: 'auto',
-        padding: 6,
-    },
     itemDate: {
         width: 150,
         height: 20,
