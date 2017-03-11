@@ -3,6 +3,7 @@ import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import staticData from './../../util/setting'
 import Style from './../../util/style'
+var Markdown = require('react-markdown');
 
 const covers = staticData[0]
 const thumbs = staticData[1]
@@ -36,8 +37,20 @@ class ItemCard extends React.Component {
     };
 
     _handleTag(e) {
-        this.props.dispatch({type:"tag"}, e.target.innerHTML)
+        this.props.dispatch({ type: "tag" }, e.target.innerHTML)
     };
+
+    _markdownHtml() {
+        let markdownSrc = [
+            '# ---\nChanges are automatically rendered as you type.\n\n* Follows the ',
+            '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
+            'elements',
+            '\n* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!',
+            '\n* :scissors: Modern :clipboard:'
+        ].join('')
+
+        return <Markdown source={markdownSrc} />;
+    }
 
 
     render() {
@@ -58,7 +71,7 @@ class ItemCard extends React.Component {
                 <Card className="itemBox">
                     <div className="itemBox-Img">
 
-                        <img className="itemBox-Img-cover" id="im-user-id"  src={coverID} onClick={this._handleDetail.bind(this)} />
+                        <img className="itemBox-Img-cover" id="im-user-id" src={coverID} onClick={this._handleDetail.bind(this)} />
                         <img className="itemBox-Img-author" id="123456789" src={userThumb} onClick={this._handleAuthor.bind(this)} />
 
                         <br /><br />
@@ -66,10 +79,8 @@ class ItemCard extends React.Component {
 
                     <CardTitle title={this.props.value.name} subtitle={parseFloat(this.props.value.alcohol)} />
 
-                    <div style={{ padding: 10 }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi...Victotest Day in
-                                t it is like to be a software engineer and the path that got her there. ................
+                    <div style={{ paddingLeft: 10, paddingTop: -100, paddingBottom: 15,}}>
+                        {this._markdownHtml()}
                     </div>
 
                     <CardActions>
