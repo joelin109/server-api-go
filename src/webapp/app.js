@@ -41,58 +41,27 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            channel: { type: act.Action_Channel_Type_Github, data: [0, 8] },
-            filter: "",
-            min: 0,
-            max: 30,
-            products: [],
-            total: 0,
-
+            channel: { type: act.Action_Channel_Type_Github, data: [0, 8], filter: "javascript" },
         }
     }
 
     componentDidMount() {
-        switch (this.state.channel.type) {
+        /*switch (this.state.channel.type) {
             case act.Action_Channel_Type_Github:
                 this._github_findProducts();
                 break;
             default:
                 this._article_findProducts();
                 break;
-        }
+        }*/
 
-    }
-
-
-    //API
-    _article_findProducts() {
-        productService.findAll({ search: this.state.filter, min: this.state.min, max: this.state.max, page: 1 })
-            .then(data => {
-                this.setState({
-                    products: data.products,
-                    pageSize: data.pageSize,
-                    total: data.total
-
-                });
-            });
-    }
-
-    _github_findProducts() {
-        githubService.findAll({ search: this.state.filter, page: 1 })
-            .then(data => {
-                this.setState({
-                    products: data.items,
-                    pageSize: 30,
-                    total: data.total_count
-                });
-            });
     }
 
     //Dispatch
-    _dispatch_navigator(action, value) {
+    _dispatch_navigator(action) {
         switch (action.type) {
-            case "filter_beer":
-                this._action_list_changeRange(value)
+            case act.Action_Filter_List_Article_Confirm:
+                alert(action.data)
                 break;
             default:
                 break;
@@ -101,53 +70,29 @@ class App extends React.Component {
     }
 
     _dispatch_channel(action) {
-        this.state.filter = "";
-        this.state.channel = action
-
-        switch (action.type) {
-            case act.Action_Channel_Type_Github:
-                this._action_github_search(action.data)
-                break;
-            default:
-                this._action_list_changeRange(action.data)
-                break;
-        }
+        //this.state.filter = "";
+        this.setState({
+            channel: action
+        });
         return false;
     }
 
     _dispatch_list(action, value) {
         switch (action.type) {
-            case act.Action_List_Article_Tag:
-                this._action_list_tag(action.data)
-                break;
             case act.Action_List_Github_Author:
                 window.open(action.data, '_blank');
                 break;
             case act.Action_List_Github_Repository:
                 window.open(action.data, '_blank');
                 break;
+            case act.Action_List_Article_Detail:
+                window.open(action.data, '_blank');
+                break;
             default:
-                alert(action.type + "-" + value)
+                alert(action.type + "-" + action.data)
                 break;
         }
         return false;
-    }
-
-    //Action
-    _action_list_changeRange(values) {
-        this.state.min = values[0];
-        this.state.max = values[1];
-        this._article_findProducts()
-    }
-
-    _action_list_tag(tag) {
-        this.state.filter = tag;
-        this._article_findProducts()
-    }
-
-    _action_github_search(language) {
-        this.state.filter = language;
-        this._github_findProducts()
     }
 
 
@@ -164,16 +109,15 @@ class App extends React.Component {
 
         return (
             <div >
-                <Navigator title="Title" onClick={this._dispatch_navigator.bind(this)} />
-                <Channel value={3} onClick={this._dispatch_channel.bind(this)} />
+                <Navigator title="Title" dispatch={this._dispatch_navigator.bind(this)} />
+                <Channel value={3} dispatch={this._dispatch_channel.bind(this)} />
                 <br />
 
                 <div style={_style.root}>
                     <div style={_style.root2}>
 
                         <ListC value={this.state.products} displayStyle={displayType}
-                            min={this.state.min} max={this.state.max}
-                            total={this.state.total} filter={this.state.filter}
+                            channel={this.state.channel}
                             dispatch={this._dispatch_list.bind(this)} />
                         <br /><br />
 

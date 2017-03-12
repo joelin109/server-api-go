@@ -1,13 +1,16 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import staticData from './../../util/setting'
+import {itemCovers, userThumbs} from './../../util/data'
+import * as act from './../../action';
+
+
 import Style from './../../util/style'
 var Markdown = require('react-markdown');
 
-const covers = staticData[0]
-const thumbs = staticData[1]
-const coverCount = covers.length
+const covers = itemCovers
+const thumbs = userThumbs
+const coverCount = itemCovers.length
 
 class ItemCard extends React.Component {
 
@@ -29,15 +32,15 @@ class ItemCard extends React.Component {
 
 
     _handleAuthor(e) {
-        this.props.dispatch("Author-", e.target.id)
+        this.props.dispatch({type: act.Action_List_Article_Author, data: e.target.id})
     };
 
     _handleDetail(e) {
-        this.props.dispatch("Detail-" + e.target.id, e.target.src)
+        this.props.dispatch({type: act.Action_List_Article_Detail, data: e.target.src})
     };
 
     _handleTag(e) {
-        this.props.dispatch({ type: "tag" }, e.target.innerHTML)
+        this.props.dispatch({type: act.Action_List_Article_Tag, data: e.target.innerHTML})
     };
 
     _markdownHtml() {

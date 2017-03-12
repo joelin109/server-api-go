@@ -1,15 +1,12 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import { FlatButton, FontIcon } from 'material-ui';
-//import { markdown } from 'markdown';
-//import md from 'markdown-in-js'
-//import { Markdown } from 'react-markdown';
-import staticData from './../../util/setting'
+
+import {itemCovers, userThumbs} from './../../util/data'
 import Style from './../../util/style'
 
-const covers = staticData[0]
-const thumbs = staticData[1]
-const coverCount = covers.length
+const covers = itemCovers
+const coverCount = itemCovers.length
 
 const Action_List_Github_Repository = 'Action_Github_Repository'
 const Action_List_Github_Author = 'Action_Github_Author'
@@ -65,25 +62,6 @@ class ItemGithub extends React.Component {
         return NaN;
     };
 
-    _markdownHtml() {
-        let markdownSrc = [
-            '# Live demo\n\nChanges are automatically rendered as you type.\n\n* Follows the ',
-            '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
-            'elements\n* Allows you to escape or skip HTML (try toggling the checkboxes above)',
-            '\n* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!\n',
-            '\n## HTML block below\n\n<blockquote>\n    This blockquote will change based ',
-            'on the HTML settings above.\n</blockquote>\n\n## How about some code?\n',
-            '```js\nvar React = require(\'react\');\nvar Markdown = require(\'react-markdown\');',
-            '\n\nReact.render(\n    <Markdown source="# Your markdown here" />,\n    document.',
-            'getElementById(\'content\')\n);\n```\n\nPretty neat, eh?\n\n', '## More info?\n\n',
-            'Read usage information and more on [GitHub](//github.com/rexxars/react-markdown)\n\n',
-            '---------------\n\n',
-            'A component by [VaffelNinja](http://vaffel.ninja) / Espen Hovlandsdal',
-            ':scissors: Modern :clipboard:'
-        ].join('')
-
-       // return <Markdown source={markdownSrc} />;
-    }
 
     render() {
         let coverID = covers[Math.floor(Math.random() * coverCount)] //this.props.src

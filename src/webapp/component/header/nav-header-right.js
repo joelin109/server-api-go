@@ -64,7 +64,7 @@ export default class HeaderRight extends Component {
     return (
       <div style={Style.headerRight}>
 
-        <FlatButton icon={this._newFontIcon("filter_list")}
+        <FlatButton icon={this._newFontIcon("search")}
           onTouchTap={this._linkHandler2.bind(this)} />
 
         <FlatButton icon={this._newFontIcon("person")}

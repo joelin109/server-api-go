@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {cyan800, grey900, grey300, grey400 } from 'material-ui/styles/colors';
+import { cyan800, grey900, grey300, grey400 } from 'material-ui/styles/colors';
 
 const _style = {
     test: {
@@ -11,21 +11,28 @@ const _style = {
         alignContent: 'flex-start',
     },
     test1: {
-        height: 520,
+        height: 220,
         width: 320,
-        background: cyan800,//'#BDBDBD',
+        background: '#424242', //cyan800,//'#BDBDBD',
         padding: 3,
     },
     test2: {
-        height: 520,
+        height: 220,
         width: 320,
-        background: '#107A7B',//#757575',#007E70
+        background: '#616161', //#107A7B',//#757575',#007E70
         padding: 3,
     },
     test3: {
-        height: 520,
+        height: 220,
         width: 320,
-        background: '#2D2D2D',//#616161',
+        background: '#757575',//#616161',
+        padding: 3,
+    },
+
+    test4: {
+        height: 220,
+        width: 320,
+        background: '#9E9E9E',//#616161',
         padding: 3,
     },
 
@@ -48,13 +55,13 @@ class Recommend extends React.Component {
 
         return (
             <div className="recommend">
-                <div style={_style.test1}>
-                </div>
-                <br/> <br/>
                 <div style={_style.test2}>
                 </div>
-                 <br/> <br/>
+                <br /> <br />
                 <div style={_style.test3}>
+                </div>
+                <br /> <br />
+                <div style={_style.test4}>
                 </div>
             </div>
         );

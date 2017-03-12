@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FlatButton, IconButton, RaisedButton, MenuItem } from 'material-ui';
 import FontIcon from 'material-ui/FontIcon';
-import Style from './../util/style'
 import * as act from './../action';
 
 
@@ -20,6 +19,7 @@ export default class Channel extends Component {
     let _value = e.target.innerHTML
     let _data = [0, 8];
     let _type = act.Action_Channel_Type_Article;
+    let _filter = ""
 
     switch (_value) {
       case "生活":
@@ -29,6 +29,7 @@ export default class Channel extends Component {
 
       case "科技":
         _type = act.Action_Channel_Type_Github;
+        _filter = "javascript"
         break;
 
       case "语法":
@@ -40,7 +41,7 @@ export default class Channel extends Component {
         _data = [13, 26];
         break;
     }
-    this.props.onClick({ type: _type, data: _data })
+    this.props.dispatch({ type: _type, data: _data, filter:_filter })
     return false;
   }
 
@@ -56,7 +57,7 @@ export default class Channel extends Component {
 
     return (
       <div>
-        <div style={Style.channel}>
+        <div className="channel">
 
           {this._newFlatButton("生活")}
           {this._newFlatButton("科技")}
@@ -64,8 +65,7 @@ export default class Channel extends Component {
           {this._newFlatButton("单词")}
 
         </div>
-        <div style={{ height: 8, background: '#007E70', }}>
-        </div>
+
       </div>
     );
   }

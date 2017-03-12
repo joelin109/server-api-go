@@ -7,7 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import App from './app';
 
-const ap_bg_color = "#007E70"//"#2D2D2D";//#107A7B";//cyan800;
+const ap_bg_color = cyan800 //"#007E70"//"#2D2D2D";//#107A7B";//cyan800;
 const ap_height = 44;
 const appTheme = getMuiTheme({
     palette: {

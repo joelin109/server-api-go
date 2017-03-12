@@ -7,14 +7,6 @@ const Style = {
         alignContent: 'center',
         height: 44,
     },
-    channel: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        alignContent: 'flex-end',
-        height: 64,
-        background: '#007E70',
-    },
     root: {
         display: 'flex',
         flexWrap: 'wrap',
