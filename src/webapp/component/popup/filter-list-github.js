@@ -1,17 +1,27 @@
 import React from 'react';
 import { Dialog, RaisedButton, FlatButton } from 'material-ui';
-import { Step, Stepper, StepButton, } from 'material-ui/Stepper';
+import { RadioButtonGroup, RadioButton, Slider, DatePicker, Toggle } from 'material-ui';
+//import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
 
 class FilterListGithub extends React.Component {
     constructor() {
         super();
+
+        const fourYearAgo = new Date();
+        fourYearAgo.setFullYear(fourYearAgo.getFullYear() - 4);
+        fourYearAgo.setHours(0, 0, 0, 0);
+
         this.state = {
             stepIndex: 0,
             stepValue: [0, 10],
-            language: 'javascript',
-            created_at: '2013-01-01',
-            star_count: 3000,
+            language: 'JavaScript',
+            starSlider: 3000,
+            createdAt: fourYearAgo,
+            fromCache: true,
+
         };
     }
 
@@ -21,19 +31,32 @@ class FilterListGithub extends React.Component {
     };
 
     _handleConfirm() {
-        this.props.dispatch({ type: "Action_Filter_List_Github_Confirm", data: this.state.stepValue })
+        let _data = {
+            language: this.state.language,
+            star: this.state.starSlider,
+            created_at: this.state.createdAt,
+            is_cache: this.state.fromCache
+        }
+        this.props.dispatch({ type: "Action_Filter_List_Github_Confirm", data: _data })
     };
 
-    _handleStep1() {
-        this.setState({ stepIndex: 0, stepValue: [0, 8] })
-    };
-    _handleStep2() {
-        this.setState({ stepIndex: 1, stepValue: [8, 13] })
-    };
-    _handleStep3() {
-        this.setState({ stepIndex: 2, stepValue: [13, 26] })
+    //For Filter
+    _handle_language_choose(event, value) {
+        this.setState({ language: value });
     };
 
+    _handle_star_slider(event, value) {
+        this.setState({ starSlider: value });
+    };
+
+    _handle_date_picker(event, value) {
+        this.state.createdAt = value
+        //this.setState({ createdAt: value });
+    };
+
+    _handle_cache_togle(event, value) {
+        this.setState({ fromCache: value });
+    };
 
     render() {
         const title = "Sort & Filter"
@@ -50,26 +73,81 @@ class FilterListGithub extends React.Component {
             />,
         ];
 
-        let content = <div style={{ width: '100%', maxWidth: 700, margin: 'auto', height: 400, }}>
-            <Stepper linear={false} activeStep={this.state.stepIndex} orientation="vertical">
-                <Step>
-                    <StepButton onClick={this._handleStep1.bind(this)}>
-                        [0 - 8]
-                        </StepButton>
-                </Step>
-                <Step>
-                    <StepButton onClick={this._handleStep2.bind(this)}>
-                        [8 - 13]
-                        </StepButton>
-                </Step>
-               
-            </Stepper>
-        </div>
+        let content = <div className="popup-content">
+
+            <div className="popup-content-text">
+                <p className="popup-content-text-title">Language:</p>
+                <RadioButtonGroup className="popup-dialog-radio-group" onChange={this._handle_language_choose.bind(this)}
+                    name="shipSpeed" defaultSelected={this.state.language}>
+
+                    <RadioButton className="popup-dialog-radio"
+                        value="JavaScript"
+                        label="JavaScript"
+                        checkedIcon={<ActionFavorite />}
+                        uncheckedIcon={<ActionFavoriteBorder />}
+
+                    />
+                    <RadioButton className="popup-dialog-radio"
+                        value="TypeScript"
+                        label="TypeScript"
+                        checkedIcon={<ActionFavorite />}
+                        uncheckedIcon={<ActionFavoriteBorder />}
+
+                    />
+                    <RadioButton className="popup-dialog-radio"
+                        value="Python"
+                        label="Python"
+                        checkedIcon={<ActionFavorite />}
+                        uncheckedIcon={<ActionFavoriteBorder />}
+                    />
+                    <RadioButton className="popup-dialog-radio"
+                        value="Golang"
+                        label="Golang"
+                        checkedIcon={<ActionFavorite />}
+                        uncheckedIcon={<ActionFavoriteBorder />}
+                    />
+                </RadioButtonGroup>
+            </div>
+
+            <div className="popup-content-text">
+                <p className="popup-content-text-title">Star: >= {this.state.starSlider} </p>
+                <Slider
+                    min={0}
+                    max={10000}
+                    step={1}
+                    defaultValue={this.state.starSlider}
+                    onChange={this._handle_star_slider.bind(this)}
+                />
+            </div>
+
+            <div className="popup-content-text">
+                <p className="popup-content-text-title">CreateDate: </p>
+                <DatePicker
+                    defaultDate={this.state.createdAt}
+                    hintText="date picker"
+                    locale="en-US"
+                    autoOk={true}
+                    firstDayOfWeek={0}
+                    onChange={this._handle_date_picker.bind(this)}
+                />
+            </div>
+
+            <div className="popup-content-text">
+                <p className="popup-content-text-title">FromCache: {this.state.fromCache ? 'Yes' : 'No'}</p>
+                <Toggle
+                    name="from_cache"
+                    value="from_cache"
+                    label=""
+                    toggled={this.state.fromCache}
+                    onToggle={this._handle_cache_togle.bind(this)}
+                />
+            </div>
+        </div >
 
 
         return (
             <div>
-                <Dialog modal={false} open={this.props.open} title={title}
+                <Dialog contentStyle={{ maxWidth: 500 }} modal={false} open={this.props.open} title={title}
                     actions={actions}
                     autoScrollBodyContent={true}
                     onRequestClose={this._handleCancel.bind(this)}

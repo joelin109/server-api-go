@@ -220,6 +220,55 @@ a:active {
 
 /*----- Item End ----------*/
 
+
+/*----- Popup Start ----------*/
+
+.popup {
+    justify-content: center;
+}
+
+.popup-dialog {
+    display: flex;
+    justify-content: center;
+    padding: 100px 0px;
+}
+
+.popup-content {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px;
+}
+
+.popup-dialog-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    align-content: flex-end;
+}
+
+.popup-dialog-radio {
+    margin-bottom: 10px;
+     margin-right: 30px;
+       max-width: 120px;
+}
+
+.popup-content-text {
+    margin-top: 0px;
+    margin-top: 30px;
+}
+
+.popup-content-text-title {
+    font-size: 15px;
+    font-size: 1.25rem;
+    line-height: 20px;
+    font-weight: bold;
+    color: #424242;
+}
+
+
+/*----- Popup End ----------*/
+
 .mainCSS {
     background: #EEEEEE
 }
