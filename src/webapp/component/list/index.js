@@ -20,6 +20,7 @@ export default class ListC extends React.Component {
             results: [],
             page: 1,
             channel: {},
+            filterGithub: { language: 'JavaScript', star: 3000 },
             filterKey: "",
             filterRange: [0, 26],
             listFilterVisible: false,
@@ -74,10 +75,7 @@ export default class ListC extends React.Component {
         productService.findAll(filter)
             .then(result => {
 
-                if (willScrollTop == true) {
-                    window.scrollTo(0, 0);
-                }
-                this.state.willNeedUpdate = true;
+                this._list_prepare_update(willScrollTop)
                 this.setState({
                     results: result.products,
                     page: result.page,
@@ -87,16 +85,25 @@ export default class ListC extends React.Component {
     }
 
     _list_github_findAll(willScrollTop) {
-        let filter = { search: this.state.filterKey, page: 1 }
+
+        let filter = { filter: this.state.filterGithub, page: this.state.page }
         githubService.findAll(filter)
             .then(data => {
-                this.state.willNeedUpdate = true;
+
+                this._list_prepare_update(willScrollTop)
                 this.setState({
                     results: data.items,
                     pageSize: 30,
                     total: data.total_count
                 });
             });
+    }
+
+    _list_prepare_update(willScrollTop) {
+        if (willScrollTop == true) {
+            window.scrollTo(0, 0);
+        }
+        this.state.willNeedUpdate = true;
     }
 
     //Dispatch
@@ -123,7 +130,7 @@ export default class ListC extends React.Component {
     _dispatch_list_filter_popup(action) {
         switch (action.type) {
             case act.Action_Filter_List_Github_Confirm:
-                alert("Github_Confirm-" + action.data)
+                this._action_list_github_filter(action.data)
                 break;
 
             case act.Action_Filter_List_Article_Confirm:
@@ -151,6 +158,12 @@ export default class ListC extends React.Component {
         this.state.filterRange = range;
         this.state.page = 1;
         this._list_findAll()
+    }
+
+    _action_list_github_filter(data) {
+        this.state.filterGithub = data;
+        this.state.page = 1;
+        this._list_findAll(true)
     }
 
     _action_list_page_previous() {

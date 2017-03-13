@@ -66,9 +66,10 @@ class ItemGithub extends React.Component {
     render() {
         let coverID = covers[Math.floor(Math.random() * coverCount)] //this.props.src
         let userThumb = this.props.value.owner.avatar_url;
-        let repoDateRange = this.props.value.created_at.substring(2, 10) + " ~ " + this.props.value.updated_at.substring(2, 10);
-        let repoStarNum = this._formatNumber(this.props.value.stargazers_count)
-        let repoDesc = this.props.value.description
+        let _repoDateRange = this.props.value.created_at.substring(2, 10) + " ~ " + this.props.value.updated_at.substring(2, 10);
+        let _repoStarNum = this._formatNumber(this.props.value.stargazers_count)
+        let _repoForkNum = this._formatNumber(this.props.value.forks)
+        let _repoDesc = this.props.value.description
 
         let color = "#bdbdbd"
         let hoverColor = "#EF5350"
@@ -90,19 +91,19 @@ class ItemGithub extends React.Component {
                         <img className="itemBox-Img-author" id={this.props.value.owner.html_url} src={userThumb}
                             onClick={this._handleAuthor.bind(this)} />
 
-                        <label style={Style.itemDate}>{repoDateRange}</label>
+                        <label style={Style.itemDate}>{'...'}</label>
                     </div>
                     <br />
 
                     <div className="itemBox-Text">
                         <p className="itemBox-Text-title"><a href={this.props.value.html_url} target="_blank">{this.props.value.name}</a></p>
-                        <p className="itemBox-Text-subTitle">{repoDateRange}</p>
-                        <p className="itemBox-Text-text">{repoDesc}</p>
+                        <p className="itemBox-Text-subTitle">{_repoDateRange}</p>
+                        <p className="itemBox-Text-text">{_repoDesc}</p>
                     </div>
 
                     <div>
-                        <FlatButton icon={thumb_up} label={repoStarNum} labelStyle={labelStyle} />
-                        <FlatButton icon={share} label={this.props.value.forks} labelStyle={labelStyle} />
+                        <FlatButton icon={thumb_up} label={_repoStarNum} labelStyle={labelStyle} />
+                        <FlatButton icon={share} label={_repoForkNum} labelStyle={labelStyle} />
                     </div>
                     <div style={{ height: 12 }}> </div>
 

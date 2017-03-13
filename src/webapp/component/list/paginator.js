@@ -13,7 +13,7 @@ class Paginator extends React.Component {
                         Previous
                     </button>
 
-                    <div className="legend">{this.props.total} beers • page {this.props.page}/{pages}</div>
+                    <div className="legend">{this.props.total}  • page {this.props.page}/{pages}</div>
 
 
                     <button href="#top"
