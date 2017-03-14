@@ -19,6 +19,7 @@ export default class ListC extends React.Component {
         this.state = {
             results: [],
             page: 1,
+            pageSize: 12,
             channel: {},
             filterGithub: { language: 'JavaScript', star: 3000 },
             filterKey: "",
@@ -67,6 +68,7 @@ export default class ListC extends React.Component {
     }
 
     _list_article_findAll(willScrollTop) {
+        this.state.pageSize = 12;
         let filter = {
             search: this.state.filterKey,
             min: this.state.filterRange[0], max: this.state.filterRange[1],
@@ -85,7 +87,7 @@ export default class ListC extends React.Component {
     }
 
     _list_github_findAll(willScrollTop) {
-
+        this.state.pageSize = 30;
         let filter = { filter: this.state.filterGithub, page: this.state.page }
         githubService.findAll(filter)
             .then(data => {
@@ -179,7 +181,6 @@ export default class ListC extends React.Component {
 
     render() {
         //alert("render - " + this.state.results.length)
-        let size = this.state.results.length
         let color = "#EEEEEE"
         let hoverColor = "#EF5350"
         let search = <FontIcon className="material-icons" color={hoverColor} hoverColor={hoverColor}>filter_list</FontIcon>;
@@ -209,7 +210,7 @@ export default class ListC extends React.Component {
 
                 <div>
                     <Paginator style={Style.paginator}
-                        page={this.state.page} pageSize={size} total={this.state.total}
+                        page={this.state.page} pageSize={this.state.pageSize} total={this.state.total}
                         onPrevious={this._action_list_page_previous.bind(this)}
                         onNext={this._action_list_page_next.bind(this)} />
                 </div>

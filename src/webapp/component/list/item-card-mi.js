@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import {itemCovers, userThumbs} from './../../util/data'
+import { itemCovers, userThumbs } from './../../util/data'
 import * as act from './../../action';
 
 
@@ -32,15 +32,15 @@ class ItemCard extends React.Component {
 
 
     _handleAuthor(e) {
-        this.props.dispatch({type: act.Action_List_Article_Author, data: e.target.id})
+        this.props.dispatch({ type: act.Action_List_Article_Author, data: e.target.id })
     };
 
     _handleDetail(e) {
-        this.props.dispatch({type: act.Action_List_Article_Detail, data: e.target.src})
+        this.props.dispatch({ type: act.Action_List_Article_Detail, data: e.target.src })
     };
 
     _handleTag(e) {
-        this.props.dispatch({type: act.Action_List_Article_Tag, data: e.target.innerHTML})
+        this.props.dispatch({ type: act.Action_List_Article_Tag, data: e.target.innerHTML })
     };
 
     _markdownHtml() {
@@ -64,9 +64,10 @@ class ItemCard extends React.Component {
         if (this.props.value.tags) {
             let tags = this.props.value.tags.split(', ');
             pills = tags.map(tag =>
-                <FlatButton style={Style.itemTag} label={tag} onTouchTap={this._handleTag.bind(this)} />
+                <li2><p className="word" onClick={this._handleTag.bind(this)}>{tag}</p></li2>
             );
         }
+        // <FlatButton style={Style.itemTag} label={tag} onTouchTap={this._handleTag.bind(this)} />
 
         return (
 
@@ -82,13 +83,16 @@ class ItemCard extends React.Component {
 
                     <CardTitle title={this.props.value.name} subtitle={parseFloat(this.props.value.alcohol)} />
 
-                    <div style={{ paddingLeft: 10, paddingTop: -100, paddingBottom: 15,}}>
+                    <div style={{ paddingLeft: 10, paddingTop: -100, paddingBottom: 15, }}>
                         {this._markdownHtml()}
                     </div>
 
-                    <CardActions>
-                        {pills}
-                    </CardActions>
+
+                    <div className="itemBox-tag">
+                        <ul className="keyword cfix">
+                            {pills}
+                        </ul>
+                    </div>
                 </Card>
             </div>
         );
