@@ -66,10 +66,11 @@ class ItemGithub extends React.Component {
     render() {
         let coverID = covers[Math.floor(Math.random() * coverCount)] //this.props.src
         let userThumb = this.props.value.owner.avatar_url;
-        let _repoDateRange = this.props.value.created_at.substring(2, 10) + " ~ " + this.props.value.updated_at.substring(2, 10);
-        let _repoStarNum = this._formatNumber(this.props.value.stargazers_count)
-        let _repoForkNum = this._formatNumber(this.props.value.forks)
-        let _repoDesc = this.props.value.description
+        let _repoDateRange = this.props.value.created_at.substring(2, 10) + " ~ " + this.props.value.pushed_at.substring(2, 10);
+        let _repoStarNum = this._formatNumber(this.props.value.stargazers_count);
+        let _repoForkNum = this._formatNumber(this.props.value.forks);
+        let _repoDesc = this.props.value.description;
+        let _repoAuthorClass = (this.props.value.owner.type === 'User' ? 'itemBox-Img-author' : 'itemBox-Img-organization');
 
         let color = "#bdbdbd"
         let hoverColor = "#EF5350"
@@ -88,7 +89,7 @@ class ItemGithub extends React.Component {
                         <img className="itemBox-Img-cover" id={this.props.value.html_url} src={coverID}
                             onClick={this._handleDetail.bind(this)} />
 
-                        <img className="itemBox-Img-author" id={this.props.value.owner.html_url} src={userThumb}
+                        <img className={_repoAuthorClass} id={this.props.value.owner.html_url} src={userThumb}
                             onClick={this._handleAuthor.bind(this)} />
 
                         <label style={Style.itemDate}>{'...'}</label>
@@ -105,7 +106,7 @@ class ItemGithub extends React.Component {
                         <FlatButton icon={thumb_up} label={_repoStarNum} labelStyle={labelStyle} />
                         <FlatButton icon={share} label={_repoForkNum} labelStyle={labelStyle} />
                     </div>
-                    <div style={{ height: 12 }}> </div>
+                   
 
                 </Card>
             </div>

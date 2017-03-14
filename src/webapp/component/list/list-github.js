@@ -14,7 +14,7 @@ class ListGithub extends React.Component {
 
     render() {
 
-        let listItems = <div style={{ height: 10, width: 1024 }}> </div>;
+        let listItems = <div style={{ height: 600, width: 1024 }}> </div>;
         if (this.props.value.length > 0) {
             listItems = this.props.value.map(item =>
                 <ItemGithub key={item.id} value={item}
