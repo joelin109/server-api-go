@@ -2,11 +2,9 @@ package logic
 
 import (
 	"fmt"
-
-	"server-api-go/src/service/msql"
 	"server-api-go/src/service/model"
+	"server-api-go/src/service/msql"
 	"server-api-go/src/service/util"
-	//"os/user"
 	"time"
 )
 
@@ -14,7 +12,7 @@ type DictionaryLogic struct{}
 
 var DefaultDictionary = DictionaryLogic{}
 
-func (*DictionaryLogic) Post(word *model.ContentWord) (*model.ContentWord, error) {
+func (self *DictionaryLogic) Post(word *model.ContentWord) (*model.ContentWord, error) {
 
 	util.Log(util.UnderscoreName("DictionaryHandler.Post"))
 
@@ -69,9 +67,12 @@ func (*DictionaryLogic) GetList(param string, page int8, size int8) ([]*model.Co
 
 	fmt.Println(util.UnderscoreName("DictionaryLogic.GetList"))
 
-	_filter := msql.Filter("is_recommend = ?", 0)
+	//_filter := msql.Filter("is_recommend = ?", 0)
+	_desc := "LOWER(wort)"
 	_words := make([]*model.ContentWord, 0)
-	msql.Query(&_words, _filter, nil)
+	msql.Query(&_words, "", _desc)
+	//_rawSQL := "SELECT id,wort,wort_sex,plural,zh,en,level,type,is_regel,is_recommend,is_ignore,create_date,update_date from content_dictionary_de order by LOWER(wort)"
+	//msql.QueryRaw(&_words, _rawSQL)
 
 	for _, _word := range _words {
 		_word.FormatDate()

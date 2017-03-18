@@ -14,16 +14,16 @@ class ListCard extends React.Component {
 
     render() {
 
-        let listItems = <div style={{ height: 10, width: 1024 }}> </div>;
-        if (this.props.value.length > 0) {
-            listItems = this.props.value.map(item =>
+        let listItems = <div> </div>;
+        if (this.props.resource.length > 0) {
+            listItems = this.props.resource.map(item =>
                 <ItemCard key={item.id} value={item}
                     dispatch={this._dispatch.bind(this)}
                 />);
         }
 
         return (
-            <div style={this.props.style}>
+            <div className='root-list'>
                 {listItems}
             </div>
         );

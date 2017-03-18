@@ -10,6 +10,7 @@ export const Action_Channel_Type_Word = 'Action_Channel_Type_Word'
 
 export const Action_Display_List_Article = 'Action_Display_List_Article'
 export const Action_Display_List_Github = 'Action_Display_List_Github'
+export const Action_Display_List_Deutsch = 'Action_Display_List_Deutsch'
 
 export const Action_Filter_List_Article_Confirm = 'Action_Filter_List_Article_Confirm'
 export const Action_Filter_List_Github_Confirm = 'Action_Filter_List_Github_Confirm'

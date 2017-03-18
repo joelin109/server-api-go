@@ -5,12 +5,11 @@ import (
 
 	"server-api-go/src/service/_conf"
 
-	"github.com/jinzhu/gorm"
-	_"github.com/lib/pq"
 	"strings"
 
+	"github.com/jinzhu/gorm"
+	_ "github.com/lib/pq"
 )
-
 
 // var Db gorm.DB []interface{}
 
@@ -83,13 +82,13 @@ func QueryFirst(out interface{}, filter string) {
 	}
 }
 
-func Query(out interface{}, filter string, orderBy *string) {
+func Query(out interface{}, filter string, orderBy string) {
 
 	QueryPaginate(out, filter, orderBy, 1, conf.DB_Query_limit)
 
 }
 
-func QueryPaginate(out interface{}, filter string, orderBy *string, curPage, limit int8) {
+func QueryPaginate(out interface{}, filter string, orderBy string, curPage, limit int8) {
 
 	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
 	defer db.Close()
@@ -98,7 +97,16 @@ func QueryPaginate(out interface{}, filter string, orderBy *string, curPage, lim
 	if isPass(err) {
 		//_offset := (curPage - 1) * limit
 		//db.Where(filter).Limit(limit, _offset).Find(out)
-		db.Where(filter).Limit(limit).Find(out)
+		db.Order(orderBy).Limit(limit).Find(out)
+	}
+}
+
+func QueryRaw(out interface{}, rawSQL string) {
+	db, err := gorm.Open("postgres", conf.DB_Conn_URI)
+	defer db.Close()
+
+	if isPass(err) {
+		db.Raw(rawSQL).Scan(out)
 	}
 }
 
@@ -128,7 +136,6 @@ func Filter(format string, v interface{}) string {
 	return fmt.Sprintf(_format, v)
 }
 
-
 // Check Error
 func isPass(err error) bool {
 	if err != nil {
@@ -137,5 +144,3 @@ func isPass(err error) bool {
 	}
 	return true
 }
-
-

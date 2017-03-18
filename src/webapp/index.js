@@ -12,7 +12,7 @@ const ap_height = 44;
 const appTheme = getMuiTheme({
     palette: {
         primary1Color: ap_bg_color,
-        accent1Color:grey400,
+        accent1Color: grey400,
         textColor: grey900,
         canvasColor: "#F5F5F5",
     },
@@ -25,6 +25,10 @@ const appTheme = getMuiTheme({
     },
     icon: {
         color: grey400,
+    },
+    tableRow: {
+        hoverColor: '#9E9E9E',
+        selectedColor: '#616161',
     },
 });
 

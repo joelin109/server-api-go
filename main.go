@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"server-api-go/src/service/api"
 	"net/http"
+	"server-api-go/src/service/api"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -21,6 +22,6 @@ func main() {
 		c.HTML(http.StatusOK, "index.html", nil)
 	})
 
-	router.Run(":8089")
+	router.Run(":8088")
 
 }

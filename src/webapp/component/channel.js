@@ -37,11 +37,16 @@ export default class Channel extends Component {
         _data = [8, 13];
         break;
 
+      case "单词":
+        _type = act.Action_Channel_Type_Word;
+        _data = [8, 13];
+        break;
+
       default:
         _data = [13, 26];
         break;
     }
-    this.props.dispatch({ type: _type, data: _data, filter:_filter })
+    this.props.dispatch({ type: _type, data: _data, filter: _filter })
     return false;
   }
 

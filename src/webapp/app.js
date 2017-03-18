@@ -41,7 +41,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            channel: { type: act.Action_Channel_Type_Github, data: [0, 8], filter: "javascript" },
+            channel: { type: act.Action_Channel_Type_Word, data: [0, 8], filter: "javascript" },
         }
     }
 
@@ -102,6 +102,9 @@ class App extends React.Component {
         switch (this.state.channel.type) {
             case act.Action_Channel_Type_Github:
                 displayType = act.Action_Display_List_Github;
+                break;
+            case act.Action_Channel_Type_Word:
+                displayType = act.Action_Display_List_Deutsch;
                 break;
             default:
                 break;

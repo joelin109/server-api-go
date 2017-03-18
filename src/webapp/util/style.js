@@ -26,15 +26,6 @@ const Style = {
         background: '#FAFAFA',
     },
 
-    list: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        alignContent: 'flex-start',
-        maxWidth: 1024,
-    },
-
     paginator: {
         display: 'flex',
         flexWrap: 'nowrap',

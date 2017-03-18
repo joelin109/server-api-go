@@ -3,10 +3,11 @@ import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-u
 import Paginator from './paginator';
 import * as productService from './../../service/product-service';
 import * as githubService from './../../service/github-service';
+import * as wordService from './../../service/word-service';
 import * as act from './../../action';
 
 import ListCard from './list-card';
-import ListDefault from './list-default';
+import ListTable from './list-table';
 import ListGithub from './list-github'
 import PopupFilterList from './../popup/filter-list'
 import Style from './../../util/style'
@@ -61,6 +62,9 @@ export default class ListC extends React.Component {
             case act.Action_Channel_Type_Github:
                 this._list_github_findAll(willScrollTop);
                 break;
+            case act.Action_Channel_Type_Word:
+                this._list_deutsch_findAll(willScrollTop);
+                break;
             default:
                 this._list_article_findAll(willScrollTop);
                 break;
@@ -99,6 +103,20 @@ export default class ListC extends React.Component {
                     total: data.total_count
                 });
             });
+    }
+
+    _list_deutsch_findAll(willScrollTop) {
+        this.state.pageSize = 30;
+
+        wordService.findAll({})
+            .then(data => {
+                this._list_prepare_update(willScrollTop)
+                this.setState({
+                    results: data.rows,
+                    pageSize: 30,
+                });
+            });
+
     }
 
     _list_prepare_update(willScrollTop) {
@@ -186,18 +204,17 @@ export default class ListC extends React.Component {
         let search = <FontIcon className="material-icons" color={hoverColor} hoverColor={hoverColor}>filter_list</FontIcon>;
 
         let list
-        let listStyle = Style.list;
         switch (this.props.displayStyle) {
             case act.Action_Display_List_Article:
-                list = <ListCard value={this.state.results} style={listStyle}
+                list = <ListCard resource={this.state.results} 
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
             case act.Action_Display_List_Github:
-                list = <ListGithub value={this.state.results} style={listStyle}
+                list = <ListGithub resource={this.state.results} 
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
             default:
-                list = <ListDefault value={this.state.results} style={listStyle} itemStyle="deutsch"
+                list = <ListTable resource={this.state.results} itemStyle="deutsch"
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
         }
