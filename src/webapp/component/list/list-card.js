@@ -14,7 +14,7 @@ class ListCard extends React.Component {
 
     render() {
 
-        let listItems = <div> </div>;
+        let listItems = <div className='root-list-default'> </div>;
         if (this.props.resource.length > 0) {
             listItems = this.props.resource.map(item =>
                 <ItemCard key={item.id} value={item}

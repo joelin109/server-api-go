@@ -1,10 +1,9 @@
 import React from 'react';
-import * as act from './../../action';
-import FilterBeer from './../popup/filter-list-beer'
-import FilterListGithub from './../popup/filter-list-github'
+import * as act from './../action';
+import WordListFilter from './word/word-list-filter'
 
 
-class PopupFilterList extends React.Component {
+class AdminListFilter extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -25,13 +24,13 @@ class PopupFilterList extends React.Component {
 
         let filter;
         switch (this.props.channel.type) {
-            case act.Action_Channel_Type_Github:
-                filter = <FilterListGithub open={this.props.open} data={this.state.data}
+            case act.Action_Admin_Channel_Type_Word:
+                filter = <WordListFilter open={this.props.open} data={this.state.data}
                     dispatch={this._dispatch.bind(this)} />
                 break;
 
             default:
-                filter = <FilterBeer open={this.props.open} data={this.state.data}
+                filter = <WordListFilter open={this.props.open} data={this.state.data}
                     dispatch={this._dispatch.bind(this)} />
                 break;
         }
@@ -46,4 +45,4 @@ class PopupFilterList extends React.Component {
 }
 
 
-export default PopupFilterList;
+export default AdminListFilter;

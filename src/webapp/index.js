@@ -28,7 +28,7 @@ const appTheme = getMuiTheme({
     },
     tableRow: {
         hoverColor: '#9E9E9E',
-        selectedColor: '#616161',
+        selectedColor: '#E0E0E0',
     },
 });
 

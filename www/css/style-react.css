@@ -98,6 +98,11 @@ a:active {
     min-height: 600px;
 }
 
+.root-list-default {
+    width: 1024px;
+    min-height: 1366px;
+}
+
 .root-list-filter {
     display: flex;
     justify-content: flex-end;
@@ -382,20 +387,20 @@ a:active {
     max-width: 660px,
 }
 
-.admin-list-col-200 {
-    max-width: 300px;
-    min-width: 200px;
+.admin-list-col-wo {
+    max-width: 180px;
     text-align: left;
 }
 
-.admin-list-col-180 {
+.admin-list-col-zh {
+    max-width: 300px;
+    min-width: 250px;
+    text-align: left;
+}
+
+.admin-list-col-st {
     max-width: 200px;
     min-width: 180px;
-    text-align: left;
-}
-
-.admin-list-col-160 {
-    max-width: 160px;
     text-align: left;
 }
 
@@ -406,7 +411,7 @@ a:active {
 
 .admin-list-col-25 {
     max-width: 30px;
-    text-align: left;
+    text-align: center;
 }
 
 

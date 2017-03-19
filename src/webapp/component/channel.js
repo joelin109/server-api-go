@@ -38,7 +38,7 @@ export default class Channel extends Component {
         break;
 
       case "单词":
-        _type = act.Action_Channel_Type_Word;
+        _type = act.Action_Admin_Channel_Type_Word;
         _data = [8, 13];
         break;
 

@@ -8,6 +8,7 @@ import Navigator from './component/header';
 import Channel from './component/channel';
 import Recommend from './Component/recommend';
 import ListC from './component/list';
+import AdminList from './admin/admin-list';
 
 const _style = {
     root: {
@@ -41,7 +42,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            channel: { type: act.Action_Channel_Type_Word, data: [0, 8], filter: "javascript" },
+            channel: { type: act.Action_Admin_Channel_Type_Word, data: [0, 8], filter: "javascript" },
         }
     }
 
@@ -98,17 +99,34 @@ class App extends React.Component {
 
     render() {
 
-        let displayType = act.Action_Display_List_Article;
+        let _switchAdmin = false;
+        let _displayType = act.Action_Display_List_Article;
         switch (this.state.channel.type) {
             case act.Action_Channel_Type_Github:
-                displayType = act.Action_Display_List_Github;
+                _displayType = act.Action_Display_List_Github;
                 break;
             case act.Action_Channel_Type_Word:
-                displayType = act.Action_Display_List_Deutsch;
+                _displayType = act.Action_Display_List_Deutsch;
+                break;
+            case act.Action_Admin_Channel_Type_Word:
+                _switchAdmin = true;
                 break;
             default:
                 break;
         }
+
+        let _listAdmin = <div style={_style.root2}>
+            <AdminList value={this.state.products} channel={this.state.channel}
+                dispatch={this._dispatch_list.bind(this)} />
+        </div>;
+        let _list = <div style={_style.root2}>
+            <ListC value={this.state.products} displayStyle={_displayType}
+                channel={this.state.channel}
+                dispatch={this._dispatch_list.bind(this)} />
+
+            <br />
+            <Recommend value={0} />
+        </div>;
 
         return (
             <div >
@@ -117,18 +135,8 @@ class App extends React.Component {
                 <br />
 
                 <div style={_style.root}>
-                    <div style={_style.root2}>
-
-                        <ListC value={this.state.products} displayStyle={displayType}
-                            channel={this.state.channel}
-                            dispatch={this._dispatch_list.bind(this)} />
-                        <br /><br />
-
-                        <Recommend value={0} />
-                    </div>
+                    {_switchAdmin === true ? _listAdmin : _list}
                 </div>
-
-
             </div>
         );
     }

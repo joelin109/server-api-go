@@ -4,7 +4,7 @@ import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow
 import { TextField, Toggle, FlatButton, FontIcon, IconButton } from 'material-ui';
 
 
-export default class ListTable extends React.Component {
+export default class WordList extends React.Component {
 
   constructor(props) {
     super(props);
