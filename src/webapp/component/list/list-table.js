@@ -71,25 +71,6 @@ export default class ListTable extends React.Component {
             {this._fontIcon((row.isrecommend === 1 ? 'favorite' : 'favorite_border'), (row.isrecommend === 1 ? _selectedColor : _defaultColor))}
           </IconButton>
         </TableRowColumn>
-        <TableRowColumn className='admin-list-col-st'>
-          {row.status}
-
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <IconButton value={row.wort} onTouchTap={this._handle_approval.bind(this)}>
-            {this._fontIcon("thumb_up", (row.status === 'accepted' ? _selectedColor : _defaultColor))}
-          </IconButton>
-
-          <IconButton value={row.wort} onTouchTap={this._handle_approval.bind(this)}>
-            {this._fontIcon("thumb_down", (row.status === 'rejected' ? _selectedColor : _defaultColor))}
-          </IconButton>
-
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <IconButton value={row} onTouchTap={this._handle_modify.bind(this)}>
-            {this._fontIcon("edit")}
-          </IconButton>
-
-        </TableRowColumn >
-
       </TableRow>
 
     ));
@@ -125,15 +106,7 @@ export default class ListTable extends React.Component {
                   <FlatButton label={'Regel'} labelPosition="before"
                     onTouchTap={this._handle_sort.bind(this)} />
                 </TableHeaderColumn>
-
                 <TableHeaderColumn tooltip="">Recommend</TableHeaderColumn>
-
-                <TableHeaderColumn className='admin-list-col-st' tooltip="">
-                  <FlatButton icon={this._fontIcon("arrow_downward")} label={'Status'} labelPosition="before"
-                    onTouchTap={this._handle_sort.bind(this)} />
-                </TableHeaderColumn>
-
-
 
               </TableRow>
             </TableHeader>

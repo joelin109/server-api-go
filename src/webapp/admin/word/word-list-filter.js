@@ -82,6 +82,7 @@ class WordListFilter extends React.Component {
         ];
 
         let _status = (this.state.status !== 'All' ? ' ( ' + this.state.status + ' ) ' : '')
+        let _haveSex= (this.state.type === 'Noun');
         let _content = <div className="popup-content">
 
             <div className="popup-content-text">
@@ -115,22 +116,22 @@ class WordListFilter extends React.Component {
                     <RadioButton className="popup-dialog-radio"
                         value="Der"
                         label="Der"
-                        disabled={this.state.type !== 'Verb'}
+                        disabled={!_haveSex}
                     />
                     <RadioButton className="popup-dialog-radio"
                         value="Die"
                         label="Die"
-                        disabled={this.state.type !== 'Verb'}
+                        disabled={!_haveSex}
                     />
                     <RadioButton className="popup-dialog-radio"
                         value="Das"
                         label="Das"
-                        disabled={this.state.type !== 'Verb'}
+                        disabled={!_haveSex}
                     />
                     <RadioButton className="popup-dialog-radio"
                         value="All"
                         label="All"
-                        disabled={this.state.type !== 'Verb'}
+                        disabled={!_haveSex}
                     />
                 </RadioButtonGroup>
             </div>
