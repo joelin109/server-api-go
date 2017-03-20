@@ -10,7 +10,6 @@ export default class WordList extends React.Component {
     super(props);
 
     this.state = {
-      fixedHeader: false,
       showCheckboxes: false,
       height: 'auto',
     };
@@ -98,7 +97,7 @@ export default class WordList extends React.Component {
         <div className="admin-list">
           <Table style={{ tableLayout: 'auto' }}
             height={this.state.height}
-            fixedHeader={this.state.fixedHeader}
+            fixedHeader={false}
             selectable={this.state.showCheckboxes}
             multiSelectable={true}
           >
@@ -161,12 +160,6 @@ export default class WordList extends React.Component {
             floatingLabelText="Table Body Height"
             defaultValue={this.state.height}
             onChange={this.handleChange.bind(this)}
-          />
-          <Toggle
-            name="fixedHeader"
-            label="Fixed Header"
-            onToggle={this.handleToggle.bind(this)}
-            defaultToggled={this.state.fixedHeader}
           />
           <Toggle
             name="showCheckboxes"

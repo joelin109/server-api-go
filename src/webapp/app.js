@@ -64,6 +64,9 @@ class App extends React.Component {
             case act.Action_Filter_List_Article_Confirm:
                 alert(action.data)
                 break;
+            case act.Action_Admin_Channel_Type_Word:
+                this.setState({ channel: action });
+                break;
             default:
                 break;
         }
@@ -131,6 +134,7 @@ class App extends React.Component {
         return (
             <div >
                 <Navigator title="Title" dispatch={this._dispatch_navigator.bind(this)} />
+
                 <Channel value={3} dispatch={this._dispatch_channel.bind(this)} />
                 <br />
 

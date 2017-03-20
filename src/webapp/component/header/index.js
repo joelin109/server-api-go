@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
-import { AppBar, Drawer, MenuItem, Badge, FlatButton, RaisedButton, } from 'material-ui';
+import { AppBar } from 'material-ui';
 import HeaderRight from './nav-header-right'
 import NavLeft from './nav-left'
 import FilterBeer from './../popup/filter-list-beer'
@@ -55,6 +54,12 @@ class Navigator extends React.Component {
         return false;
     }
 
+    _dispatch_nav_left(action) {
+        this.props.dispatch(action)
+        this._closeDrawer()
+        return false;
+    }
+
     _dispatch_filter_beer(action) {
 
         switch (action.type) {
@@ -77,14 +82,14 @@ class Navigator extends React.Component {
                     onTitleTouchTap={this._dispatch_header_title_touch.bind(this)}
                     style={{ position: 'fixed', top: 0, left: 0, right: 0 }} />
 
-                <Drawer open={this.state.drawerVisible} docked={false} onRequestChange={this._closeDrawer.bind(this)}>
-                    <MenuItem>Menu Item</MenuItem>
-                    <MenuItem>Menu Item 2</MenuItem>
-                </Drawer>
-                <br />
+                <NavLeft open={this.state.drawerVisible} login={0}
+                    dispatch={this._dispatch_nav_left.bind(this)} />
+
+                <FilterBeer open={this.state.filterVisible}
+                    dispatch={this._dispatch_filter_beer.bind(this)} />
+
                 {this.state.accountVisible ? <NewPropertyWindow onSave={this._saveHandler.bind(this)} onCancel={this._cancelHandler.bind(this)} /> : ""}
 
-                <FilterBeer open={this.state.filterVisible} dispatch={this._dispatch_filter_beer.bind(this)} />
             </div>
         )
     }

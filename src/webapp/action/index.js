@@ -13,6 +13,7 @@ export const Action_Admin_Channel_Type_User = 'Action_Admin_Channel_Type_User'
 export const Action_Admin_Channel_Type_Channel = 'Action_Admin_Channel_Type_Channel'
 export const Action_Admin_Channel_Type_Article = 'Action_Admin_Channel_Type_Article'
 export const Action_Admin_Channel_Type_Word = 'Action_Admin_Channel_Type_Word'
+export const Action_Admin_Channel_Type_Close = 'Action_Admin_Channel_Type_Close'
 
 export const Action_Display_List_Article = 'Action_Display_List_Article'
 export const Action_Display_List_Github = 'Action_Display_List_Github'

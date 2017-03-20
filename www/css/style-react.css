@@ -78,6 +78,11 @@ a:active {
     padding-bottom: 8px;
 }
 
+.nav-left-header {
+    height: 80px;
+    background: #00838F;
+}
+
 
 /*----- Head :end ----------*/
 
