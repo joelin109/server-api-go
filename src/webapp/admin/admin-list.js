@@ -107,6 +107,9 @@ export default class AdminList extends React.Component {
             case act.Action_List_Article_Tag:
                 this._action_list_article_tag(action.data)
                 break;
+            case act.Action_Admin_Word_List_Modify:
+                alert(action.data.wort + '-' + action.data.wortsex)
+                break;
 
             default:
                 this.props.dispatch(action, action.data)

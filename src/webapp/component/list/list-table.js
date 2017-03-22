@@ -10,7 +10,6 @@ export default class ListTable extends React.Component {
     super(props);
 
     this.state = {
-      fixedHeader: false,
       showCheckboxes: false,
       height: 'auto',
     };
@@ -79,7 +78,7 @@ export default class ListTable extends React.Component {
         <div className="admin-list">
           <Table style={{ tableLayout: 'auto' }}
             height={this.state.height}
-            fixedHeader={this.state.fixedHeader}
+            fixedHeader={false}
             selectable={this.state.showCheckboxes}
             multiSelectable={true}
           >
@@ -127,26 +126,6 @@ export default class ListTable extends React.Component {
               </TableRow>
             </TableFooter>
           </Table>
-        </div>
-        <div className='admin-list-setting'>
-          <h3>Table Properties</h3>
-          <TextField
-            floatingLabelText="Table Body Height"
-            defaultValue={this.state.height}
-            onChange={this.handleChange.bind(this)}
-          />
-          <Toggle
-            name="fixedHeader"
-            label="Fixed Header"
-            onToggle={this.handleToggle.bind(this)}
-            defaultToggled={this.state.fixedHeader}
-          />
-          <Toggle
-            name="showCheckboxes"
-            label="Show Checkboxes"
-            onToggle={this.handleToggle.bind(this)}
-            defaultToggled={this.state.showCheckboxes}
-          />
         </div>
       </div>
     );

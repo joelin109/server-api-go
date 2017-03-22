@@ -23,5 +23,10 @@ export const Action_Filter_List_Article_Confirm = 'Action_Filter_List_Article_Co
 export const Action_Filter_List_Github_Confirm = 'Action_Filter_List_Github_Confirm'
 export const Action_Admin_Article_List_Filter_Confirm = 'Action_Admin_Article_List_Filter_Confirm'
 export const Action_Admin_Word_List_Filter_Confirm = 'Action_Admin_Word_List_Filter_Confirm'
+export const Action_Admin_Word_List_Unregel = 'Action_Admin_Word_List_Unregel'
+export const Action_Admin_Word_List_Recommend = 'Action_Admin_Word_List_Recommend'
+export const Action_Admin_Word_List_Approval = 'Action_Admin_Word_List_Approval'
+export const Action_Admin_Word_List_Modify = 'Action_Admin_Word_List_Modify'
+
 export const Action_Admin_New_Article_Confirm = 'Action_Admin_New_Article_Confirm'
 export const Action_Admin_New_Word_Confirm = 'Action_Admin_New_Word_Confirm'
