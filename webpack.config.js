@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/webapp/index.js',
     output: {
         path: path.resolve(__dirname, 'www'),
-        filename: 'app.bundle.js'
+        filename: 'index.bundle.js'
     },
     module: {
         loaders: [

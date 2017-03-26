@@ -19,7 +19,8 @@ export default class Channel extends Component {
     let _value = e.target.innerHTML
     let _data = [0, 8];
     let _type = act.Action_Channel_Type_Article;
-    let _filter = ""
+    let _display = act.Action_Display_List_Article;
+    let _filter = '';
 
     switch (_value) {
       case "生活":
@@ -29,6 +30,7 @@ export default class Channel extends Component {
 
       case "科技":
         _type = act.Action_Channel_Type_Github;
+        _display = act.Action_Display_List_Github;
         _filter = "javascript"
         break;
 
@@ -38,7 +40,8 @@ export default class Channel extends Component {
         break;
 
       case "单词":
-        _type = act.Action_Admin_Channel_Type_Word;
+        _type = act.Action_Channel_Type_Word;
+        _display = act.Action_Display_List_Deutsch;
         _data = [8, 13];
         break;
 
@@ -46,7 +49,8 @@ export default class Channel extends Component {
         _data = [13, 26];
         break;
     }
-    this.props.dispatch({ type: _type, data: _data, filter: _filter })
+    
+    this.props.dispatch({ type: _type, display:_display, data: _data, filter: _filter })
     return false;
   }
 
@@ -54,7 +58,7 @@ export default class Channel extends Component {
   _newFlatButton(text) {
     let color = "#bdbdbd"
     let hoverColor = "#EF5350"
-    return <FlatButton labelStyle={{ color: '#EEEEEE', fontWeight: 'bold', }} hoverColor={hoverColor} label={text}
+    return <FlatButton labelStyle={{ color: '#EEEEEE', fontWeight: 'bold' }} hoverColor={hoverColor} label={text}
       onTouchTap={this._linkHandler.bind(this)} />;
   }
 

@@ -3,7 +3,7 @@ import { Dialog, RaisedButton, FlatButton } from 'material-ui';
 import { Step, Stepper, StepButton, } from 'material-ui/Stepper';
 
 
-class FilterBeer extends React.Component {
+export default class FilterListBeer extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -82,6 +82,3 @@ class FilterBeer extends React.Component {
         )
     }
 }
-
-
-export default FilterBeer;

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { AppBar } from 'material-ui';
 import HeaderRight from './nav-header-right'
 import NavLeft from './nav-left'
-import FilterBeer from './../popup/filter-list-beer'
 import NewPropertyWindow from './../popup/NewPropertyWindow';
 
 
@@ -84,9 +83,6 @@ class Navigator extends React.Component {
 
                 <NavLeft open={this.state.drawerVisible} login={0}
                     dispatch={this._dispatch_nav_left.bind(this)} />
-
-                <FilterBeer open={this.state.filterVisible}
-                    dispatch={this._dispatch_filter_beer.bind(this)} />
 
                 {this.state.accountVisible ? <NewPropertyWindow onSave={this._saveHandler.bind(this)} onCancel={this._cancelHandler.bind(this)} /> : ""}
 

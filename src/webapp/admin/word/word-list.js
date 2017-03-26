@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }
   from 'material-ui/Table';
 import { TextField, Toggle, FlatButton, FontIcon, IconButton } from 'material-ui';
+import * as act from './../../action'
 
 
 export default class WordList extends React.Component {
@@ -15,13 +16,13 @@ export default class WordList extends React.Component {
     };
   }
 
-  handleToggle(event, toggled) {
+  _handleToggle(event, toggled) {
     this.setState({
       [event.target.name]: toggled,
     });
   };
 
-  handleChange(event) {
+  _handleChange(event) {
     this.setState({ height: event.target.value });
   };
 
@@ -31,8 +32,8 @@ export default class WordList extends React.Component {
   }
 
   //Modify
-  _handle_modify(event) {
-    alert(event.currentTarget.value)
+  _handle_modify(event, data) {
+    this.props.dispatch({type: act.Action_Admin_Word_List_Modify ,data:event})
     // alert(value)
   }
   _handle_unregel(event) {
@@ -83,7 +84,7 @@ export default class WordList extends React.Component {
           </IconButton>
 
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <IconButton value={row} onTouchTap={this._handle_modify.bind(this)}>
+          <IconButton onTouchTap={this._handle_modify.bind(this, row)}>
             {this._fontIcon("edit")}
           </IconButton>
 
@@ -159,12 +160,12 @@ export default class WordList extends React.Component {
           <TextField
             floatingLabelText="Table Body Height"
             defaultValue={this.state.height}
-            onChange={this.handleChange.bind(this)}
+            onChange={this._handleChange.bind(this)}
           />
           <Toggle
             name="showCheckboxes"
             label="Show Checkboxes"
-            onToggle={this.handleToggle.bind(this)}
+            onToggle={this._handleToggle.bind(this)}
             defaultToggled={this.state.showCheckboxes}
           />
         </div>

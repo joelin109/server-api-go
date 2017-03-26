@@ -1,41 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as productService from './service/product-service';
-import * as githubService from './service/github-service';
 import * as act from './action';
 
 import Navigator from './component/header';
 import Channel from './component/channel';
-import Recommend from './Component/recommend';
-import ListC from './component/list';
+import Home from './Component/home';
 import AdminList from './admin/admin-list';
 
-const _style = {
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-    },
-    root2: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        width: 1024 + 320 + 40,
-    },
-    filter: {
-        display: 'flex',
-        justifyContent: 'center',
-        width: 1024,
-    },
-    recommend: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        alignContent: 'flex-start',
-        background: '#FAFAFA',
-    },
-
-};
 
 class App extends React.Component {
 
@@ -81,36 +52,11 @@ class App extends React.Component {
         return false;
     }
 
-    _dispatch_list(action, value) {
-        switch (action.type) {
-            case act.Action_List_Github_Author:
-                window.open(action.data, '_blank');
-                break;
-            case act.Action_List_Github_Repository:
-                window.open(action.data, '_blank');
-                break;
-            case act.Action_List_Article_Detail:
-                window.open(action.data, '_blank');
-                break;
-            default:
-                alert(action.type + "-" + action.data)
-                break;
-        }
-        return false;
-    }
-
 
     render() {
 
         let _switchAdmin = false;
-        let _displayType = act.Action_Display_List_Article;
         switch (this.state.channel.type) {
-            case act.Action_Channel_Type_Github:
-                _displayType = act.Action_Display_List_Github;
-                break;
-            case act.Action_Channel_Type_Word:
-                _displayType = act.Action_Display_List_Deutsch;
-                break;
             case act.Action_Admin_Channel_Type_Word:
                 _switchAdmin = true;
                 break;
@@ -118,17 +64,11 @@ class App extends React.Component {
                 break;
         }
 
-        let _listAdmin = <div style={_style.root2}>
-            <AdminList value={this.state.products} channel={this.state.channel}
-                dispatch={this._dispatch_list.bind(this)} />
+        let _adminHome = <div className='root-body'>
+            <AdminList channel={this.state.channel} />
         </div>;
-        let _list = <div style={_style.root2}>
-            <ListC value={this.state.products} displayStyle={_displayType}
-                channel={this.state.channel}
-                dispatch={this._dispatch_list.bind(this)} />
-
-            <br />
-            <Recommend value={0} />
+        let _home = <div className='root-body'>
+            <Home channel={this.state.channel} />
         </div>;
 
         return (
@@ -138,8 +78,8 @@ class App extends React.Component {
                 <Channel value={3} dispatch={this._dispatch_channel.bind(this)} />
                 <br />
 
-                <div style={_style.root}>
-                    {_switchAdmin === true ? _listAdmin : _list}
+                <div className='root'>
+                    {_switchAdmin === true ? _adminHome : _home}
                 </div>
             </div>
         );

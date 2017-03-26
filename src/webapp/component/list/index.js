@@ -21,7 +21,7 @@ export default class ListC extends React.Component {
             results: [],
             page: 1,
             pageSize: 12,
-            channel: {},
+            channel: props.channel,
             filterGithub: { language: 'JavaScript', star: 3000 },
             filterKey: "",
             filterRange: [0, 26],
@@ -133,9 +133,17 @@ export default class ListC extends React.Component {
             case act.Action_List_Article_Tag:
                 this._action_list_article_tag(action.data)
                 break;
-
+            case act.Action_List_Github_Author:
+                window.open(action.data, '_blank');
+                break;
+            case act.Action_List_Github_Repository:
+                window.open(action.data, '_blank');
+                break;
+            case act.Action_List_Article_Detail:
+                window.open(action.data, '_blank');
+                break;
             default:
-                this.props.dispatch(action, action.data)
+                alert(action.type + "-" + action.data)
                 break;
         }
         return false;
@@ -197,24 +205,32 @@ export default class ListC extends React.Component {
     }
 
 
+    _fontIcon(id, color = '#EEEEEE') {
+        let _hoverColor = "#EF5350"
+        return <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
+    }
+
     render() {
-        //alert("render - " + this.state.results.length)
-        let color = "#EEEEEE"
-        let hoverColor = "#EF5350"
-        let search = <FontIcon className="material-icons" color={hoverColor} hoverColor={hoverColor}>filter_list</FontIcon>;
+        const _display = this.state.channel.type;
+        let _hoverColor = "#EF5350"
 
         let list
-        switch (this.props.displayStyle) {
-            case act.Action_Display_List_Article:
-                list = <ListCard resource={this.state.results} 
+        switch (_display) {
+            case act.Action_Channel_Type_Github:
+                list = <ListGithub
+                    resource={this.state.results}
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
-            case act.Action_Display_List_Github:
-                list = <ListGithub resource={this.state.results} 
+
+            case act.Action_Channel_Type_Word:
+                list = <ListTable
+                    resource={this.state.results} itemStyle="deutsch"
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
+
             default:
-                list = <ListTable resource={this.state.results} itemStyle="deutsch"
+                list = <ListCard
+                    resource={this.state.results}
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
         }
@@ -234,9 +250,9 @@ export default class ListC extends React.Component {
 
                 <div className="root-list-filter">
                     <FloatingActionButton className="root-list-filter-button"
-                        backgroundColor={hoverColor} zDepth={2}
+                        backgroundColor={_hoverColor} zDepth={2}
                         onTouchTap={this._dispatch_list_filter.bind(this)}>
-                        {search}
+                        {this._fontIcon('filter_list')}
                     </FloatingActionButton>
                 </div>
 

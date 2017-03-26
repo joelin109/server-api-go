@@ -1,6 +1,6 @@
 import React from 'react';
 import * as act from './../../action';
-import FilterBeer from './../popup/filter-list-beer'
+import FilterListBeer from './../popup/filter-list-beer'
 import FilterListGithub from './../popup/filter-list-github'
 
 
@@ -31,7 +31,7 @@ class PopupFilterList extends React.Component {
                 break;
 
             default:
-                filter = <FilterBeer open={this.props.open} data={this.state.data}
+                filter = <FilterListBeer open={this.props.open} data={this.state.data}
                     dispatch={this._dispatch.bind(this)} />
                 break;
         }

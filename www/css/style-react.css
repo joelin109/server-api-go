@@ -73,23 +73,42 @@ a:active {
     justify-content: center;
     align-items: flex-end;
     align-content: flex-end;
-    height: 72px;
+    height: 80px;
     background: #00838F;
     padding-bottom: 8px;
 }
 
+.channel-button {
+    color: #EEEEEE;
+    font-weight: bold;
+    text-align: center;
+}
+
 .nav-left-header {
-    height: 80px;
+    height: 89px;
     background: #00838F;
 }
 
 
 /*----- Head :end ----------*/
 
-.bodyMain {
+.body-main {
     background: #EEEEEE
 }
 
+.root {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.root-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1366px;
+    min-height: 736px;
+}
 
 /*----- List Start ----------*/
 
@@ -384,6 +403,7 @@ a:active {
 .admin-list {
     min-width: 1004px;
     max-width: 1366px;
+    min-height: 1004px;
 }
 
 .admin-list-setting {
@@ -434,6 +454,7 @@ a:active {
     overflow: hidden;
     border-top: 1px solid #999999;
     box-sizing: border-box;
+    bottom: 0px;
 }
 
 .imgBox img {
