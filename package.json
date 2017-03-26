@@ -13,20 +13,19 @@
   },
   "author": "Christophe Coenraets",
   "dependencies": {
-    "material-ui": "^0.17.1",
     "path": "^0.12.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.0.0",
-    "react-router": "^4.0.0-2",
     "react-markdown": "^2.4.5",
+    "material-ui": "^0.17.1",
     "react-tap-event-plugin": "^2.0.1",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
-    "babel-loader": "^6.2.5",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "react-addons-test-utils": "^15.3.0",
     "react-addons-linked-state-mixin": "^15.4.2",
