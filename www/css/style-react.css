@@ -70,10 +70,21 @@ a:active {
 
 .channel {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-start;
+    height: 80px;
+    background: #00838F;
+    padding-bottom: 8px;
+}
+
+.channel-hidden {
+    display: flex;
     justify-content: center;
     align-items: flex-end;
     align-content: flex-end;
-    height: 80px;
+    height: 40px;
     background: #00838F;
     padding-bottom: 8px;
 }
@@ -93,13 +104,14 @@ a:active {
 /*----- Head :end ----------*/
 
 .body-main {
-    background: #EEEEEE
+    background: #EEEEEE;
 }
 
 .root {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 25px;
 }
 
 .root-body {
@@ -108,11 +120,14 @@ a:active {
     justify-content: center;
     max-width: 1366px;
     min-height: 736px;
+    padding-bottom: 12px;
 }
+
 
 /*----- List Start ----------*/
 
 .root-list {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -124,7 +139,28 @@ a:active {
 
 .root-list-default {
     width: 1024px;
-    min-height: 1366px;
+    min-height: 736px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.root-list-default-loading {
+    width: 50%;
+    max-width: 350px;
+    margin-top: 30%;
+}
+
+.root-list-paginator {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
+    max-width: 1024px;
+    min-width: 320px;
+    min-height: 70px;
+    margin-top: 30px;
 }
 
 .root-list-filter {
@@ -295,6 +331,29 @@ a:active {
 
 /*----- Item End ----------*/
 
+.detail-root {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background: #EEEEEE;
+    z-index: 999;
+}
+
+.detail-root-body {
+    background: #fff;
+    top: 100px;
+    left: 0%;
+    right: 0%;
+    bottom: 0px;
+    padding-top: 150px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 0px solid #444;
+}
+
 
 /*----- Popup Start ----------*/
 
@@ -401,9 +460,10 @@ a:active {
 /*----- Admin Start ----------*/
 
 .admin-list {
-    min-width: 1004px;
+    min-width: 768px;
     max-width: 1366px;
     min-height: 1004px;
+    padding-right: 10px;
 }
 
 .admin-list-setting {

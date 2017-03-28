@@ -1,5 +1,5 @@
 import React from 'react';
-import * as act from './../action';
+import * as act from './../setting/action';
 import WordListFilter from './word/word-list-filter'
 
 

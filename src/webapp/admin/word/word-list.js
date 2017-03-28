@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }
   from 'material-ui/Table';
 import { TextField, Toggle, FlatButton, FontIcon, IconButton } from 'material-ui';
-import * as act from './../../action'
+import * as act from './../../setting/action'
 
 
 export default class WordList extends React.Component {

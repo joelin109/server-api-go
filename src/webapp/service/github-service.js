@@ -1,6 +1,6 @@
 import request from './request';
-import { api_result_js, api_result_ts } from './../util/data/github'
-import { api_result_go, api_result_py } from './../util/data/github2'
+//import { api_result_js, api_result_ts } from './../setting/data/github'
+//import { api_result_go, api_result_py } from './../setting/data/github2'
 
 
 const api_github_js = 'https://api.github.com/search/repositories?q=created:%3E2013-03-01%20language:javascript%20stars:%3E=3000&sort=stars';
@@ -23,14 +23,14 @@ export let findAll = (data) => {
     let _language = data.filter.language.toLowerCase();
     let _createdAt = _toString(data.filter.created_at);
     let _star = data.filter.star;
-    let _isCache = data.filter.is_cache;
+    let _isCache = false;//data.filter.is_cache;
 
     if (typeof (_isCache) !== "undefined" && _isCache === false) {
 
         apiurl = _apiBase + _createdAt + '%20language:' + _language + '%20stars:>=' + _star + '&sort=stars&page=' + _page;
         return fetch(apiurl)
             .then(response => response.json())
-        alert(apiurl)
+       // alert(apiurl)
     }
     else {
 

@@ -1,18 +1,14 @@
 import React from 'react';
 import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
+
+import ListCard from './list-card'
 import Paginator from './paginator';
-import * as productService from './../../service/product-service';
-import * as githubService from './../../service/github-service';
-import * as wordService from './../../service/word-service';
-import * as act from './../../action';
 
-import ListCard from './list-card';
-import ListTable from './list-table';
-import ListGithub from './list-github'
-import PopupFilterList from './../popup/filter-list'
-import Style from './../../util/style'
+export const List_Page_Previous = 'List_Page_Previous'
+export const List_Page_Next = 'List_Page_Next'
+export const List_Filter = 'List_Filter'
 
-export default class ListC extends React.Component {
+export default class List extends React.Component {
 
     constructor(props) {
         super(props);
@@ -20,190 +16,47 @@ export default class ListC extends React.Component {
         this.state = {
             results: [],
             page: 1,
-            pageSize: 12,
-            channel: props.channel,
-            filterGithub: { language: 'JavaScript', star: 3000 },
-            filterKey: "",
-            filterRange: [0, 26],
-            listFilterVisible: false,
-            willNeedUpdate: false,
+            listFilterButtonBground: '#EF5350',
         }
-    }
+        this._dispatch_list = this._dispatch_list.bind(this);
+        this._dispatch_list_page_previous = this._dispatch_list_page_previous.bind(this);
+        this._dispatch_list_page_next = this._dispatch_list_page_next.bind(this);
+        this._dispatch_list_filter = this._dispatch_list_filter.bind(this);
 
-    componentDidMount() {
-        this._switch_channel(this.props.channel)
-    }
-
-    componentWillReceiveProps(nextProps) {
-        // alert("componentWillReceiveProps - " + nextProps.channel.type)
-        this.state.willNeedUpdate = false;
-        if (this.state.channel.type !== nextProps.channel.type) {
-            this._switch_channel(nextProps.channel)
-        }
+        // alert('ListBase-constructor')
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-
-        return this.state.willNeedUpdate;
-    }
-
-    _switch_channel(newChannel) {
-        this.state.channel = newChannel;
-        this.state.filterKey = newChannel.filter;
-        this.state.filterRange = newChannel.data;
-        this.state.page = 1;
-        this._list_findAll();
-    }
-
-
-    //API Request&Response
-    _list_findAll(willScrollTop = false) {
-        switch (this.state.channel.type) {
-            case act.Action_Channel_Type_Github:
-                this._list_github_findAll(willScrollTop);
-                break;
-            case act.Action_Channel_Type_Word:
-                this._list_deutsch_findAll(willScrollTop);
-                break;
-            default:
-                this._list_article_findAll(willScrollTop);
-                break;
+        if (typeof (nextProps.filterOpen) !== "undefined" && nextProps.filterOpen) {
+            return false;
         }
-    }
-
-    _list_article_findAll(willScrollTop) {
-        this.state.pageSize = 12;
-        let filter = {
-            search: this.state.filterKey,
-            min: this.state.filterRange[0], max: this.state.filterRange[1],
-            page: this.state.page
+        else {
+            return true;
         }
-        productService.findAll(filter)
-            .then(result => {
-
-                this._list_prepare_update(willScrollTop)
-                this.setState({
-                    results: result.products,
-                    page: result.page,
-                    total: result.total,
-                });
-            });
-    }
-
-    _list_github_findAll(willScrollTop) {
-        this.state.pageSize = 30;
-        let filter = { filter: this.state.filterGithub, page: this.state.page }
-        githubService.findAll(filter)
-            .then(data => {
-
-                this._list_prepare_update(willScrollTop)
-                this.setState({
-                    results: data.items,
-                    pageSize: 30,
-                    total: data.total_count
-                });
-            });
-    }
-
-    _list_deutsch_findAll(willScrollTop) {
-        this.state.pageSize = 30;
-
-        wordService.findAll({})
-            .then(data => {
-                this._list_prepare_update(willScrollTop)
-                this.setState({
-                    results: data.rows,
-                    pageSize: 30,
-                });
-            });
-
-    }
-
-    _list_prepare_update(willScrollTop) {
-        if (willScrollTop == true) {
-            window.scrollTo(0, 0);
-        }
-        this.state.willNeedUpdate = true;
     }
 
     //Dispatch
     _dispatch_list(action) {
+        this.props.dispatch_item(action);
+        return false;
+    }
 
-        switch (action.type) {
-            case act.Action_List_Article_Tag:
-                this._action_list_article_tag(action.data)
-                break;
-            case act.Action_List_Github_Author:
-                window.open(action.data, '_blank');
-                break;
-            case act.Action_List_Github_Repository:
-                window.open(action.data, '_blank');
-                break;
-            case act.Action_List_Article_Detail:
-                window.open(action.data, '_blank');
-                break;
-            default:
-                alert(action.type + "-" + action.data)
-                break;
-        }
+    _dispatch_list_page_previous() {
+        this.state.page = this.state.page - 1;
+        this.props.dispatch({ type: List_Page_Previous, data: this.state.page });
+        return false;
+    }
+
+    _dispatch_list_page_next() {
+        this.state.page = this.state.page + 1;
+        this.props.dispatch({ type: List_Page_Next, data: this.state.page });
         return false;
     }
 
     _dispatch_list_filter(action) {
-
-        this.state.willNeedUpdate = true;
-        this.setState({ listFilterVisible: true })
-    }
-
-    _dispatch_list_filter_popup(action) {
-        switch (action.type) {
-            case act.Action_Filter_List_Github_Confirm:
-                this._action_list_github_filter(action.data)
-                break;
-
-            case act.Action_Filter_List_Article_Confirm:
-                this._action_list_article_filter(action.data)
-                break;
-
-            default:
-                break;
-        }
-
-        this.state.willNeedUpdate = true;
-        this.setState({ listFilterVisible: false });
+        this.props.dispatch({ type: List_Filter, data: this.state.page });
         return false;
     }
-
-    //Acton
-    _action_list_article_tag(tag) {
-        this.state.filterKey = tag;
-        this.state.page = 1;
-        this._list_findAll()
-    }
-
-    _action_list_article_filter(range) {
-        this.state.filterKey = ""
-        this.state.filterRange = range;
-        this.state.page = 1;
-        this._list_findAll()
-    }
-
-    _action_list_github_filter(data) {
-        this.state.filterGithub = data;
-        this.state.page = 1;
-        this._list_findAll(true)
-    }
-
-    _action_list_page_previous() {
-        this.state.page = this.state.page - 1;
-        this._list_findAll()
-    }
-
-    _action_list_page_next() {
-        this.state.page = this.state.page + 1;
-        this._list_findAll(true)
-    }
-
 
     _fontIcon(id, color = '#EEEEEE') {
         let _hoverColor = "#EF5350"
@@ -211,59 +64,36 @@ export default class ListC extends React.Component {
     }
 
     render() {
-        const _display = this.state.channel.type;
-        let _hoverColor = "#EF5350"
-
-        let list
-        switch (_display) {
-            case act.Action_Channel_Type_Github:
-                list = <ListGithub
-                    resource={this.state.results}
-                    dispatch={this._dispatch_list.bind(this)} />
-                break;
-
-            case act.Action_Channel_Type_Word:
-                list = <ListTable
-                    resource={this.state.results} itemStyle="deutsch"
-                    dispatch={this._dispatch_list.bind(this)} />
-                break;
-
-            default:
-                list = <ListCard
-                    resource={this.state.results}
-                    dispatch={this._dispatch_list.bind(this)} />
-                break;
-        }
+        this.state.results = this.props.resource;
+        let _itemTag = this.props.itemTag;
+        let _key = `list-${_itemTag}`;
 
         return (
             <div>
-                {list}
+                <ListCard key={_key}
+                    itemTag={_itemTag}
+                    resource={this.state.results}
+                    dispatch={this._dispatch_list.bind(this)}
+                />
 
-                <br />  <br />
-
-                <div>
-                    <Paginator style={Style.paginator}
-                        page={this.state.page} pageSize={this.state.pageSize} total={this.state.total}
-                        onPrevious={this._action_list_page_previous.bind(this)}
-                        onNext={this._action_list_page_next.bind(this)} />
-                </div>
+                <Paginator
+                    page={this.state.page}
+                    pageSize={this.props.pageSize} total={this.props.total}
+                    onPrevious={this._dispatch_list_page_previous.bind(this)}
+                    onNext={this._dispatch_list_page_next.bind(this)}
+                />
 
                 <div className="root-list-filter">
                     <FloatingActionButton className="root-list-filter-button"
-                        backgroundColor={_hoverColor} zDepth={2}
+                        zDepth={2}
+                        backgroundColor={this.state.listFilterButtonBground}
                         onTouchTap={this._dispatch_list_filter.bind(this)}>
                         {this._fontIcon('filter_list')}
                     </FloatingActionButton>
                 </div>
-
-                <PopupFilterList open={this.state.listFilterVisible}
-                    channel={this.state.channel}
-                    dispatch={this._dispatch_list_filter_popup.bind(this)} />
             </div>
         );
     }
 
 
 }
-;
-

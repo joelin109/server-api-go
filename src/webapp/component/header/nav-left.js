@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Drawer, Divider, MenuItem, Badge, FlatButton, RaisedButton, FontIcon } from 'material-ui';
-import * as act from './../../action'
+import * as act from './../../setting/action'
 
 class NavLeft extends React.Component {
     constructor() {
@@ -28,6 +28,11 @@ class NavLeft extends React.Component {
         return false;
     }
 
+      _dispatch_left_channel_article() {
+        this._dispatch_left_channel(act.Action_Admin_Channel_Type_Article);
+        return false;
+    }
+
     _fontIcon(id, color = '#757575') {
         let _hoverColor = "#EF5350"
         return <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
@@ -45,7 +50,7 @@ class NavLeft extends React.Component {
                     <MenuItem leftIcon={this._fontIcon('visibility')}>Channel</MenuItem>
                     <MenuItem leftIcon={this._fontIcon('flag')}>Tag</MenuItem>
                     <Divider />
-                    <MenuItem leftIcon={this._fontIcon('local_library')}>Article</MenuItem>
+                    <MenuItem leftIcon={this._fontIcon('local_library')} onTouchTap={this._dispatch_left_channel_article.bind(this)}>Article</MenuItem>
                     <MenuItem leftIcon={this._fontIcon('text_fields')} onTouchTap={this._dispatch_left_channel_word.bind(this)}>Word</MenuItem>
                     <Divider />
                     <MenuItem leftIcon={this._fontIcon('settings')}>Setting</MenuItem>

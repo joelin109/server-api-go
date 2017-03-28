@@ -71,8 +71,8 @@ export default class HeaderRight extends Component {
           onTouchTap={this._linkHandler.bind(this)} />
 
         <FlatButton icon={this._newFontIcon("home")}
-          href="https://github.com/callemall/material-ui"
-          target="_blank" />
+          href="/#"
+          />
 
 
       </div>

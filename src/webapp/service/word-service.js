@@ -1,5 +1,5 @@
 import request from './request';
-import { api_result_word } from './../util/data/word'
+import { api_result_word } from './../setting/data/word'
 
 
 export let findAll = (data) => {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { FlatButton, IconButton, RaisedButton, MenuItem } from 'material-ui';
 import FontIcon from 'material-ui/FontIcon';
-import * as act from './../action';
+import * as act from './../setting/action';
 
 
-export default class Channel extends Component {
+export default class HeaderChannel extends Component {
   constructor(props) {
     super(props);
 
@@ -13,7 +13,6 @@ export default class Channel extends Component {
       valueMultiple: ['3', '5'],
     };
   }
-
 
   _linkHandler(e) {
     let _value = e.target.innerHTML
@@ -36,7 +35,7 @@ export default class Channel extends Component {
 
       case "语法":
         _type = act.Action_Channel_Type_Grammar;
-        _data = [8, 13];
+        _data = [13, 26];
         break;
 
       case "单词":
@@ -49,11 +48,10 @@ export default class Channel extends Component {
         _data = [13, 26];
         break;
     }
-    
-    this.props.dispatch({ type: _type, display:_display, data: _data, filter: _filter })
+
+    this.props.dispatch({ type: _type, display: _display, data: _data, filter: _filter })
     return false;
   }
-
 
   _newFlatButton(text) {
     let color = "#bdbdbd"
@@ -63,18 +61,22 @@ export default class Channel extends Component {
   }
 
   render() {
+    let _hidden = this.props.hidden;
+    let _content = <div className="channel-hidden" />;
+    if (_hidden === false) {
+      _content = <div className="channel">
+
+        {this._newFlatButton("生活")}
+        {this._newFlatButton("科技")}
+        {this._newFlatButton("语法")}
+        {this._newFlatButton("单词")}
+
+      </div>
+    }
 
     return (
       <div>
-        <div className="channel">
-
-          {this._newFlatButton("生活")}
-          {this._newFlatButton("科技")}
-          {this._newFlatButton("语法")}
-          {this._newFlatButton("单词")}
-
-        </div>
-
+        {_content}
       </div>
     );
   }

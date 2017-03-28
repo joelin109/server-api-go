@@ -1,42 +1,43 @@
 import React from 'react';
 import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
-import * as wordService from './../service/word-service';
-import * as articleService from './../service/product-service';
-import * as act from './../setting/action';
+import Paginator from './paginator';
+import * as productService from './../../service/product-service';
+import * as wordService from './../../service/word-service';
+import * as act from './../../setting/action';
 
-import WordList from './word/word-list';
-import AdminListFilter from './admin-list-filter'
-import Style from './../util/style'
+import ListTable from './list-table';
+import List from './list'
+import * as tag from './../item/tag';
+import PopupFilterList from './../popup/filter-list'
 
-export default class AdminList extends React.Component {
+
+export default class ListC extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            channel: { type: act.Action_Admin_Channel_Type_Word, data: {} },
             results: [],
             page: 1,
             pageSize: 12,
-            filterKey: '',
+            channel: props.channel,
+            filterKey: "",
+            filterRange: [0, 26],
             listFilterVisible: false,
             willNeedUpdate: false,
         }
     }
 
     componentDidMount() {
-        this._list_findAll();
+        this._switch_channel(this.props.channel)
     }
 
     componentWillReceiveProps(nextProps) {
         // alert("componentWillReceiveProps - " + nextProps.channel.type)
         this.state.willNeedUpdate = false;
-        if (nextProps.channel) {
-            if (this.state.channel.type !== nextProps.channel.type) {
-                this._switch_channel(nextProps.channel)
-            }
+        if (this.state.channel.type !== nextProps.channel.type) {
+            this._switch_channel(nextProps.channel)
         }
-
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -45,18 +46,18 @@ export default class AdminList extends React.Component {
     }
 
     _switch_channel(newChannel) {
-        if (newChannel) {
-            this.state.channel = newChannel;
-            this.state.page = 1;
-            this._list_findAll();
-        }
+        this.state.channel = newChannel;
+        this.state.filterKey = newChannel.filter;
+        this.state.filterRange = newChannel.data;
+        this.state.page = 1;
+        this._list_findAll();
     }
 
 
     //API Request&Response
     _list_findAll(willScrollTop = false) {
         switch (this.state.channel.type) {
-            case act.Action_Admin_Channel_Type_Word:
+            case act.Action_Channel_Type_Word:
                 this._list_deutsch_findAll(willScrollTop);
                 break;
             default:
@@ -69,10 +70,10 @@ export default class AdminList extends React.Component {
         this.state.pageSize = 12;
         let filter = {
             search: this.state.filterKey,
-            min: 0, max: 26,
+            min: this.state.filterRange[0], max: this.state.filterRange[1],
             page: this.state.page
         }
-        articleService.findAll(filter)
+        productService.findAll(filter)
             .then(result => {
 
                 this._list_prepare_update(willScrollTop)
@@ -85,8 +86,10 @@ export default class AdminList extends React.Component {
     }
 
 
+
     _list_deutsch_findAll(willScrollTop) {
         this.state.pageSize = 30;
+
         wordService.findAll({})
             .then(data => {
                 this._list_prepare_update(willScrollTop)
@@ -112,15 +115,30 @@ export default class AdminList extends React.Component {
             case act.Action_List_Article_Tag:
                 this._action_list_article_tag(action.data)
                 break;
-            case act.Action_Admin_Word_List_Modify:
-                alert(action.data.wort + '-' + action.data.wortsex)
+            case act.Action_List_Article_Detail:
+                window.open(action.data, '_blank');
                 break;
-
             default:
-                //this.props.dispatch(action, action.data)
+                alert(action.type + "-" + action.data)
                 break;
         }
         return false;
+    }
+
+    _dispatch_link_detail(action) {
+        let _types = action.type.split("_");
+        let _type = _types[_types.length - 1].toLowerCase();
+        let _link = `/article/?_${_type}`;
+        this.state.link = {
+            pathname: _link,
+            // this is the trick!
+            state: {
+                modal: true,
+                channel: action
+            }
+        }
+
+        this.props.history.push(this.state.link)
     }
 
     _dispatch_list_filter(action) {
@@ -131,10 +149,6 @@ export default class AdminList extends React.Component {
 
     _dispatch_list_filter_popup(action) {
         switch (action.type) {
-            case act.Action_Filter_List_Github_Confirm:
-                this._action_list_github_filter(action.data)
-                break;
-
             case act.Action_Filter_List_Article_Confirm:
                 this._action_list_article_filter(action.data)
                 break;
@@ -157,9 +171,11 @@ export default class AdminList extends React.Component {
 
     _action_list_article_filter(range) {
         this.state.filterKey = ""
+        this.state.filterRange = range;
         this.state.page = 1;
         this._list_findAll()
     }
+
 
 
     _action_list_page_previous() {
@@ -173,21 +189,27 @@ export default class AdminList extends React.Component {
     }
 
 
+    _fontIcon(id, color = '#EEEEEE') {
+        let _hoverColor = "#EF5350"
+        return <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
+    }
+
     render() {
-        //alert("render - " + this.state.results.length)
-        let color = "#EEEEEE"
-        let hoverColor = "#EF5350"
-        let search = <FontIcon className="material-icons" color={hoverColor} hoverColor={hoverColor}>filter_list</FontIcon>;
+        const _display = this.state.channel.type;
+        let _hoverColor = "#EF5350"
 
         let list
-        switch (this.state.channel.type) {
-            case act.Action_Admin_Channel_Type_Word:
-                list = <WordList resource={this.state.results}
+        switch (_display) {
+            case act.Action_Channel_Type_Word:
+                list = <ListTable
+                    resource={this.state.results} itemStyle="deutsch"
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
 
             default:
-                list = <WordList resource={this.state.results}
+                list = <List key='card'
+                    itemTag={tag.List_Item_Card}
+                    resource={this.state.results}
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
         }
@@ -198,15 +220,22 @@ export default class AdminList extends React.Component {
 
                 <br />  <br />
 
+                <div>
+                    <Paginator
+                        page={this.state.page} pageSize={this.state.pageSize} total={this.state.total}
+                        onPrevious={this._action_list_page_previous.bind(this)}
+                        onNext={this._action_list_page_next.bind(this)} />
+                </div>
+
                 <div className="root-list-filter">
                     <FloatingActionButton className="root-list-filter-button"
-                        backgroundColor={hoverColor} zDepth={2}
+                        backgroundColor={_hoverColor} zDepth={2}
                         onTouchTap={this._dispatch_list_filter.bind(this)}>
-                        {search}
+                        {this._fontIcon('filter_list')}
                     </FloatingActionButton>
                 </div>
 
-                <AdminListFilter open={this.state.listFilterVisible}
+                <PopupFilterList open={this.state.listFilterVisible}
                     channel={this.state.channel}
                     dispatch={this._dispatch_list_filter_popup.bind(this)} />
             </div>
@@ -215,4 +244,5 @@ export default class AdminList extends React.Component {
 
 
 }
-;
+
+

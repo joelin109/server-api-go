@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import { FlatButton, FontIcon } from 'material-ui';
 
-import {itemCovers, userThumbs} from './../../util/data'
+import {itemCovers, userThumbs} from './../../setting/data'
 import Style from './../../util/style'
 
 const covers = itemCovers
@@ -10,7 +10,8 @@ const coverCount = itemCovers.length
 
 const Action_List_Github_Repository = 'Action_Github_Repository'
 const Action_List_Github_Author = 'Action_Github_Author'
-class ItemGithub extends React.Component {
+
+export default class ItemGithub extends React.Component {
 
     constructor(props) {
         super(props);
@@ -113,5 +114,3 @@ class ItemGithub extends React.Component {
         );
     }
 }
-
-export default ItemGithub;

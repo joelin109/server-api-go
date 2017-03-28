@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import { itemCovers, userThumbs } from './../../util/data'
-import * as act from './../../action';
+import { itemCovers, userThumbs } from './../../setting/data'
+import * as act from './../../setting/action';
 
 
 import Style from './../../util/style'
@@ -63,8 +63,8 @@ class ItemCard extends React.Component {
         let pills;
         if (this.props.value.tags) {
             let tags = this.props.value.tags.split(', ');
-            pills = tags.map(tag =>
-                <li2><p className="word" onClick={this._handleTag.bind(this)}>{tag}</p></li2>
+            pills = tags.map((tag,i) =>
+                <li2 key={i}><p className="word" onClick={this._handleTag.bind(this)}>{tag}</p></li2>
             );
         }
         // <FlatButton style={Style.itemTag} label={tag} onTouchTap={this._handleTag.bind(this)} />
