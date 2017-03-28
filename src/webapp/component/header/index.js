@@ -6,7 +6,7 @@ import NavLeft from './nav-left'
 import NewPropertyWindow from './../popup/NewPropertyWindow';
 
 
-class Navigator extends React.Component {
+export default class Header extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -90,6 +90,3 @@ class Navigator extends React.Component {
         )
     }
 }
-
-
-export default Navigator;

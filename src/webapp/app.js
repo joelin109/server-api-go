@@ -4,8 +4,8 @@ import {
     BrowserRouter as Router, Route, Switch
 } from 'react-router-dom'
 import * as act from './setting/action';
-import Navigator from './component/header';
-import HeaderChannel from './component/channel';
+import Header from './component/header';
+import HeaderChannel from './component/header/channel';
 import Recommend from './component/recommend';
 
 import Channel from './c-channel';
@@ -41,7 +41,7 @@ export default class App extends React.Component {
 
 
     //Dispatch
-    _dispatch_navigator(action) {
+    _dispatch_header_navigator(action) {
         switch (action.type) {
             case act.Action_Filter_List_Article_Confirm:
                 alert(action.data)
@@ -62,7 +62,7 @@ export default class App extends React.Component {
         return false;
     }
 
-    _dispatch_channel(action) {
+    _dispatch_header_channel(action) {
         this._dispatch_route_link_to(action)
         return false;
     }
@@ -112,20 +112,21 @@ export default class App extends React.Component {
 
         let _switchAdmin = (window.location.href.indexOf("admin?_t") > 0);
 
-        const { location } = this.props
-        const isUnInitial = (this.state.previousLocation !== location) //not initial render
-        const isStateModal = (location.state && location.state.modal)
-        const isModal = !!(isStateModal && isUnInitial)
+        const {location } = this.props
+        const _isUnInitial = (this.state.previousLocation !== location) //not initial render
+        const _isStateModal = (location.state && location.state.modal)
+        const _isModal = !!(_isStateModal && _isUnInitial)
+        const _location = _isModal ? this.state.previousLocation : location;
 
         return (
             <div >
-                <Navigator title="Title" dispatch={this._dispatch_navigator.bind(this)} />
-                <HeaderChannel value={3} hidden={isModal} dispatch={this._dispatch_channel.bind(this)} />
+                <Header title="Title" dispatch={this._dispatch_header_navigator.bind(this)} />
+                <HeaderChannel value={3} hidden={_isModal} dispatch={this._dispatch_header_channel.bind(this)} />
 
                 <div className='root'>
                     <div className='root-body'>
                         <div className='root-list'>
-                            <Switch location={isModal ? this.state.previousLocation : location}>
+                            <Switch location={_location}>
                                 <Route exact path='/' component={Geek} />
                                 <Route path='/channel?_t=:id' component={Channel} />
                                 <Route path='/deutsch?_t=:channel' component={Deutsch} />

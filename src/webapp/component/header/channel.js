@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatButton, IconButton, RaisedButton, MenuItem } from 'material-ui';
 import FontIcon from 'material-ui/FontIcon';
-import * as act from './../setting/action';
+import * as act from './../../setting/action';
 
 
 export default class HeaderChannel extends Component {
