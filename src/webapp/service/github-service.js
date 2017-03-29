@@ -1,5 +1,5 @@
 import request from './request';
-//import { api_result_js, api_result_ts } from './../setting/data/github'
+import { api_result_ts } from './../setting/data/github'
 //import { api_result_go, api_result_py } from './../setting/data/github2'
 
 
@@ -16,14 +16,11 @@ export let findAll = (data) => {
     /*return request({url: apiurl})
      .then(data => data = JSON.parse(data))*/
 
-    /*return fetch(apiurl)
-        .then(response => response.json())*/
-
     let _page = data.page;
     let _language = data.filter.language.toLowerCase();
     let _createdAt = _toString(data.filter.created_at);
     let _star = data.filter.star;
-    let _isCache = false;//data.filter.is_cache;
+    let _isCache = data.filter.is_cache;
 
     if (typeof (_isCache) !== "undefined" && _isCache === false) {
 
@@ -34,16 +31,16 @@ export let findAll = (data) => {
     }
     else {
 
-        let api_result = api_result_js;
-        switch (_language) {
+        let api_result = api_result_ts;
+        switch ('_language') {
             case "golang":
                 api_result = api_result_go;
                 break;
             case "python":
                 api_result = api_result_py;
                 break;
-            case "typescript":
-                api_result = api_result_ts;
+            case "javascript":
+                api_result = api_result_js;
                 break;
             default:
                 break;
