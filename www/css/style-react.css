@@ -2,7 +2,6 @@ html {
     font-size: 75%;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
 }
 
 html.mac.f {
@@ -135,6 +134,7 @@ a:active {
     align-content: flex-start;
     max-width: 1024px;
     min-height: 600px;
+    padding-bottom: 12px;
 }
 
 .root-list-default {
@@ -171,7 +171,7 @@ a:active {
 
 .root-list-filter-button {
     position: fixed;
-    top: 118px;
+    top: 110px;
     background: #EF5350;
     background-color: #EF5350;
 }
@@ -413,7 +413,7 @@ a:active {
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 @media screen and (max-width:480px) {
@@ -427,12 +427,35 @@ a:active {
     }
 }
 
+
+/*-------screen width > 1380px-----*/
+
 @media screen and (min-width: 1380px) {
     .recommend {
-        background: transparent;
-        max-width: 320px;
+        background:transparent;
+        width: 320px;
         padding: 6px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
     }
+}
+
+.recommend-widget-c {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    background: transparent;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 20px;
+}
+
+.recommend-widget {
+    width: 100%;
+    height: auto;
+    background: #EF5350;
 }
 
 .recommend-1-img {
@@ -444,13 +467,15 @@ a:active {
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.16);
 }
 
-.recommend-2-img {
-    width: 100%;
+.recommend-widget-img-c {
+    width: 320px;
+    margin-bottom: -10px;
+}
+
+.recommend-widget-img {
+    width: 320px;
     height: auto;
     max-width: 320;
-    border: 1px #999999;
-    border-radius: 5px;
-    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.16);
 }
 
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { cyan800, grey900, grey300, grey400 } from 'material-ui/styles/colors';
+import Widget from './widget';
 
 const _style = {
     test: {
@@ -57,18 +58,14 @@ class Recommend extends React.Component {
         let demo3_src = 'asset/img/demo-chart13.png';
         return (
             <div className="recommend">
-                <div style={_style.test2}>
-                    <img className="recommend-1-img" src={demo1_src} />
+                <div className="recommend-widget-c">
+                    <Widget heading="Empfehlen" imageSrc={demo1_src} />
                 </div>
-                <br />
-
-                <div style={_style.test3}>
-                    <img className="recommend-2-img" src={demo2_src} />
+                <div className="recommend-widget-c">
+                    <Widget heading="Anzeige" imageSrc={demo2_src} />
                 </div>
-
-                <br />
-                <div style={_style.test4}>
-                    <img className="recommend-2-img" src={demo3_src} />
+                <div className="recommend-widget-c">
+                    <Widget heading="Werbung" imageSrc={demo3_src} />
                 </div>
             </div>
         );

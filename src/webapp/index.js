@@ -1,16 +1,13 @@
 import React from 'react'
 import { ReactDOM, render } from 'react-dom';
-import {
-    BrowserRouter as Router, Route, browserHistory
-} from 'react-router-dom'
+import {BrowserRouter as Router, Route, browserHistory} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 import App from './app';
 import { appTheme } from './theme'
-//import Home from './Component/home';
-//import AdminList from './admin/admin-list';
+
 
 class Index extends React.Component {
 
@@ -30,14 +27,14 @@ class Index extends React.Component {
 
         return (
             <div>
+                <MuiThemeProvider muiTheme={appTheme} >
 
-                <Router basename={_basename}>
-                    <MuiThemeProvider muiTheme={appTheme} >
+                    <Router basename={_basename}>
                         <Route name="main" path="/" component={App}>
                         </Route>
-                    </MuiThemeProvider>
-                </Router>
+                    </Router>
 
+                </MuiThemeProvider>
             </div>
         );
     }
