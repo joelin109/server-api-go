@@ -1,3 +1,13 @@
-// Place your settings in this file to overwrite default and user settings.
+
 {
+    "files.autoSave": "afterDelay",
+    // 以像素为单位控制字号。
+    "editor.fontSize": 14,
+// Go configuration
+    // Specifies the GOPATH to use when no environment variable is set.
+    // 这是我个人的 GOPATH, 设置2个, 首个为 lib 路径, 次个为个人开发工作区
+    "go.gopath": "/Volumes/Mac-TBD/Server/Golang/workspace",
+     // Specifies the GOROOT to use when no environment variable is set.
+    "go.goroot": "/usr/local/go",
+    "workbench.statusBar.visible": true
 }

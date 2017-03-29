@@ -36,7 +36,7 @@ export default class Header extends React.Component {
     }
 
     _dispatch_header_title_touch(type, value) {
-        //window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
     }
 
     _dispatch_header_right(action, value) {

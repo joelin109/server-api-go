@@ -6,6 +6,7 @@ node_modules/
 .DS_Store
 webapp/.DS_Store
 .vscode/launch.json
-wwww/
+wwww/index.bundle.js.map
+wwww/index.bundle.js
 
 
