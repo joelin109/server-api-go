@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Drawer, Divider, MenuItem, Badge, FlatButton, RaisedButton, FontIcon } from 'material-ui';
+import { Drawer, Divider, MenuItem, Badge, FontIcon } from 'material-ui';
 import * as act from './../../setting/action'
 
 class NavLeft extends React.Component {
@@ -28,7 +28,7 @@ class NavLeft extends React.Component {
         return false;
     }
 
-      _dispatch_left_channel_article() {
+    _dispatch_left_channel_article() {
         this._dispatch_left_channel(act.Action_Admin_Channel_Type_Article);
         return false;
     }
@@ -40,7 +40,8 @@ class NavLeft extends React.Component {
     render() {
         return (
             <div>
-                <Drawer open={this.props.open} docked={false}
+                <Drawer
+                    open={this.props.open} docked={false} 
                     onRequestChange={this._dispatch_close.bind(this)}>
                     <div className='nav-left-header'></div>
                     <Divider />

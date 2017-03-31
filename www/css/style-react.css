@@ -67,6 +67,15 @@ a:active {
 
 /*----- Head Start ----------*/
 
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    height: 38px;
+    padding: 5px;
+}
+
 .channel {
     display: flex;
     flex-wrap: wrap;
@@ -354,6 +363,66 @@ a:active {
     border: 0px solid #444;
 }
 
+.detail-root-body-geek {
+    background: #fff;
+    top: 100px;
+    left: 0%;
+    right: 0%;
+    bottom: 0px;
+    min-height: 2000px;
+    padding-top: 50px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border: 0px solid #444;
+}
+
+.draw-detail-root {
+    position: fixed;
+    z-index: 10000;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    -webkit-flex-justify-content: center;
+    justify-content: center;
+    left: 0px;
+    right: 0px;
+}
+
+.draw-detail-root-container {
+    max-width: 1024px;
+    position: fixed;
+    overflow: auto;
+}
+
+.draw-detail-root-container-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #00838F;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 48px;
+    max-width: 1024px;
+}
+
+.draw-detail-root-container-header-thumb {
+  max-height: 48px;
+}
+
+.draw-detail-root-container-body {
+    height: 60px;
+    background: #444;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    height: 2000px;
+}
+
 
 /*----- Popup Start ----------*/
 
@@ -432,7 +501,7 @@ a:active {
 
 @media screen and (min-width: 1380px) {
     .recommend {
-        background:transparent;
+        background: transparent;
         width: 320px;
         padding: 6px;
         display: flex;

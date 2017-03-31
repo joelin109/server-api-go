@@ -14,8 +14,8 @@ class Index extends React.Component {
     _getBaseName() {
 
         let _basename = '';
-        let _href = window.location.href
-        if (_href.indexOf("e://") > 0) {
+        let _href = window.location.href;
+        if (_href.toLowerCase().indexOf("e://") > 0) {
             window.location.hash = '/';
             _basename = window.location.href.replace("file://", "");
         }

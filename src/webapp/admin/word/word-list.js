@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }
   from 'material-ui/Table';
-import { TextField, Toggle, FlatButton, FontIcon, IconButton } from 'material-ui';
+import { TextField, Toggle, FlatButton, IconButton } from 'material-ui';
+import { SIcon } from './../../component/wui'
 import * as act from './../../setting/action'
 
 
@@ -33,7 +34,7 @@ export default class WordList extends React.Component {
 
   //Modify
   _handle_modify(event, data) {
-    this.props.dispatch({type: act.Action_Admin_Word_List_Modify ,data:event})
+    this.props.dispatch({ type: act.Action_Admin_Word_List_Modify, data: event })
     // alert(value)
   }
   _handle_unregel(event) {
@@ -49,14 +50,9 @@ export default class WordList extends React.Component {
     // alert(value)
   }
 
-  _fontIcon(id, color = '#00838F') {
-    let _hoverColor = "#EF5350"
-    return <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
-  }
 
   render() {
-    let _defaultColor = "#757575"
-    let _selectedColor = "#EF5350"
+    let _sortIcon = <SIcon id="arrow_downward" />  
     let _tableBody = this.props.resource.map((row, index) => (
       <TableRow key={index} selected={row.selected}>
 
@@ -68,7 +64,7 @@ export default class WordList extends React.Component {
         <TableRowColumn className='admin-list-col-40'>{row.isregel}</TableRowColumn>
         <TableRowColumn className='admin-list-col-25'>
           <IconButton value={row} onTouchTap={this._handle_recommend.bind(this)}>
-            {this._fontIcon((row.isrecommend === 1 ? 'favorite' : 'favorite_border'), (row.isrecommend === 1 ? _selectedColor : _defaultColor))}
+            <SIcon id={row.isrecommend === 1 ? 'favorite' : 'favorite_border'} selected={row.isrecommend === 1} />
           </IconButton>
         </TableRowColumn>
         <TableRowColumn className='admin-list-col-st'>
@@ -76,16 +72,16 @@ export default class WordList extends React.Component {
 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <IconButton value={row.wort} onTouchTap={this._handle_approval.bind(this)}>
-            {this._fontIcon("thumb_up", (row.status === 'accepted' ? _selectedColor : _defaultColor))}
+            <SIcon id="thumb_up" selected={row.status === 'accepted'} />
           </IconButton>
 
           <IconButton value={row.wort} onTouchTap={this._handle_approval.bind(this)}>
-            {this._fontIcon("thumb_down", (row.status === 'rejected' ? _selectedColor : _defaultColor))}
+            <SIcon id="thumb_down" selected={row.status === 'rejected'} />
           </IconButton>
 
           &nbsp;&nbsp;&nbsp;&nbsp;
           <IconButton onTouchTap={this._handle_modify.bind(this, row)}>
-            {this._fontIcon("edit")}
+            <SIcon id="edit" />
           </IconButton>
 
         </TableRowColumn >
@@ -109,7 +105,7 @@ export default class WordList extends React.Component {
 
               <TableRow>
                 <TableHeaderColumn className='admin-list-col-wo' tooltip="Sort">
-                  <FlatButton icon={this._fontIcon("arrow_downward")} label={'Word'} labelPosition="before"
+                  <FlatButton icon={_sortIcon} label={'Word'} labelPosition="before"
                     onTouchTap={this._handle_sort.bind(this)} />
                 </TableHeaderColumn>
 
@@ -129,7 +125,7 @@ export default class WordList extends React.Component {
                 <TableHeaderColumn tooltip="">Recommend</TableHeaderColumn>
 
                 <TableHeaderColumn className='admin-list-col-st' tooltip="">
-                  <FlatButton icon={this._fontIcon("arrow_downward")} label={'Status'} labelPosition="before"
+                  <FlatButton icon={_sortIcon} label={'Status'} labelPosition="before"
                     onTouchTap={this._handle_sort.bind(this)} />
                 </TableHeaderColumn>
 

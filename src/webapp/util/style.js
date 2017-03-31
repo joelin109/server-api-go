@@ -1,12 +1,5 @@
 const coverHeight = 200
 const Style = {
-    headerRight: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        alignContent: 'center',
-        height: 44,
-    },
     itemDate: {
         width: 150,
         height: 20,

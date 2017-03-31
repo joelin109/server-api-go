@@ -2,10 +2,12 @@ import React from 'react';
 import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
 import * as githubService from './../service/github-service';
 import * as act from './../setting/action';
+import * as tag from './../component/item/tag'
 
 import List, * as _list from './../component/list'
 import FilterListGithub from './filter-list-github'
-import * as tag from './../component/item/tag'
+import DetailGeek from './detail-geek'
+
 
 export default class Geek extends React.Component {
 
@@ -19,6 +21,8 @@ export default class Geek extends React.Component {
             page: 1,
             filterData: { language: 'JavaScript', star: 3000 },
             filterVisible: false,
+            detailObject: {},
+            detailVisible: false,
             willNeedUpdate: false,
         }
     }
@@ -26,6 +30,9 @@ export default class Geek extends React.Component {
         this._list_findAll(true)
     }
 
+    componentWillReceiveProps(nextProps) {
+        this._component_should_update(false);
+    }
     shouldComponentUpdate(nextProps, nextState) {
         return this.state.willNeedUpdate;
     }
@@ -42,7 +49,7 @@ export default class Geek extends React.Component {
         githubService.findAll(filter)
             .then(data => {
 
-                this._list_prepare_update(willScrollTop)
+                this._component_should_update(true, true)
                 this.setState({
                     results: data.items,
                     total: data.total_count
@@ -50,10 +57,12 @@ export default class Geek extends React.Component {
             });
     }
 
-    _list_prepare_update(willScrollTop) {
-        if (willScrollTop == true) {
+    _component_should_update(willUpdate=true, willScroll=false) {
+        if (willScroll == true) {
             window.scrollTo(0, 0);
         }
+        this.state.filterVisible = false;
+        this.state.detailVisible = false;
         this.state.willNeedUpdate = true;
     }
 
@@ -63,7 +72,8 @@ export default class Geek extends React.Component {
 
         switch (action.type) {
             case _list.List_Filter:
-                this.setState({ filterVisible: true });
+                this.setState({ filterVisible: true,
+                 detailVisible: false});
                 break;
 
             default:
@@ -81,13 +91,19 @@ export default class Geek extends React.Component {
                 this._router_link_detail(action)
                 break;
             case act.Action_List_Github_Repository:
-                window.open(action.data, '_blank');
+                //window.open(action.data, '_blank');
                 //this._router_link_detail(action)
+                this.setState({ detailVisible: true });
                 break;
             default:
                 alert(action.type + "-" + action.data)
                 break;
         }
+        return false;
+    }
+
+    _dispatch_list_detail(action) {
+
         return false;
     }
 
@@ -103,7 +119,7 @@ export default class Geek extends React.Component {
                 break;
         }
 
-        this.state.willNeedUpdate = true;
+        this._component_should_update();
         this.setState({ filterVisible: false });
         return false;
     }
@@ -126,6 +142,7 @@ export default class Geek extends React.Component {
     }
 
     render() {
+        let _filterOrDetail = this.state.filterVisible || this.state.detailVisible;
         return (
             <div>
                 <List
@@ -133,7 +150,7 @@ export default class Geek extends React.Component {
                     pageSize={this.state.pageSize} total={this.state.total}
                     dispatch={this._dispatch_list.bind(this)}
                     dispatch_item={this._dispatch_list_item.bind(this)}
-                    filterOpen={this.state.filterVisible}
+                    filterOpen={_filterOrDetail}
                     itemTag={tag.List_Item_Github}
                 />
 
@@ -141,6 +158,13 @@ export default class Geek extends React.Component {
                     open={this.state.filterVisible}
                     dispatch={this._dispatch_list_filter_popup.bind(this)}
                 />
+
+                <DetailGeek
+                    open={this.state.detailVisible}
+                    resource={this.state.detailObject}
+                    dispatch={this._dispatch_list_detail.bind(this)}
+                />
+
             </div>
         );
     }
