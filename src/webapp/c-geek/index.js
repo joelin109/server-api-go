@@ -57,7 +57,7 @@ export default class Geek extends React.Component {
             });
     }
 
-    _component_should_update(willUpdate=true, willScroll=false) {
+    _component_should_update(willUpdate = true, willScroll = false) {
         if (willScroll == true) {
             window.scrollTo(0, 0);
         }
@@ -72,8 +72,10 @@ export default class Geek extends React.Component {
 
         switch (action.type) {
             case _list.List_Filter:
-                this.setState({ filterVisible: true,
-                 detailVisible: false});
+                this.setState({
+                    filterVisible: true,
+                    detailVisible: false
+                });
                 break;
 
             default:
@@ -93,7 +95,10 @@ export default class Geek extends React.Component {
             case act.Action_List_Github_Repository:
                 //window.open(action.data, '_blank');
                 //this._router_link_detail(action)
-                this.setState({ detailVisible: true });
+                this.setState({
+                    detailVisible: true,
+                    detailObject: action.data
+                });
                 break;
             default:
                 alert(action.type + "-" + action.data)

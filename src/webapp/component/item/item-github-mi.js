@@ -1,12 +1,7 @@
 import React from 'react';
 import { Card, CardTitle, CardActions } from 'material-ui/Card';
 import { FlatButton, FontIcon } from 'material-ui';
-
-import {itemCovers, userThumbs} from './../../setting/data'
 import Style from './../../util/style'
-
-const covers = itemCovers
-const coverCount = itemCovers.length
 
 const Action_List_Github_Repository = 'Action_Github_Repository'
 const Action_List_Github_Author = 'Action_Github_Author'
@@ -19,6 +14,7 @@ export default class ItemGithub extends React.Component {
             expanded: false,
             loading: true,
         };
+        this._handleDetail = this._handleDetail.bind(this)
     }
 
     componentDidMount() {
@@ -33,7 +29,7 @@ export default class ItemGithub extends React.Component {
     _handleDetail(e) {
         let action = {
             type: Action_List_Github_Repository,
-            data: e.target.id
+            data: this.props.value
         }
         this.props.dispatch(action)
     };
@@ -65,8 +61,8 @@ export default class ItemGithub extends React.Component {
 
 
     render() {
-        let coverID = covers[Math.floor(Math.random() * coverCount)] //this.props.src
-        let userThumb = this.props.value.owner.avatar_url;
+        let _coverID = this.props.value.coverSrc//covers[Math.floor(Math.random() * coverCount)] //this.props.src
+        let _userThumb = this.props.value.owner.avatar_url;
         let _repoDateRange = this.props.value.created_at.substring(2, 10) + " ~ " + this.props.value.pushed_at.substring(2, 10);
         let _repoStarNum = this._formatNumber(this.props.value.stargazers_count);
         let _repoForkNum = this._formatNumber(this.props.value.forks);
@@ -87,10 +83,10 @@ export default class ItemGithub extends React.Component {
                 <Card className="itemBox">
 
                     <div className="itemBox-Img">
-                        <img className="itemBox-Img-cover" id={this.props.value.html_url} src={coverID}
-                            onClick={this._handleDetail.bind(this)} />
+                        <img className="itemBox-Img-cover" id={this.props.value.html_url} src={_coverID}
+                            onClick={this._handleDetail} />
 
-                        <img className={_repoAuthorClass} id={this.props.value.owner.html_url} src={userThumb}
+                        <img className={_repoAuthorClass} id={this.props.value.owner.html_url} src={_userThumb}
                             onClick={this._handleAuthor.bind(this)} />
 
                         <label style={Style.itemDate}>{'...'}</label>

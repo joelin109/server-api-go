@@ -1,7 +1,6 @@
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Drawer, Divider, MenuItem, Avatar, FlatButton, RaisedButton, FontIcon } from 'material-ui';
+import { Drawer, Divider, Avatar, FlatButton, RaisedButton } from 'material-ui';
 import ListItem from 'material-ui/List/ListItem';
 import * as act from './../setting/action'
 import { Button } from './../component/wui'
@@ -16,8 +15,8 @@ class DetailGeek extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            channel: '',
             open: false,
+            resource: {},
         };
 
         this.state.open = props.open;
@@ -52,45 +51,51 @@ class DetailGeek extends React.Component {
         return false;
     }
 
-    _fontIcon(id, color = '#757575') {
-        let _hoverColor = "#EF5350"
-        return <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
+    _isSafari() {
+        let browser = navigator.appName;
+        let _version = navigator.appVersion.toLowerCase();
+        return _version.indexOf("applewebkit") > 0 && _version.indexOf("chrome/") <= 0;
     }
-    render() {
-        let _className = 'draw-detail-root';
-        let _classNameHeader = this.state.open ? 'draw-detail-root-container-header' : '';
-        if (this.state.open) {
-            let browser = navigator.appName;
-            let b_version = navigator.appVersion.toLowerCase();
-            if (b_version.indexOf("applewebkit") > 0 && b_version.indexOf("chrome/") <= 0) {
-                _className = '';
-            }
 
-        }
+
+    render() {
+        let _className = this._isSafari() === false ? 'draw-detail-root' : '';
+        let _classNameHeader = this.state.open ? 'draw-detail-root-container-header' : '';
+        let _coverID = this.props.resource.coverSrc;
+        window.scrollTo(0, 0);
+
         return (
             <div>
                 <Drawer
                     className={_className}
                     containerClassName="draw-detail-root-container"
-                    width={1024}
+                    width={768}
                     open={this.state.open} docked={false}
                     onRequestChange={this._dispatch_close.bind(this)}>
                     <div className={_classNameHeader}>
                         <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
-                        <ListItem className = "draw-detail-root-container-header-thumb"
+                        <ListItem className="draw-detail-root-container-header-thumb"
                             leftAvatar={<Avatar src="http://www.material-ui.com/images/uxceo-128.jpg" />}
                         >
                             AuthorName
                         </ListItem>
                         <Button id={'refresh'} onTouchTap={this._dispatch_close.bind(this)} />
                     </div>
-                    <Divider />
-                    <div className='draw-detail-root-container-body'>
-                        fdgd
-                    </div>
-                    <Divider />
-                    jnfdkjhngjfdnghjdfhgnjfdjkhg
+               
+                    <div className='draw-detail-root-container-box'>
+                        <img className="draw-detail-root-container-box-cover" src={_coverID} />
 
+                        <div className='draw-detail-root-container-box-body-2'>
+                            2222222
+                         </div>
+                        <div className='draw-detail-root-container-box-body-3'>
+                            3333
+                         </div>
+                    </div>
+          
+                    <div className='draw-detail-root-container-footer'>
+                        jnfdkjhngjfdnghjdfhgnjfdjkhg
+                    </div>
                 </Drawer>
             </div>
         )
