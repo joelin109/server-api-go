@@ -129,6 +129,9 @@ export default class Channel extends React.Component {
             case act.Action_List_Article_Tag:
                 this._action_list_article_tag(action.data)
                 break;
+            case act.Action_List_Article_Range:
+                this._action_list_article_range(action.data)
+                break;
 
             case act.Action_List_Article_Detail:
                 window.open(action.data, '_blank');
@@ -158,17 +161,21 @@ export default class Channel extends React.Component {
 
 
     //Acton
+    _action_list_article_range(range) {
+        this.state.filterData = '';
+        this.state.filterRange = range;
+        this.state.page = 1;
+        this._list_findAll(true)
+    }
     _action_list_article_tag(tag) {
         this.state.filterData = tag;
+        this.state.filterRange = [0, 26];
         this.state.page = 1;
-        this._list_findAll()
+        this._list_findAll(true)
     }
 
     _action_list_article_filter(range) {
-        this.state.filterData = ""
-        this.state.filterRange = range;
-        this.state.page = 1;
-        this._list_findAll()
+        this._action_list_article_range(range);
     }
 
     //Router_link

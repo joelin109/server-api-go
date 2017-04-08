@@ -6,7 +6,6 @@ import * as act from './../setting/action';
 
 import WordList from './word/word-list';
 import AdminListFilter from './admin-list-filter'
-import Style from './../util/style'
 
 export default class AdminList extends React.Component {
 

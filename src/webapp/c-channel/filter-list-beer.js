@@ -23,13 +23,13 @@ export default class FilterListBeer extends React.Component {
     };
 
     _handleStep1() {
-        this.setState({ stepIndex: 0, stepValue: [0, 8] })
+        this.setState({ stepIndex: 0, stepValue: [0, 7] })
     };
     _handleStep2() {
-        this.setState({ stepIndex: 1, stepValue: [8, 13] })
+        this.setState({ stepIndex: 1, stepValue: [7, 11] })
     };
     _handleStep3() {
-        this.setState({ stepIndex: 2, stepValue: [13, 26] })
+        this.setState({ stepIndex: 2, stepValue: [11, 26] })
     };
 
 
@@ -52,17 +52,17 @@ export default class FilterListBeer extends React.Component {
             <Stepper linear={false} activeStep={this.state.stepIndex} orientation="vertical">
                 <Step>
                     <StepButton onClick={this._handleStep1.bind(this)}>
-                        [0 - 8]
+                        [0 - 7]
                         </StepButton>
                 </Step>
                 <Step>
                     <StepButton onClick={this._handleStep2.bind(this)}>
-                        [8 - 13]
+                        [7 - 11]
                         </StepButton>
                 </Step>
                 <Step>
                     <StepButton onClick={this._handleStep3.bind(this)}>
-                        [13 - 26]
+                        [11 - 26]
                          </StepButton>
                 </Step>
             </Stepper>

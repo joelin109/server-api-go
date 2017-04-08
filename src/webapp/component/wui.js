@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatButton, FontIcon } from 'material-ui';
+import { FlatButton, FontIcon, FloatingActionButton } from 'material-ui';
 const Style = {
     button: {
         display: 'flex',
@@ -10,7 +10,7 @@ const Style = {
 }
 
 export const Icon = ({ id }) => {
-    let _color = '#bdbdbd';
+    let _color = 1 > 10 ? '#bdbdbd' : '#E0E0E0';
     let _hoverColor = '#EF5350';
     return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
 }
@@ -30,4 +30,6 @@ export const Link = ({ id, to }) => {
     let _icon = <Icon id={id} />;
     return <FlatButton style={Style.button} icon={_icon} href={to} />
 }
+
+
 

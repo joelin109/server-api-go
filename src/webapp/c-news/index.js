@@ -1,15 +1,15 @@
 import React from 'react';
 import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
-import * as githubService from './../service/github-service';
+import * as service from './../service/news-service';
 import * as act from './../setting/action';
 import * as tag from './../component/item/tag'
 
 import List, * as _list from './../component/list'
-import FilterListGithub from './filter-list-github'
-import DetailGeek from './detail-geek'
+import FilterListNews from './filter-list-news'
 
 
-export default class Geek extends React.Component {
+
+export default class News extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,9 +19,8 @@ export default class Geek extends React.Component {
             pageSize: 30,
             total: 0,
             page: 1,
-            filterData: { language: 'JavaScript', star: 3000 },
+            filterData: "ars-technica",
             filterVisible: false,
-            detailObject: {},
             detailVisible: false,
             willNeedUpdate: false,
         }
@@ -39,20 +38,20 @@ export default class Geek extends React.Component {
 
 
     _list_findAll(willScrollTop) {
-        this._list_github_findAll(willScrollTop);
+        this._list_news_findAll(willScrollTop);
     }
 
-    _list_github_findAll(willScrollTop) {
+    _list_news_findAll(willScrollTop) {
         this.state.pageSize = 30;
         let filter = { filter: this.state.filterData, page: this.state.page }
 
-        githubService.findAll(filter)
+        service.findAll(filter)
             .then(data => {
 
+                let _results = this._mergeResult(data.articles, data.source);
                 this._component_should_update(true, true)
                 this.setState({
-                    results: data.items,
-                    total: data.total_count
+                    results: _results,
                 });
             });
     }
@@ -66,13 +65,24 @@ export default class Geek extends React.Component {
         this.state.willNeedUpdate = willUpdate;
     }
 
+    _mergeResult(result, tag) {
+
+        let _result = result;
+        Array.from(_result, (item) => {
+            item["tag"] = tag;
+            return item
+        })
+
+        return _result;
+    }
+
 
     //Dispatch 
     _dispatch_list(action) {
 
         switch (action.type) {
             case _list.List_Filter:
-                this._setFilter();
+                this._setFilter()
                 break;
 
             default:
@@ -85,10 +95,6 @@ export default class Geek extends React.Component {
 
     _dispatch_list_item(action) {
         switch (action.type) {
-            case act.Action_List_Github_Author:
-                //window.open(action.data, '_blank');
-                this._router_link_detail(action)
-                break;
             case act.Action_List_Github_Repository:
                 this._component_should_update();
                 this.setState({
@@ -103,14 +109,10 @@ export default class Geek extends React.Component {
         return false;
     }
 
-    _dispatch_list_detail(action) {
-
-        return false;
-    }
 
     _dispatch_list_filter_popup(action) {
         switch (action.type) {
-            case act.Action_Filter_List_Github_Confirm:
+            case act.Action_Filter_List_Confirm:
                 this.state.filterData = action.data;
                 this.state.page = 1;
                 this._list_findAll(true)
@@ -132,22 +134,9 @@ export default class Geek extends React.Component {
         });
     }
 
-    //Router_link
-    _router_link_detail(action) {
-        let _types = action.type.split("_");
-        let _type = _types[_types.length - 1].toLowerCase();
-        let _link = `/detail?_v=${_type}`;
-        this.state.link = {
-            pathname: _link,
-            // this is the trick!
-            state: {
-                modal: true,
-                channel: action
-            }
-        }
 
-        this.props.history.push(this.state.link)
-    }
+
+
 
     render() {
         let _filterOrDetail = this.state.filterVisible || this.state.detailVisible;
@@ -155,23 +144,18 @@ export default class Geek extends React.Component {
             <div>
                 <List
                     resource={this.state.results}
-                    pageSize={this.state.pageSize} total={this.state.total}
+                    pageSize={this.state.pageSize} total={this.state.results.length}
                     dispatch={this._dispatch_list.bind(this)}
                     dispatch_item={this._dispatch_list_item.bind(this)}
                     filterOpen={_filterOrDetail}
-                    itemTag={tag.List_Item_Github}
+                    itemTag={tag.List_Item_Article}
                 />
 
-                <FilterListGithub
+                <FilterListNews
                     open={this.state.filterVisible}
                     dispatch={this._dispatch_list_filter_popup.bind(this)}
                 />
 
-                <DetailGeek
-                    open={this.state.detailVisible}
-                    resource={this.state.detailObject}
-                    dispatch={this._dispatch_list_detail.bind(this)}
-                />
 
             </div>
         );

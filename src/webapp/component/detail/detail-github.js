@@ -1,4 +1,5 @@
 import React from 'react';
+import {Cancel} from './../wui-cancel'
 
 
 const Image = ({ color }) =>
@@ -25,6 +26,7 @@ export default class DetailGithub extends React.Component {
     back(e) {
         e.stopPropagation()
         this.state.history.goBack()
+        return false;
     }
 
 
@@ -33,13 +35,11 @@ export default class DetailGithub extends React.Component {
         window.scrollTo(0, 0);
 
         return (
-            <div className = 'detail-root' onClick={this.back.bind(this)}>
+            <div className = 'detail-root'>
                 <div className='detail-root-body'>
                     <h1>React-Router-History-Back-Style</h1>
                     <Image color={'#00838F'} />
-                    <button type='button' onClick={this.back.bind(this)}>
-                        Close
-                    </button>
+                    <Cancel onTouchTap={this.back.bind(this)} />
                 </div>
             </div>
         );

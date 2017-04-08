@@ -1,7 +1,6 @@
 import React from 'react';
-import { Card, CardTitle, CardActions } from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import { FlatButton, FontIcon } from 'material-ui';
-import Style from './../../util/style'
 
 const Action_List_Github_Repository = 'Action_Github_Repository'
 const Action_List_Github_Author = 'Action_Github_Author'
@@ -22,11 +21,12 @@ export default class ItemGithub extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return false; //(this.state.total != nextProps.total);
+        return true; //(this.state.total != nextProps.total);
     }
 
 
     _handleDetail(e) {
+        //alert(this.props.value.coverSrc)
         let action = {
             type: Action_List_Github_Repository,
             data: this.props.value
@@ -71,7 +71,6 @@ export default class ItemGithub extends React.Component {
 
         let color = "#bdbdbd"
         let hoverColor = "#EF5350"
-        let favorite = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>favorite</FontIcon>;
         let share = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>share</FontIcon>;
         let thumb_up = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>thumb_up</FontIcon>;
         let labelStyle = { color: '#616161', fontWeight: 'normal', };
@@ -89,7 +88,7 @@ export default class ItemGithub extends React.Component {
                         <img className={_repoAuthorClass} id={this.props.value.owner.html_url} src={_userThumb}
                             onClick={this._handleAuthor.bind(this)} />
 
-                        <label style={Style.itemDate}>{'...'}</label>
+                        <label className="itemBox-Text-date">{'...'}</label>
                     </div>
                     <br />
 
@@ -103,7 +102,7 @@ export default class ItemGithub extends React.Component {
                         <FlatButton icon={thumb_up} label={_repoStarNum} labelStyle={labelStyle} />
                         <FlatButton icon={share} label={_repoForkNum} labelStyle={labelStyle} />
                     </div>
-                   
+
 
                 </Card>
             </div>

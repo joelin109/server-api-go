@@ -64,6 +64,12 @@ a:active {
     outline: none;
 }
 
+h1 {
+    margin: 0.67em 0;
+    font-size: 2rem;
+    line-height: 25px;
+}
+
 
 /*----- Head Start ----------*/
 
@@ -181,16 +187,6 @@ a:active {
 .root-list-filter-button {
     position: fixed;
     top: 110px;
-    background: #EF5350;
-    background-color: #EF5350;
-}
-
-.root-list-filter-icon {
-    color: #EEEEEE;
-}
-
-.root-list-filter-icon:hover {
-    color: #EF5350;
 }
 
 .root-list-button {
@@ -251,9 +247,20 @@ a:active {
     top: 180px;
     cursor: pointer;
     left: 10px;
-    background: #757575;
+    background: #E57373;
     border-radius: 30px;
     border: 3px solid #FAFAFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.itemBox-Img-author-name {
+    font-size: 2rem;
+    line-height: 25px;
+    font-weight: bold;
+    color: #E0E0E0;
 }
 
 .itemBox-Img-organization {
@@ -271,8 +278,27 @@ a:active {
     border-bottom: 3px solid #00838F;
 }
 
+.itemBox-Text-date {
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    height: 15px;
+    position: absolute;
+    top: 218px;
+    padding-right: 20px;
+    color: #9E9E9E;
+}
+
+
+/* padding: top, right, bottom, and left*/
+
+.itemBox-Desc {
+    padding: 40px 0px 15px 10px;
+    min-height: 150px;
+}
+
 .itemBox-Text {
-    padding: 30px 15px 0px 12px;
+    padding: 20px 15px 0px 12px;
     min-height: 150px;
 }
 
@@ -352,12 +378,13 @@ a:active {
 
 .detail-root-body {
     background: #fff;
-    top: 100px;
+    top: 0px;
     left: 0%;
     right: 0%;
     bottom: 0px;
-    padding-top: 150px;
-    margin-top: 10px;
+    padding-top: 40px;
+    padding-bottom: 150px;
+    margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;
     border: 0px solid #444;
@@ -375,6 +402,17 @@ a:active {
     margin-left: 0px;
     margin-right: 0px;
     border: 0px solid #444;
+}
+
+.detail-root-back-box {
+    display: flex;
+    justify-content: flex-start;
+    padding-right: 10px;
+}
+
+.detail-root-back-button {
+    position: fixed;
+    top: 75px;
 }
 
 .draw-detail-root {
@@ -404,19 +442,18 @@ a:active {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    height: 48px;
+    height: 45px;
     max-width: 768px;
- 
 }
 
 .draw-detail-root-container-header-thumb {
-    max-height: 48px;
+    max-height: 45px;
 }
 
 .draw-detail-root-container-box {
-    background-color: #212121;
+    background-color: #EEEEEE;
     width: 100%;
-    padding-top: 48px;
+    padding-top: 44px;
     height: 100%;
 }
 
@@ -427,12 +464,9 @@ a:active {
 }
 
 .draw-detail-root-container-box-body {
-    height: 60px;
-    background: #BDBDBD;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: center;
-    height: 200px;
+    height: 600px;
+    background: white;
+    padding: 10px;
 }
 
 .draw-detail-root-container-box-body-2 {
@@ -513,10 +547,10 @@ a:active {
 /*----- Popup End ----------*/
 
 
-/*----- Recommend Start ----------*/
+/*----- Recommend Start(#424242) ----------*/
 
 .recommend {
-    background: #424242;
+    background:transparent;
     max-width: 1024px;
     display: flex;
     flex-wrap: wrap;

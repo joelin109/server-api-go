@@ -3,7 +3,6 @@ import { api_result_ts } from './../setting/data/github'
 //import { api_result_go, api_result_py } from './../setting/data/github2'
 import { itemCovers } from './../setting/data'
 const covers = itemCovers;
-const cover_count = itemCovers.length;
 
 const api_github_js = 'https://api.github.com/search/repositories?q=created:%3E2013-03-01%20language:javascript%20stars:%3E=3000&sort=stars';
 const api_github_ts = 'https://api.github.com/search/repositories?q=created:%3E2013-03-13%20language:typescript%20stars:%3E=3000&sort=stars';
@@ -29,7 +28,7 @@ export let findAll = (data) => {
         apiurl = _apiBase + _createdAt + '%20language:' + _language + '%20stars:>=' + _star + '&sort=stars&page=' + _page;
         return fetch(apiurl)
             .then(response => {
-                return _adjustResult(response.json());
+                return response.json();
             })
     }
     else {
@@ -51,8 +50,8 @@ export let findAll = (data) => {
 
         return _asyncDemo(apiurl)
             .then(data => {
-
-                return _adjustResult(api_result);
+                return api_result;
+                //return _adjustResult(api_result);
             })
     }
 
@@ -62,7 +61,7 @@ function _adjustResult(result) {
 
     let _result = result;
     Array.from(_result.items, (item) => {
-        item["coverSrc"] = covers[Math.floor(Math.random() * cover_count)];
+        item["coverSrc"] = covers[Math.floor(Math.random() * covers.length)];
         return item
     })
 

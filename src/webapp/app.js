@@ -8,6 +8,7 @@ import Header from './component/header';
 import HeaderChannel from './component/header/channel';
 import Recommend from './component/recommend';
 
+import News from './c-news';
 import Channel from './c-channel';
 import Geek from './c-geek';
 import Deutsch from './c-deutsch'
@@ -84,6 +85,9 @@ export default class App extends React.Component {
                 break;
 
             case act.Action_Channel_Type_Article:
+                _link = `/article?_s=${_type}`;
+                break;
+
             case act.Action_Channel_Type_Grammar:
                 _link = `/channel?_t=${_type}`;
                 break;
@@ -112,7 +116,7 @@ export default class App extends React.Component {
 
         let _switchAdmin = (window.location.href.indexOf("admin?_t") > 0);
 
-        const {location } = this.props
+        const { location } = this.props
         const _isUnInitial = (this.state.previousLocation !== location) //not initial render
         const _isStateModal = (location.state && location.state.modal)
         const _isModal = !!(_isStateModal && _isUnInitial)
@@ -128,6 +132,7 @@ export default class App extends React.Component {
                         <div className='root-list'>
                             <Switch location={_location}>
                                 <Route exact path='/' component={Geek} />
+                                <Route path='/article?_s=:source' component={News} />
                                 <Route path='/channel?_t=:id' component={Channel} />
                                 <Route path='/deutsch?_t=:channel' component={Deutsch} />
                                 <Route path='/admin?_t=:channel' component={AdminList} />

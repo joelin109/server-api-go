@@ -22,7 +22,7 @@ export default class HeaderChannel extends Component {
     let _filter = '';
 
     switch (_value) {
-      case "生活":
+      case "今日头条":
         _data = [0, 8];
         _type = act.Action_Channel_Type_Article;
         break;
@@ -35,17 +35,17 @@ export default class HeaderChannel extends Component {
 
       case "语法":
         _type = act.Action_Channel_Type_Grammar;
-        _data = [13, 26];
+        _data = [11, 26];
         break;
 
       case "单词":
         _type = act.Action_Channel_Type_Word;
         _display = act.Action_Display_List_Deutsch;
-        _data = [8, 13];
+        _data = [7, 11];
         break;
 
       default:
-        _data = [13, 26];
+        _data = [11, 26];
         break;
     }
 
@@ -66,7 +66,7 @@ export default class HeaderChannel extends Component {
     if (_hidden === false) {
       _content = <div className="channel">
 
-        {this._newFlatButton("生活")}
+        {this._newFlatButton("今日头条")}
         {this._newFlatButton("科技")}
         {this._newFlatButton("语法")}
         {this._newFlatButton("单词")}

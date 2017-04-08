@@ -1,8 +1,10 @@
 import React from 'react';
 import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
-
 import ListCard from './list-card'
 import Paginator from './paginator';
+import { itemCovers, userThumbs } from './../../setting/data'
+const covers = itemCovers
+const thumbs = userThumbs
 
 export const List_Page_Previous = 'List_Page_Previous'
 export const List_Page_Next = 'List_Page_Next'
@@ -63,8 +65,20 @@ export default class List extends React.Component {
         return <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
     }
 
+    _adjustResult(result) {
+
+        let _result = result;
+        Array.from(_result, (item) => {
+            item["coverSrc"] = covers[Math.floor(Math.random() * covers.length)];
+            item["userThumb"] = thumbs[Math.floor(Math.random() * thumbs.length)]
+            return item
+        })
+
+        return _result;
+    }
+
     render() {
-        this.state.results = this.props.resource;
+        this.state.results = this._adjustResult(this.props.resource);
         let _itemTag = this.props.itemTag;
         let _key = `list-${_itemTag}`;
 

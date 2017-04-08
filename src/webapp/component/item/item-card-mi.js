@@ -1,16 +1,8 @@
 import React from 'react';
-import { Card, CardTitle, CardActions } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import { itemCovers, userThumbs } from './../../setting/data'
+import { Card, } from 'material-ui/Card';
 import * as act from './../../setting/action';
-
-
-import Style from './../../util/style'
 var Markdown = require('react-markdown');
 
-const covers = itemCovers
-const thumbs = userThumbs
-const coverCount = itemCovers.length
 
 class ItemCard extends React.Component {
 
@@ -39,54 +31,66 @@ class ItemCard extends React.Component {
         this.props.dispatch({ type: act.Action_List_Article_Detail, data: e.target.src })
     };
 
+    _handleRange(e) {
+        let _float =  parseFloat(e.target.innerHTML);
+        let _int = parseInt(e.target.innerHTML);
+        let _range = _float%1 === 0 ? [_float, _float + 0.9] : [_int, _int + 1];
+        this.props.dispatch({ type: act.Action_List_Article_Range, data: _range })
+    };
+
     _handleTag(e) {
         this.props.dispatch({ type: act.Action_List_Article_Tag, data: e.target.innerHTML })
     };
 
-    _markdownHtml() {
+    _markdownHtml(title) {
+        let _title = `# ${title} \n`;
         let markdownSrc = [
-            '# ---\nChanges are automatically rendered as you type.\n\n* Follows the ',
+            'Changes are automatically rendered as ...\n\n* Follows the',
             '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
             'elements',
             '\n* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!',
             '\n* :scissors: Modern :clipboard:'
         ].join('')
 
-        return <Markdown source={markdownSrc} />;
+        return <Markdown source={_title + markdownSrc} />;
     }
 
 
     render() {
-        let coverID = covers[Math.floor(Math.random() * coverCount)]//this.props.src
-        let userThumb = thumbs[Math.floor(Math.random() * thumbs.length)]
+        let _coverSrc = this.props.value.coverSrc;
+        let _userThumb = this.props.value.userThumb;
 
         let pills;
         if (this.props.value.tags) {
             let tags = this.props.value.tags.split(', ');
-            pills = tags.map((tag,i) =>
+            pills = tags.map((tag, i) =>
                 <li2 key={i}><p className="word" onClick={this._handleTag.bind(this)}>{tag}</p></li2>
             );
         }
-        // <FlatButton style={Style.itemTag} label={tag} onTouchTap={this._handleTag.bind(this)} />
+        let _title = this.props.value.name;
+        let _desc = this._markdownHtml(_title);
 
         return (
 
             <div className="itemC">
                 <Card className="itemBox">
+
                     <div className="itemBox-Img">
-
-                        <img className="itemBox-Img-cover" id="im-user-id" src={coverID} onClick={this._handleDetail.bind(this)} />
-                        <img className="itemBox-Img-author" id="123456789" src={userThumb} onClick={this._handleAuthor.bind(this)} />
-
-                        <br /><br />
+                        <img
+                            className="itemBox-Img-cover" id="im-user-id"
+                            src={_coverSrc}
+                            onClick={this._handleDetail.bind(this)}
+                        />
+                        <div className="itemBox-Img-author">
+                            <p className="itemBox-Img-author-name" onClick={this._handleRange.bind(this)}>
+                                {parseFloat(this.props.value.alcohol)}
+                            </p>
+                        </div>
                     </div>
 
-                    <CardTitle title={this.props.value.name} subtitle={parseFloat(this.props.value.alcohol)} />
-
-                    <div style={{ paddingLeft: 10, paddingTop: -100, paddingBottom: 15, }}>
-                        {this._markdownHtml()}
+                    <div className="itemBox-Desc">
+                        {_desc}
                     </div>
-
 
                     <div className="itemBox-tag">
                         <ul className="keyword cfix">

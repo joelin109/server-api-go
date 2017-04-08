@@ -9,5 +9,6 @@
     "go.gopath": "/Volumes/Mac-TBD/Server/Golang/workspace",
      // Specifies the GOROOT to use when no environment variable is set.
     "go.goroot": "/usr/local/go",
-    "workbench.statusBar.visible": true
+    "workbench.statusBar.visible": true,
+    "editor.wordWrap": "on"
 }

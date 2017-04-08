@@ -11,7 +11,7 @@ left: this.props.width < 1024 ? 0 : 'auto',
 top: this.props.open ? 0 : -10000,
 */
 
-class DetailGeek extends React.Component {
+export default class DetailGeek extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,12 +57,24 @@ class DetailGeek extends React.Component {
         return _version.indexOf("applewebkit") > 0 && _version.indexOf("chrome/") <= 0;
     }
 
+    _test(detail) {
+        return detail.created_at.substring(2, 10) + " ~ " + detail.pushed_at.substring(2, 10);
+    }
 
     render() {
+
         let _className = this._isSafari() === false ? 'draw-detail-root' : '';
         let _classNameHeader = this.state.open ? 'draw-detail-root-container-header' : '';
-        let _coverID = this.props.resource.coverSrc;
-        window.scrollTo(0, 0);
+
+        if(this.state.open === false){
+            return (<div></div>);
+        }
+       
+        let _detail = this.props.resource;
+        let _coverSrc = _detail.coverSrc;
+        let _userThumb = _detail.owner.avatar_url;
+        let _date = this._test(_detail);
+        let _title = "美墨之間的「長城」，就聳立在我的眼前──看得見、與看不見的壁壘";
 
         return (
             <div>
@@ -75,32 +87,30 @@ class DetailGeek extends React.Component {
                     <div className={_classNameHeader}>
                         <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
                         <ListItem className="draw-detail-root-container-header-thumb"
-                            leftAvatar={<Avatar src="http://www.material-ui.com/images/uxceo-128.jpg" />}
+                            leftAvatar={<Avatar src={_userThumb} size={30}/>}
                         >
                             AuthorName
                         </ListItem>
                         <Button id={'refresh'} onTouchTap={this._dispatch_close.bind(this)} />
                     </div>
-               
-                    <div className='draw-detail-root-container-box'>
-                        <img className="draw-detail-root-container-box-cover" src={_coverID} />
 
-                        <div className='draw-detail-root-container-box-body-2'>
-                            2222222
-                         </div>
+                    <div className='draw-detail-root-container-box'>
+                        <img className="draw-detail-root-container-box-cover" src={_coverSrc} />
+                        <label className="">{_date}</label>
+                        <div className='draw-detail-root-container-box-body'>
+                             <p className="itemBox-Text-title">{_title}</p>
+                             <p className="itemBox-Text-text">{_detail.description}</p>
+                        </div>
                         <div className='draw-detail-root-container-box-body-3'>
                             3333
                          </div>
                     </div>
-          
+
                     <div className='draw-detail-root-container-footer'>
-                        jnfdkjhngjfdnghjdfhgnjfdjkhg
+
                     </div>
                 </Drawer>
             </div>
         )
     }
 }
-
-
-export default DetailGeek;
