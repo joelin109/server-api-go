@@ -5,9 +5,9 @@ import ListItem from 'material-ui/List/ListItem';
 import * as act from './../setting/action'
 import { Button } from './../component/wui'
 
-/* Modified for Drawer
-width: this.props.width < 1024 ? this.props.width || theme.width : '100%',
-left: this.props.width < 1024 ? 0 : 'auto',
+/* Modified for material-ui/Drawer/Drawer.js (Line 233)
+width: this.props.width >= 736 ?  '100%' : this.props.width || theme.width,
+left: this.props.width >= 736 ? 'auto' : 0,
 top: this.props.open ? 0 : -10000,
 */
 
@@ -66,10 +66,10 @@ export default class DetailGeek extends React.Component {
         let _className = this._isSafari() === false ? 'draw-detail-root' : '';
         let _classNameHeader = this.state.open ? 'draw-detail-root-container-header' : '';
 
-        if(this.state.open === false){
+        if (this.state.open === false) {
             return (<div></div>);
         }
-       
+
         let _detail = this.props.resource;
         let _coverSrc = _detail.coverSrc;
         let _userThumb = _detail.owner.avatar_url;
@@ -87,7 +87,7 @@ export default class DetailGeek extends React.Component {
                     <div className={_classNameHeader}>
                         <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
                         <ListItem className="draw-detail-root-container-header-thumb"
-                            leftAvatar={<Avatar src={_userThumb} size={30}/>}
+                            leftAvatar={<Avatar src={_userThumb} size={30} />}
                         >
                             AuthorName
                         </ListItem>
@@ -98,8 +98,8 @@ export default class DetailGeek extends React.Component {
                         <img className="draw-detail-root-container-box-cover" src={_coverSrc} />
                         <label className="">{_date}</label>
                         <div className='draw-detail-root-container-box-body'>
-                             <p className="itemBox-Text-title">{_title}</p>
-                             <p className="itemBox-Text-text">{_detail.description}</p>
+                            <p className="itemBox-Text-title">{_title}</p>
+                            <p className="itemBox-Text-text">{_detail.description}</p>
                         </div>
                         <div className='draw-detail-root-container-box-body-3'>
                             3333

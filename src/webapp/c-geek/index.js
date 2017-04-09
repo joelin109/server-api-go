@@ -110,7 +110,7 @@ export default class Geek extends React.Component {
 
     _dispatch_list_filter_popup(action) {
         switch (action.type) {
-            case act.Action_Filter_List_Github_Confirm:
+            case act.Action_Filter_List_Confirm:
                 this.state.filterData = action.data;
                 this.state.page = 1;
                 this._list_findAll(true)
@@ -155,7 +155,7 @@ export default class Geek extends React.Component {
             <div>
                 <List
                     resource={this.state.results}
-                    pageSize={this.state.pageSize} total={this.state.total}
+                    pageSize={this.state.pageSize} total={this.state.total} page={this.state.page}
                     dispatch={this._dispatch_list.bind(this)}
                     dispatch_item={this._dispatch_list_item.bind(this)}
                     filterOpen={_filterOrDetail}

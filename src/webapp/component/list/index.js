@@ -81,6 +81,9 @@ export default class List extends React.Component {
         this.state.results = this._adjustResult(this.props.resource);
         let _itemTag = this.props.itemTag;
         let _key = `list-${_itemTag}`;
+        if (this.props.page !== null && this.props.page === 1) {
+            this.state.page = 1;
+        }
 
         return (
             <div>

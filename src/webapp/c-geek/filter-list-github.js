@@ -37,7 +37,7 @@ class FilterListGithub extends React.Component {
             created_at: this.state.createdAt,
             is_cache: this.state.fromCache
         }
-        this.props.dispatch({ type: "Action_Filter_List_Github_Confirm", data: _data })
+        this.props.dispatch({ type: "Action_Filter_List_Confirm", data: _data })
     };
 
     //For Filter
