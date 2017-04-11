@@ -143,7 +143,7 @@ export default class News extends React.Component {
         return (
             <div>
                 <List
-                    resource={this.state.results}
+                    source={this.state.results}
                     pageSize={this.state.pageSize} total={this.state.results.length}
                     dispatch={this._dispatch_list.bind(this)}
                     dispatch_item={this._dispatch_list_item.bind(this)}

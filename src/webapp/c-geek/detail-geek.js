@@ -16,7 +16,7 @@ export default class DetailGeek extends React.Component {
         super(props);
         this.state = {
             open: false,
-            resource: {},
+    
         };
 
         this.state.open = props.open;
@@ -70,7 +70,7 @@ export default class DetailGeek extends React.Component {
             return (<div></div>);
         }
 
-        let _detail = this.props.resource;
+        let _detail = this.props.source;
         let _coverSrc = _detail.coverSrc;
         let _userThumb = _detail.owner.avatar_url;
         let _date = this._test(_detail);

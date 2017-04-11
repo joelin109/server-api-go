@@ -14,8 +14,8 @@ export default class ListCard extends React.Component {
             </div>
         </div>;
 
-        if (this.props.resource.length > 0) {
-            listItems = this.props.resource.map(item =>
+        if (this.props.source.length > 0) {
+            listItems = this.props.source.map(item =>
                 <Item tag={_itemTag} value={item} dispatch={this.props.dispatch} />
             );
         }

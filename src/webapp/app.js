@@ -77,7 +77,7 @@ export default class App extends React.Component {
 
         switch (action.type) {
             case act.Action_Channel_Type_Github:
-                _link = '/';
+                _link = `/geek?_t=${_type}`;
                 break;
 
             case act.Action_Channel_Type_Word:
@@ -115,6 +115,7 @@ export default class App extends React.Component {
     render() {
 
         let _switchAdmin = (window.location.href.indexOf("admin?_t") > 0);
+        _switchAdmin = _switchAdmin === false ? !(window.location.href.indexOf("?_") > 0) : true;
 
         const { location } = this.props
         const _isUnInitial = (this.state.previousLocation !== location) //not initial render
@@ -130,15 +131,17 @@ export default class App extends React.Component {
                 <div className='root'>
                     <div className='root-body'>
                         <div className='root-list'>
+
                             <Switch location={_location}>
-                                <Route exact path='/' component={Geek} />
+                                <Route exact path='/' component={AdminList} />
                                 <Route path='/article?_s=:source' component={News} />
+                                <Route path='/geek?_t=:channel' component={Geek} />
                                 <Route path='/channel?_t=:id' component={Channel} />
                                 <Route path='/deutsch?_t=:channel' component={Deutsch} />
                                 <Route path='/admin?_t=:channel' component={AdminList} />
-
                             </Switch>
                             <Route path='/detail?_v=:id' component={DetailGithub} />
+
                         </div>
 
                         {_switchAdmin ? "" : <Recommend value={0} />}

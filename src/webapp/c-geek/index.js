@@ -154,7 +154,7 @@ export default class Geek extends React.Component {
         return (
             <div>
                 <List
-                    resource={this.state.results}
+                    source={this.state.results}
                     pageSize={this.state.pageSize} total={this.state.total} page={this.state.page}
                     dispatch={this._dispatch_list.bind(this)}
                     dispatch_item={this._dispatch_list_item.bind(this)}
@@ -169,7 +169,7 @@ export default class Geek extends React.Component {
 
                 <DetailGeek
                     open={this.state.detailVisible}
-                    resource={this.state.detailObject}
+                    source={this.state.detailObject}
                     dispatch={this._dispatch_list_detail.bind(this)}
                 />
 

@@ -187,6 +187,7 @@ h1 {
 .root-list-filter-button {
     position: fixed;
     top: 110px;
+    z-index: 1000;
 }
 
 .root-list-button {
@@ -454,7 +455,6 @@ h1 {
     background-color: #EEEEEE;
     width: 100%;
     padding-top: 44px;
-    height: 100%;
 }
 
 .draw-detail-root-container-box-cover {
@@ -631,7 +631,7 @@ h1 {
     min-width: 768px;
     max-width: 1366px;
     min-height: 1004px;
-    padding-right: 10px;
+    padding-right: 15px;
 }
 
 .admin-list-setting {

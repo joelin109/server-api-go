@@ -202,14 +202,14 @@ export default class ListC extends React.Component {
         switch (_display) {
             case act.Action_Channel_Type_Word:
                 list = <ListTable
-                    resource={this.state.results} itemStyle="deutsch"
+                    source={this.state.results} itemStyle="deutsch"
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
 
             default:
                 list = <List key='card'
                     itemTag={tag.List_Item_Card}
-                    resource={this.state.results}
+                    source={this.state.results}
                     dispatch={this._dispatch_list.bind(this)} />
                 break;
         }

@@ -4,8 +4,8 @@ import * as wordService from './../service/word-service';
 import * as articleService from './../service/product-service';
 import * as act from './../setting/action';
 
-import WordList from './word/word-list';
-import AdminListFilter from './admin-list-filter'
+import Word from './word';
+
 
 export default class AdminList extends React.Component {
 
@@ -181,13 +181,19 @@ export default class AdminList extends React.Component {
         let list
         switch (this.state.channel.type) {
             case act.Action_Admin_Channel_Type_Word:
-                list = <WordList resource={this.state.results}
-                    dispatch={this._dispatch_list.bind(this)} />
+                list = <Word
+                    source={this.state.results}
+                    dispatch={this._dispatch_list.bind(this)}
+                    open={this.state.listFilterVisible}
+                />
                 break;
 
             default:
-                list = <WordList resource={this.state.results}
-                    dispatch={this._dispatch_list.bind(this)} />
+                list = <Word
+                    source={this.state.results}
+                    dispatch={this._dispatch_list.bind(this)}
+                    open={this.state.listFilterVisible}
+                />
                 break;
         }
 
@@ -204,10 +210,6 @@ export default class AdminList extends React.Component {
                         {search}
                     </FloatingActionButton>
                 </div>
-
-                <AdminListFilter open={this.state.listFilterVisible}
-                    channel={this.state.channel}
-                    dispatch={this._dispatch_list_filter_popup.bind(this)} />
             </div>
         );
     }

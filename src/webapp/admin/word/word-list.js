@@ -6,6 +6,7 @@ import { SIcon } from './../../component/wui'
 import * as act from './../../setting/action'
 
 
+
 export default class WordList extends React.Component {
 
   constructor(props) {
@@ -27,33 +28,40 @@ export default class WordList extends React.Component {
     this.setState({ height: event.target.value });
   };
 
-  _handle_sort(event) {
-    alert(event)
-    // alert(value)
+  //For Table List
+  _handle_list_sort(event) {
+    let _act = {type:act.Action_Admin_Word_List_Sort, data: event };
+    this.props.dispatch(_act);
+  }
+  _handle_list_page(event) {
+    let _act = { data: event };
+    this.props.dispatch(_act);
   }
 
-  //Modify
-  _handle_modify(event, data) {
-    this.props.dispatch({ type: act.Action_Admin_Word_List_Modify, data: event })
-    // alert(value)
+  //For Table List Item
+  _handle_item_modify(event, data) {
+    let _act = { type: act.Action_Admin_Word_List_Item_Modify, data: event };
+    this.props.dispatch_item(_act)
   }
-  _handle_unregel(event) {
+  _handle_item_unregel(event) {
     alert(event.currentTarget.value.wort)
     // alert(value)
   }
-  _handle_recommend(event) {
+  _handle_item_recommend(event) {
     alert(event.currentTarget.value['wort'])
     // alert(value)
   }
-  _handle_approval(event) {
+  _handle_item_approval(event) {
     alert(event.currentTarget.value)
     // alert(value)
   }
 
 
   render() {
-    let _sortIcon = <SIcon id="arrow_downward" />  
-    let _tableBody = this.props.resource.map((row, index) => (
+    let _sortIcon = <SIcon id="arrow_downward" />
+    let _result = this.props.source;
+
+    let _tableBody = _result.map((row, index) => (
       <TableRow key={index} selected={row.selected}>
 
         <TableRowColumn className='admin-list-col-wo' tooltip="dgdgfdgfdg">
@@ -63,7 +71,8 @@ export default class WordList extends React.Component {
         <TableRowColumn className='admin-list-col-zh'>{row.zh} - {row.en}</TableRowColumn>
         <TableRowColumn className='admin-list-col-40'>{row.isregel}</TableRowColumn>
         <TableRowColumn className='admin-list-col-25'>
-          <IconButton value={row} onTouchTap={this._handle_recommend.bind(this)}>
+          <IconButton value={row}
+            onTouchTap={this._handle_item_recommend.bind(this)}>
             <SIcon id={row.isrecommend === 1 ? 'favorite' : 'favorite_border'} selected={row.isrecommend === 1} />
           </IconButton>
         </TableRowColumn>
@@ -71,16 +80,18 @@ export default class WordList extends React.Component {
           {row.status}
 
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <IconButton value={row.wort} onTouchTap={this._handle_approval.bind(this)}>
+          <IconButton value={row.wort}
+            onTouchTap={this._handle_item_approval.bind(this)}>
             <SIcon id="thumb_up" selected={row.status === 'accepted'} />
           </IconButton>
 
-          <IconButton value={row.wort} onTouchTap={this._handle_approval.bind(this)}>
+          <IconButton value={row.wort}
+            onTouchTap={this._handle_item_approval.bind(this)}>
             <SIcon id="thumb_down" selected={row.status === 'rejected'} />
           </IconButton>
 
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <IconButton onTouchTap={this._handle_modify.bind(this, row)}>
+          <IconButton onTouchTap={this._handle_item_modify.bind(this, row)}>
             <SIcon id="edit" />
           </IconButton>
 
@@ -106,33 +117,32 @@ export default class WordList extends React.Component {
               <TableRow>
                 <TableHeaderColumn className='admin-list-col-wo' tooltip="Sort">
                   <FlatButton icon={_sortIcon} label={'Word'} labelPosition="before"
-                    onTouchTap={this._handle_sort.bind(this)} />
+                    onTouchTap={this._handle_list_sort.bind(this)} />
                 </TableHeaderColumn>
-
 
                 <TableHeaderColumn className='admin-list-col-40' tooltip="">
                   <FlatButton label={'Sex'} labelPosition="before"
-                    onTouchTap={this._handle_sort.bind(this)} />
+                    onTouchTap={this._handle_list_sort.bind(this)} />
                 </TableHeaderColumn>
 
-                <TableHeaderColumn style={{ textAlign: 'center' }}>Zh</TableHeaderColumn>
+                <TableHeaderColumn style={{ textAlign: 'center' }} >
+                  Zh
+                </TableHeaderColumn>
 
                 <TableHeaderColumn className='admin-list-col-40' tooltip="" >
-                  <FlatButton label={'Regel'} labelPosition="before"
-                    onTouchTap={this._handle_sort.bind(this)} />
+                  <FlatButton label={'Regel'} labelPosition="before" />
                 </TableHeaderColumn>
 
                 <TableHeaderColumn tooltip="">Recommend</TableHeaderColumn>
 
                 <TableHeaderColumn className='admin-list-col-st' tooltip="">
                   <FlatButton icon={_sortIcon} label={'Status'} labelPosition="before"
-                    onTouchTap={this._handle_sort.bind(this)} />
+                    onTouchTap={this._handle_list_sort.bind(this)} />
                 </TableHeaderColumn>
-
-
 
               </TableRow>
             </TableHeader>
+
             <TableBody
               displayRowCheckbox={this.state.showCheckboxes}
               showRowHover={true}
@@ -140,6 +150,7 @@ export default class WordList extends React.Component {
             >
               {_tableBody}
             </TableBody>
+
             <TableFooter
               adjustForCheckbox={this.state.showCheckboxes}
             >
@@ -151,6 +162,7 @@ export default class WordList extends React.Component {
             </TableFooter>
           </Table>
         </div>
+
         <div className='admin-list-setting'>
           <h3>Table Properties</h3>
           <TextField
@@ -165,6 +177,7 @@ export default class WordList extends React.Component {
             defaultToggled={this.state.showCheckboxes}
           />
         </div>
+
       </div>
     );
   }

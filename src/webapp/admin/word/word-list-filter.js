@@ -25,7 +25,7 @@ class WordListFilter extends React.Component {
 
 
     _handleCancel() {
-        this.props.dispatch({ type: "cancel", data: false })
+        this.props.dispatch_filter({ type: "cancel", data: false })
     };
 
     _handleConfirm() {
@@ -34,7 +34,7 @@ class WordListFilter extends React.Component {
             star: this.state.starSlider,
             is_cache: this.state.recommend
         }
-        this.props.dispatch({ type: "Action_Admin_Word_List_Filter_Confirm", data: _data })
+        this.props.dispatch_filter({ type: "Action_Admin_Word_List_Filter_Confirm", data: _data })
     };
 
     //For Filter

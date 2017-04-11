@@ -56,7 +56,7 @@ export default class ListTable extends React.Component {
   render() {
     let _defaultColor = "#757575"
     let _selectedColor = "#EF5350"
-    let _tableBody = this.props.resource.map((row, index) => (
+    let _tableBody = this.props.source.map((row, index) => (
       <TableRow key={index} selected={row.selected}>
 
         <TableRowColumn className='admin-list-col-wo' tooltip="dgdgfdgfdg">

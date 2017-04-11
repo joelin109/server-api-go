@@ -104,7 +104,7 @@ export default class Deutsch extends React.Component {
         return (
             <div>
                 <ListTable
-                    resource={this.state.results} itemStyle="deutsch"
+                    source={this.state.results} itemStyle="deutsch"
                     dispatch={this._dispatch_list.bind(this)} />
              
             </div>

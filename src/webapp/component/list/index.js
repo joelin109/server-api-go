@@ -78,7 +78,7 @@ export default class List extends React.Component {
     }
 
     render() {
-        this.state.results = this._adjustResult(this.props.resource);
+        this.state.results = this._adjustResult(this.props.source);
         let _itemTag = this.props.itemTag;
         let _key = `list-${_itemTag}`;
         if (this.props.page !== null && this.props.page === 1) {
@@ -89,7 +89,7 @@ export default class List extends React.Component {
             <div>
                 <ListCard key={_key}
                     itemTag={_itemTag}
-                    resource={this.state.results}
+                    source={this.state.results}
                     dispatch={this._dispatch_list.bind(this)}
                 />
 
