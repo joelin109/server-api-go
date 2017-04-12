@@ -1,11 +1,11 @@
 import React from 'react';
-import { FlatButton, FontIcon, FloatingActionButton } from 'material-ui';
+import { IconButton, FlatButton, FontIcon, FloatingActionButton } from 'material-ui';
 const Style = {
     button: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 6,
+        paddingTop: 8,
     },
 }
 
@@ -23,12 +23,20 @@ export const SIcon = ({ id, selected = false }) => {
 
 export const Button = ({ id, onTouchTap }) => {
     let _icon = <Icon id={id} />;
-    return <FlatButton style={Style.button} icon={_icon} onTouchTap={onTouchTap} />
+    return <IconButton className = "header-icon-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
+    //return <FlatButton style={Style.button} icon={_icon} onTouchTap={onTouchTap} />
 }
+
+export const TButton = ({ text, onTouchTap }) => {
+    let _icon = <Icon id={id} />;
+    return <FlatButton style={Style.button} label={text} onTouchTap={onTouchTap} />
+}
+
 
 export const Link = ({ id, to }) => {
     let _icon = <Icon id={id} />;
-    return <FlatButton style={Style.button} icon={_icon} href={to} />
+    //return <FlatButton style={Style.button} icon={_icon} href={to} />
+    return <IconButton className = "header-icon-button-link" href={to} >{_icon}</IconButton>
 }
 
 

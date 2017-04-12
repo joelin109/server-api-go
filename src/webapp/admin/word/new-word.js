@@ -1,35 +1,66 @@
 import React from 'react'
-import { Drawer, Divider, FlatButton } from 'material-ui';
+import { Drawer, Divider, IconMenu, IconButton, MenuItem } from 'material-ui';
+import { TextField, RadioButtonGroup, RadioButton, Slider, Toggle, Checkbox } from 'material-ui';
 import * as act from './../../setting/action'
-import { Button } from './../../component/wui'
+import { Button, Icon, SIcon } from './../../component/wui'
 
 
 export default class NewWord extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false,
-            resource: {},
+            open: props.open,
+            source: {},
+            actionValue: 1,
+            type: '-',
+            sex: '-',
+            unRegel: false,
+            recommend: false,
         };
 
-        this.state.open = props.open;
+        this._dispatch_close = this._dispatch_close.bind(this);
+        this._dispatch_save = this._dispatch_save.bind(this);
+        this._dispatch_more = this._dispatch_more.bind(this);
+        this._handle_type_choose = this._handle_type_choose.bind(this);
+        this._handle_sex_choose = this._handle_sex_choose.bind(this);
+        this._handle_togle_regel = this._handle_togle_regel.bind(this);
+        this._handle_togle_recommend = this._handle_togle_recommend.bind(this);
+
     }
 
     componentWillReceiveProps(nextProps) {
         this.state.open = nextProps.open;
     }
 
-    handleOpen() {
-        this.setState({ open: true });
-    };
 
+    //Add or edit the word info.
+    _handle_type_choose(event, value) {
+
+    }
+
+    _handle_sex_choose(event, value) {
+
+    }
+    _handle_togle_regel(event, value) {
+        //this.setState({ unRegel: value });
+    };
+    _handle_togle_recommend(event, value) {
+        //this.setState({ recommend: value });
+    };
 
     _dispatch_close() {
         //this._dispatch_left_channel(act.Action_Admin_Channel_Type_Close);
         this.setState({ open: false });
         return false;
     }
+    _dispatch_save() {
+        //this._dispatch_left_channel(act.Action_Admin_Channel_Type_Close);
 
+        return false;
+    }
+    _dispatch_more(event, value) {
+        alert(value)
+    }
 
     _isSafari() {
         let browser = navigator.appName;
@@ -46,9 +77,8 @@ export default class NewWord extends React.Component {
         }
 
         let _detail = this.props.source;
-        let _coverSrc = 'https://a0.muscache.com/im/pictures/bc34fd09-adf1-434a-8028-6913e3bc2177.jpg';
-        let _date = 'this._test(_detail)';
-        let _title = "美墨之間的「長城」，就聳立在我的眼前──看得見、與看不見的壁壘";
+        let _haveSex = (this.state.type === 'n');
+        let _regelIcon = <SIcon id="add_alert" selected />
 
         return (
             <div>
@@ -59,21 +89,120 @@ export default class NewWord extends React.Component {
                     open={this.state.open} docked={false}
                     onRequestChange={this._dispatch_close.bind(this)}>
                     <div className={_classNameHeader}>
-                        <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
-                        <Button id={'refresh'} onTouchTap={this._dispatch_close.bind(this)} />
-                        <Button id={'add'} onTouchTap={this._dispatch_close.bind(this)} />
-                        <Button id={'save'} onTouchTap={this._dispatch_close.bind(this)} />
-                        <Button id={'more_horiz'} onTouchTap={this._dispatch_close.bind(this)} />
+                        <Button id={'arrow_back'} onTouchTap={this._dispatch_close} />
+                        <Button id={'add'} onTouchTap={this._dispatch_close} />
+                        <Button id={'save'} onTouchTap={this._dispatch_save} />
+                        <IconMenu
+                            iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
+                            onChange={this._dispatch_more}
+                            value={this.state.actionValue}
+                            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
 
+                        >
+                            <MenuItem value="1" primaryText="Refresh" />
+                            <MenuItem value="2" primaryText="New" />
+                            <MenuItem value="3" primaryText="More" />
+                        </IconMenu>
                     </div>
 
                     <div className='draw-detail-root-container-box'>
-                        <img className="draw-detail-root-container-box-cover" src={_coverSrc} />
-                        <label className="">{_date}</label>
-                        <div>
-                            <p className="itemBox-Text-title">{_title}</p>
-                        </div>
+                        <div className='draw-detail-root-container-box-word'>
+                            <TextField
+                                className="root-text-field"
+                                hintText="..."
+                                floatingLabelText="Word"
+                                floatingLabelFixed={true}
+                            />
+                            <TextField
+                                className="root-text-field"
+                                hintText="."
+                                floatingLabelText="Plural"
+                                floatingLabelFixed={true}
+                            />
+                            <TextField
+                                className="root-text-field"
+                                hintText="."
+                                floatingLabelText="Zh"
+                                floatingLabelFixed={true}
+                            />
+                            <div className="draw-content-line">
+                                <p className="draw-content-text-title">Sex:&nbsp;&nbsp;</p>
+                                <RadioButtonGroup
+                                    className="draw-dialog-radio-group"
+                                    onChange={this._handle_sex_choose}
+                                    name="shipSpeed"
+                                    defaultSelected={this.state.sex}>
 
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="der"
+                                        label="der"
+                                        disabled={!_haveSex}
+                                    />
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="die"
+                                        label="die"
+                                        disabled={!_haveSex}
+                                    />
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="das"
+                                        label="das"
+                                        disabled={!_haveSex}
+                                    />
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="-"
+                                        label="-"
+                                        disabled={!_haveSex}
+                                    />
+                                </RadioButtonGroup>
+                            </div>
+                            <div className="draw-content-line">
+                                <p className="draw-content-text-title">Type:</p>
+                                <RadioButtonGroup className="draw-dialog-radio-group" onChange={this._handle_type_choose}
+                                    name="shipSpeed" defaultSelected={this.state.type}>
+
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="v"
+                                        label="v"
+                                    />
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="n"
+                                        label="n"
+                                    />
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="adj"
+                                        label="adj"
+                                    />
+                                    <RadioButton className="popup-dialog-radio"
+                                        value="-"
+                                        label="-"
+                                    />
+                                </RadioButtonGroup>
+                            </div>
+
+                            <div className="draw-content-line">
+                                <TextField
+                                    className="root-text-field"
+                                    hintText="."
+                                    floatingLabelText="En"
+                                    floatingLabelFixed={true}
+                                />
+                                <Checkbox
+                                    className="draw-content-check-regel"
+                                    label="regel"
+                                    defaultChecked = {true}
+                                    onCheck={this._handle_togle_regel}
+                                />
+                                <Toggle
+                                    className="root-text-toggle"
+                                    name="Recommend"
+                                    label="Recommend:"
+                                    defaultToggled={this.state.recommend}
+                                    onToggle={this._handle_togle_recommend}
+                                />
+                            </div>
+
+
+                        </div>
                     </div>
                 </Drawer>
             </div>

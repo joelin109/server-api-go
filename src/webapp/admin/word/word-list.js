@@ -67,10 +67,10 @@ export default class WordList extends React.Component {
         <TableRowColumn className='admin-list-col-wo' tooltip="dgdgfdgfdg">
           {row.wort}{(row.plural === '' ? '' : ', ' + row.plural)}
         </TableRowColumn>
-        <TableRowColumn className='admin-list-col-40'>{row.wortsex}</TableRowColumn>
+        <TableRowColumn className='admin-list-col-50'>{row.wortsex}</TableRowColumn>
         <TableRowColumn className='admin-list-col-zh'>{row.zh} - {row.en}</TableRowColumn>
-        <TableRowColumn className='admin-list-col-40'>{row.isregel}</TableRowColumn>
-        <TableRowColumn className='admin-list-col-25'>
+        <TableRowColumn className='admin-list-col-30'>{row.isregel}</TableRowColumn>
+        <TableRowColumn className='admin-list-col-30'>
           <IconButton value={row}
             onTouchTap={this._handle_item_recommend.bind(this)}>
             <SIcon id={row.isrecommend === 1 ? 'favorite' : 'favorite_border'} selected={row.isrecommend === 1} />
@@ -79,7 +79,7 @@ export default class WordList extends React.Component {
         <TableRowColumn className='admin-list-col-st'>
           {row.status}
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
           <IconButton value={row.wort}
             onTouchTap={this._handle_item_approval.bind(this)}>
             <SIcon id="thumb_up" selected={row.status === 'accepted'} />
@@ -90,7 +90,7 @@ export default class WordList extends React.Component {
             <SIcon id="thumb_down" selected={row.status === 'rejected'} />
           </IconButton>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;
           <IconButton onTouchTap={this._handle_item_modify.bind(this, row)}>
             <SIcon id="edit" />
           </IconButton>
@@ -120,7 +120,7 @@ export default class WordList extends React.Component {
                     onTouchTap={this._handle_list_sort.bind(this)} />
                 </TableHeaderColumn>
 
-                <TableHeaderColumn className='admin-list-col-40' tooltip="">
+                <TableHeaderColumn className='admin-list-col-50' tooltip="">
                   <FlatButton label={'Sex'} labelPosition="before"
                     onTouchTap={this._handle_list_sort.bind(this)} />
                 </TableHeaderColumn>
@@ -129,7 +129,7 @@ export default class WordList extends React.Component {
                   Zh
                 </TableHeaderColumn>
 
-                <TableHeaderColumn className='admin-list-col-40' tooltip="" >
+                <TableHeaderColumn className='admin-list-col-30' tooltip="" >
                   <FlatButton label={'Regel'} labelPosition="before" />
                 </TableHeaderColumn>
 
