@@ -571,9 +571,9 @@ h1 {
 }
 
 
-/*-------screen width > 1380px-----*/
+/*-------screen width > 1365px-----*/
 
-@media screen and (min-width: 1380px) {
+@media screen and (min-width: 1365px) {
     .recommend {
         background: transparent;
         width: 320px;
