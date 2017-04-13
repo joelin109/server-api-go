@@ -7,7 +7,7 @@ export default class FilterListNews extends React.Component {
     constructor() {
         super();
         this.state = {
-            stepIndex: 5,
+            stepIndex: 0,
             stepValue: 'ars-technica',
         };
     }
