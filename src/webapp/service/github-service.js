@@ -1,6 +1,5 @@
 import request from './request';
 import { api_result_ts } from './../setting/data/github'
-//import { api_result_go, api_result_py } from './../setting/data/github2'
 import { itemCovers } from './../setting/data'
 const covers = itemCovers;
 

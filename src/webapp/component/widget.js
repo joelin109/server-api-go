@@ -2,7 +2,7 @@ import React from 'react';
 import spacing from 'material-ui/styles/spacing';
 import transitions from 'material-ui/styles/transitions';
 import typography from 'material-ui/styles/typography';
-import { grey400 } from 'material-ui/styles/colors';
+import {grey300 } from 'material-ui/styles/colors';
 import Paper from 'material-ui/Paper';
 import withWidth, { MEDIUM, LARGE } from 'material-ui/utils/withWidth'
 
@@ -23,7 +23,7 @@ const Style = {
         letterSpacing: 0,
         fontWeight: typography.fontWeightMedium,
         color: typography.textDarkBlack,
-        backgroundColor: grey400,
+        backgroundColor: grey300,
         textAlign: 'center',
         margin: 0,
         padding: 0,

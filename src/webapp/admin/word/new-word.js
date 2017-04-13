@@ -99,9 +99,9 @@ export default class NewWord extends React.Component {
                             anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
 
                         >
-                            <MenuItem value="1" primaryText="Refresh" />
-                            <MenuItem value="2" primaryText="New" />
-                            <MenuItem value="3" primaryText="More" />
+                            <MenuItem value="1" primaryText="New" />
+                            <MenuItem value="2" primaryText="Refresh" />
+                            <MenuItem value="3" primaryText="Share" />
                         </IconMenu>
                     </div>
 
@@ -189,7 +189,7 @@ export default class NewWord extends React.Component {
                                 <Checkbox
                                     className="draw-content-check-regel"
                                     label="regel"
-                                    defaultChecked = {true}
+                                    defaultChecked={true}
                                     onCheck={this._handle_togle_regel}
                                 />
                                 <Toggle
@@ -200,7 +200,9 @@ export default class NewWord extends React.Component {
                                     onToggle={this._handle_togle_recommend}
                                 />
                             </div>
-
+                            <div className="draw-content-draft">
+                                <p className="draw-content-text-title">Example:</p>
+                            </div>
 
                         </div>
                     </div>

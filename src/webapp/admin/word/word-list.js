@@ -30,7 +30,7 @@ export default class WordList extends React.Component {
 
   //For Table List
   _handle_list_sort(event) {
-    let _act = {type:act.Action_Admin_Word_List_Sort, data: event };
+    let _act = { type: act.Action_Admin_Word_List_Sort, data: event };
     this.props.dispatch(_act);
   }
   _handle_list_page(event) {
@@ -43,7 +43,7 @@ export default class WordList extends React.Component {
     let _act = { type: act.Action_Admin_Word_List_Item_Modify, data: event };
     this.props.dispatch_item(_act)
   }
-  _handle_item_unregel(event) {
+  _handle_item_regel(event) {
     alert(event.currentTarget.value.wort)
     // alert(value)
   }
@@ -69,7 +69,12 @@ export default class WordList extends React.Component {
         </TableRowColumn>
         <TableRowColumn className='admin-list-col-50'>{row.wortsex}</TableRowColumn>
         <TableRowColumn className='admin-list-col-zh'>{row.zh} - {row.en}</TableRowColumn>
-        <TableRowColumn className='admin-list-col-30'>{row.isregel}</TableRowColumn>
+        <TableRowColumn className='admin-list-col-30'>
+           <IconButton value={row}
+            onTouchTap={this._handle_item_regel.bind(this)}>
+            <SIcon id={row.isregel === 1 ? 'star_border' : 'star_half'} selected={row.isregel !== 1} />
+          </IconButton>
+        </TableRowColumn>
         <TableRowColumn className='admin-list-col-30'>
           <IconButton value={row}
             onTouchTap={this._handle_item_recommend.bind(this)}>
@@ -100,9 +105,11 @@ export default class WordList extends React.Component {
       </TableRow>
 
     ));
+
+    let _classname = _tableBody.length === 0 ? 'admin-list-default' : 'admin-list';
     return (
       <div className="admin-list">
-        <div className="admin-list">
+        <div className={_classname}>
           <Table style={{ tableLayout: 'auto' }}
             height={this.state.height}
             fixedHeader={false}
