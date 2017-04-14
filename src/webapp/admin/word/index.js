@@ -82,7 +82,7 @@ export default class Word extends React.Component {
     let _willUpdate = !_filterVisible && !_editVisible;
 
     return (
-      <div className="admin-list">
+      <div>
         <WordList
           source={this.props.source}
           pageSize={this.state.pageSize} total={this.state.total} page={this.state.page}

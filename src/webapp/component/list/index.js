@@ -1,5 +1,5 @@
 import React from 'react';
-import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
+import { FloatingActionButton, FontIcon } from 'material-ui';
 import ListCard from './list-card'
 import Paginator from './paginator';
 import { itemCovers, userThumbs } from './../../setting/data'

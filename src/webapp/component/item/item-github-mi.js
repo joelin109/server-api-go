@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'material-ui/Card';
-import { FlatButton, FontIcon } from 'material-ui';
+import { SButton } from './../wui'
 
 const Action_List_Github_Repository = 'Action_Github_Repository'
 const Action_List_Github_Author = 'Action_Github_Author'
@@ -69,12 +69,6 @@ export default class ItemGithub extends React.Component {
         let _repoDesc = this.props.value.description;
         let _repoAuthorClass = (this.props.value.owner.type === 'User' ? 'itemBox-Img-author' : 'itemBox-Img-organization');
 
-        let color = "#bdbdbd"
-        let hoverColor = "#EF5350"
-        let share = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>share</FontIcon>;
-        let thumb_up = <FontIcon className="material-icons" color={color} hoverColor={hoverColor}>thumb_up</FontIcon>;
-        let labelStyle = { color: '#616161', fontWeight: 'normal', };
-
 
         return (
 
@@ -98,9 +92,9 @@ export default class ItemGithub extends React.Component {
                         <p className="itemBox-Text-text">{_repoDesc}</p>
                     </div>
 
-                    <div>
-                        <FlatButton icon={thumb_up} label={_repoStarNum} labelStyle={labelStyle} />
-                        <FlatButton icon={share} label={_repoForkNum} labelStyle={labelStyle} />
+                    <div className="itemBox-social">
+                       <SButton id="thumb_up" label={_repoStarNum} />
+                       <SButton id="share" label={_repoForkNum} />
                     </div>
 
 

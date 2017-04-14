@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { AppBar } from 'material-ui';
 import HeaderRight from './nav-header-right'
 import NavLeft from './nav-left'
-import NewPropertyWindow from './../popup/NewPropertyWindow';
+
 
 
 export default class Header extends React.Component {
@@ -11,11 +11,8 @@ export default class Header extends React.Component {
         super();
         this.state = {
             drawerVisible: false,
-            accountVisible: false,
-            filterVisible: false,
         };
     }
-
 
 
     _showDrawer() {
@@ -27,48 +24,18 @@ export default class Header extends React.Component {
     }
 
 
-    _saveHandler(e) {
-        alert(e.address)
-    }
-
-    _cancelHandler() {
-        this.setState({ accountVisible: false });
-    }
-
     _dispatch_header_title_touch(type, value) {
         window.scrollTo(0, 0);
     }
 
-    _dispatch_header_right(action, value) {
-        switch (action.type) {
-            case "login":
-                this.setState({ accountVisible: true });
-                break;
-            case "filter":
-                //this.setState({ filterVisible: true });
-                break;
-            default:
-                break;
-        }
+    _dispatch_header_right(action) {
+        this.props.dispatch(action);
         return false;
     }
 
     _dispatch_nav_left(action) {
         this.props.dispatch(action)
         this._closeDrawer()
-        return false;
-    }
-
-    _dispatch_filter_beer(action) {
-
-        switch (action.type) {
-            case "Action_Filter_List_Article_Confirm":
-                this.props.dispatch(action)
-                break;
-            default:
-                break;
-        }
-        this.setState({ filterVisible: false });
         return false;
     }
 
@@ -83,8 +50,6 @@ export default class Header extends React.Component {
 
                 <NavLeft open={this.state.drawerVisible} login={0}
                     dispatch={this._dispatch_nav_left.bind(this)} />
-
-                {this.state.accountVisible ? <NewPropertyWindow onSave={this._saveHandler.bind(this)} onCancel={this._cancelHandler.bind(this)} /> : ""}
 
             </div>
         )

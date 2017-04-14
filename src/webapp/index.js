@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactDOM, render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, browserHistory} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -40,4 +40,4 @@ class Index extends React.Component {
     }
 };
 
-render(<Index />, document.getElementById("main"));
+ReactDOM.render(<Index />, document.getElementById("main"));

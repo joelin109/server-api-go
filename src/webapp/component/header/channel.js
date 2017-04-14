@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, IconButton, RaisedButton, MenuItem } from 'material-ui';
-import FontIcon from 'material-ui/FontIcon';
+import { TButton } from './../wui'
 import * as act from './../../setting/action';
 
 
@@ -53,24 +52,16 @@ export default class HeaderChannel extends Component {
     return false;
   }
 
-  _newFlatButton(text) {
-    let color = "#bdbdbd"
-    let hoverColor = "#EF5350"
-    return <FlatButton labelStyle={{ color: '#EEEEEE', fontWeight: 'bold' }} hoverColor={hoverColor} label={text}
-      onTouchTap={this._linkHandler.bind(this)} />;
-  }
 
   render() {
     let _hidden = this.props.hidden;
     let _content = <div className="channel-hidden" />;
     if (_hidden === false) {
       _content = <div className="channel">
-
-        {this._newFlatButton("今日头条")}
-        {this._newFlatButton("科技")}
-        {this._newFlatButton("语法")}
-        {this._newFlatButton("单词")}
-
+        <TButton label="今日头条" onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label="科技" onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label="语法" onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label="单词" onTouchTap={this._linkHandler.bind(this)} />
       </div>
     }
 

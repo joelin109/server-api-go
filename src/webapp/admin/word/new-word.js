@@ -3,6 +3,7 @@ import { Drawer, Divider, IconMenu, IconButton, MenuItem } from 'material-ui';
 import { TextField, RadioButtonGroup, RadioButton, Slider, Toggle, Checkbox } from 'material-ui';
 import * as act from './../../setting/action'
 import { Button, Icon, SIcon } from './../../component/wui'
+import { Editor } from 'react-draft-wysiwyg';
 
 
 export default class NewWord extends React.Component {
@@ -25,6 +26,8 @@ export default class NewWord extends React.Component {
         this._handle_sex_choose = this._handle_sex_choose.bind(this);
         this._handle_togle_regel = this._handle_togle_regel.bind(this);
         this._handle_togle_recommend = this._handle_togle_recommend.bind(this);
+        this.onEditorStateChange = this.onEditorStateChange.bind(this);
+
 
     }
 
@@ -32,6 +35,9 @@ export default class NewWord extends React.Component {
         this.state.open = nextProps.open;
     }
 
+    onEditorStateChange(value) {
+
+    }
 
     //Add or edit the word info.
     _handle_type_choose(event, value) {
@@ -48,6 +54,8 @@ export default class NewWord extends React.Component {
         //this.setState({ recommend: value });
     };
 
+
+    //Action for menu
     _dispatch_close() {
         //this._dispatch_left_channel(act.Action_Admin_Channel_Type_Close);
         this.setState({ open: false });
@@ -202,6 +210,12 @@ export default class NewWord extends React.Component {
                             </div>
                             <div className="draw-content-draft">
                                 <p className="draw-content-text-title">Example:</p>
+                                <Editor
+                                    toolbarClassName="home-toolbar"
+                                    wrapperClassName="home-wrapper"
+                                    editorClassName="home-editor"
+                                    onEditorStateChange={this.onEditorStateChange}
+                                />
                             </div>
 
                         </div>

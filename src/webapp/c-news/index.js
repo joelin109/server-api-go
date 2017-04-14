@@ -102,6 +102,7 @@ export default class News extends React.Component {
                     detailObject: action.data,
                 });
                 break;
+                
             default:
                 alert(action.type + "-" + action.data)
                 break;

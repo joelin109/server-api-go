@@ -38,10 +38,10 @@ export default class HeaderRight extends Component {
   }
 
   _linkHandler(e) {
-    this.props.onClick({ type: "login" }, "hello")
+    this.props.onClick({ type: "Action_Header_Right_Auth" })
   }
   _linkHandler2(e) {
-    this.props.onClick({ type: "filter" }, "hello")
+    this.props.onClick({ type: "filter" })
   }
 
 

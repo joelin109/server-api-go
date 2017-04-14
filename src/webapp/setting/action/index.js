@@ -5,6 +5,8 @@ export const Action_List_Article_Author = 'Action_List_Article_Author'
 export const Action_List_Article_Tag = 'Action_List_Article_Tag'
 export const Action_List_Article_Range = 'Action_List_Article_Range'
 
+export const Action_Header_Right_Auth = 'Action_Header_Right_Auth'
+
 export const Action_Channel_Type_Article = 'Action_Channel_Type_Article'
 export const Action_Channel_Type_Github = 'Action_Channel_Type_Github'
 export const Action_Channel_Type_Grammar = 'Action_Channel_Type_Grammar'

@@ -18,7 +18,7 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: "Lineto Circular", "Futura LT Light", "verdana", "Microsoft JhengHei", "微軟正黑體", "Heiti TC", "LiHei Pro", sans-serif;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     color: #000000;
     font-size: 15px;
     font-size: 1.25rem;
@@ -75,6 +75,7 @@ h1 {
 }
 
 
+
 /*----- Head Start ----------*/
 
 .header-right {
@@ -124,7 +125,7 @@ h1 {
 }
 
 .channel-button {
-    color: #EEEEEE;
+    color: #E8E8E8;
     font-weight: bold;
     text-align: center;
 }
@@ -138,7 +139,7 @@ h1 {
 /*----- Head :end ----------*/
 
 .body-main {
-    background: #EEEEEE;
+    background: #E8E8E8;
 }
 
 .root {
@@ -405,7 +406,7 @@ h1 {
     left: 0px;
     bottom: 0px;
     right: 0px;
-    background: #EEEEEE;
+    background: #E8E8E8;
     z-index: 199;
 }
 
@@ -485,7 +486,7 @@ h1 {
 }
 
 .draw-detail-root-container-box {
-    background-color: #EEEEEE;
+    background-color: #E8E8E8;
     width: 100%;
     padding-top: 44px;
 }

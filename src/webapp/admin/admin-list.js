@@ -198,7 +198,7 @@ export default class AdminList extends React.Component {
         }
 
         return (
-            <div>
+            <div className="admin-root">
                 {list}
 
                 <br />  <br />

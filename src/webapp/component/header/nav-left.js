@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Drawer, Divider, MenuItem, Badge, FontIcon } from 'material-ui';
+import { Drawer, Divider, MenuItem, FontIcon } from 'material-ui';
 import * as act from './../../setting/action'
 
 class NavLeft extends React.Component {

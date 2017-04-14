@@ -1,5 +1,11 @@
 /*----- Admin Start ----------*/
 
+.admin-root {
+    display: flex;
+    justify-content: center;
+    padding-top: 44px;
+}
+
 .admin-list {
     min-width: 768px;
     max-width: 1014px;
@@ -83,7 +89,7 @@
 
 .draw-content-draft {
     padding-top: 25px;
-    min-height: 400px;
+    min-height: 350px;
     height: 50%;
 }
 
