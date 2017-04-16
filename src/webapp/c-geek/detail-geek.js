@@ -16,7 +16,7 @@ export default class DetailGeek extends React.Component {
         super(props);
         this.state = {
             open: false,
-    
+
         };
 
         this.state.open = props.open;
@@ -84,14 +84,17 @@ export default class DetailGeek extends React.Component {
                     width={768}
                     open={this.state.open} docked={false}
                     onRequestChange={this._dispatch_close.bind(this)}>
+                    
                     <div className={_classNameHeader}>
-                        <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
-                        <ListItem className="draw-detail-root-container-header-thumb"
-                            leftAvatar={<Avatar src={_userThumb} size={30} />}
-                        >
-                            AuthorName
+                        <div className='draw-detail-root-container-header-box'>
+                            <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
+                            <ListItem className="draw-detail-root-container-header-thumb"
+                                leftAvatar={<Avatar src={_userThumb} size={30} />}
+                            >
+                                AuthorName
                         </ListItem>
-                        <Button id={'refresh'} onTouchTap={this._dispatch_close.bind(this)} />
+                            <Button id={'refresh'} onTouchTap={this._dispatch_close.bind(this)} />
+                        </div>
                     </div>
 
                     <div className='draw-detail-root-container-box'>

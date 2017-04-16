@@ -8,5 +8,7 @@ webapp/.DS_Store
 .vscode/launch.json
 wwww/index.bundle.js.map
 wwww/index.bundle.js
+wwww/admin.bundle.js.map
+wwww/admin.bundle.js
 
 

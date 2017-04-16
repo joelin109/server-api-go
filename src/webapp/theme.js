@@ -24,4 +24,9 @@ export const appTheme = getMuiTheme({
         hoverColor: '#9E9E9E',
         selectedColor: '#E0E0E0',
     },
+    tabs: {
+        backgroundColor: 'transparent',
+        textColor: '#9E9E9E',
+        selectedTextColor:'#EF5350',
+    },
 });

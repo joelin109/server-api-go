@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextField, RadioButtonGroup, RadioButton, Toggle, Checkbox } from 'material-ui';
-import * as act from './../../setting/action'
-import { Button, SIcon } from './../../component/wui'
+import * as act from './../../../setting/action'
+import { Button, SIcon } from './../../../component/wui'
 
 
 export default class WordTabBasic extends React.Component {
@@ -56,7 +56,8 @@ export default class WordTabBasic extends React.Component {
 
         return (
 
-            <div className="draw-detail-content-tab-basic">
+            <div className="draw-detail-tab-content-basic">
+                <div className="draw-detail-tab-content-basic-box">
                     <TextField
                         className="root-text-field"
                         hintText="..."
@@ -151,7 +152,7 @@ export default class WordTabBasic extends React.Component {
                         />
                     </div>
 
-                
+                </div>
             </div>
 
         )

@@ -22,8 +22,11 @@
     "react-markdown": "^2.4.5",
     "material-ui": "^0.17.2",
     "react-tap-event-plugin": "^2.0.1",
-    "react-draft-wysiwyg": "^1.9.3",
     "draft-js": "^0.10.0",
+    "draftjs-to-html": "^0.7.1",
+    "immutable": "^3.8.1",
+    "react-draft-wysiwyg": "^1.9.3",
+    "babel-preset-stage-0": "^6.24.1",
     "webpack": "^2.3.3"
   },
   "devDependencies": {
