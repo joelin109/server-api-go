@@ -12,7 +12,7 @@ export default class WordTabContentHtml extends React.Component {
 
         };
         this._dispatch_editor_change = this._dispatch_editor_change.bind(this);
-         this._dispatch_editor_save = this._dispatch_editor_save.bind(this);
+        this._dispatch_editor_save = this._dispatch_editor_save.bind(this);
 
     }
 
@@ -51,7 +51,10 @@ export default class WordTabContentHtml extends React.Component {
                     />
 
                 </div>
-                <FloatingButton onTouchTap={this._dispatch_editor_save} />
+                <FloatingButton
+                    id="swap_horiz" className="left-b2"
+                    onTouchTap={this._dispatch_editor_save} />
+
             </div>
         )
     }

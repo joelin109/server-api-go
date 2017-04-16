@@ -21,12 +21,24 @@ export default class WordTabDesc extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if (nextProps.change) {
+
+            let editorContent = nextProps.source;
+            let editorContents = this.state.editorContents;
+            editorContents[0] = editorContent;
+            editorContents = [...editorContents];
+            this.setState({
+                editorContents,
+            });
+        }
+
     }
 
     _dispatch_editor_change(index, editorContent) {
         let editorContents = this.state.editorContents;
         editorContents[index] = editorContent;
         editorContents = [...editorContents];
+
         this.setState({
             editorContents,
         });
@@ -75,9 +87,8 @@ export default class WordTabDesc extends React.Component {
                         }}
                     />
                 </div>
-                <FloatingButton 
-                id="arrow_back"  className = "draw-float-button-left-b2"
-                onTouchTap={this._dispatch_editor_save} />
+
+                <FloatingButton id="translate" className="left-b3" onTouchTap={this._dispatch_editor_save} />
             </div>
         )
     }

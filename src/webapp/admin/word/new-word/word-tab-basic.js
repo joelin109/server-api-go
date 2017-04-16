@@ -57,9 +57,9 @@ export default class WordTabBasic extends React.Component {
         return (
 
             <div className="draw-detail-tab-content-basic">
-                <div className="draw-detail-tab-content-basic-box">
+                <div className="draw-detail-tab-content-basic-box" tabindex="0">
                     <TextField
-                        className="root-text-field"
+                        className="root-text-field-0"
                         hintText="..."
                         floatingLabelText="Word"
                         floatingLabelFixed={true}
@@ -74,6 +74,12 @@ export default class WordTabBasic extends React.Component {
                         className="root-text-field"
                         hintText="."
                         floatingLabelText="Zh"
+                        floatingLabelFixed={true}
+                    />
+                    <TextField
+                        className="root-text-field"
+                        hintText="."
+                        floatingLabelText="En"
                         floatingLabelFixed={true}
                     />
                     <div className="draw-content-line">
@@ -131,12 +137,7 @@ export default class WordTabBasic extends React.Component {
                     </div>
 
                     <div className="draw-content-line">
-                        <TextField
-                            className="root-text-field"
-                            hintText="."
-                            floatingLabelText="En"
-                            floatingLabelFixed={true}
-                        />
+
                         <Checkbox
                             className="draw-content-check-regel"
                             label="regel"

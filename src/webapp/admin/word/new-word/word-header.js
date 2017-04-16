@@ -39,26 +39,27 @@ export default class WordHeader extends React.Component {
     }
 
     render() {
-        //  <Button id={'add'} onTouchTap={this._dispatch_close} />
-        //    <Button id={'save'} onTouchTap={this._dispatch_save} />
 
         return (
             <div className="draw-detail-root-container-header-box">
-                <Button id={'arrow_back'} onTouchTap={this._dispatch_close} />
+                <div className="draw-button-style-back">
+                    <Button id={'arrow_back'} onTouchTap={this._dispatch_close} />
+                </div>
+                <div className="draw-button-style-more">
+                    <IconMenu
+                        iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
+                        onChange={this._dispatch_more}
+                        value={this.state.actionValue}
+                        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
 
-                <IconMenu
-                    iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
-                    onChange={this._dispatch_more}
-                    value={this.state.actionValue}
-                    anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-
-                >
-                    <MenuItem value="1" primaryText="New" />
-                    <MenuItem value="2" primaryText="Save" />
-                    <MenuItem value="3" primaryText="Save & New" />
-                    <MenuItem value="4" primaryText="Refresh" />
-                    <MenuItem value="5" primaryText="Share" />
-                </IconMenu>
+                    >
+                        <MenuItem value="1" primaryText="New" />
+                        <MenuItem value="2" primaryText="Save" />
+                        <MenuItem value="3" primaryText="Save & New" />
+                        <MenuItem value="2" primaryText="Refresh" />
+                        <MenuItem value="3" primaryText="Share" />
+                    </IconMenu>
+                </div>
             </div>
         )
     }

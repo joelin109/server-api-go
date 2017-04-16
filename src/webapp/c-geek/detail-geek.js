@@ -64,7 +64,7 @@ export default class DetailGeek extends React.Component {
     render() {
 
         let _className = this._isSafari() === false ? 'draw-detail-root' : '';
-        let _classNameHeader = this.state.open ? 'draw-detail-root-container-header' : '';
+        let _classNameHeader = this.state.open ? 'draw-detail-root-container-header linit-768' : '';
 
         if (this.state.open === false) {
             return (<div></div>);
@@ -84,7 +84,7 @@ export default class DetailGeek extends React.Component {
                     width={768}
                     open={this.state.open} docked={false}
                     onRequestChange={this._dispatch_close.bind(this)}>
-                    
+
                     <div className={_classNameHeader}>
                         <div className='draw-detail-root-container-header-box'>
                             <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
