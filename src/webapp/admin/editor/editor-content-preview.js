@@ -1,9 +1,9 @@
 import React from 'react'
-import * as act from './../../../setting/action'
-import { Button } from './../../../component/wui'
+import * as act from './../../setting/action'
+import { Button } from './../../component/wui'
 
 
-export default class WordTabContentPreview extends React.Component {
+export default class EditorContentPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

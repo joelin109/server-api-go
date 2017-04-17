@@ -1,36 +1,29 @@
 import React from 'react'
-import * as act from './../../../setting/action'
-import { Button, FloatingButton } from './../../../component/wui'
+import * as act from './../../setting/action'
+import { Button, FloatingButton } from './../../component/wui'
 import { Editor } from 'react-draft-wysiwyg';
-import * as convert from './word-convert'
 
-export default class WordTabDesc extends React.Component {
+export default class EditorContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             source: {},
             value: '',
-            editorContents: [],
+            editorContents: {},
 
         };
+    
+        this._setEditorContent(props.source);
 
         this._dispatch_editor_change = this._dispatch_editor_change.bind(this);
         this._dispatch_editor_save = this._dispatch_editor_save.bind(this);
         this.uploadImageCallBack = this.uploadImageCallBack.bind(this);
-
     }
 
     componentWillReceiveProps(nextProps) {
 
         if (nextProps.change) {
-
-            let editorContent = nextProps.source;
-            let editorContents = this.state.editorContents;
-            editorContents[0] = editorContent;
-            editorContents = [...editorContents];
-            this.setState({
-                editorContents,
-            });
+            this._setEditorContent(nextProps.source)
         }
 
     }
@@ -44,6 +37,18 @@ export default class WordTabDesc extends React.Component {
         this.props.dispatch(_action);
     }
 
+    _setEditorContent(source) {
+        let editorContent = source;
+
+        let editorContents = this.state.editorContents;
+        editorContents[0] = editorContent;
+        editorContents = [...editorContents];
+
+        this.setState({
+            editorContents,
+        });
+    }
+
     _dispatch_editor_change(index, editorContent) {
         let editorContents = this.state.editorContents;
         editorContents[index] = editorContent;
@@ -53,8 +58,8 @@ export default class WordTabDesc extends React.Component {
             editorContents,
         });
 
-
     }
+
     uploadImageCallBack(file) {
 
     }
@@ -76,6 +81,7 @@ export default class WordTabDesc extends React.Component {
             <div className="draw-detail-tab-content-editor">
                 <div className="draw-detail-tab-content-editor-box">
                     <Editor
+                        hashtag={{}}
                         editorState={this.state.editorContents[0]}
                         onEditorStateChange={this._dispatch_editor_change.bind(this, 0)}
                         toolbarClassName="demo-toolbar"
@@ -100,7 +106,7 @@ export default class WordTabDesc extends React.Component {
                     />
                 </div>
 
-                <FloatingButton id="translate" className="left-b3" onTouchTap={this._dispatch_editor_save} />
+                <FloatingButton id="translate" className="colr-light loc-btm-4" onTouchTap={this._dispatch_editor_save} />
             </div>
         )
     }

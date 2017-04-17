@@ -80,7 +80,7 @@ export default class DetailGeek extends React.Component {
             <div>
                 <Drawer
                     className={_className}
-                    containerClassName="draw-detail-root-container"
+                    containerClassName="w-limit-768"
                     width={768}
                     open={this.state.open} docked={false}
                     onRequestChange={this._dispatch_close.bind(this)}>

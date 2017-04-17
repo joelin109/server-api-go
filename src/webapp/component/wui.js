@@ -7,35 +7,32 @@ const Style = {
         paddingBottom: 8,
     },
 }
+const _hoverColor = '#EF5350';
 
 export const Icon = ({ id }) => {
     let _color = 1 > 10 ? '#bdbdbd' : '#E0E0E0';
-    let _hoverColor = '#EF5350';
     return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
 }
 
 const BIcon = ({ id, defaultColor = false }) => {
     let _color = defaultColor ? '#bdbdbd' : '#E0E0E0';
-    let _hoverColor = '#EF5350';
     return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
 }
 
 export const SIcon = ({ id, selected = false }) => {
     let _color = selected ? '#EF5350' : '#757575';
-    let _hoverColor = '#EF5350';
     return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
 }
 
 export const Button = ({ id, onTouchTap }) => {
-    let _icon =  <Icon id={id} />
-    return <IconButton className="header-icon-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
+    let _icon = <Icon id={id} />
+    return <IconButton className="base-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
     //return <FlatButton style={Style.button} icon={_icon} onTouchTap={onTouchTap} />
 }
 
 export const TButton = ({ label, onTouchTap }) => {
-    let _hoverColor = "#EF5350"
-    let _style = { color: '#EEEEEE', fontWeight: 'bold', paddingBottom: 10 }
 
+    let _style = { color: '#EEEEEE', fontWeight: 'bold', paddingBottom: 10 }
     return <FlatButton
         labelStyle={_style} hoverColor={_hoverColor}
         label={label} onTouchTap={onTouchTap}
@@ -45,7 +42,6 @@ export const TButton = ({ label, onTouchTap }) => {
 
 export const SButton = ({ id, label, onTouchTap }) => {
     let _icon = <BIcon id={id} defaultColor={true} />;
-    let _hoverColor = "#EF5350"
     let _labelStyle = { color: '#616161', fontWeight: 'normal', paddingBottom: 8 }
 
     return <FlatButton
@@ -56,22 +52,27 @@ export const SButton = ({ id, label, onTouchTap }) => {
 
 }
 
-export const FloatingButton = ({ id = 'save', className = 'left-b1', onTouchTap }) => {
-    let _className = `draw-float-button ${className}`;
+export const ColorButton = ({ id, color, onTouchTap }) => {
 
-    let _hoverColor = '#EF5350';
-    let _icon = <FontIcon className="material-icons" color={'#00838F'} hoverColor={_hoverColor}>{id}</FontIcon>;
-    let _button = <IconButton className="header-icon-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
+    let _icon = <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
+    return <IconButton className="base-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
+}
 
-    return <div className="draw-float-button-box-left">
+export const FloatingButton = ({ id = 'save', className = 'colr-dark loc-btm-1', onTouchTap }) => {
+    let _className = `float-button ${className}`;
+    let _colorButton = <ColorButton id={id} color={'#00838F'} onTouchTap={onTouchTap} />
+    let _button = <Button id={id} onTouchTap={onTouchTap} />
+
+
+    return <div className="loc-left-box">
         <div className={_className}>
-            <div className="draw-float-button-style">
-                {_button}
-            </div>
+            
+            {_className.indexOf('colr-light') > 0 ? _colorButton : _button}
+
         </div>
     </div>
-
 }
+
 
 export const Link = ({ id, to }) => {
     let _icon = <Icon id={id} />;

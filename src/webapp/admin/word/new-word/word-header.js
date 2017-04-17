@@ -41,24 +41,30 @@ export default class WordHeader extends React.Component {
     render() {
 
         return (
-            <div className="draw-detail-root-container-header-box">
-                <div className="draw-button-style-back">
-                    <Button id={'arrow_back'} onTouchTap={this._dispatch_close} />
-                </div>
-                <div className="draw-button-style-more">
-                    <IconMenu
-                        iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
-                        onChange={this._dispatch_more}
-                        value={this.state.actionValue}
-                        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
 
-                    >
-                        <MenuItem value="1" primaryText="New" />
-                        <MenuItem value="2" primaryText="Save" />
-                        <MenuItem value="3" primaryText="Save & New" />
-                        <MenuItem value="2" primaryText="Refresh" />
-                        <MenuItem value="3" primaryText="Share" />
-                    </IconMenu>
+            <div className="draw-detail-root-container-header-box">
+                <div className="w-limit-60">
+                    <div className="float-button colr-dark loc-top-1">
+                        <Button id={'arrow_back'} onTouchTap={this._dispatch_close} />
+                    </div>
+                </div>
+
+                <div className="w-limit-60">
+                    <div className="float-button colr-dark loc-top-1">
+                        <IconMenu
+                            iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
+                            onChange={this._dispatch_more}
+                            value={this.state.actionValue}
+                            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+
+                        >
+                            <MenuItem value="1" primaryText="New" />
+                            <MenuItem value="2" primaryText="Save" />
+                            <MenuItem value="3" primaryText="Save & New" />
+                            <MenuItem value="2" primaryText="Refresh" />
+                            <MenuItem value="3" primaryText="Share" />
+                        </IconMenu>
+                    </div>
                 </div>
             </div>
         )

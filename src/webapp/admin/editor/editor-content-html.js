@@ -1,9 +1,9 @@
 import React from 'react'
-import * as act from './../../../setting/action'
-import { Button, FloatingButton } from './../../../component/wui'
+import * as act from './../../setting/action'
+import { Button, FloatingButton } from './../../component/wui'
 
 
-export default class WordTabContentHtml extends React.Component {
+export default class EditorContentHtml extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,7 +52,7 @@ export default class WordTabContentHtml extends React.Component {
 
                 </div>
                 <FloatingButton
-                    id="swap_horiz" className="left-b2"
+                    id="swap_horiz" className="colr-light loc-btm-3"
                     onTouchTap={this._dispatch_editor_save} />
 
             </div>
