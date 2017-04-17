@@ -21,6 +21,7 @@ export default class WordTabDesc extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+
         if (nextProps.change) {
 
             let editorContent = nextProps.source;
@@ -33,6 +34,15 @@ export default class WordTabDesc extends React.Component {
         }
 
     }
+    componentDidUpdate() {
+
+        let _action = {
+            type: 'componentDidUpdate',
+            data: this.state.editorContents[0]
+        };
+
+        this.props.dispatch(_action);
+    }
 
     _dispatch_editor_change(index, editorContent) {
         let editorContents = this.state.editorContents;
@@ -42,6 +52,8 @@ export default class WordTabDesc extends React.Component {
         this.setState({
             editorContents,
         });
+
+
     }
     uploadImageCallBack(file) {
 

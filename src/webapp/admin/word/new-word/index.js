@@ -46,6 +46,7 @@ export default class NewWord extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.state.open = nextProps.open;
     }
+    
 
     onEditorStateChange(value) {
 
@@ -65,7 +66,6 @@ export default class NewWord extends React.Component {
 
     _handle_tab_editor(tab) {
         this.setState({ tabIndex: 1 })
-        this.state.editorChange = false;
     }
     _handle_tab_html(tab) {
         this.setState({ tabIndex: 2 })
@@ -79,9 +79,12 @@ export default class NewWord extends React.Component {
     }
 
     _dispatch_tab_content_editor(action) {
-        let _editorContent = action.data;
-        this.state.editorContent = _editorContent;
-        this.state.editorHtml = convert.toHtml(_editorContent);
+        if (action.type !== 'componentDidUpdate') {
+            let _editorContent = action.data;
+            this.state.editorContent = _editorContent;
+            this.state.editorHtml = convert.toHtml(_editorContent);
+        }
+
         this.state.editorChange = false;
     }
 
@@ -93,7 +96,6 @@ export default class NewWord extends React.Component {
     }
 
     _dispatch_tab_content_preview(tab) {
-        this.setState({ tabIndex: 3 })
     }
 
 
@@ -145,7 +147,7 @@ export default class NewWord extends React.Component {
                         </div>
 
                     </div>
-                    
+
                     <div>
                         <FloatingButton onTouchTap={this._dispatch_close} />
                     </div>
