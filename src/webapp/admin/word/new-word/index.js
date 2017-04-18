@@ -7,19 +7,22 @@ import * as util from './../../../util'
 import WordHeader from './word-header'
 import WordTabBasic from './word-tab-basic'
 import RichTextEditor from './../../editor/'
+import * as convert from './../../editor/e-convert'
 
 
 export default class NewWord extends React.Component {
     constructor(props) {
         super(props);
 
-        let _html = '...';
+        let _html = '<p></p><img src="https://cdn.arstechnica.net/wp-content/uploads/2016/09/ArsColossal-640x375.jpg " style="float:none;height: auto;width: auto"/>';
         this.state = {
             open: props.open,
             source: {},
             editorHtml: _html,
+            editorContent: convert.toEditorContent(_html),
+            willSave: false,
 
-            tabIndex: 0,
+            tabIndex: 1,
             type: '-',
             sex: '-',
             unRegel: false,
@@ -27,8 +30,13 @@ export default class NewWord extends React.Component {
 
         };
 
-        this._dispatch_header = this._dispatch_header.bind(this);
+        //this.state.editorContent = _contentState;
+
+
+        this._handle_save = this._handle_save.bind(this);
+        this._handle_tab_basic = this._handle_tab_basic.bind(this);
         this._handle_tab_desc = this._handle_tab_desc.bind(this);
+        this._dispatch_header = this._dispatch_header.bind(this);
         this._dispatch_tab_basic = this._dispatch_tab_basic.bind(this);
         this._dispatch_tab_desc = this._dispatch_tab_desc.bind(this);
 
@@ -46,18 +54,29 @@ export default class NewWord extends React.Component {
 
     //Action for menu
     _dispatch_header(action) {
-        //this._dispatch_left_channel(act.Action_Admin_Channel_Type_Close);
+        this.state.willSave = false;
         this.setState({ open: false });
         return false;
     }
     _dispatch_close(action) {
-        //this._dispatch_left_channel(act.Action_Admin_Channel_Type_Close);
+        this.state.willSave = false;
         this.setState({ open: false });
         return false;
     }
 
+    _handle_save() {
+        this.setState({ willSave: true });
+        return false;
+    }
+
+    _handle_tab_basic(tab) {
+        this.state.tabIndex = 1;
+        this.setState({ willSave: false });
+    }
+
     _handle_tab_desc(tab) {
-        // this.setState({ tabIndex: 1 })
+        this.state.tabIndex = 2;
+        this.setState({ willSave: false });
     }
 
     _dispatch_tab_basic(action) {
@@ -65,7 +84,7 @@ export default class NewWord extends React.Component {
     }
 
     _dispatch_tab_desc(action) {
-
+        this.state.editorContent = action.data;
     }
 
     render() {
@@ -92,7 +111,7 @@ export default class NewWord extends React.Component {
                     <div className="draw-detail-root-container w-limit-808">
                         <div className="draw-detail-tab-container">
                             <Tabs className="draw-detail-tab">
-                                <Tab label="Basic Info">
+                                <Tab label="Basic Info" onActive={this._handle_tab_basic}>
                                     <WordTabBasic
                                         source={this.props.source}
                                         dispatch={this._dispatch_tab_basic}
@@ -101,6 +120,8 @@ export default class NewWord extends React.Component {
 
                                 <Tab label="Description" onActive={this._handle_tab_desc}>
                                     <RichTextEditor
+                                        save={this.state.willSave}
+                                        display={this.state.tabIndex === 2}
                                         source={this.state.editorContent}
                                         dispatch={this._dispatch_tab_desc}
                                     />
@@ -111,7 +132,7 @@ export default class NewWord extends React.Component {
                     </div>
 
                     <div>
-                        <FloatingButton onTouchTap={this._dispatch_close} />
+                        <FloatingButton onTouchTap={this._handle_save} />
                     </div>
                 </Drawer>
             </div>

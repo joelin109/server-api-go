@@ -10,9 +10,10 @@ export default class EditorContent extends React.Component {
             source: {},
             value: '',
             editorContents: {},
+            willUpdate:true,
 
         };
-    
+
         this._setEditorContent(props.source);
 
         this._dispatch_editor_change = this._dispatch_editor_change.bind(this);
@@ -37,6 +38,26 @@ export default class EditorContent extends React.Component {
         this.props.dispatch(_action);
     }
 
+    _defautToolbar() {
+        return {
+            options: ['inline', 'blockType', 'fontFamily', 'list', 'textAlign', 'history', 'link', 'image', 'emoji', 'colorPicker'],
+            inline: {
+                options: ['bold', 'italic', 'strikethrough'],
+            },
+            fontFamily: {
+                options: ['Tahoma', 'Verdana'],
+            },
+            list: {
+                options: ['unordered', 'ordered'],
+            },
+            textAlign: {
+                options: ['left', 'center', 'right', 'justify'],
+            },
+            image: { uploadCallback: this.uploadImageCallBack }
+        }
+
+    }
+
     _setEditorContent(source) {
         let editorContent = source;
 
@@ -45,18 +66,18 @@ export default class EditorContent extends React.Component {
         editorContents = [...editorContents];
 
         this.setState({
-            editorContents,
+            willUpdate:true,
         });
     }
 
     _dispatch_editor_change(index, editorContent) {
         let editorContents = this.state.editorContents;
-        editorContents[index] = editorContent;
+        editorContents[0] = editorContent;
         editorContents = [...editorContents];
 
-        this.setState({
-            editorContents,
-        });
+        // this.setState({
+        //    editorContents,
+        // });
 
     }
 
@@ -76,37 +97,28 @@ export default class EditorContent extends React.Component {
 
 
     render() {
+        //alert('EditorContent render')defaultEditorState={this.state.editorContents[0]}      
+        let _toolbar = this._defautToolbar();
+        let _btm = <FloatingButton
+            id="translate" className="colr-light loc-btm-4"
+            onTouchTap={this._dispatch_editor_save} />;
 
         return (
             <div className="draw-detail-tab-content-editor">
                 <div className="draw-detail-tab-content-editor-box">
                     <Editor
                         hashtag={{}}
-                        editorState={this.state.editorContents[0]}
+                        defaultEditorState={this.state.editorContents[0]}
                         onEditorStateChange={this._dispatch_editor_change.bind(this, 0)}
+
                         toolbarClassName="demo-toolbar"
                         wrapperClassName="demo-wrapper-wide"
                         editorClassName="demo-editor"
-                        toolbar={{
-                            options: ['inline', 'blockType', 'fontFamily', 'list', 'textAlign', 'history', 'link', 'image', 'emoji', 'colorPicker'],
-                            inline: {
-                                options: ['bold', 'italic', 'strikethrough'],
-                            },
-                            fontFamily: {
-                                options: ['Tahoma', 'Verdana'],
-                            },
-                            list: {
-                                options: ['unordered', 'ordered'],
-                            },
-                            textAlign: {
-                                options: ['left', 'center', 'right', 'justify'],
-                            },
-                            image: { uploadCallback: this.uploadImageCallBack }
-                        }}
+                        toolbar={_toolbar}
                     />
                 </div>
 
-                <FloatingButton id="translate" className="colr-light loc-btm-4" onTouchTap={this._dispatch_editor_save} />
+                {this.props.display ? _btm : ''}
             </div>
         )
     }

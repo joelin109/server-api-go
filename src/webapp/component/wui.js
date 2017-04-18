@@ -31,10 +31,10 @@ export const Button = ({ id, onTouchTap }) => {
 }
 
 export const TButton = ({ label, onTouchTap }) => {
-
+    let _hoverBgColr = '#E57373';
     let _style = { color: '#BDBDBD', fontWeight: 'bold', paddingBottom: 10 }
     return <FlatButton
-        labelStyle={_style} hoverColor={_hoverColor}
+        labelStyle={_style} hoverColor={_hoverBgColr}
         label={label} onTouchTap={onTouchTap}
     />
 }

@@ -178,6 +178,7 @@
 }
 
 .draw-detail-tab-content-preview-box {
+    min-width: 750px;
     padding: 6px 8px 10px 8px;
     min-height: 660px;
     width: 100%;

@@ -22,6 +22,7 @@ export default class EditorContentPreview extends React.Component {
                          className="demo-content no-focus"
                          value={this.props.source}
                      />*/
+                     
         let _html = { __html: this.props.source };
         return (
             <div className="draw-detail-tab-content-preview">

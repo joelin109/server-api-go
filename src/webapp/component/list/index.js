@@ -18,7 +18,7 @@ export default class List extends React.Component {
         this.state = {
             results: [],
             page: 1,
-            listFilterButtonBground: '#EF5350',
+            listFilterButtonBground: '#E57373',
         }
         this._dispatch_list = this._dispatch_list.bind(this);
         this._dispatch_list_page_previous = this._dispatch_list_page_previous.bind(this);

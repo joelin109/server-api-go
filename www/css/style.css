@@ -2,6 +2,7 @@
 padding: top, right, bottom, and left
 */
 
+
 /*----- Head Start ----------*/
 
 .header-right {
@@ -137,9 +138,6 @@ padding: top, right, bottom, and left
     margin-top: 30px;
 }
 
-
-
-
 .root-list-button {
     color: #00838F;
     border-radius: 5px;
@@ -191,6 +189,7 @@ padding: top, right, bottom, and left
     align-items: 'center';
 }
 
+/* #E0E0E0  */
 .itemBox-Img-author {
     width: 50px;
     height: 50px;
@@ -198,9 +197,9 @@ padding: top, right, bottom, and left
     top: 180px;
     cursor: pointer;
     left: 10px;
-    background: #E57373;
+    background: #E0E0E0;
     border-radius: 30px;
-    border: 3px solid #FAFAFA;
+    border: 3px solid #E0E0E0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -211,7 +210,7 @@ padding: top, right, bottom, and left
     font-size: 2rem;
     line-height: 25px;
     font-weight: bold;
-    color: #E0E0E0;
+    color: #E57373;
 }
 
 .itemBox-Img-organization {
@@ -223,10 +222,7 @@ padding: top, right, bottom, and left
     left: 10px;
     background: #757575;
     border-radius: 30px;
-    border-top: 3px solid #00838F;
-    border-left: 3px solid #00838F;
-    border-right: 3px solid #00838F;
-    border-bottom: 3px solid #00838F;
+    border: 3px solid #616161;
 }
 
 .itemBox-Text-date {
@@ -447,7 +443,6 @@ padding: top, right, bottom, and left
     bottom: 0px;
     width: 100%;
 }
-
 
 
 /*----- Popup Start ----------*/
