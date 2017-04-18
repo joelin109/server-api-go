@@ -203,8 +203,8 @@ export default class AdminList extends React.Component {
 
                 <br />  <br />
 
-                <div className="root-list-filter">
-                    <FloatingActionButton className="root-list-filter-button"
+                <div className="loc-right-box">
+                    <FloatingActionButton className="loc-top-1-1 z-3"
                         backgroundColor={hoverColor} zDepth={2}
                         onTouchTap={this._dispatch_list_filter.bind(this)}>
                         {search}

@@ -42,7 +42,7 @@ export default class Header extends React.Component {
     render() {
         return (
             <div>
-                <AppBar title="Joe." zDepth={0}
+                <AppBar title={this.props.title} zDepth={0}
                     iconElementRight={<HeaderRight onClick={this._dispatch_header_right.bind(this)} />}
                     onLeftIconButtonTouchTap={this._showDrawer.bind(this)}
                     onTitleTouchTap={this._dispatch_header_title_touch.bind(this)}

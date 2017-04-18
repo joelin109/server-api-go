@@ -123,7 +123,7 @@ export default class App extends React.Component {
 
         return (
             <div >
-                <Header title="Title" dispatch={this._dispatch_header_navigator.bind(this)} />
+                <Header title="Joe.c" dispatch={this._dispatch_header_navigator.bind(this)} />
                 <HeaderChannel value={3} hidden={_isModal} dispatch={this._dispatch_header_channel.bind(this)} />
 
                 <div className='root'>

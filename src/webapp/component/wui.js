@@ -32,7 +32,7 @@ export const Button = ({ id, onTouchTap }) => {
 
 export const TButton = ({ label, onTouchTap }) => {
 
-    let _style = { color: '#EEEEEE', fontWeight: 'bold', paddingBottom: 10 }
+    let _style = { color: '#BDBDBD', fontWeight: 'bold', paddingBottom: 10 }
     return <FlatButton
         labelStyle={_style} hoverColor={_hoverColor}
         label={label} onTouchTap={onTouchTap}
@@ -66,7 +66,7 @@ export const FloatingButton = ({ id = 'save', className = 'colr-dark loc-btm-1',
 
     return <div className="loc-left-box">
         <div className={_className}>
-            
+
             {_className.indexOf('colr-light') > 0 ? _colorButton : _button}
 
         </div>

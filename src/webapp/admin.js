@@ -100,7 +100,7 @@ class Admin extends React.Component {
 
         return (
             <div >
-                <Header title="Title" dispatch={this._dispatch_header_navigator.bind(this)} />
+                <Header title="Console" dispatch={this._dispatch_header_navigator.bind(this)} />
                 <div className='root'>
                     <div className='root-body'>
                         <div className='root-list'>

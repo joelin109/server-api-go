@@ -100,8 +100,8 @@ export default class List extends React.Component {
                     onNext={this._dispatch_list_page_next.bind(this)}
                 />
 
-                <div className="root-list-filter">
-                    <FloatingActionButton className="root-list-filter-button"
+                <div className="loc-right-box">
+                    <FloatingActionButton className="loc-top-1-2 z-3"
                         zDepth={2}
                         backgroundColor={this.state.listFilterButtonBground}
                         onTouchTap={this._dispatch_list_filter.bind(this)}>

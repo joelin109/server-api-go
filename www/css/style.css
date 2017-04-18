@@ -137,17 +137,8 @@ padding: top, right, bottom, and left
     margin-top: 30px;
 }
 
-.root-list-filter {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 10px;
-}
 
-.root-list-filter-button {
-    position: fixed;
-    top: 110px;
-    z-index: 100;
-}
+
 
 .root-list-button {
     color: #00838F;

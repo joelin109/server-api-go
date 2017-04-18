@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { TButton } from './../wui'
 import * as act from './../../setting/action';
 
+const _topnews='今日头条'; //"今日头条"
+const _geek='Geek';
+const _channel='Channel';
+const _deutsch='Deutsch';
 
 export default class HeaderChannel extends Component {
   constructor(props) {
@@ -21,23 +25,23 @@ export default class HeaderChannel extends Component {
     let _filter = '';
 
     switch (_value) {
-      case "今日头条":
+      case _topnews:
         _data = [0, 8];
         _type = act.Action_Channel_Type_Article;
         break;
 
-      case "科技":
+      case _geek:
         _type = act.Action_Channel_Type_Github;
         _display = act.Action_Display_List_Github;
         _filter = "javascript"
         break;
 
-      case "语法":
+      case _channel:
         _type = act.Action_Channel_Type_Grammar;
         _data = [11, 26];
         break;
 
-      case "单词":
+      case _deutsch:
         _type = act.Action_Channel_Type_Word;
         _display = act.Action_Display_List_Deutsch;
         _data = [7, 11];
@@ -58,10 +62,10 @@ export default class HeaderChannel extends Component {
     let _content = <div className="channel-hidden" />;
     if (_hidden === false) {
       _content = <div className="channel">
-        <TButton label="今日头条" onTouchTap={this._linkHandler.bind(this)} />
-        <TButton label="科技" onTouchTap={this._linkHandler.bind(this)} />
-        <TButton label="语法" onTouchTap={this._linkHandler.bind(this)} />
-        <TButton label="单词" onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label={_topnews} onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label={_geek} onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label={_channel} onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label={_deutsch} onTouchTap={this._linkHandler.bind(this)} />
       </div>
     }
 
