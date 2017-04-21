@@ -14,7 +14,7 @@ export default class NewWord extends React.Component {
     constructor(props) {
         super(props);
 
-        let _html = '<p></p><img src="https://cdn.arstechnica.net/wp-content/uploads/2016/09/ArsColossal-640x375.jpg " style="float:none;height: auto;width: auto"/>';
+        let _html = '<p></p><img src="https://cdn.arstechnica.net/wp-content/uploads/2016/09/Colossal-1-760x380.jpg " style="float:none;height: auto;width: 100%"/>';
         this.state = {
             open: props.open,
             source: {},
@@ -92,6 +92,7 @@ export default class NewWord extends React.Component {
         let _className = util.isSafari() === false ? 'draw-detail-root color-dark' : '';
         let _classNameHeader = this.state.open ? 'w-limit-xx8' : '';
         if (this.state.open === false) {
+            this.state.tabIndex = 1;
             return (<div></div>);
         }
 

@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import * as act from './setting/action';
 import Header from './component/header';
-import AdminList from './admin/admin-list';
+import AdminWord from './admin/word';
+import AdminArticle from './admin/article';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -69,16 +70,13 @@ class Admin extends React.Component {
         let _link = `/admin?_t=${_type}`;
 
         switch (action.type) {
-            case act.Action_Channel_Type_Word:
-                _link = `/deutsch?_t=${_type}`;
-                break;
-
-            case act.Action_Channel_Type_Article:
-                _link = `/article?_s=${_type}`;
+       
+            case act.Action_Admin_Channel_Type_Article:
+                _link = `/article?_t=${_type}`;
                 break;
 
             case act.Action_Admin_Channel_Type_Word:
-                _link = `/admin?_t=${_type}`;
+                _link = `/deutsch?_t=${_type}`;
                 break;
 
             default:
@@ -101,13 +99,14 @@ class Admin extends React.Component {
         return (
             <div >
                 <Header title="Console" dispatch={this._dispatch_header_navigator.bind(this)} />
-                <div className='root'>
+                <div className='loc-center-box'>
                     <div className='root-body'>
-                        <div className='root-list'>
+                        <div className='root-list root-list-admin-layout'> 
 
                             <Switch>
-                                <Route exact path='/' component={AdminList} />
-                                <Route path='/admin?_t=:channel' component={AdminList} />
+                                <Route exact path='/' component={AdminArticle} />
+                                <Route path='/article?_t=:channel' component={AdminArticle} />
+                                <Route path='/deutsch?_t=:channel' component={AdminWord} />
                             </Switch>
 
                         </div>

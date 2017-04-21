@@ -3,6 +3,7 @@ import * as _tag from './tag';
 import ItemGithub from './item-github-mi';
 import ItemCard from './item-card-mi';
 import ItemArticle from './item-article';
+import ArticleListItem from './../../admin/article/article-list-item';
 
 const Item = ({ tag, value, dispatch }) => {
     switch (tag) {
@@ -16,6 +17,10 @@ const Item = ({ tag, value, dispatch }) => {
 
         case _tag.List_Item_Article:
             return <ItemArticle value={value} dispatch={dispatch} />
+            break;
+
+     case _tag.List_Item_Admin_Article:
+            return <ArticleListItem value={value} dispatch={dispatch} />
             break;
 
         default:

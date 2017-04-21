@@ -61,21 +61,7 @@ padding: top, right, bottom, and left
     background: #E8E8E8;
 }
 
-.root {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 25px;
-}
 
-.root-body {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 1366px;
-    min-height: 736px;
-    padding-bottom: 12px;
-}
 
 .root-text-field {
     max-width: 200px;
@@ -99,17 +85,8 @@ padding: top, right, bottom, and left
 
 
 /*----- List Start ----------*/
-
-.root-list {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    align-content: flex-start;
-    max-width: 1024px;
-    min-height: 600px;
-    padding-bottom: 12px;
+.root-list-layout {
+ padding: 25px 0px 12px 0px;
 }
 
 .root-list-default {
@@ -523,7 +500,7 @@ padding: top, right, bottom, and left
     .recommend {
         background: transparent;
         width: 320px;
-        padding: 6px;
+        padding: 30px 6px 6px 6px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;

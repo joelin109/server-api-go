@@ -1,12 +1,11 @@
 /*----- Admin Start ----------*/
 
-.admin-root {
-    display: flex;
-    justify-content: center;
-    padding-top: 44px;
+.root-list-admin-layout {
+    padding-top: 70px;
+    padding-bottom: 30px;
 }
 
-.admin-list {
+.admin-table {
     min-width: 768px;
     max-width: 1014px;
     min-height: 1004px;
@@ -14,7 +13,7 @@
     padding-right: 10px;
 }
 
-.admin-list-default {
+.admin-table-default {
     min-width: 1009px;
     max-width: 1014px;
     min-height: 1004px;
@@ -54,6 +53,32 @@
     text-align: center;
 }
 
+.itemBox-recommend {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background: #FAFAFA;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.itemBox-console {
+    width: 95%;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border-top: 1px solid #E0E0E0;
+}
+
 
 /*----- Admin End ----------*/
 
@@ -81,7 +106,6 @@
     bottom: 0px;
     top: 0px;
 }
-
 
 .draw-detail-tab-container {
     background-color: transparent;

@@ -106,9 +106,9 @@ export default class WordList extends React.Component {
 
     ));
 
-    let _classname = _tableBody.length === 0 ? 'admin-list-default' : 'admin-list';
+    let _classname = _tableBody.length === 0 ? 'admin-table-default' : 'admin-table';
     return (
-      <div className="admin-list">
+      <div className="admin-table">
         <div className={_classname}>
           <Table style={{ tableLayout: 'auto' }}
             height={this.state.height}

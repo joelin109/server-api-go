@@ -27,6 +27,6 @@ export const appTheme = getMuiTheme({
     tabs: {
         backgroundColor: 'transparent',
         textColor: '#9E9E9E',
-        selectedTextColor:'#EF5350',
+        selectedTextColor: cyan500,
     },
 });

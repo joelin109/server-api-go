@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'material-ui/Card';
-import { SButton } from './../wui'
+import { SuperButton } from './../wui'
 
 const Action_List_Github_Repository = 'Action_Github_Repository'
 const Action_List_Github_Author = 'Action_Github_Author'
@@ -93,8 +93,8 @@ export default class ItemGithub extends React.Component {
                     </div>
 
                     <div className="itemBox-social">
-                       <SButton id="thumb_up" label={_repoStarNum} />
-                       <SButton id="share" label={_repoForkNum} />
+                       <SuperButton id="thumb_up" label={_repoStarNum} />
+                       <SuperButton id="share" label={_repoForkNum} />
                     </div>
 
 

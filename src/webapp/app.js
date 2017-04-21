@@ -126,9 +126,9 @@ export default class App extends React.Component {
                 <Header title="Joe.c" dispatch={this._dispatch_header_navigator.bind(this)} />
                 <HeaderChannel value={3} hidden={_isModal} dispatch={this._dispatch_header_channel.bind(this)} />
 
-                <div className='root'>
+                <div className='loc-center-box'>
                     <div className='root-body'>
-                        <div className='root-list'>
+                        <div className='root-list root-list-layout'>
 
                             <Switch location={_location}>
                                 <Route exact path='/' component={Geek} />

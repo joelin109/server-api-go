@@ -71,6 +71,30 @@ p {
 }
 
 
+/*----- Main Layout Start ----------*/
+
+.root-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1366px;
+}
+
+.root-list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    max-width: 1024px;
+    min-height: 736px;
+}
+
+
+/*----- Main Layout End ----------*/
+
+
 /*----- Float-button Start ----------*/
 
 .float-button {
@@ -109,6 +133,11 @@ p {
 
 
 /*----- Position Start ----------*/
+
+.loc-center-box {
+    display: flex;
+    justify-content: center;
+}
 
 .loc-left-box {
     display: flex;

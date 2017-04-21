@@ -1,14 +1,12 @@
 import React from 'react';
-
-import * as service from './../service/news-service';
-import * as act from './../setting/action';
-import * as tag from './../component/item/tag'
-import List, * as _list from './../component/list'
-import FilterListNews from './filter-list-news'
+import * as service from './../../service/news-service';
+import * as act from './../../setting/action';
+import * as tag from './../../component/item/tag'
+import List, * as _list from './../../component/list'
 
 
 
-export default class News extends React.Component {
+export default class AdminArticle extends React.Component {
 
     constructor(props) {
         super(props);
@@ -148,12 +146,7 @@ export default class News extends React.Component {
                     dispatch={this._dispatch_list.bind(this)}
                     dispatch_item={this._dispatch_list_item.bind(this)}
                     filterOpen={_filterOrDetail}
-                    itemTag={tag.List_Item_Article}
-                />
-
-                <FilterListNews
-                    open={this.state.filterVisible}
-                    dispatch={this._dispatch_list_filter_popup.bind(this)}
+                    itemTag={tag.List_Item_Admin_Article}
                 />
 
 
