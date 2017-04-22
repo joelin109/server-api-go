@@ -113,7 +113,7 @@ export default class RichTextEditor extends React.Component {
                         />
                     </Tab>
 
-                    <Tab label="Preview" onActive={this._handle_tab_preview}>
+                    <Tab label="View" onActive={this._handle_tab_preview}>
                         <EditorContentPreview source={this.state.editorHtml} />
                     </Tab>
                 </Tabs>

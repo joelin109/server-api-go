@@ -67,7 +67,7 @@ export default class ItemGithub extends React.Component {
         let _repoStarNum = this._formatNumber(this.props.value.stargazers_count);
         let _repoForkNum = this._formatNumber(this.props.value.forks);
         let _repoDesc = this.props.value.description;
-        let _repoAuthorClass = (this.props.value.owner.type === 'User' ? 'itemBox-Img-author' : 'itemBox-Img-organization');
+        let _repoAuthorClass = (this.props.value.owner.type === 'User' ? 'itemBox-img-author' : 'itemBox-img-author img-organization');
 
 
         return (
@@ -75,24 +75,23 @@ export default class ItemGithub extends React.Component {
             <div className="itemC">
                 <Card className="itemBox">
 
-                    <div className="itemBox-Img">
-                        <img className="itemBox-Img-cover" id={this.props.value.html_url} src={_coverID}
+                    <div className="itemBox-img-box with-author">
+                        <img className="itemBox-img-cover" id={this.props.value.html_url} src={_coverID}
                             onClick={this._handleDetail} />
 
                         <img className={_repoAuthorClass} id={this.props.value.owner.html_url} src={_userThumb}
                             onClick={this._handleAuthor.bind(this)} />
 
-                        <label className="itemBox-Text-date">{'...'}</label>
-                    </div>
-                    <br />
-
-                    <div className="itemBox-Text">
-                        <p className="itemBox-Text-title"><a href={this.props.value.html_url} target="_blank">{this.props.value.name}</a></p>
-                        <p className="itemBox-Text-subTitle">{_repoDateRange}</p>
-                        <p className="itemBox-Text-text">{_repoDesc}</p>
+                        <label className="itemBox-img-below-right">{'...'}</label>
                     </div>
 
-                    <div className="itemBox-social">
+                    <div className="itemBox-text-box">
+                        <p className="itemBox-text-title"><a href={this.props.value.html_url} target="_blank">{this.props.value.name}</a></p>
+                        <p className="itemBox-text-subTitle">{_repoDateRange}</p>
+                        <p className="itemBox-text-text">{_repoDesc}</p>
+                    </div>
+
+                    <div className="itemBox-social-box">
                        <SuperButton id="thumb_up" label={_repoStarNum} />
                        <SuperButton id="share" label={_repoForkNum} />
                     </div>

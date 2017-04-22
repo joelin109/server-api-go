@@ -47,7 +47,7 @@ export default class ArticleListItem extends React.Component {
 
     };
     _handle_item_edit() {
-        alert(this.props.value.title);
+        this.props.dispatch({ type: 'edit', data: this.props.value })
     };
 
 
@@ -74,31 +74,31 @@ export default class ArticleListItem extends React.Component {
             <div className="itemC">
                 <Card className="itemBox">
 
-                    <div className="itemBox-Img">
+                    <div className="itemBox-img-box">
                         <img
-                            className="itemBox-Img-cover" id="im-user-id"
+                            className="itemBox-img-cover" id="im-user-id"
                             src={_coverSrc}
                             onClick={this._handleDetail.bind(this)}
                         />
                         <div className="itemBox-recommend">
                             {_recommendButton}
                         </div>
-                        <div className="itemBox-Text-rightcopy">
-                            <p className="itemBox-Text-subTitle"></p>
+                        <div className="itemBox-text-rightcopy">
+                            <p className="itemBox-text-subTitle"></p>
                         </div>
                     </div>
 
-                    <div className="itemBox-Text">
-                        <p className="itemBox-Text-title">
+                    <div className="itemBox-text-box">
+                        <p className="itemBox-text-title">
                             <a href={this.props.value.url} target="_blank">{_title}</a>
                         </p>
-                        <p className="itemBox-Text-subTitle">{_publish}</p>
+                        <p className="itemBox-text-subTitle">{_publish}</p>
                         <ul className="keyword cfix">
                             {pills}
                         </ul>
                     </div>
 
-                    <div className="itemBox-console">
+                    <div className="itemBox-console-box">
                         {_status === 0 ? 'pending' : <div>&nbsp;&nbsp;</div>}&nbsp;&nbsp;{_upButton} {_downButton} &nbsp;&nbsp;{_editButton}
                     </div>
                 </Card>

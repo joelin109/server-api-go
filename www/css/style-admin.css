@@ -69,7 +69,7 @@
     align-content: center;
 }
 
-.itemBox-console {
+.itemBox-console-box {
     width: 95%;
     display: flex;
     justify-content: flex-start;
@@ -222,8 +222,8 @@
 }
 
 .draw-content-line {
-    margin-top: 15px;
-    margin-bottom: 0px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;

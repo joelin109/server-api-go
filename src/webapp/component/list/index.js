@@ -9,6 +9,7 @@ const thumbs = userThumbs
 export const List_Page_Previous = 'List_Page_Previous'
 export const List_Page_Next = 'List_Page_Next'
 export const List_Filter = 'List_Filter'
+export const List_New = 'List_New'
 
 export default class List extends React.Component {
 
@@ -23,7 +24,8 @@ export default class List extends React.Component {
         this._dispatch_list = this._dispatch_list.bind(this);
         this._dispatch_list_page_previous = this._dispatch_list_page_previous.bind(this);
         this._dispatch_list_page_next = this._dispatch_list_page_next.bind(this);
-        this._dispatch_list_filter = this._dispatch_list_filter.bind(this);
+        this._handle_list_filter = this._handle_list_filter.bind(this);
+        this._handle_list_new = this._handle_list_new.bind(this);
 
         // alert('ListBase-constructor')
     }
@@ -55,8 +57,12 @@ export default class List extends React.Component {
         return false;
     }
 
-    _dispatch_list_filter(action) {
-        this.props.dispatch({ type: List_Filter, data: this.state.page });
+    _handle_list_filter() {
+        this.props.dispatch({ type: List_Filter, data: '' });
+        return false;
+    }
+    _handle_list_new() {
+        this.props.dispatch({ type: List_New, data: '' });
         return false;
     }
 
@@ -85,6 +91,18 @@ export default class List extends React.Component {
             this.state.page = 1;
         }
 
+        let _new = '';
+        if (this.props.admin !== null && this.props.admin) {
+            _new = <div className="loc-right-box">
+                <FloatingActionButton className="loc-top-3 z-3"
+                    zDepth={2}
+                    backgroundColor={this.state.listFilterButtonBground}
+                    onTouchTap={this._handle_list_new}>
+                    {this._fontIcon('add')}
+                </FloatingActionButton>
+            </div>
+        }
+
         return (
             <div>
                 <ListCard key={_key}
@@ -104,10 +122,11 @@ export default class List extends React.Component {
                     <FloatingActionButton className="loc-top-1-2 z-3"
                         zDepth={2}
                         backgroundColor={this.state.listFilterButtonBground}
-                        onTouchTap={this._dispatch_list_filter.bind(this)}>
+                        onTouchTap={this._handle_list_filter}>
                         {this._fontIcon('filter_list')}
                     </FloatingActionButton>
                 </div>
+                {_new}
             </div>
         );
     }

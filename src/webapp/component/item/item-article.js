@@ -47,26 +47,26 @@ export default class ItemArticle extends React.Component {
             <div className="itemC">
                 <Card className="itemBox">
 
-                    <div className="itemBox-Img">
+                    <div className="itemBox-img-box">
                         <img
-                            className="itemBox-Img-cover" id="im-user-id"
+                            className="itemBox-img-cover" id="im-user-id"
                             src={_coverSrc}
                             onClick={this._handleDetail.bind(this)}
                         />
-                        <div className="itemBox-Text-date">
-                            <p className="itemBox-Text-subTitle">{_publish}</p>
+                        <div className="itemBox-img-below-right">
+                            <p className="itemBox-text-subTitle">{_publish}</p>
                         </div>
                     </div>
 
-                    <div className="itemBox-Text">
-                        <p className="itemBox-Text-title">
+                    <div className="itemBox-text-box">
+                        <p className="itemBox-text-title">
                             <a href={this.props.value.url} target="_blank">{_title}</a>
                         </p>
-                        <p className="itemBox-Text-subTitle">{_author}</p>
-                        <p className="itemBox-Text-text">{this.props.value.description}</p>
+                        <p className="itemBox-text-subTitle">{_author}</p>
+                        <p className="itemBox-text-text">{this.props.value.description}</p>
                     </div>
 
-                    <div className="itemBox-tag">
+                    <div className="itemBox-tag-box">
                         <ul className="keyword cfix">
                             {pills}
                         </ul>

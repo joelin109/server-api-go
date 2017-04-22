@@ -3,6 +3,9 @@ import * as service from './../../service/news-service';
 import * as act from './../../setting/action';
 import * as tag from './../../component/item/tag'
 import List, * as _list from './../../component/list'
+import ArticleListFilter from './article-list-filter'
+import NewArticle from './new-article'
+
 
 
 
@@ -18,10 +21,17 @@ export default class AdminArticle extends React.Component {
             page: 1,
             filterData: "ars-technica",
             filterVisible: false,
-            detailVisible: false,
+            editVisible: false,
+            editObject: {},
             willNeedUpdate: false,
         }
+
+        this._dispatch_list = this._dispatch_list.bind(this);
+        this._dispatch_list_filter = this._dispatch_list_filter.bind(this);
+        this._dispatch_list_item = this._dispatch_list_item.bind(this);
+        this._dispatch_list_item_update = this._dispatch_list_item_update.bind(this);
     }
+
     componentDidMount() {
         this._list_findAll(true)
     }
@@ -81,6 +91,9 @@ export default class AdminArticle extends React.Component {
             case _list.List_Filter:
                 this._setFilter()
                 break;
+            case _list.List_New:
+                this._setEditOrNew();
+                break;
 
             default:
                 this.state.page = action.data;
@@ -91,24 +104,16 @@ export default class AdminArticle extends React.Component {
     }
 
     _dispatch_list_item(action) {
-        switch (action.type) {
-            case act.Action_List_Github_Repository:
-                this._component_should_update();
-                this.setState({
-                    detailVisible: true,
-                    detailObject: action.data,
-                });
-                break;
-                
-            default:
-                alert(action.type + "-" + action.data)
-                break;
-        }
+        this._setEditOrNew(action.data, false)
         return false;
     }
 
+    _dispatch_list_item_update(action) {
 
-    _dispatch_list_filter_popup(action) {
+    }
+
+
+    _dispatch_list_filter(action) {
         switch (action.type) {
             case act.Action_Filter_List_Confirm:
                 this.state.filterData = action.data;
@@ -128,7 +133,14 @@ export default class AdminArticle extends React.Component {
         this._component_should_update();
         this.setState({
             filterVisible: open,
-            detailVisible: false
+            editVisible: false
+        });
+    }
+    _setEditOrNew(data, isNew = true) {
+        this._component_should_update();
+        this.setState({
+            filterVisible: false,
+            editVisible: true,
         });
     }
 
@@ -137,19 +149,32 @@ export default class AdminArticle extends React.Component {
 
 
     render() {
-        let _filterOrDetail = this.state.filterVisible || this.state.detailVisible;
+        let _filterVisible = this.state.filterVisible;
+        let _editVisible = _filterVisible ? false : this.state.editVisible;
+        let _willUpdate = !_filterVisible && !_editVisible;
+
         return (
             <div>
                 <List
                     source={this.state.results}
                     pageSize={this.state.pageSize} total={this.state.results.length}
-                    dispatch={this._dispatch_list.bind(this)}
-                    dispatch_item={this._dispatch_list_item.bind(this)}
-                    filterOpen={_filterOrDetail}
+                    dispatch={this._dispatch_list}
+                    dispatch_item={this._dispatch_list_item}
+                    filterOpen={!_willUpdate}
                     itemTag={tag.List_Item_Admin_Article}
+                    admin={true}
                 />
 
+                <ArticleListFilter
+                    open={_filterVisible}
+                    dispatch_filter={this._dispatch_list_filter}
+                />
 
+                <NewArticle
+                    open={_editVisible}
+                    source={this.state.editObject}
+                    dispatch_item_update={this._dispatch_list_item_update}
+                />
             </div>
         );
     }

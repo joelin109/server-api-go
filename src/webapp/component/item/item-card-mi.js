@@ -75,24 +75,24 @@ class ItemCard extends React.Component {
             <div className="itemC">
                 <Card className="itemBox">
 
-                    <div className="itemBox-Img">
+                    <div className="itemBox-img-box with-author">
                         <img
-                            className="itemBox-Img-cover" id="im-user-id"
+                            className="itemBox-img-cover" id="im-user-id"
                             src={_coverSrc}
                             onClick={this._handleDetail.bind(this)}
                         />
-                        <div className="itemBox-Img-author">
-                            <p className="itemBox-Img-author-name" onClick={this._handleRange.bind(this)}>
+                        <div className="itemBox-img-author">
+                            <p className="itemBox-img-author-name" onClick={this._handleRange.bind(this)}>
                                 {parseFloat(this.props.value.alcohol)}
                             </p>
                         </div>
                     </div>
 
-                    <div className="itemBox-Desc">
+                    <div className="itemBox-desc">
                         {_desc}
                     </div>
 
-                    <div className="itemBox-tag">
+                    <div className="itemBox-tag-box">
                         <ul className="keyword cfix">
                             {pills}
                         </ul>
