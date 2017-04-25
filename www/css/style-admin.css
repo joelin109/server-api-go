@@ -211,23 +211,9 @@
     border-radius: 3px;
 }
 
-.draw-dialog-radio-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-end;
-    align-content: flex-end;
-    min-width: 600px;
-    padding-left: 20px;
-}
-
-.draw-content-line {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    align-content: flex-end;
+.draw-content-box{
+   height: 180px;
+   padding: 6px 6px 0px 25px; 
 }
 
 .draw-content-text-title {

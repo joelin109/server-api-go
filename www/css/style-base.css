@@ -157,7 +157,7 @@ p {
 
 .loc-top-1 {
     position: fixed;
-    top: 3px;
+    top: 2px;
 }
 
 .loc-top-1-1 {
@@ -208,6 +208,11 @@ p {
     max-width: 60px;
 }
 
+.w-limit-600 {
+    min-width: 600px;
+    padding-left: 20px;
+}
+
 .w-limit-768 {
     max-width: 768px;
 }
@@ -226,3 +231,12 @@ p {
 
 
 /*----- Position End ----------*/
+
+.content-line {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    align-content: flex-end;
+}

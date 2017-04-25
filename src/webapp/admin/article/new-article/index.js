@@ -4,7 +4,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import { FloatingButton } from './../../../component/wui'
 import * as act from './../../../setting/action'
 import * as util from './../../../util'
-import WordHeader from './../../word/new-word/word-header'
+import DetailHeader from './../../detail-header'
 import ArticleTabBasic from './article-tab-basic'
 import RichTextEditor from './../../editor/'
 import * as convert from './../../editor/e-convert'
@@ -88,7 +88,7 @@ export default class NewArticle extends React.Component {
     }
 
     render() {
-
+        let _blank = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         let _className = util.isSafari() === false ? 'draw-detail-root color-dark' : '';
         let _classNameHeader = this.state.open ? 'w-limit-xx8' : '';
         if (this.state.open === false) {
@@ -106,7 +106,7 @@ export default class NewArticle extends React.Component {
                 >
 
                     <div className={_classNameHeader}>
-                        <WordHeader dispatch={this._dispatch_header} />
+                        <DetailHeader dispatch={this._dispatch_header} />
                     </div>
 
                     <div className="draw-detail-root-container w-limit-808">
@@ -127,8 +127,8 @@ export default class NewArticle extends React.Component {
                                         dispatch={this._dispatch_tab_desc}
                                     />
                                 </Tab>
-                                 <Tab label="Preview" onActive={this._handle_tab_desc}>
-                               
+                                <Tab label="Preview &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" onActive={this._handle_tab_desc}>
+
                                 </Tab>
                             </Tabs>
                         </div>

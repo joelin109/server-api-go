@@ -4,7 +4,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import { FloatingButton } from './../../../component/wui'
 import * as act from './../../../setting/action'
 import * as util from './../../../util'
-import WordHeader from './word-header'
+import DetailHeader from './../../detail-header'
 import WordTabBasic from './word-tab-basic'
 import RichTextEditor from './../../editor/'
 import * as convert from './../../editor/e-convert'
@@ -106,7 +106,7 @@ export default class NewWord extends React.Component {
                 >
 
                     <div className={_classNameHeader}>
-                        <WordHeader dispatch={this._dispatch_header} />
+                        <DetailHeader dispatch={this._dispatch_header} />
                     </div>
 
                     <div className="draw-detail-root-container w-limit-808">

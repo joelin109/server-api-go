@@ -82,7 +82,7 @@ export default class WordTabBasic extends React.Component {
                         floatingLabelText="En"
                         floatingLabelFixed={true}
                     />
-                    <div className="draw-content-line">
+                    <div className="content-line">
                         <p className="draw-content-text-title">Sex:&nbsp;&nbsp;</p>
                         <RadioButtonGroup
                             className="draw-dialog-radio-group"
@@ -112,7 +112,7 @@ export default class WordTabBasic extends React.Component {
                             />
                         </RadioButtonGroup>
                     </div>
-                    <div className="draw-content-line">
+                    <div className="content-line">
                         <p className="draw-content-text-title">Type:</p>
                         <RadioButtonGroup className="draw-dialog-radio-group" onChange={this._handle_type_choose}
                             name="shipSpeed" defaultSelected={this.state.type}>
@@ -136,7 +136,7 @@ export default class WordTabBasic extends React.Component {
                         </RadioButtonGroup>
                     </div>
 
-                    <div className="draw-content-line">
+                    <div className="content-line">
 
                         <Checkbox
                             className="draw-content-check-regel"

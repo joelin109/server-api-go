@@ -28,9 +28,10 @@ padding: top, right, bottom, and left
     justify-content: center;
     align-items: flex-end;
     align-content: flex-start;
-    height: 80px;
     background: #00838F;
-    padding-bottom: 8px;
+    margin-top: 44px;
+    height: 38px;
+    padding-bottom: 6px;
 }
 
 .channel-hidden {
@@ -166,9 +167,10 @@ padding: top, right, bottom, and left
 .itemBox-img-cover {
     width: 100%;
     max-width: 320px;
+    min-width: 317px;
     height: 180px;
     cursor: pointer;
-    background: #444;
+    background: #BDBDBD;
 }
 
 

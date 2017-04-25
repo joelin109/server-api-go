@@ -1,9 +1,9 @@
 import React from 'react'
 import { IconMenu, IconButton, MenuItem } from 'material-ui';
-import { Button, Icon, SIcon } from './../../../component/wui'
-import * as act from './../../../setting/action'
+import { Button, Icon, SIcon } from './../component/wui'
+import * as act from './../setting/action'
 
-export default class WordHeader extends React.Component {
+export default class DetailHeader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
