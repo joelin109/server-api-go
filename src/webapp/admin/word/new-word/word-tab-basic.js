@@ -85,7 +85,7 @@ export default class WordTabBasic extends React.Component {
                     <div className="content-line">
                         <p className="draw-content-text-title">Sex:&nbsp;&nbsp;</p>
                         <RadioButtonGroup
-                            className="draw-dialog-radio-group"
+                            className="content-line w-limit-600"
                             onChange={this._handle_sex_choose}
                             name="shipSpeed"
                             defaultSelected={this.state.sex}>
@@ -114,7 +114,7 @@ export default class WordTabBasic extends React.Component {
                     </div>
                     <div className="content-line">
                         <p className="draw-content-text-title">Type:</p>
-                        <RadioButtonGroup className="draw-dialog-radio-group" onChange={this._handle_type_choose}
+                        <RadioButtonGroup className="content-line w-limit-600" onChange={this._handle_type_choose}
                             name="shipSpeed" defaultSelected={this.state.type}>
 
                             <RadioButton className="popup-dialog-radio"

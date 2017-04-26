@@ -45,6 +45,6 @@ export let get = (url, params) => request({method: "GET", url, params});
 
 export let post = (url, data) => request({method: "POST", contentType: "application/json", url, data});
 
-export let put = (url, data) => request({method: "PUT", contentType: "application/json", url, data});
+let put = (url, data) => request({method: "PUT", contentType: "application/json", url, data});
 
-export let del = (url) => request({method: "DELETE", url});
+let del = (url) => request({method: "DELETE", url});

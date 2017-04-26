@@ -8,20 +8,36 @@ export default class ArticleTabBasic extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            source: {},
-            actionValue: 1,
-            type: '-',
-            sex: '-',
-            unRegel: false,
+            isNew: true,
+            item: {},
             recommend: false,
+            status: 0,
+            channel: '',
+            tag: '',
+            coverSrc: '',
+            coverThumbSrc: '',
+            title: '',
+            subTitle: '',
+            originalResource: '',
+            desc: '',
+            formatType: 'html',
+            isOriginal: true,
         };
 
-        this._handle_type_choose = this._handle_type_choose.bind(this);
-        this._handle_sex_choose = this._handle_sex_choose.bind(this);
-        this._handle_togle_regel = this._handle_togle_regel.bind(this);
+
         this._handle_item_recommend = this._handle_item_recommend.bind(this);
         this._handle_item_approval = this._handle_item_approval.bind(this);
         this._handle_item_unapproval = this._handle_item_unapproval.bind(this);
+        this._handle_item_channel = this._handle_item_channel.bind(this);
+        this._handle_item_tag = this._handle_item_tag.bind(this);
+
+        this._handle_item_coverSrc = this._handle_item_coverSrc.bind(this);
+        this._handle_item_conver_thumbSrc = this._handle_item_conver_thumbSrc.bind(this);
+        this._handle_item_title = this._handle_item_title.bind(this);
+        this._handle_item_subTitle = this._handle_item_subTitle.bind(this);
+        this._handle_item_desc = this._handle_item_desc.bind(this);
+        this._handle_type_choose = this._handle_type_choose.bind(this);
+        this._handle_togle_original = this._handle_togle_original.bind(this);
 
     }
 
@@ -30,20 +46,6 @@ export default class ArticleTabBasic extends React.Component {
     }
 
 
-    //Add or edit the word info.
-    _handle_type_choose(event, value) {
-
-    }
-
-    _handle_sex_choose(event, value) {
-
-    }
-    _handle_togle_regel(event, value) {
-        //this.setState({ unRegel: value });
-    };
-    _handle_togle_recommend(event, value) {
-        //this.setState({ recommend: value });
-    };
     _handle_item_recommend(event, value) {
         //this.setState({ recommend: value });
     };
@@ -53,25 +55,53 @@ export default class ArticleTabBasic extends React.Component {
     _handle_item_unapproval(event, value) {
         //this.setState({ recommend: value });
     };
+    _handle_item_channel() {
 
-    _handle_status() {
+    }
+    _handle_item_tag() {
 
     }
 
+    //Add or edit the word info.
+    _handle_item_coverSrc(event, newValue) {
 
+    }
+    _handle_item_conver_thumbSrc(event, newValue) {
+
+    }
+    _handle_item_title(event, newValue) {
+
+    }
+    _handle_item_subTitle(event, newValue) {
+
+    }
+    _handle_item_desc(event, newValue) {
+
+    }
+
+    _handle_type_choose(event, value) {
+
+    }
+    _handle_togle_original(event, value) {
+        //this.setState({ unRegel: value });
+    };
 
 
 
     render() {
         let _fieldClassName = 'root-text-field-full';
 
-        let _detail = this.props.source;
-        let _coverSrc = '';
-        let _isNew = true;
+        let _isNew = this.props.source === null;
+        let _item = this.props.source;
+        let _coverSrc = _isNew ? '' : _item.urlToImage;
+        let _recommend = _isNew ? false : _item.is_recommend === 1;
+        let _status = _isNew ? 1 : _item.valid_status;
+        let _title = _isNew ? '' : _item.title;
+        let _originalLink = _isNew ? '' : _item.url;
+        let _desc = _isNew ? '' : _item.description;
 
-        let _recommend = true;
+
         let _recommendButton = <SButton id={_recommend ? 'favorite' : 'favorite_border'} selected={_recommend} onTouchTap={this._handle_item_recommend} />;
-        let _status = 1;
         let _upButton = <SButton id="thumb_up" selected={_status === 1} onTouchTap={this._handle_item_approval} />;
         let _downButton = <SButton id="thumb_down" selected={_status === -1} onTouchTap={this._handle_item_unapproval} />;
 
@@ -93,7 +123,7 @@ export default class ArticleTabBasic extends React.Component {
                             </div>
                             <div className="content-line">
                                 Channel:
-                        <DropDownMenu value={'pending'} onChange={this._handle_status.bind(this)}>
+                                 <DropDownMenu value={'pending'} onChange={this._handle_item_channel}>
                                     <MenuItem value={'pending'} primaryText="Pending" />
                                     <MenuItem value={'accepted'} primaryText="Accepted" />
                                     <MenuItem value={'rejected'} primaryText="Rejected" />
@@ -101,7 +131,7 @@ export default class ArticleTabBasic extends React.Component {
                             </div>
                             <div className="content-line">
                                 Tag:
-                           <DropDownMenu value={'pending'} onChange={this._handle_status.bind(this)}>
+                                 <DropDownMenu value={'pending'} onChange={this._handle_item_tag}>
                                     <MenuItem value={'pending'} primaryText="Pending" />
                                     <MenuItem value={'accepted'} primaryText="Accepted" />
                                     <MenuItem value={'rejected'} primaryText="Rejected" />
@@ -114,18 +144,23 @@ export default class ArticleTabBasic extends React.Component {
                     </div>
 
                     <TextField
+                        onChange={this._handle_item_coverSrc}
+                        defaultValue={_coverSrc}
                         className={_fieldClassName}
                         hintText="Image link"
                         floatingLabelText="Cover Src"
                         floatingLabelFixed={true}
                     />
                     <TextField
-                        className="root-text-field"
+                        defaultValue={_coverSrc}
+                        className={_fieldClassName}
                         hintText="."
                         floatingLabelText="Cover Thumbnail Src"
                         floatingLabelFixed={true}
                     />
                     <TextField
+                        onChange={this._handle_item_title}
+                        defaultValue={_title}
                         className={_fieldClassName}
                         hintText="..."
                         floatingLabelText="Title"
@@ -140,12 +175,15 @@ export default class ArticleTabBasic extends React.Component {
 
 
                     <TextField
+                        defaultValue={_originalLink}
+                        disabled={true}
                         className={_fieldClassName}
                         hintText="."
                         floatingLabelText="Original Resource"
                         floatingLabelFixed={true}
                     />
                     <TextField
+                        defaultValue={_desc}
                         className={_fieldClassName}
                         hintText="."
                         floatingLabelText="Desc"
@@ -162,22 +200,22 @@ export default class ArticleTabBasic extends React.Component {
                             <RadioButton className="popup-dialog-radio"
                                 value="html"
                                 label="Html"
-                                disabled={_isNew}
+                                disabled={true}
                             />
                             <RadioButton className="popup-dialog-radio"
                                 value="markdown"
                                 label="Markdown"
-                                disabled={_isNew}
+                                disabled={true}
                             />
                             <RadioButton className="popup-dialog-radio"
                                 value="json"
                                 label="JSon"
-                                disabled={_isNew}
+                                disabled={true}
                             />
                             <RadioButton className="popup-dialog-radio"
                                 value="xml"
                                 label="Xml"
-                                disabled={_isNew}
+                                disabled={true}
                             />
                         </RadioButtonGroup>
                     </div>
@@ -186,9 +224,10 @@ export default class ArticleTabBasic extends React.Component {
                     <div className="content-line">
 
                         <Checkbox
+                            disabled={true}
                             className="draw-content-check-regel"
                             label="Original"
-                            defaultChecked={true}
+                            defaultChecked={_originalLink === ''}
                             onCheck={this._handle_togle_regel}
                         />
 

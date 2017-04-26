@@ -1,5 +1,6 @@
 import React from 'react';
-import * as service from './../../service/news-service';
+//import * as service from './../../service/news-service';
+import * as service from './../../service/article-service';
 import * as act from './../../setting/action';
 import * as tag from './../../component/item/tag'
 import List, * as _list from './../../component/list'
@@ -137,6 +138,8 @@ export default class AdminArticle extends React.Component {
         });
     }
     _setEditOrNew(data, isNew = true) {
+        this.state.editObject = isNew ? null : data;
+
         this._component_should_update();
         this.setState({
             filterVisible: false,
