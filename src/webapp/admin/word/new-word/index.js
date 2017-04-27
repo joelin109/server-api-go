@@ -122,7 +122,7 @@ export default class NewWord extends React.Component {
                                 <Tab label="Description" onActive={this._handle_tab_desc}>
                                     <RichTextEditor
                                         save={this.state.willSave}
-                                        display={this.state.tabIndex === 2}
+                                        show={this.state.tabIndex === 2}
                                         source={this.state.editorContent}
                                         dispatch={this._dispatch_tab_desc}
                                     />

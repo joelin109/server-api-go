@@ -18,7 +18,7 @@ export default class FilterListNews extends React.Component {
     };
 
     _handleConfirm() {
-        let type = "Action_Filter_List_Confirm"
+        let type = "Action_List_Filter_Confirm"
         this.props.dispatch({ type: type, data: this.state.stepValue })
     };
 

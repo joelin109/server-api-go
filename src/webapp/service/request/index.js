@@ -1,7 +1,7 @@
-export default opts => {
+function requestNew(obj) {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
-        xhr.open(opts.method || "GET", opts.url);
+        xhr.open(obj.method || "GET", obj.url);
         xhr.onload = () => {
             if (xhr.status >= 200 && xhr.status < 300) {
                 resolve(xhr.response);
@@ -18,12 +18,57 @@ export default opts => {
                 statusText: xhr.statusText
             });
         };
-        if (opts.headers) {
-            Object.keys(opts.headers).forEach(key => {
-                xhr.setRequestHeader(key, opts.headers[key]);
+        if (obj.headers) {
+            Object.keys(obj.headers).forEach(key => {
+                xhr.setRequestHeader(key, obj.headers[key]);
             });
         }
 
-        xhr.send(opts.data);
+        xhr.send(obj.data);
+        //xhr.send(obj.data);
     });
 }
+
+function toQueryString(obj) {
+    let parts = [],
+        i;
+    for (i in obj) {
+        if (obj.hasOwnProperty(i) && obj[i]) {
+            parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
+        }
+    }
+    return parts.join("&");
+}
+
+function request(obj) {
+
+    return new Promise((resolve, reject) => {
+
+        if (obj.params) {
+            obj.url += '?' + toQueryString(obj.params);
+        }
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(xhr.responseText ? JSON.parse(xhr.responseText) : undefined);
+                } else {
+                    reject(xhr.responseText);
+                }
+            }
+        };
+
+        xhr.open(obj.method, obj.url, true);
+        xhr.setRequestHeader("Accept", "application/json");
+        if (obj.contentType) {
+            xhr.setRequestHeader("Content-Type", obj.contentType);
+        }
+        xhr.send(obj.data ? JSON.stringify(obj.data) : undefined);
+    });
+
+}
+
+export let tryNew = (url) => requestNew({ method: "GET", url});
+export let get = (url, params) => request({ method: "GET", url, params });
+export let post = (url, data) => request({ method: "POST", contentType: "application/json", url, data });

@@ -22,7 +22,7 @@ export const Action_Display_List_Article = 'Action_Display_List_Article'
 export const Action_Display_List_Github = 'Action_Display_List_Github'
 export const Action_Display_List_Deutsch = 'Action_Display_List_Deutsch'
 
-export const Action_Filter_List_Confirm = 'Action_Filter_List_Confirm'
+export const Action_List_Filter_Confirm = 'Action_List_Filter_Confirm'
 export const Action_Filter_List_Article_Confirm = 'Action_Filter_List_Article_Confirm'
 export const Action_Filter_List_Github_Confirm = 'Action_Filter_List_Github_Confirm'
 export const Action_Admin_Article_List_Filter_Confirm = 'Action_Admin_Article_List_Filter_Confirm'

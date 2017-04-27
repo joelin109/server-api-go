@@ -1,8 +1,9 @@
 import React from 'react'
+import * as service from './../../../service/article';
 import { Drawer } from 'material-ui';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import { FloatingButton } from './../../../component/wui'
-import * as act from './../../../setting/action'
+import * as act from './../../action'
 import * as util from './../../../util'
 import DetailHeader from './../../detail-header'
 import ArticleTabBasic from './article-tab-basic'
@@ -17,7 +18,7 @@ export default class NewArticle extends React.Component {
         let _html = '<p></p><img src="https://cdn.arstechnica.net/wp-content/uploads/2016/09/Colossal-1-760x380.jpg " style="float:none;height: auto;width: 100%"/>';
         this.state = {
             open: props.open,
-            source: {},
+            source: props.source,
             editorHtml: _html,
             editorContent: convert.toEditorContent(_html),
             willSave: false,
@@ -33,7 +34,7 @@ export default class NewArticle extends React.Component {
         //this.state.editorContent = _contentState;
 
 
-        this._handle_save = this._handle_save.bind(this);
+        this._handle_tab_save = this._handle_tab_save.bind(this);
         this._handle_tab_basic = this._handle_tab_basic.bind(this);
         this._handle_tab_desc = this._handle_tab_desc.bind(this);
         this._dispatch_header = this._dispatch_header.bind(this);
@@ -45,26 +46,23 @@ export default class NewArticle extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.state.open = nextProps.open;
+        this.state.source = nextProps.source;
     }
 
 
-    onEditorStateChange(value) {
+    _save() {
+        let _data = this.state.source;
+        _data.body_text = this.state.editorHtml;
+
+        service.update(_data)
+            .then(data => {
+
+                alert('save successful')
+            });
 
     }
 
-    //Action for menu
-    _dispatch_header(action) {
-        this.state.willSave = false;
-        this.setState({ open: false });
-        return false;
-    }
-    _dispatch_close(action) {
-        this.state.willSave = false;
-        this.setState({ open: false });
-        return false;
-    }
-
-    _handle_save() {
+    _handle_tab_save() {
         this.setState({ willSave: true });
         return false;
     }
@@ -79,12 +77,52 @@ export default class NewArticle extends React.Component {
         this.setState({ willSave: false });
     }
 
+
+    //Action for menu
+    _dispatch_header(action) {
+        this.state.willSave = false;
+
+        switch (action.type) {
+            case act.Action_Handle_Cancel:
+                this.setState({ open: false });
+                break;
+
+            case act.Action_Handle_Save:
+                this._save();
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
     _dispatch_tab_basic(action) {
+        switch (action.type) {
+            case act.Action_Handle_Save:
+                this.state.source = action.data;
+                //alert(this.state.source.title)
+                break;
+
+            default:
+                break;
+        }
 
     }
 
     _dispatch_tab_desc(action) {
-        this.state.editorContent = action.data;
+        switch (action.type) {
+            case act.Action_Handle_Save:
+                this.state.editorContent = action.data;
+                this.state.editorHtml = convert.toHtml(action.data);
+                //alert(this.state.editorHtml)
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     render() {
@@ -114,17 +152,18 @@ export default class NewArticle extends React.Component {
                             <Tabs className="draw-detail-tab">
                                 <Tab label="Basic Info" onActive={this._handle_tab_basic}>
                                     <ArticleTabBasic
-                                        source={this.props.source}
+                                        source={this.state.source}
                                         dispatch={this._dispatch_tab_basic}
+                                        onSave={this.state.willSave}
                                     />
                                 </Tab>
 
                                 <Tab label="Description" onActive={this._handle_tab_desc}>
                                     <RichTextEditor
-                                        save={this.state.willSave}
-                                        display={this.state.tabIndex === 2}
+                                        show={this.state.tabIndex === 2}
                                         source={this.state.editorContent}
                                         dispatch={this._dispatch_tab_desc}
+                                        onSave={this.state.willSave}
                                     />
                                 </Tab>
                                 <Tab label="Preview &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" onActive={this._handle_tab_desc}>
@@ -136,7 +175,7 @@ export default class NewArticle extends React.Component {
                     </div>
 
                     <div>
-                        <FloatingButton onTouchTap={this._handle_save} />
+                        <FloatingButton onTouchTap={this._handle_tab_save} />
                     </div>
                 </Drawer>
             </div>

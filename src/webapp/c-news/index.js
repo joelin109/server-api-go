@@ -112,7 +112,7 @@ export default class News extends React.Component {
 
     _dispatch_list_filter_popup(action) {
         switch (action.type) {
-            case act.Action_Filter_List_Confirm:
+            case act.Action_List_Filter_Confirm:
                 this.state.filterData = action.data;
                 this.state.page = 1;
                 this._list_findAll(true)

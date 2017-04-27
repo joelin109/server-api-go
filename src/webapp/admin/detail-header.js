@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconMenu, IconButton, MenuItem } from 'material-ui';
 import { Button, Icon, SIcon } from './../component/wui'
-import * as act from './../setting/action'
+import * as act from './action'
 
 export default class DetailHeader extends React.Component {
     constructor(props) {
@@ -12,9 +12,9 @@ export default class DetailHeader extends React.Component {
             actionValue: 1,
         };
 
-        this._dispatch_close = this._dispatch_close.bind(this);
-        this._dispatch_save = this._dispatch_save.bind(this);
-        this._dispatch_more = this._dispatch_more.bind(this);
+        this._handle_close = this._handle_close.bind(this);
+        this._handle_save = this._handle_save.bind(this);
+        this._handle_more = this._handle_more.bind(this);
 
 
     }
@@ -25,17 +25,27 @@ export default class DetailHeader extends React.Component {
 
 
     //Action for menu
-    _dispatch_close() {
-        this.props.dispatch({ type: act.Action_Admin_Channel_Type_Close })
+    _handle_close() {
+        this.props.dispatch({ type: act.Action_Handle_Cancel })
         return false;
     }
-    _dispatch_save() {
+    _handle_save() {
 
-        this.props.dispatch({ type: act.Action_Admin_Channel_Type_Close })
+        this.props.dispatch({ type: act.Action_Handle_Save })
         return false;
     }
-    _dispatch_more(event, value) {
-        alert(value)
+
+    _handle_more(event, value) {
+        switch (value) {
+            case '1':
+                this._handle_save();
+                break;
+
+            default:
+                alert(value)
+                break;
+        }
+
     }
 
     render() {
@@ -45,7 +55,7 @@ export default class DetailHeader extends React.Component {
             <div className="draw-detail-root-container-header-box">
                 <div className="w-limit-60">
                     <div className="float-button colr-dark loc-top-1">
-                        <Button id={'arrow_back'} onTouchTap={this._dispatch_close} />
+                        <Button id={'arrow_back'} onTouchTap={this._handle_close} />
                     </div>
                 </div>
 
@@ -53,16 +63,16 @@ export default class DetailHeader extends React.Component {
                     <div className="float-button colr-dark loc-top-1">
                         <IconMenu
                             iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
-                            onChange={this._dispatch_more}
+                            onChange={this._handle_more}
                             value={this.state.actionValue}
                             anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
 
                         >
-                            <MenuItem value="1" primaryText="New" />
-                            <MenuItem value="2" primaryText="Save" />
-                            <MenuItem value="3" primaryText="Save & New" />
-                            <MenuItem value="2" primaryText="Refresh" />
-                            <MenuItem value="3" primaryText="Share" />
+                            <MenuItem value="1" primaryText="Save" />
+                            <MenuItem value="2" primaryText="Save & New" />
+                            <MenuItem value="3" primaryText="Publish" />
+                            <MenuItem value="4" primaryText="Refresh" />
+                            <MenuItem value="5" primaryText="Share" />
                         </IconMenu>
                     </div>
                 </div>

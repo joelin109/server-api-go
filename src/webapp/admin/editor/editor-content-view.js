@@ -3,7 +3,7 @@ import * as act from './../../setting/action'
 import { Button } from './../../component/wui'
 
 
-export default class EditorContentPreview extends React.Component {
+export default class EditorContentView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -3,14 +3,14 @@ import { TextField, RadioButtonGroup, RadioButton, Toggle, Checkbox, DropDownMen
 import * as act from './../../../setting/action'
 import { SButton, Button, SIcon } from './../../../component/wui'
 
-
+const _action_Handle_Save = 'Action_Handle_Save';
 export default class ArticleTabBasic extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isNew: true,
             item: {},
-            recommend: false,
+            isRecommend: false,
             status: 0,
             channel: '',
             tag: '',
@@ -18,11 +18,14 @@ export default class ArticleTabBasic extends React.Component {
             coverThumbSrc: '',
             title: '',
             subTitle: '',
-            originalResource: '',
+            originalLink: '',
             desc: '',
             formatType: 'html',
             isOriginal: true,
+            willUpdate: true,
         };
+
+        this._initItem(props.source);
 
 
         this._handle_item_recommend = this._handle_item_recommend.bind(this);
@@ -30,7 +33,6 @@ export default class ArticleTabBasic extends React.Component {
         this._handle_item_unapproval = this._handle_item_unapproval.bind(this);
         this._handle_item_channel = this._handle_item_channel.bind(this);
         this._handle_item_tag = this._handle_item_tag.bind(this);
-
         this._handle_item_coverSrc = this._handle_item_coverSrc.bind(this);
         this._handle_item_conver_thumbSrc = this._handle_item_conver_thumbSrc.bind(this);
         this._handle_item_title = this._handle_item_title.bind(this);
@@ -41,20 +43,78 @@ export default class ArticleTabBasic extends React.Component {
 
     }
 
-    componentWillReceiveProps(nextProps) {
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.onSave) {
+            this._save()
+            this.state.willUpdate = false;
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.willUpdate;
     }
 
 
+    _initItem(source) {
+        let _isNew = source === null;
+        let _item = source;
+
+        this.state.isNew = _isNew;
+        this.state.coverSrc = _isNew ? '' : _item.urlToImage;
+        this.state.isRecommend = _isNew ? false : _item.is_recommend === 1;
+        this.state.status = _isNew ? 1 : _item.valid_status;
+        this.state.title = _isNew ? '' : _item.title;
+        this.state.desc = _isNew ? '' : _item.description;
+        this.state.originalLink = _isNew ? '' : _item.url;
+
+    }
+
+    _save() {
+        let _source = {
+            is_recommend: this.state.isRecommend,
+            publish_status: this.state.status,
+            cover_src: this.state.coverSrc,
+            cover_thumb_src: this.state.coverThumbSrc,
+            title: this.state.title,
+            subtitle: this.state.subTitle,
+            desc: this.state.desc,
+            channel_id: this.state.channel,
+            tag_id: this.state.tag,
+            body_text: '',
+            id: '',
+        };
+
+        let _action = { type: _action_Handle_Save, data: _source };
+        this.props.dispatch(_action);
+        this.state.willUpdate = true;
+    }
+
+
+
+
     _handle_item_recommend(event, value) {
-        //this.setState({ recommend: value });
+        let _isRec = this.state.isRecommend;
+        this.state.isRecommend = !_isRec;
+        this._save();
+
+        this.setState({ willUpdate: true });
     };
     _handle_item_approval(event, value) {
-        //this.setState({ recommend: value });
+        let _status = this.state.status === 1 ? 0 : 1;
+        this.state.status = _status;
+        this._save();
+
+        this.setState({ willUpdate: true });
     };
     _handle_item_unapproval(event, value) {
-        //this.setState({ recommend: value });
+        let _status = this.state.status === -1 ? 0 : -1;
+        this.state.status = _status;
+        this._save();
+
+        this.setState({ willUpdate: true });
     };
+
     _handle_item_channel() {
 
     }
@@ -64,19 +124,20 @@ export default class ArticleTabBasic extends React.Component {
 
     //Add or edit the word info.
     _handle_item_coverSrc(event, newValue) {
-
+        this.state.coverSrc = newValue;
     }
     _handle_item_conver_thumbSrc(event, newValue) {
-
+        this.state.coverThumbSrc = newValue;
     }
     _handle_item_title(event, newValue) {
-
+        this.state.title = newValue;
+        this._save();
     }
     _handle_item_subTitle(event, newValue) {
-
+        this.state.subTitle = newValue;
     }
     _handle_item_desc(event, newValue) {
-
+        this.state.desc = newValue;
     }
 
     _handle_type_choose(event, value) {
@@ -91,19 +152,12 @@ export default class ArticleTabBasic extends React.Component {
     render() {
         let _fieldClassName = 'root-text-field-full';
 
-        let _isNew = this.props.source === null;
-        let _item = this.props.source;
-        let _coverSrc = _isNew ? '' : _item.urlToImage;
-        let _recommend = _isNew ? false : _item.is_recommend === 1;
-        let _status = _isNew ? 1 : _item.valid_status;
-        let _title = _isNew ? '' : _item.title;
-        let _originalLink = _isNew ? '' : _item.url;
-        let _desc = _isNew ? '' : _item.description;
-
-
+        let _coverSrc = this.state.coverSrc;
+        let _recommend = this.state.isRecommend;
+        let _title = this.state.title;
         let _recommendButton = <SButton id={_recommend ? 'favorite' : 'favorite_border'} selected={_recommend} onTouchTap={this._handle_item_recommend} />;
-        let _upButton = <SButton id="thumb_up" selected={_status === 1} onTouchTap={this._handle_item_approval} />;
-        let _downButton = <SButton id="thumb_down" selected={_status === -1} onTouchTap={this._handle_item_unapproval} />;
+        let _upButton = <SButton id="thumb_up" selected={this.state.status === 1} onTouchTap={this._handle_item_approval} />;
+        let _downButton = <SButton id="thumb_down" selected={this.state.status === -1} onTouchTap={this._handle_item_unapproval} />;
 
         return (
 
@@ -175,7 +229,7 @@ export default class ArticleTabBasic extends React.Component {
 
 
                     <TextField
-                        defaultValue={_originalLink}
+                        defaultValue={this.state.originalLink}
                         disabled={true}
                         className={_fieldClassName}
                         hintText="."
@@ -183,7 +237,7 @@ export default class ArticleTabBasic extends React.Component {
                         floatingLabelFixed={true}
                     />
                     <TextField
-                        defaultValue={_desc}
+                        defaultValue={this.state.desc}
                         className={_fieldClassName}
                         hintText="."
                         floatingLabelText="Desc"
@@ -227,7 +281,7 @@ export default class ArticleTabBasic extends React.Component {
                             disabled={true}
                             className="draw-content-check-regel"
                             label="Original"
-                            defaultChecked={_originalLink === ''}
+                            defaultChecked={this.state.originalLink === ''}
                             onCheck={this._handle_togle_regel}
                         />
 

@@ -1,7 +1,6 @@
 import request from './request';
 
-let baseURL_JoeTestForReact = "http://www.belgianbeerexplorer.com";
-let baseURL = baseURL_JoeTestForReact;
+let baseURL = baseAPI_HTTP_URL;
 
 export let findAll = (values) => {
     let qs = "";

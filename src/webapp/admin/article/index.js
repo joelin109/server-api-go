@@ -1,7 +1,7 @@
 import React from 'react';
 //import * as service from './../../service/news-service';
-import * as service from './../../service/article-service';
-import * as act from './../../setting/action';
+import * as service from './../../service/article';
+import * as act from './../action';
 import * as tag from './../../component/item/tag'
 import List, * as _list from './../../component/list'
 import ArticleListFilter from './article-list-filter'
@@ -30,7 +30,7 @@ export default class AdminArticle extends React.Component {
         this._dispatch_list = this._dispatch_list.bind(this);
         this._dispatch_list_filter = this._dispatch_list_filter.bind(this);
         this._dispatch_list_item = this._dispatch_list_item.bind(this);
-        this._dispatch_list_item_update = this._dispatch_list_item_update.bind(this);
+        this._dispatch_list_item_article = this._dispatch_list_item_article.bind(this);
     }
 
     componentDidMount() {
@@ -45,11 +45,9 @@ export default class AdminArticle extends React.Component {
     }
 
 
-    _list_findAll(willScrollTop) {
-        this._list_news_findAll(willScrollTop);
-    }
 
-    _list_news_findAll(willScrollTop) {
+    //-----------------------------------
+    _list_findAll(willScrollTop) {
         this.state.pageSize = 30;
         let filter = { filter: this.state.filterData, page: this.state.page }
 
@@ -61,6 +59,15 @@ export default class AdminArticle extends React.Component {
                 this.setState({
                     results: _results,
                 });
+            });
+    }
+
+    _listItemStatusUpdate(data) {
+
+        service.updateStatus(data)
+            .then(data => {
+
+
             });
     }
 
@@ -105,18 +112,29 @@ export default class AdminArticle extends React.Component {
     }
 
     _dispatch_list_item(action) {
-        this._setEditOrNew(action.data, false)
+        switch (action.type) {
+            case act.Action_List_Item_Update:
+                this._listItemStatusUpdate(action.data)
+                break;
+            case act.Action_List_Item_Edit:
+                this._setEditOrNew(action.data, false)
+                break;
+
+            default:
+                break;
+        }
         return false;
+
     }
 
-    _dispatch_list_item_update(action) {
+    _dispatch_list_item_article(action) {
 
     }
 
 
     _dispatch_list_filter(action) {
         switch (action.type) {
-            case act.Action_Filter_List_Confirm:
+            case act.Action_List_Filter_Confirm:
                 this.state.filterData = action.data;
                 this.state.page = 1;
                 this._list_findAll(true)
@@ -166,6 +184,7 @@ export default class AdminArticle extends React.Component {
                     filterOpen={!_willUpdate}
                     itemTag={tag.List_Item_Admin_Article}
                     admin={true}
+                    updateItem={'id'}
                 />
 
                 <ArticleListFilter
@@ -176,7 +195,7 @@ export default class AdminArticle extends React.Component {
                 <NewArticle
                     open={_editVisible}
                     source={this.state.editObject}
-                    dispatch_item_update={this._dispatch_list_item_update}
+                    dispatch_item_article={this._dispatch_list_item_article}
                 />
             </div>
         );

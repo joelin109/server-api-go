@@ -1,50 +1,12 @@
-function toQueryString(obj) {
-    let parts = [],
-        i;
-    for (i in obj) {
-        if (obj.hasOwnProperty(i) && obj[i]) {
-            parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
-        }
-    }
-    return parts.join("&");
-}
+exports. APIURL_Content_Channel_List = "/api/content/channel/list"
+exports. APIURL_Content_Channel_Post = "/api/content/channel/post"
+exports. APIURL_Content_Article_List = "/api/content/article/list"
+exports. APIURL_Content_Article_Detail = "/api/content/article/detail"
+exports. APIURL_Content_Article_Post = "/api/content/article/post"
+exports. APIURL_Content_Article_Remove = "/api/content/article/remove"
+exports. APIURL_Content_Article_Status_Update = '/api/content/article/status_update'
+exports. APIURL_Content_Dictionary_List = "/api/content/dictionary/list"
+exports. APIURL_Content_Dictionary_Detail = "/api/content/dictionary/detail"
+exports. APIURL_Content_Dictionary_Post = "/api/content/dictionary/post"
+exports. APIURL_Content_Dictionary_Remove = "/api/content/dictionary/remove"
 
-function request(obj) {
-
-    return new Promise((resolve, reject) => {
-
-        let xhr = new XMLHttpRequest();
-
-        if (obj.params) {
-            obj.url += '?' + toQueryString(obj.params);
-        }
-
-
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status > 199 && xhr.status < 300) {
-                    resolve(xhr.responseText ? JSON.parse(xhr.responseText) : undefined);
-                } else {
-                    reject(xhr.responseText);
-                }
-            }
-        };
-
-        xhr.open(obj.method, obj.url, true);
-        xhr.setRequestHeader("Accept", "application/json");
-        if (obj.contentType) {
-            xhr.setRequestHeader("Content-Type", obj.contentType);
-        }
-        xhr.send(obj.data ? JSON.stringify(obj.data) : undefined);
-    });
-
-}
-
-export let get = (url, params) => request({method: "GET", url, params});
-
-export let post = (url, data) => request({method: "POST", contentType: "application/json", url, data});
-
-let put = (url, data) => request({method: "PUT", contentType: "application/json", url, data});
-
-let del = (url) => request({method: "DELETE", url});

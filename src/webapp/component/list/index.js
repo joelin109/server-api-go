@@ -21,11 +21,12 @@ export default class List extends React.Component {
             page: 1,
             listFilterButtonBground: '#E57373',
         }
-        this._dispatch_list = this._dispatch_list.bind(this);
+
         this._dispatch_list_page_previous = this._dispatch_list_page_previous.bind(this);
         this._dispatch_list_page_next = this._dispatch_list_page_next.bind(this);
         this._handle_list_filter = this._handle_list_filter.bind(this);
         this._handle_list_new = this._handle_list_new.bind(this);
+        this._dispatch_list_item = this._dispatch_list_item.bind(this);
 
         // alert('ListBase-constructor')
     }
@@ -40,7 +41,7 @@ export default class List extends React.Component {
     }
 
     //Dispatch
-    _dispatch_list(action) {
+    _dispatch_list_item(action) {
         this.props.dispatch_item(action);
         return false;
     }
@@ -108,7 +109,7 @@ export default class List extends React.Component {
                 <ListCard key={_key}
                     itemTag={_itemTag}
                     source={this.state.results}
-                    dispatch={this._dispatch_list.bind(this)}
+                    dispatch={this._dispatch_list_item.bind(this)}
                 />
 
                 <Paginator

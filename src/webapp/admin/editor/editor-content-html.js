@@ -56,7 +56,7 @@ export default class EditorContentHtml extends React.Component {
 
                 </div>
 
-                {this.props.display ? _btm : ''}
+                {this.props.show ? _btm : ''}
 
             </div>
         )

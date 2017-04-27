@@ -6,10 +6,10 @@ import * as act from './e-action'
 import * as convert from './e-convert'
 import EditorContent from './editor-content'
 import EditorContentHtml from './editor-content-html'
-import EditorContentPreview from './editor-content-preview'
+import EditorContentView from './editor-content-view'
 
 
-
+const _action_Handle_Save = 'Action_Handle_Save';
 export default class RichTextEditor extends React.Component {
     constructor(props) {
         super(props);
@@ -40,8 +40,8 @@ export default class RichTextEditor extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.state.open = nextProps.open;
-        if (nextProps.save) {
-            let _action = { type: '', data: this.state.editorContent };
+        if (nextProps.onSave) {
+            let _action = { type: _action_Handle_Save, data: this.state.editorContent };
             this.props.dispatch(_action);
             this.state.willUpdate = false;
         }
@@ -93,7 +93,7 @@ export default class RichTextEditor extends React.Component {
         let _editor = <div> </div>;
         if (this.state.tabIndex !== 2) {
             _editor = <EditorContent
-                display={this.props.display && this.state.tabIndex === 1}
+                show={this.props.show && this.state.tabIndex === 1}
                 source={this.state.editorContent} change={this.state.editorChange}
                 dispatch={this._dispatch_tab_content_editor} />
         }
@@ -107,14 +107,14 @@ export default class RichTextEditor extends React.Component {
 
                     <Tab label="Html" onActive={this._handle_tab_html}>
                         <EditorContentHtml
+                            show={this.props.show && this.state.tabIndex === 2}
                             source={this.state.editorHtml}
-                            display={this.props.display && this.state.tabIndex === 2}
                             dispatch={this._dispatch_tab_content_html}
                         />
                     </Tab>
 
                     <Tab label="View" onActive={this._handle_tab_preview}>
-                        <EditorContentPreview source={this.state.editorHtml} />
+                        <EditorContentView source={this.state.editorHtml} />
                     </Tab>
                 </Tabs>
             </div>
