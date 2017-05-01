@@ -1,6 +1,6 @@
 import React from 'react';
 import { FloatingActionButton, FontIcon } from 'material-ui';
-import * as wordService from './../../service/word-service';
+import * as service from './../../service';
 import * as act from './../../setting/action'
 import WordList from './word-list'
 import WordListFilter from './word-list-filter'
@@ -45,9 +45,11 @@ export default class AdminWord extends React.Component {
 
   //API Request&Response
   _list_findAll(willScrollTop) {
+
     this.state.pageSize = 30;
-    wordService.findAll({})
+    service.findAll('', {})
       .then(data => {
+ 
         this._component_prepare_update(willScrollTop)
         this.setState({
           results: data.rows,

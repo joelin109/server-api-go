@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as service from './../service/news-service';
+import * as service from './../service/dem/news-service';
 import * as act from './../setting/action';
 import * as tag from './../component/item/tag'
 import List, * as _list from './../component/list'

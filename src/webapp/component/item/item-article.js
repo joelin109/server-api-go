@@ -36,6 +36,10 @@ export default class ItemArticle extends React.Component {
 
     render() {
         let _coverSrc = this.props.value.urlToImage;
+        if (_coverSrc === null || _coverSrc === '') {
+            return (<div></div>)
+        }
+
         let _author = this.props.value.author === null ? '---' : this.props.value.author;
         let _title = this.props.value.title;
         let _pb = this.props.value.publishedAt;

@@ -1,4 +1,4 @@
-function requestNew(obj) {
+function requestDemo(obj) {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
         xhr.open(obj.method || "GET", obj.url);
@@ -69,6 +69,6 @@ function request(obj) {
 
 }
 
-export let tryNew = (url) => requestNew({ method: "GET", url});
+export let demo = (url) => requestDemo({ method: "GET", url });
 export let get = (url, params) => request({ method: "GET", url, params });
 export let post = (url, data) => request({ method: "POST", contentType: "application/json", url, data });

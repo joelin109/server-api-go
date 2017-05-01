@@ -1,5 +1,4 @@
 import React from 'react';
-//import * as service from './../../service/news-service';
 import * as service from './../../service/article';
 import * as act from './../action';
 import * as tag from './../../component/item/tag'
@@ -17,7 +16,7 @@ export default class AdminArticle extends React.Component {
 
         this.state = {
             results: [],
-            pageSize: 30,
+            pageSize: 18,
             total: 0,
             page: 1,
             filterData: "ars-technica",
@@ -48,16 +47,14 @@ export default class AdminArticle extends React.Component {
 
     //-----------------------------------
     _list_findAll(willScrollTop) {
-        this.state.pageSize = 30;
         let filter = { filter: this.state.filterData, page: this.state.page }
 
         service.findAll(filter)
             .then(data => {
-
-                let _results = this._mergeResult(data.articles, data.source);
                 this._component_should_update(true, true)
                 this.setState({
-                    results: _results,
+                    results: data.rows,
+                    total:data.page.total_rows
                 });
             });
     }
@@ -77,24 +74,13 @@ export default class AdminArticle extends React.Component {
         }
         this.state.filterVisible = false;
         this.state.detailVisible = false;
+        this.state.editVisible = false;
         this.state.willNeedUpdate = willUpdate;
-    }
-
-    _mergeResult(result, tag) {
-
-        let _result = result;
-        Array.from(_result, (item) => {
-            item["tag"] = tag;
-            return item
-        })
-
-        return _result;
     }
 
 
     //Dispatch 
     _dispatch_list(action) {
-
         switch (action.type) {
             case _list.List_Filter:
                 this._setFilter()
@@ -173,12 +159,12 @@ export default class AdminArticle extends React.Component {
         let _filterVisible = this.state.filterVisible;
         let _editVisible = _filterVisible ? false : this.state.editVisible;
         let _willUpdate = !_filterVisible && !_editVisible;
-
+        let _pageSize = this.state.results.length >= this.state.pageSize ? this.state.results.length : this.state.pageSize
         return (
             <div>
                 <List
                     source={this.state.results}
-                    pageSize={this.state.pageSize} total={this.state.results.length}
+                    pageSize={_pageSize} total={this.state.total}
                     dispatch={this._dispatch_list}
                     dispatch_item={this._dispatch_list_item}
                     filterOpen={!_willUpdate}

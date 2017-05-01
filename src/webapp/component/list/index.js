@@ -19,7 +19,7 @@ export default class List extends React.Component {
         this.state = {
             results: [],
             page: 1,
-            listFilterButtonBground: '#E57373',
+            listFilterButtonBground: '#ff7277', //#E57373',
         }
 
         this._dispatch_list_page_previous = this._dispatch_list_page_previous.bind(this);
@@ -103,7 +103,7 @@ export default class List extends React.Component {
                 </FloatingActionButton>
             </div>
         }
-
+   
         return (
             <div>
                 <ListCard key={_key}

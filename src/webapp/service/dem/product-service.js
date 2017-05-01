@@ -1,5 +1,3 @@
-import request from './request';
-
 let baseURL = baseAPI_HTTP_URL;
 
 export let findAll = (values) => {

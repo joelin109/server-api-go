@@ -61,12 +61,12 @@ export default class ArticleTabBasic extends React.Component {
         let _item = source;
 
         this.state.isNew = _isNew;
-        this.state.coverSrc = _isNew ? '' : _item.urlToImage;
+        this.state.coverSrc = _isNew ? '' : _item.cover_thumbnail_src;
         this.state.isRecommend = _isNew ? false : _item.is_recommend === 1;
-        this.state.status = _isNew ? 1 : _item.valid_status;
+        this.state.status = _isNew ? 1 : _item.publish_status;
         this.state.title = _isNew ? '' : _item.title;
-        this.state.desc = _isNew ? '' : _item.description;
-        this.state.originalLink = _isNew ? '' : _item.url;
+        this.state.desc = _isNew ? '' : _item.desc;
+        this.state.originalLink = _isNew ? '' : _item.original_url;
 
     }
 

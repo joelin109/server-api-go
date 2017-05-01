@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>React - Admin - API</title>
+    <title>React - Admin - Console</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,20 +13,21 @@
 
 
     <script>
-        var WebFontConfig = {
-            google: {
-                families: ['Roboto:400,300,500:latin']
-            }
+        const baseAPI_HTTP_URL = 'http://localhost:1058';
+        const baseAPI_HTTP_BodyData = {
+            "filter":{"letter":"", "page":2, "page_num":1, "page_size": 18},
+            "Word": "besichtigen",
+            "Sex": "",
+            "Level": "A",
+            "Type": "",
+            "Plural": "",
+            "Synonym": "",
+            "Word_Zh": "参观",
+            "Word_En": "",
+            "Konjugation": "",
+            "isRegel": 1,
+            "isRecommend": 0
         };
-        (function () {
-            var wf = document.createElement('script');
-            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-            wf.type = 'text/javascript';
-            wf.async = 'true';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(wf, s);
-        })();
     </script>
 </head>
 

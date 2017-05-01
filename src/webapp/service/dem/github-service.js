@@ -1,6 +1,5 @@
-import request from './request';
-import { api_result_ts } from './../setting/data/github'
-import { itemCovers } from './../setting/data'
+import { api_result_ts } from './../../setting/data/github'
+import { itemCovers } from './../../setting/data'
 const covers = itemCovers;
 
 const api_github_js = 'https://api.github.com/search/repositories?q=created:%3E2013-03-01%20language:javascript%20stars:%3E=3000&sort=stars';

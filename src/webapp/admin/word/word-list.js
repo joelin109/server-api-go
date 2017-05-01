@@ -67,18 +67,18 @@ export default class WordList extends React.Component {
         <TableRowColumn className='admin-list-col-wo' tooltip="dgdgfdgfdg">
           {row.wort}{(row.plural === '' ? '' : ', ' + row.plural)}
         </TableRowColumn>
-        <TableRowColumn className='admin-list-col-50'>{row.wortsex}</TableRowColumn>
+        <TableRowColumn className='admin-list-col-50'>{row.wort_sex}</TableRowColumn>
         <TableRowColumn className='admin-list-col-zh'>{row.zh} - {row.en}</TableRowColumn>
         <TableRowColumn className='admin-list-col-30'>
            <IconButton value={row}
             onTouchTap={this._handle_item_regel.bind(this)}>
-            <SIcon id={row.isregel === 1 ? 'star_border' : 'star_half'} selected={row.isregel !== 1} />
+            <SIcon id={row.is_regel === 1 ? 'star_border' : 'star_half'} selected={row.is_regel !== 1} />
           </IconButton>
         </TableRowColumn>
         <TableRowColumn className='admin-list-col-30'>
           <IconButton value={row}
             onTouchTap={this._handle_item_recommend.bind(this)}>
-            <SIcon id={row.isrecommend === 1 ? 'favorite' : 'favorite_border'} selected={row.isrecommend === 1} />
+            <SIcon id={row.is_recommend === 1 ? 'favorite' : 'favorite_border'} selected={row.is_recommend === 1} />
           </IconButton>
         </TableRowColumn>
         <TableRowColumn className='admin-list-col-st'>

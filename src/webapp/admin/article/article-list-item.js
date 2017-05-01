@@ -17,7 +17,8 @@ export default class ArticleListItem extends React.Component {
             status: 0,
             coverThumbSrc: '',
             title: '',
-            tag: '',
+            tagID: '',
+            tagName: '',
             updated: '',
         };
 
@@ -42,14 +43,14 @@ export default class ArticleListItem extends React.Component {
     _initItem(source) {
 
         let _item = source;
-
-        this.state.coverThumbSrc = _item.urlToImage;
+        this.state.id = _item.id;
+        this.state.coverThumbSrc = _item.cover_thumbnail_src;
         this.state.title = _item.title;
         this.state.isRecommend = _item.is_recommend === 1;
-        this.state.status = _item.valid_status;
-
-        let _pb = _item.publishedAt;
-        this.state.updated = _pb === null ? '' : _pb.replace("T", " . ").replace("Z", "");
+        this.state.status = _item.publish_status;
+        this.state.updated = _item.last_update_date;
+        this.state.tagID = '';
+        this.state.tagName = 'entertainment-weekly';
 
     }
 
@@ -103,7 +104,7 @@ export default class ArticleListItem extends React.Component {
 
     render() {
         let _author = this.props.value.author === null ? '---' : this.props.value.author;
-        let pills = <li2 ><p className="word" onClick={this._handle_item_tag}>{this.props.value.tag}</p></li2>;
+        let pills = <li2 ><p className="word" onClick={this._handle_item_tag}>{this.state.tagName}</p></li2>;
 
         let _coverSrc = this.state.coverThumbSrc;
         let _title = this.state.title;
@@ -134,7 +135,7 @@ export default class ArticleListItem extends React.Component {
 
                     <div className="itemBox-text-box">
                         <p className="itemBox-text-title">
-                            <a href={this.props.value.url} target="_blank">{_title}</a>
+                            <a href={this.props.value.original_url} target="_blank">{_title}</a>
                         </p>
                         <p className="itemBox-text-subTitle">{this.state.updated}</p>
                         <ul className="keyword cfix">

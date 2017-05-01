@@ -1,6 +1,6 @@
 import React from 'react';
 import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
-import * as githubService from './../service/github-service';
+import * as githubService from './../service/dem/github-service';
 import * as act from './../setting/action';
 import * as tag from './../component/item/tag'
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
 import Paginator from './paginator';
-import * as productService from './../../service/product-service';
+import * as productService from './../../service/dem/product-service';
 import * as wordService from './../../service/word-service';
 import * as act from './../../setting/action';
 
