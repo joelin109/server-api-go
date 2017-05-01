@@ -36,6 +36,10 @@ export default class ArticleListItem extends React.Component {
         this.state.loading = false
     }
 
+    componentWillReceiveProps(nextProps) {
+        this._initItem(nextProps.value)
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         return true;//(this.state.total != nextProps.total);
     }
