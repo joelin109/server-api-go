@@ -15,7 +15,7 @@ export default class AdminArticle extends React.Component {
 
         this.state = {
             results: [],
-            pageSize: 18,
+            pageSize: service.request_page_size,
             total: 0,
             page: 1,
             filterData: "ars-technica",

@@ -7,7 +7,7 @@ let postData = baseAPI_HTTP_BodyData;
 export let findAll = (filter, bodyData) => {
 
     let _apiURL = baseURL + api.APIURL_Content_Dictionary_List;
-    let _httpBody = httpBody(postData)
+    let _httpBody = api.httpBody(postData)
 
     return request.post(_apiURL, _httpBody)
         .then(data => {
@@ -15,16 +15,21 @@ export let findAll = (filter, bodyData) => {
         })
 }
 
-function httpBody(bodyData) {
-    let _data = bodyData
-    let _body = {
-        "token": "1384595117-ddc161cb-3b93-4809-a54e-07ac49189737-178953",
-        "sitecode": "colr.ios.phone",
-        "channel": "",
-        "locale": "zh_CN",
-        "appver": 10000,
-        "data": _data
+
+
+exports.getTagTitle = (tagID) => {
+
+    let _tag = {
+        "t10001": "ars-technica",
+        "t10002": "buzzfeed",
+        "t10003": "cnn",
+        "t10004": "der-tagesspiegel",
+        "t10005": "google-news",
+        "t10006": "bbc-news",
+        "t10007": "entertainment-weekly",
+        "t10008": "the-new-york-times",
+        "t10009": "wired-de"
     }
 
-    return _body;
+    return _tag[tagID];
 }

@@ -7,9 +7,11 @@ let postBodyData = {
     "article_id": "besichtigen"
 };
 
+export let request_page_size = 24;
 export let findAll = (filter) => {
 
     postBodyData.filter.page_num = filter.page;
+    postBodyData.filter.page_size = request_page_size;
 
     let _apiURL = baseURL + api.APIURL_Content_Article_List;
     let _httpBody = api.httpBody(postBodyData)
