@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextField, RadioButtonGroup, RadioButton, Toggle, Checkbox, DropDownMenu, MenuItem } from 'material-ui';
 import * as act from './../../../setting/action'
-import { SButton, Button, SIcon } from './../../../component/wui'
+import { SButton, Button } from './../../../component/wui'
 
 const _action_Handle_Save = 'Action_Handle_Save';
 export default class ArticleTabBasic extends React.Component {
@@ -10,6 +10,7 @@ export default class ArticleTabBasic extends React.Component {
         this.state = {
             isNew: true,
             item: {},
+            articleID: '',
             isRecommend: false,
             status: 0,
             channel: '',
@@ -18,7 +19,7 @@ export default class ArticleTabBasic extends React.Component {
             coverThumbSrc: '',
             title: '',
             subTitle: '',
-            originalLink: '',
+            originalUrl: '',
             desc: '',
             formatType: 'html',
             isOriginal: true,
@@ -61,12 +62,13 @@ export default class ArticleTabBasic extends React.Component {
         let _item = source;
 
         this.state.isNew = _isNew;
+        this.state.articleID = _isNew ? '' : _item.id;
         this.state.coverSrc = _isNew ? '' : _item.cover_thumbnail_src;
         this.state.isRecommend = _isNew ? false : _item.is_recommend === 1;
         this.state.status = _isNew ? 1 : _item.publish_status;
         this.state.title = _isNew ? '' : _item.title;
         this.state.desc = _isNew ? '' : _item.desc;
-        this.state.originalLink = _isNew ? '' : _item.original_url;
+        this.state.originalUrl = _isNew ? '' : _item.original_url;
 
     }
 
@@ -229,7 +231,7 @@ export default class ArticleTabBasic extends React.Component {
 
 
                     <TextField
-                        defaultValue={this.state.originalLink}
+                        defaultValue={this.state.originalUrl}
                         disabled={true}
                         className={_fieldClassName}
                         hintText="."
@@ -274,14 +276,13 @@ export default class ArticleTabBasic extends React.Component {
                         </RadioButtonGroup>
                     </div>
 
-
                     <div className="content-line">
 
                         <Checkbox
                             disabled={true}
                             className="draw-content-check-regel"
                             label="Original"
-                            defaultChecked={this.state.originalLink === ''}
+                            defaultChecked={this.state.originalUrl === ''}
                             onCheck={this._handle_togle_regel}
                         />
 

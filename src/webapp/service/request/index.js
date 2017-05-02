@@ -29,6 +29,18 @@ function requestDemo(obj) {
     });
 }
 
+function httpBody(bodyData) {
+    let _body = {
+        "token": "1384595117-ddc161cb-3b93-4809-a54e-07ac49189737-178953",
+        "sitecode": "colr.ios.phone",
+        "channel": "",
+        "locale": "zh_CN",
+        "appver": 10000,
+        "data": bodyData
+    }
+    return _body;
+}
+
 function toQueryString(obj) {
     let parts = [],
         i;
@@ -71,4 +83,7 @@ function request(obj) {
 
 export let demo = (url) => requestDemo({ method: "GET", url });
 export let get = (url, params) => request({ method: "GET", url, params });
-export let post = (url, data) => request({ method: "POST", contentType: "application/json", url, data });
+export let post = (url, data) => {
+    let _httpBody = httpBody(data);
+    return request({ method: "POST", contentType: "application/json", url, data: _httpBody })
+};

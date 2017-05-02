@@ -2,19 +2,16 @@ import * as request from './request';
 import * as api from './request/api';
 
 let baseURL = baseAPI_HTTP_URL;
-let postData = baseAPI_HTTP_BodyData;
 
 export let findAll = (filter, bodyData) => {
 
+    let _bodyData = baseAPI_HTTP_BodyData
     let _apiURL = baseURL + api.APIURL_Content_Dictionary_List;
-    let _httpBody = api.httpBody(postData)
-
-    return request.post(_apiURL, _httpBody)
+    return request.post(_apiURL, _bodyData)
         .then(data => {
             return data.result
         })
 }
-
 
 
 exports.getTagTitle = (tagID) => {

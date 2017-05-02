@@ -45,6 +45,12 @@ export default class RichTextEditor extends React.Component {
             this.props.dispatch(_action);
             this.state.willUpdate = false;
         }
+        else if (nextProps.onRefresh) {
+            this.state.willUpdate = true;
+            let _html = convert.toHtml(nextProps.source);
+            this.state.editorHtml = _html;
+            this.state.editorContent = nextProps.source;
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {

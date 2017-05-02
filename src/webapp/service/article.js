@@ -8,22 +8,27 @@ let postBodyData = {
 };
 
 export let request_page_size = 24;
+
 export let findAll = (filter) => {
 
     postBodyData.filter.page_num = filter.page;
     postBodyData.filter.page_size = request_page_size;
 
+    let _bodyData = postBodyData
     let _apiURL = baseURL + api.APIURL_Content_Article_List;
-    let _httpBody = api.httpBody(postBodyData)
-
-    return request.post(_apiURL, _httpBody)
+    return request.post(_apiURL, _bodyData)
         .then(data => {
             return data.result
         })
 }
 
-export let detail = (id) => {
-
+export let detail = (filter) => {
+    let _bodyData = filter
+    let _apiURL = baseURL + api.APIURL_Content_Article_Detail;
+    return request.post(_apiURL, _bodyData)
+        .then(data => {
+            return data.result
+        })
 
 }
 
@@ -36,22 +41,19 @@ export let updateStatus = (data) => {
 
     alert(data.id + ': - ' + data.publish_status + ' - ' + data.is_recommend);
 
+    let _bodyData = data;
     let _apiURL = baseURL + api.APIURL_Content_Article_Status_Update;
-    let _httpBody = api.httpBody(data)
-
-    return request.post(_apiURL, _httpBody)
+    return request.post(_apiURL, _bodyData)
         .then(data => {
             return data.result
         })
-
 }
 
 export let crawlArticle = (bodyData) => {
 
+    let _bodyData = bodyData;
     let _apiURL = baseURL + api.APIURL_Content_Crawler_Article;
-    let _httpBody = api.httpBody(bodyData)
-
-    return request.post(_apiURL, _httpBody)
+    return request.post(_apiURL, _bodyData)
         .then(data => {
             return data
         })

@@ -13,4 +13,5 @@ export const Action_Handle_Cancel = 'Action_Handle_Cancel';
 export const Action_Handle_Save = 'Action_Handle_Save';
 export const Action_Handle_SaveAndNew = 'Action_Handle_SaveAndNew';
 export const Action_Handle_Publish = 'Action_Handle_Publish';
+export const Action_Handle_Refresh = 'Action_Handle_Refresh';
 

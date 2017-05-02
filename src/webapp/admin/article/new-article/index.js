@@ -22,6 +22,7 @@ export default class NewArticle extends React.Component {
             editorHtml: _html,
             editorContent: convert.toEditorContent(_html),
             willSave: false,
+            refresh: false,
 
             tabIndex: 1,
             type: '-',
@@ -62,19 +63,33 @@ export default class NewArticle extends React.Component {
 
     }
 
+    _handle_item_refresh() {
+        let _item = this.state.source;
+        let _filter = {
+            id: _item.id,
+            original_url: _item.original_url
+        }
+        service.detail(_filter)
+            .then(result => {
+                this.state.editorHtml = result.body_text;
+                this.state.editorContent = convert.toEditorContent(result.body_text);
+                this.setState({ willSave: false, refresh: true });
+            });
+    }
+
     _handle_tab_save() {
-        this.setState({ willSave: true });
+        this.setState({ willSave: true, refresh: false  });
         return false;
     }
 
     _handle_tab_basic(tab) {
         this.state.tabIndex = 1;
-        this.setState({ willSave: false });
+        this.setState({ willSave: false, refresh: false  });
     }
 
     _handle_tab_desc(tab) {
         this.state.tabIndex = 2;
-        this.setState({ willSave: false });
+        this.setState({ willSave: false, refresh: false  });
     }
 
 
@@ -84,11 +99,15 @@ export default class NewArticle extends React.Component {
 
         switch (action.type) {
             case act.Action_Handle_Cancel:
-                this.setState({ open: false });
+                this.setState({ open: false, refresh: false });
                 break;
 
             case act.Action_Handle_Save:
                 this._save();
+                break;
+
+            case act.Action_Handle_Refresh:
+                this._handle_item_refresh();
                 break;
 
             default:
@@ -164,6 +183,7 @@ export default class NewArticle extends React.Component {
                                         source={this.state.editorContent}
                                         dispatch={this._dispatch_tab_desc}
                                         onSave={this.state.willSave}
+                                        onRefresh={this.state.refresh}
                                     />
                                 </Tab>
                                 <Tab label="Preview &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" onActive={this._handle_tab_desc}>

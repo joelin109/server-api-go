@@ -41,6 +41,10 @@ export default class DetailHeader extends React.Component {
                 this._handle_save();
                 break;
 
+            case '4':
+                this.props.dispatch({ type: act.Action_Handle_Refresh })
+                break;
+
             default:
                 alert(value)
                 break;
