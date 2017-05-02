@@ -10,6 +10,11 @@ class NavLeft extends React.Component {
             login: true,
             channel: '',
         };
+
+        this._handle_left_channel_article = this._handle_left_channel_article.bind(this)
+        this._handle_left_channel_word = this._handle_left_channel_word.bind(this)
+        this._handle_left_channel_setting = this._handle_left_channel_setting.bind(this)
+        this._handle_left_channel_crawler = this._handle_left_channel_crawler.bind(this)
     }
 
 
@@ -23,15 +28,24 @@ class NavLeft extends React.Component {
         return false;
     }
 
-    _dispatch_left_channel_word() {
-        this._dispatch_left_channel(act.Action_Admin_Channel_Type_Word);
-        return false;
-    }
-
-    _dispatch_left_channel_article() {
+    _handle_left_channel_article() {
         this._dispatch_left_channel(act.Action_Admin_Channel_Type_Article);
         return false;
     }
+    _handle_left_channel_word() {
+        this._dispatch_left_channel(act.Action_Admin_Channel_Type_Word);
+        return false;
+    }
+    _handle_left_channel_setting() {
+        this._dispatch_left_channel(act.Action_Admin_Channel_Type_Crawler);
+        return false;
+    }
+    _handle_left_channel_crawler() {
+        this._dispatch_left_channel(act.Action_Admin_Channel_Type_Crawler);
+        return false;
+    }
+
+
 
     _fontIcon(id, color = '#757575') {
         let _hoverColor = "#EF5350"
@@ -41,7 +55,7 @@ class NavLeft extends React.Component {
         return (
             <div>
                 <Drawer
-                    open={this.props.open} docked={false} 
+                    open={this.props.open} docked={false}
                     onRequestChange={this._dispatch_close.bind(this)}>
                     <div className='nav-left-header'></div>
                     <Divider />
@@ -51,10 +65,10 @@ class NavLeft extends React.Component {
                     <MenuItem leftIcon={this._fontIcon('visibility')}>Channel</MenuItem>
                     <MenuItem leftIcon={this._fontIcon('flag')}>Tag</MenuItem>
                     <Divider />
-                    <MenuItem leftIcon={this._fontIcon('local_library')} onTouchTap={this._dispatch_left_channel_article.bind(this)}>Article</MenuItem>
-                    <MenuItem leftIcon={this._fontIcon('text_fields')} onTouchTap={this._dispatch_left_channel_word.bind(this)}>Word</MenuItem>
+                    <MenuItem leftIcon={this._fontIcon('local_library')} onTouchTap={this._handle_left_channel_article}>Article</MenuItem>
+                    <MenuItem leftIcon={this._fontIcon('text_fields')} onTouchTap={this._handle_left_channel_word}>Word</MenuItem>
                     <Divider />
-                    <MenuItem leftIcon={this._fontIcon('settings')}>Setting</MenuItem>
+                    <MenuItem leftIcon={this._fontIcon('settings')} onTouchTap={this._handle_left_channel_setting}>Setting</MenuItem>
                     <MenuItem leftIcon={this._fontIcon('settings_power')}>Logout</MenuItem>
 
                 </Drawer>

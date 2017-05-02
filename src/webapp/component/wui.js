@@ -9,37 +9,42 @@ const Style = {
 }
 const _hoverColor = '#EF5350';
 
-export const Icon = ({ id }) => {
-    let _color = 1 > 10 ? '#bdbdbd' : '#E0E0E0';
-    return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
-}
+export const styleDefault = ''
+export const styleLight = ''
+export const styleDark = ''
+export const _colorDefault = '#E0E0E0'
+export const _colorLightGray = '#bdbdbd'
+export const _colorDarkGray = '#757575'
+export const _colorSelected = '#EF5350'
 
-const BIcon = ({ id, defaultColor = false }) => {
-    let _color = defaultColor ? '#bdbdbd' : '#E0E0E0';
-    return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
+export const Icon = ({ id }) => {
+    return <BasicIcon id={id} styleColor={_colorDefault} />;;
 }
 
 export const SIcon = ({ id, selected = false }) => {
-    let _color = selected ? '#EF5350' : '#757575';
+    let _color = selected ? _colorSelected : _colorDarkGray;
+    return <BasicIcon id={id} styleColor={_color} />;
+}
+
+const BasicIcon = ({ id, styleColor }) => {
+    let _color = styleColor;
     return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
 }
 
+
 export const SButton = ({ id, selected = false, onTouchTap }) => {
-    let _icon = <SIcon id={id} selected={selected} />
-    return <IconButton className="base-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
-    //return <FlatButton style={Style.button} icon={_icon} onTouchTap={onTouchTap} />
-}
-
-export const ColorButton = ({ id, color, onTouchTap }) => {
-
-    let _icon = <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
+    let _styleColor = selected ? _colorSelected : _colorDarkGray;
+    let _icon = <BasicIcon id={id} styleColor={_styleColor} />
     return <IconButton className="base-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
 }
 
-export const Button = ({ id, onTouchTap }) => {
-    let _icon = <Icon id={id} />
+
+export const Button = ({ id, styleColor, onTouchTap }) => {
+
+    let _styleColor = (typeof (styleColor) !== "undefined" && styleColor !== null) ? styleColor : _colorDefault
+    let _icon = <BasicIcon id={id} styleColor={_styleColor} />
+
     return <IconButton className="base-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
-    //return <FlatButton style={Style.button} icon={_icon} onTouchTap={onTouchTap} />
 }
 
 export const TButton = ({ label, onTouchTap }) => {
@@ -53,7 +58,7 @@ export const TButton = ({ label, onTouchTap }) => {
 
 
 export const SuperButton = ({ id, label, onTouchTap }) => {
-    let _icon = <BIcon id={id} defaultColor={true} />;
+    let _icon = <BasicIcon id={id} styleColor={_colorLightGray} />;
     let _labelStyle = { color: '#616161', fontWeight: 'normal', paddingBottom: 8 }
 
     return <FlatButton
@@ -64,17 +69,24 @@ export const SuperButton = ({ id, label, onTouchTap }) => {
 
 }
 
-export const FloatingButton = ({ id = 'save', className = 'colr-dark loc-btm-1', onTouchTap }) => {
-    let _className = `float-button ${className}`;
-    let _colorButton = <ColorButton id={id} color={'#00838F'} onTouchTap={onTouchTap} />
-    let _button = <Button id={id} onTouchTap={onTouchTap} />
+export const FloatingButton = ({ id = 'save', className = 'colr-default loc-btm-1', onTouchTap }) => {
+    let _containerClassName = `${className}`.indexOf('loc-right-box') >= 0 ? 'loc-right-box' : 'loc-left-box'
+    let _className = `float-button ${className}`.replace('loc-right-box', '');
 
+    let _styleColor = _colorDefault
+    if (_className.indexOf('colr-floating') >= 0) {
+        _styleColor = _colorDefault
+    } else if (_className.indexOf('colr-dark') >= 0) {
+        _styleColor = _colorDarkGray
+    } else if (_className.indexOf('colr-selected') >= 0) {
+        _styleColor = _colorSelected
+    }
 
-    return <div className="loc-left-box">
+    let _button = <Button id={id} styleColor={_styleColor} onTouchTap={onTouchTap} />
+
+    return <div className={_containerClassName}>
         <div className={_className}>
-
-            {_className.indexOf('colr-light') > 0 ? _colorButton : _button}
-
+            {_button}
         </div>
     </div>
 }

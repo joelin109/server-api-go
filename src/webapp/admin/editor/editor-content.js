@@ -100,7 +100,7 @@ export default class EditorContent extends React.Component {
         //alert('EditorContent render')defaultEditorState={this.state.editorContents[0]}      
         let _toolbar = this._defautToolbar();
         let _btm = <FloatingButton
-            id="translate" className="colr-light loc-btm-4"
+            id="translate" className="colr-selected loc-btm-4"
             onTouchTap={this._dispatch_editor_save} />;
 
         return (

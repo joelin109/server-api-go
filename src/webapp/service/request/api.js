@@ -9,6 +9,7 @@ exports.APIURL_Content_Dictionary_List = "/api/content/dictionary/list"
 exports.APIURL_Content_Dictionary_Detail = "/api/content/dictionary/detail"
 exports.APIURL_Content_Dictionary_Post = "/api/content/dictionary/post"
 exports.APIURL_Content_Dictionary_Remove = "/api/content/dictionary/remove"
+exports.APIURL_Content_Crawler_Article = '/api/content/crawler/article'
 
 exports.httpBody = (bodyData) => {
 

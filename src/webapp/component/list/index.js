@@ -1,5 +1,6 @@
 import React from 'react';
 import { FloatingActionButton, FontIcon } from 'material-ui';
+import { FloatingButton } from './../wui'
 import ListCard from './list-card'
 import Paginator from './paginator';
 import { itemCovers, userThumbs } from './../../setting/data'
@@ -10,6 +11,8 @@ export const List_Page_Previous = 'List_Page_Previous'
 export const List_Page_Next = 'List_Page_Next'
 export const List_Filter = 'List_Filter'
 export const List_New = 'List_New'
+export const List_Refresh = 'List_Refresh'
+
 
 export default class List extends React.Component {
 
@@ -26,6 +29,7 @@ export default class List extends React.Component {
         this._dispatch_list_page_next = this._dispatch_list_page_next.bind(this);
         this._handle_list_filter = this._handle_list_filter.bind(this);
         this._handle_list_new = this._handle_list_new.bind(this);
+        this._handle_list_refresh = this._handle_list_refresh.bind(this);
         this._dispatch_list_item = this._dispatch_list_item.bind(this);
 
         // alert('ListBase-constructor')
@@ -66,6 +70,10 @@ export default class List extends React.Component {
         this.props.dispatch({ type: List_New, data: '' });
         return false;
     }
+    _handle_list_refresh() {
+        this.props.dispatch({ type: List_Refresh, data: '' });
+        return false;
+    }
 
     _fontIcon(id, color = '#EEEEEE') {
         let _hoverColor = "#EF5350"
@@ -93,17 +101,14 @@ export default class List extends React.Component {
         }
 
         let _new = '';
+        let _refresh = '';
         if (this.props.admin !== null && this.props.admin) {
-            _new = <div className="loc-right-box">
-                <FloatingActionButton className="loc-top-3 z-3"
-                    zDepth={2}
-                    backgroundColor={this.state.listFilterButtonBground}
-                    onTouchTap={this._handle_list_new}>
-                    {this._fontIcon('add')}
-                </FloatingActionButton>
-            </div>
+            _new = <FloatingButton className="loc-right-box colr-selected loc-top-3 z-3"
+                id="add" onTouchTap={this._handle_list_new} />
+            _refresh = <FloatingButton className="loc-right-box colr-selected loc-btm-1 z-3"
+                id="refresh" onTouchTap={this._handle_list_refresh} />
         }
-   
+
         return (
             <div>
                 <ListCard key={_key}
@@ -127,7 +132,7 @@ export default class List extends React.Component {
                         {this._fontIcon('filter_list')}
                     </FloatingActionButton>
                 </div>
-                {_new}
+                {_new}{_refresh}
             </div>
         );
     }

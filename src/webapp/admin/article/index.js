@@ -7,8 +7,7 @@ import ArticleListFilter from './article-list-filter'
 import NewArticle from './new-article'
 
 
-
-
+const _action_Admin_Channel_Type_Crawler = 'Action_Admin_Channel_Type_Crawler'
 export default class AdminArticle extends React.Component {
 
     constructor(props) {
@@ -37,12 +36,36 @@ export default class AdminArticle extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        let _props_channel = this._get_router_link_state_data(nextProps)
+        if (_props_channel !== null && _props_channel.type === _action_Admin_Channel_Type_Crawler) {
+
+            service.crawlArticle({})
+                .then(data => { });
+        }
+
         this._component_should_update(false);
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         return this.state.willNeedUpdate;
     }
 
+
+
+
+    //-------------------
+    _get_router_link_state_data(props) {
+        const { location } = props
+        const _props = location.state
+        if (typeof (_props) !== "undefined" && _props !== null
+            && typeof (_props.channel) !== "undefined") {
+
+            return _props.channel
+        }
+        else {
+            return null;
+        }
+    }
 
 
     //-----------------------------------
@@ -54,7 +77,7 @@ export default class AdminArticle extends React.Component {
                 this._component_should_update(true, true)
                 this.setState({
                     results: data.rows,
-                    total:data.page.total_rows
+                    total: data.page.total_rows
                 });
             });
     }
@@ -88,7 +111,9 @@ export default class AdminArticle extends React.Component {
             case _list.List_New:
                 this._setEditOrNew();
                 break;
-
+            case _list.List_Refresh:
+                this._list_findAll(true)
+                break;
             default:
                 this.state.page = action.data;
                 this._list_findAll(action.type === _list.List_Page_Next)

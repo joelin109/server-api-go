@@ -27,13 +27,32 @@ export let detail = (id) => {
 
 export let update = (data) => {
 
-    alert('Update:' + ' - ' + data.publish_status + ' - ' + data.is_recommend + ' - ' + data.title);
-    //alert(data.body_text);
+    alert(data.id + ': - ' + data.publish_status + ' - ' + data.is_recommend + ' - ' + data.title);
 }
 
 export let updateStatus = (data) => {
 
-    alert('Update:' + ' - ' + data.publish_status + ' - ' + data.is_recommend);
+    alert(data.id + ': - ' + data.publish_status + ' - ' + data.is_recommend);
+
+    let _apiURL = baseURL + api.APIURL_Content_Article_Status_Update;
+    let _httpBody = api.httpBody(data)
+
+    return request.post(_apiURL, _httpBody)
+        .then(data => {
+            return data.result
+        })
+
+}
+
+export let crawlArticle = (bodyData) => {
+
+    let _apiURL = baseURL + api.APIURL_Content_Crawler_Article;
+    let _httpBody = api.httpBody(bodyData)
+
+    return request.post(_apiURL, _httpBody)
+        .then(data => {
+            return data
+        })
 
 }
 

@@ -43,11 +43,9 @@ class Admin extends React.Component {
                 break;
 
             case act.Action_Admin_Channel_Type_Word:
-                //this.setState({ channel: action });
-                this._dispatch_route_link_to(action)
-                break;
-
             case act.Action_Admin_Channel_Type_Article:
+            case act.Action_Admin_Channel_Type_Crawler:
+                //this.setState({ channel: action });
                 this._dispatch_route_link_to(action)
                 break;
 
@@ -70,7 +68,7 @@ class Admin extends React.Component {
         let _link = `/admin?_t=${_type}`;
 
         switch (action.type) {
-       
+
             case act.Action_Admin_Channel_Type_Article:
                 _link = `/article?_t=${_type}`;
                 break;
@@ -79,19 +77,26 @@ class Admin extends React.Component {
                 _link = `/deutsch?_t=${_type}`;
                 break;
 
+            case act.Action_Admin_Channel_Type_Crawler:
+                _link = `/article?_t=${_type}`;
+                break;
+
             default:
                 break;
         }
 
-        let _link_to = {
-            pathname: _link,
-            state: {
-                channel: action
-            }
-        }
-        this.props.history.push(_link_to)
-    }
+        if (_link !== '') {
 
+            let _link_to = {
+                pathname: _link,
+                state: {
+                    channel: action
+                }
+            }
+            this.props.history.push(_link_to)
+        }
+
+    }
 
 
     render() {
@@ -101,7 +106,7 @@ class Admin extends React.Component {
                 <Header title="Console" dispatch={this._dispatch_header_navigator.bind(this)} />
                 <div className='loc-center-box'>
                     <div className='root-body'>
-                        <div className='root-list root-list-admin-layout'> 
+                        <div className='root-list root-list-admin-layout'>
 
                             <Switch>
                                 <Route exact path='/' component={AdminArticle} />
@@ -133,7 +138,6 @@ class AdminIndex extends React.Component {
 
     render() {
         let _basename = this._getBaseName()
-
         return (
             <div>
                 <MuiThemeProvider muiTheme={appTheme} >
