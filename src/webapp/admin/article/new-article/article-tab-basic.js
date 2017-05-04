@@ -64,7 +64,7 @@ export default class ArticleTabBasic extends React.Component {
         this.state.isNew = _isNew;
         this.state.articleID = _isNew ? '' : _item.id;
         this.state.coverSrc = _isNew ? '' : _item.cover_thumbnail_src;
-        this.state.isRecommend = _isNew ? false : _item.is_recommend === 1;
+        this.state.isRecommend = _isNew ? false : _item.is_recommend;
         this.state.status = _isNew ? 1 : _item.publish_status;
         this.state.title = _isNew ? '' : _item.title;
         this.state.desc = _isNew ? '' : _item.desc;
@@ -229,7 +229,6 @@ export default class ArticleTabBasic extends React.Component {
                         floatingLabelFixed={true}
                     />
 
-
                     <TextField
                         defaultValue={this.state.originalUrl}
                         disabled={true}
@@ -237,7 +236,8 @@ export default class ArticleTabBasic extends React.Component {
                         hintText="."
                         floatingLabelText="Original Resource"
                         floatingLabelFixed={true}
-                    />
+                    /><a href={this.state.originalUrl} target="_blank">    ...</a>
+
                     <TextField
                         defaultValue={this.state.desc}
                         className={_fieldClassName}

@@ -72,11 +72,27 @@
 .itemBox-console-box {
     width: 95%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-content: center;
     align-items: center;
     margin-left: 10px;
     border-top: 1px solid #E0E0E0;
+}
+
+.itemBox-console-box-left {
+    width: 120px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+
+.itemBox-console-box-right {
+    width: 120px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    align-items: center;
 }
 
 
@@ -211,9 +227,9 @@
     border-radius: 3px;
 }
 
-.draw-content-box{
-   height: 180px;
-   padding: 6px 6px 0px 25px; 
+.draw-content-box {
+    height: 180px;
+    padding: 6px 6px 0px 25px;
 }
 
 .draw-content-text-title {

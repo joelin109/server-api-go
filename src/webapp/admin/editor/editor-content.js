@@ -10,7 +10,7 @@ export default class EditorContent extends React.Component {
             source: {},
             value: '',
             editorContents: {},
-            willUpdate:true,
+            willUpdate: true,
 
         };
 
@@ -59,15 +59,24 @@ export default class EditorContent extends React.Component {
     }
 
     _setEditorContent(source) {
-        let editorContent = source;
+        try {
+            
+            let editorContent = source;
 
-        let editorContents = this.state.editorContents;
-        editorContents[0] = editorContent;
-        editorContents = [...editorContents];
+            let editorContents = this.state.editorContents;
+            editorContents[0] = editorContent;
+            editorContents = [...editorContents];
 
-        this.setState({
-            willUpdate:true,
-        });
+            this.setState({
+                willUpdate: true,
+            });
+        }
+        catch (err) {
+
+            let txt = "Error description: \n\n" + err.message + "\n\n";
+            alert(txt);
+        }
+
     }
 
     _dispatch_editor_change(index, editorContent) {

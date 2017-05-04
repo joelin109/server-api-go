@@ -20,7 +20,6 @@ export default class NewArticle extends React.Component {
             open: props.open,
             source: props.source,
             editorHtml: _html,
-            editorContent: convert.toEditorContent(_html),
             willSave: false,
             refresh: false,
 
@@ -31,8 +30,6 @@ export default class NewArticle extends React.Component {
             recommend: false,
 
         };
-
-        //this.state.editorContent = _contentState;
 
 
         this._handle_tab_save = this._handle_tab_save.bind(this);
@@ -72,7 +69,6 @@ export default class NewArticle extends React.Component {
         service.detail(_filter)
             .then(result => {
                 this.state.editorHtml = result.body_text;
-                this.state.editorContent = convert.toEditorContent(result.body_text);
                 this.setState({ willSave: false, refresh: true });
             });
     }
@@ -133,7 +129,6 @@ export default class NewArticle extends React.Component {
     _dispatch_tab_desc(action) {
         switch (action.type) {
             case act.Action_Handle_Save:
-                this.state.editorContent = action.data;
                 this.state.editorHtml = convert.toHtml(action.data);
                 //alert(this.state.editorHtml)
                 break;
@@ -177,10 +172,10 @@ export default class NewArticle extends React.Component {
                                     />
                                 </Tab>
 
-                                <Tab label="Description" onActive={this._handle_tab_desc}>
+                                <Tab label="Body-Content" onActive={this._handle_tab_desc}>
                                     <RichTextEditor
                                         show={this.state.tabIndex === 2}
-                                        source={this.state.editorContent}
+                                        source={this.state.editorHtml}
                                         dispatch={this._dispatch_tab_desc}
                                         onSave={this.state.willSave}
                                         onRefresh={this.state.refresh}

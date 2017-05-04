@@ -51,7 +51,7 @@ export default class ArticleListItem extends React.Component {
         this.state.id = _item.id;
         this.state.coverThumbSrc = _item.cover_thumbnail_src;
         this.state.title = _item.title;
-        this.state.isRecommend = _item.is_recommend === 1;
+        this.state.isRecommend = _item.is_recommend;
         this.state.status = _item.publish_status;
         this.state.updated = _item.last_update_date;
         this.state.tagID = _item.tag_id;
@@ -149,7 +149,7 @@ export default class ArticleListItem extends React.Component {
                     </div>
 
                     <div className="itemBox-console-box">
-                        Status:&nbsp;&nbsp;{_upButton} {_downButton} &nbsp;&nbsp;{_editButton}
+                       <div className="itemBox-console-box-left"> {_upButton} {_downButton} </div ><div className="itemBox-console-box-right"> {_editButton}</div>
                     </div>
                 </Card>
             </div>

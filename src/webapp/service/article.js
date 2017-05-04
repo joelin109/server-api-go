@@ -33,14 +33,15 @@ export let detail = (filter) => {
 }
 
 export let update = (data) => {
-
-    alert(data.id + ': - ' + data.publish_status + ' - ' + data.is_recommend + ' - ' + data.title);
+    let _bodyData = data;
+    let _apiURL = baseURL + api.APIURL_Content_Article_Post;
+    return request.post(_apiURL, _bodyData)
+        .then(data => {
+            return data.result
+        })
 }
 
 export let updateStatus = (data) => {
-
-    alert(data.id + ': - ' + data.publish_status + ' - ' + data.is_recommend);
-
     let _bodyData = data;
     let _apiURL = baseURL + api.APIURL_Content_Article_Status_Update;
     return request.post(_apiURL, _bodyData)

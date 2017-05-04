@@ -83,13 +83,33 @@ export default class List extends React.Component {
     _adjustResult(result) {
 
         let _result = result;
+        let _random = []
         Array.from(_result, (item) => {
-            item["coverSrc"] = covers[Math.floor(Math.random() * covers.length)];
+
+            let _random_index = Math.floor(Math.random() * covers.length)
+
+            for (var i = 0; i < 10; i++) {
+                if (this._contains(_random, _random_index) === false) break;
+                _random_index = Math.floor(Math.random() * covers.length)
+            }
+            _random.push(_random_index)
+
+            item["coverSrc"] = covers[_random_index];
             item["userThumb"] = thumbs[Math.floor(Math.random() * thumbs.length)]
             return item
         })
 
         return _result;
+    }
+
+    _contains(arr, obj) {
+        var i = arr.length;
+        while (i--) {
+            if (arr[i] === obj) {
+                return true;
+            }
+        }
+        return false;
     }
 
     render() {

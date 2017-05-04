@@ -24,10 +24,7 @@ export default class RichTextEditor extends React.Component {
             willUpdate: true,
 
         };
-
-        let _html = convert.toHtml(props.source);
-        this.state.editorHtml = _html;
-        this.state.editorContent = props.source;
+        this._parse_content_htm(props.source)
 
         this._handle_tab_editor = this._handle_tab_editor.bind(this);
         this._handle_tab_html = this._handle_tab_html.bind(this);
@@ -41,15 +38,13 @@ export default class RichTextEditor extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.state.open = nextProps.open;
         if (nextProps.onSave) {
-            let _action = { type: _action_Handle_Save, data: this.state.editorContent };
+            let _action = { type: _action_Handle_Save, data: this.state.editorHtml };
             this.props.dispatch(_action);
             this.state.willUpdate = false;
         }
         else if (nextProps.onRefresh) {
             this.state.willUpdate = true;
-            let _html = convert.toHtml(nextProps.source);
-            this.state.editorHtml = _html;
-            this.state.editorContent = nextProps.source;
+            this._parse_content_htm(nextProps.source)
         }
     }
 
@@ -57,6 +52,19 @@ export default class RichTextEditor extends React.Component {
         return this.state.willUpdate;
     }
 
+    _parse_content_htm(html) {
+        try {
+            this.state.editorHtml = html;
+            this.state.editorContent = convert.toEditorContent(html);
+            return true;
+        }
+        catch (err) {
+
+            let txt = "Error description: \n\n" + err.message + "\n\n";
+            alert(txt);
+            return false;
+        }
+    }
 
     _handle_tab_editor(tab) {
         this.state.willUpdate = true;
@@ -86,9 +94,7 @@ export default class RichTextEditor extends React.Component {
 
     _dispatch_tab_content_html(action) {
         let _html = action.data;
-        this.state.editorHtml = _html;
-        this.state.editorContent = convert.toEditorContent(_html);
-        this.state.editorChange = true;
+        this.state.editorChange = this._parse_content_htm(_html)
     }
 
     _dispatch_tab_content_preview(tab) {

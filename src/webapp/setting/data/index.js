@@ -17,6 +17,16 @@ export const itemCovers = [
     'https://a0.muscache.com/im/pictures/4764ecfe-1450-4e21-a3a0-40b42b863a7f.jpg',
     'https://a0.muscache.com/im/pictures/79481070/b59a98ca_original.jpg',
     'https://a0.muscache.com/im/pictures/67720660/25af6e57_original.jpg',
+    'https://img.buzzfeed.com/buzzfeed-static/static/2017-05/2/16/campaign_images/buzzfeed-prod-fastlane-03/only-people-who-know-canadas-dirty-secrets-can-ge-2-10469-1493755280-2_dblbig.jpg',
+    'https://ichef.bbci.co.uk/news/1024/cpsprodpb/175BD/production/_95877659_kate_getty.jpg',
+    'http://www.tagesspiegel.de/images/duisburger-mafia-moerder-strangio-festgenommen/19744686/1-format530.jpg',
+    'http://www.tagesspiegel.de/images/heprodimagesfotos88120170502gez_465_1_20170501130948564-jpg/19739956/2-format530.jpg',
+    'https://cdn.arstechnica.net/wp-content/uploads/2017/04/microsoft-edu-event-600x380.png',
+    'http://www.tagesspiegel.de/images/march-for-science-freiburg/19742998/1-format530.jpg',
+    'http://www.tagesspiegel.de/images/rettungs_dpa/11294532/20-format530.jpg',
+    'http://akns-images.eonline.com/eol_images/Entire_Site/201742/rs_600x600-170502051128-600.met-gala-selfie-kylie-jenner.5217.jpg?downsize=450:*&crop=450:350;left,top',
+    'https://img.buzzfeed.com/buzzfeed-static/static/2017-05/1/5/enhanced/buzzfeed-prod-web-10/original-12816-1493631764-2.jpg?crop=1544:809;34,0',
+    'https://img.buzzfeed.com/buzzfeed-static/static/2017-05/1/11/tmp/buzzfeed-prod-fastlane-01/tmp-name-2-21091-1493652618-6_dblbig.jpg'
 ];
 
 export const userThumbs = [

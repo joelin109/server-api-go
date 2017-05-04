@@ -23,7 +23,7 @@ export default class EditorContentView extends React.Component {
                          value={this.props.source}
                      />*/
                      
-        let _html = { __html: this.props.source };
+        let _html = { __html: this.props.source.replace(/target=\"_self\"/gi, 'target=\"_blank\"') };
         return (
             <div className="draw-detail-tab-content-preview">
                 <div className="draw-detail-tab-content-preview-box"
