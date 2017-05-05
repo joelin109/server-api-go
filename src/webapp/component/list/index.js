@@ -22,7 +22,7 @@ export default class List extends React.Component {
         this.state = {
             results: [],
             page: 1,
-            listFilterButtonBground: '#ff7277', //#E57373',
+            listFilterButtonBground: app_Theme_Floating_Color, //#E57373',
         }
 
         this._dispatch_list_page_previous = this._dispatch_list_page_previous.bind(this);

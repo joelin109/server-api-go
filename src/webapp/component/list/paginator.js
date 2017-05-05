@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatButton } from 'material-ui';
 
+let _backgroundColor = app_Theme_Primary_Color
 class Paginator extends React.Component {
 
 
@@ -13,7 +14,7 @@ class Paginator extends React.Component {
                 <div className='root-list-paginator'>
 
                     <FlatButton labelStyle={style} hoverColor={hoverColor}
-                        backgroundColor={(this.props.page <= 1 ? 'transparent' : '#00838F')}
+                        backgroundColor={(this.props.page <= 1 ? 'transparent' : _backgroundColor)}
                         label={'Previous'} disabled={(this.props.page <= 1)}
                         onTouchTap={this.props.onPrevious} />
 
@@ -22,7 +23,7 @@ class Paginator extends React.Component {
 
 
                     <FlatButton labelStyle={style} hoverColor={hoverColor}
-                        backgroundColor={(this.props.page >= pages ? 'transparent' : '#00838F')}
+                        backgroundColor={(this.props.page >= pages ? 'transparent' : _backgroundColor)}
                         label={'Next'} disabled={(this.props.page >= pages)}
                         onTouchTap={this.props.onNext} />
 

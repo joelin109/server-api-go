@@ -1,7 +1,7 @@
 import * as request from './request';
 import * as api from './request/api';
 
-let baseURL = baseAPI_HTTP_URL;
+let baseURL = app_API_Http_URL;
 let postBodyData = {
     "filter": { "page_num": 1, "page_size": 18 },
     "article_id": "besichtigen"

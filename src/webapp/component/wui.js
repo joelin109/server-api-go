@@ -13,7 +13,7 @@ export const styleDefault = ''
 export const styleLight = ''
 export const styleDark = ''
 export const _colorDefault = '#E0E0E0'
-export const _colorLightGray = '#bdbdbd'
+export const _colorLightGray = '#9E9E9E'
 export const _colorDarkGray = '#757575'
 export const _colorSelected = '#EF5350'
 

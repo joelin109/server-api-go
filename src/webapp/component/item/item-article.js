@@ -63,9 +63,9 @@ export default class ItemArticle extends React.Component {
                     </div>
 
                     <div className="itemBox-text-box">
-                        <p className="itemBox-text-title">
+                        <h3 className="itemBox-text-title limit-line-3">
                             <a href={this.props.value.url} target="_blank">{_title}</a>
-                        </p>
+                        </h3>
                         <p className="itemBox-text-subTitle">{_author}</p>
                         <p className="itemBox-text-text">{this.props.value.description}</p>
                     </div>

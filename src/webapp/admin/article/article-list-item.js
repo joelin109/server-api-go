@@ -1,7 +1,7 @@
 import React from 'react';
 import * as service from './../../service';
 import { Card, } from 'material-ui/Card';
-import { SButton } from './../../component/wui'
+import { SButton, Button, _colorLightGray, _colorSelected } from './../../component/wui'
 import * as act from './../action';
 
 const _action_List_Item_Edit = 'Action_List_Item_Edit';
@@ -114,7 +114,9 @@ export default class ArticleListItem extends React.Component {
         let _coverSrc = this.state.coverThumbSrc;
         let _title = this.state.title;
         let _recommend = this.state.isRecommend;
-        let _recommendButton = <SButton id={_recommend ? 'favorite' : 'favorite_border'} selected={_recommend} onTouchTap={this._handle_item_recommend} />;
+        let _recommendButton = <Button id={_recommend ? 'favorite' : 'favorite_border'}
+            styleColor={_recommend ? _colorSelected : _colorLightGray} onTouchTap={this._handle_item_recommend} />;
+
         let _upButton = <SButton id="thumb_up" selected={this.state.status === 1} onTouchTap={this._handle_item_approval} />;
         let _downButton = <SButton id="thumb_down" selected={this.state.status === -1} onTouchTap={this._handle_item_unapproval} />;
         let _editButton = <SButton id="edit" onTouchTap={this._handle_item_edit} />;
@@ -139,9 +141,9 @@ export default class ArticleListItem extends React.Component {
                     </div>
 
                     <div className="itemBox-text-box">
-                        <p className="itemBox-text-title">
+                        <h3 className="itemBox-text-title limit-line-3">
                             <a href={this.props.value.original_url} target="_blank">{_title}</a>
-                        </p>
+                        </h3>
                         <p className="itemBox-text-subTitle">{this.state.updated}</p>
                         <ul className="keyword cfix">
                             {pills}
@@ -149,7 +151,7 @@ export default class ArticleListItem extends React.Component {
                     </div>
 
                     <div className="itemBox-console-box">
-                       <div className="itemBox-console-box-left"> {_upButton} {_downButton} </div ><div className="itemBox-console-box-right"> {_editButton}</div>
+                        <div className="itemBox-console-box-left"> {_upButton} {_downButton} </div ><div className="itemBox-console-box-right"> {_editButton}</div>
                     </div>
                 </Card>
             </div>

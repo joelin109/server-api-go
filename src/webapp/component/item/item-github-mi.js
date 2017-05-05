@@ -86,9 +86,9 @@ export default class ItemGithub extends React.Component {
                     </div>
 
                     <div className="itemBox-text-box">
-                        <p className="itemBox-text-title"><a href={this.props.value.html_url} target="_blank">{this.props.value.name}</a></p>
+                        <h2 className="itemBox-text-title"><a href={this.props.value.html_url} target="_blank">{this.props.value.name}</a></h2>
                         <p className="itemBox-text-subTitle">{_repoDateRange}</p>
-                        <p className="itemBox-text-text">{_repoDesc}</p>
+                        <p className="itemBox-text-text limit-line-2">{_repoDesc}</p>
                     </div>
 
                     <div className="itemBox-social-box">

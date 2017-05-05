@@ -43,7 +43,7 @@ class ItemCard extends React.Component {
     };
 
     _markdownHtml(title) {
-        let _title = `# ${title} \n`;
+        let _title = `## ${title} \n`;
         let markdownSrc = [
             'Changes are automatically rendered as ...\n\n* Follows the',
             '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
