@@ -179,6 +179,7 @@
 
 .draw-detail-tab-content-editor-box {
     width: 100%;
+    max-width: 768px;
     min-height: 660px;
     background: white;
     border-top: 0px solid #E0E0E0;
@@ -193,6 +194,7 @@
     padding-top: 0px;
     min-height: 660px;
     width: 100%;
+    max-width: 768px;
     border-radius: 3px;
 }
 
@@ -213,6 +215,7 @@
 .draw-detail-tab-content-preview {
     background-color: transparent;
     width: 100%;
+    max-width: 768px;
     display: flex;
     justify-content: center;
 }

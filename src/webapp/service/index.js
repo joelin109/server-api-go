@@ -25,7 +25,11 @@ exports.getTagTitle = (tagID) => {
         "t10006": "bbc-news",
         "t10007": "entertainment-weekly",
         "t10008": "the-new-york-times",
-        "t10009": "wired-de"
+        "t10009": "wired-de",
+        "t10010": "the-washington-post",
+        "t10011": "bloomberg",
+        "t10012": "the-next-web",
+        "t10013": "mashable"
     }
 
     return _tag[tagID];
