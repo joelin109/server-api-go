@@ -36,7 +36,7 @@ export default class List extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (typeof (nextProps.filterOpen) !== "undefined" && nextProps.filterOpen) {
+        if (typeof (nextProps.shouldUpdate) !== "undefined" && nextProps.shouldUpdate === false) {
             return false;
         }
         else {

@@ -88,7 +88,7 @@ class ItemCard extends React.Component {
                         </div>
                     </div>
 
-                    <div className="itemBox-desc">
+                    <div className="itemBox-text-box">
                         {_desc}
                     </div>
 

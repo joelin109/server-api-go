@@ -145,6 +145,7 @@ export default class ArticleListItem extends React.Component {
                             <a href={this.props.value.original_url} target="_blank">{_title}</a>
                         </h3>
                         <p className="itemBox-text-subTitle">{this.state.updated}</p>
+                        <p></p>
                         <ul className="keyword cfix">
                             {pills}
                         </ul>

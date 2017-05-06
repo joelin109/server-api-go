@@ -83,8 +83,7 @@ export default class ArticleTabBasic extends React.Component {
             desc: this.state.desc,
             channel_id: this.state.channel,
             tag_id: this.state.tag,
-            body_text: '',
-            id: '',
+            id: this.state.articleID
         };
 
         let _action = { type: _action_Handle_Save, data: _source };
@@ -201,7 +200,7 @@ export default class ArticleTabBasic extends React.Component {
 
                     <TextField
                         onChange={this._handle_item_coverSrc}
-                        defaultValue={_coverSrc}
+                        defaultValue={this.state.articleID}
                         className={_fieldClassName}
                         hintText="Image link"
                         floatingLabelText="Cover Src"

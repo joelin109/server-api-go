@@ -35,11 +35,15 @@ export default class NewArticle extends React.Component {
         this._handle_tab_save = this._handle_tab_save.bind(this);
         this._handle_tab_basic = this._handle_tab_basic.bind(this);
         this._handle_tab_desc = this._handle_tab_desc.bind(this);
+        this._handle_tab_preview = this._handle_tab_preview.bind(this);
         this._dispatch_header = this._dispatch_header.bind(this);
         this._dispatch_tab_basic = this._dispatch_tab_basic.bind(this);
         this._dispatch_tab_desc = this._dispatch_tab_desc.bind(this);
 
+    }
 
+    componentDidMount() {
+        this._getDetail()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -48,16 +52,35 @@ export default class NewArticle extends React.Component {
     }
 
 
+    _getDetail() {
+
+        if (this.state.source !== null) {
+            let _filter = { id: this.state.source.id }
+            service.detail(_filter)
+                .then(result => {
+                    if (result.body_text !== null) {
+                        this.state.editorHtml = result.body_text;
+                        this.state.source.title = result.title;
+                        this.setState({ willSave: false, refresh: true });
+                    }
+                });
+        }
+
+    }
+
     _save() {
         let _data = this.state.source;
         _data.body_text = this.state.editorHtml;
-
+        _data.body_match_level = this.state.editorHtml.length > 100 ? 3 : 1;
         service.update(_data)
             .then(data => {
-
                 alert('save successful')
             });
+    }
 
+    _close() {
+        let _action = { type: act.Action_Handle_Cancel }
+        this.props.dispatch_item_article(_action);
     }
 
     _handle_item_refresh() {
@@ -66,7 +89,7 @@ export default class NewArticle extends React.Component {
             id: _item.id,
             original_url: _item.original_url
         }
-        service.detail(_filter)
+        service.crawlHttpUrl(_filter)
             .then(result => {
                 this.state.editorHtml = result.body_text;
                 this.setState({ willSave: false, refresh: true });
@@ -74,19 +97,25 @@ export default class NewArticle extends React.Component {
     }
 
     _handle_tab_save() {
-        this.setState({ willSave: true, refresh: false  });
+        this.setState({ willSave: true, refresh: false });
         return false;
     }
 
     _handle_tab_basic(tab) {
         this.state.tabIndex = 1;
-        this.setState({ willSave: false, refresh: false  });
+        this.setState({ willSave: false, refresh: false });
     }
 
     _handle_tab_desc(tab) {
         this.state.tabIndex = 2;
-        this.setState({ willSave: false, refresh: false  });
+        this.setState({ willSave: false, refresh: false });
     }
+
+    _handle_tab_preview(tab) {
+        this.state.tabIndex = 3;
+        this.setState({ willSave: false, refresh: false });
+    }
+
 
 
     //Action for menu
@@ -95,7 +124,7 @@ export default class NewArticle extends React.Component {
 
         switch (action.type) {
             case act.Action_Handle_Cancel:
-                this.setState({ open: false, refresh: false });
+                this._close()
                 break;
 
             case act.Action_Handle_Save:
@@ -117,7 +146,6 @@ export default class NewArticle extends React.Component {
         switch (action.type) {
             case act.Action_Handle_Save:
                 this.state.source = action.data;
-                //alert(this.state.source.title)
                 break;
 
             default:
@@ -130,7 +158,6 @@ export default class NewArticle extends React.Component {
         switch (action.type) {
             case act.Action_Handle_Save:
                 this.state.editorHtml = convert.toHtml(action.data);
-                //alert(this.state.editorHtml)
                 break;
 
             default:
@@ -181,7 +208,7 @@ export default class NewArticle extends React.Component {
                                         onRefresh={this.state.refresh}
                                     />
                                 </Tab>
-                                <Tab label="Preview &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" onActive={this._handle_tab_desc}>
+                                <Tab label="Preview &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" onActive={this._handle_tab_preview}>
 
                                 </Tab>
                             </Tabs>

@@ -72,19 +72,28 @@ h1 {
 }
 
 h2 {
-    margin: 0.6em 0;
+    margin: 0.5em 0;
     font-size: 1.8rem;
     line-height: 25px;
 }
 
 h3 {
-    margin: 0.6em 0;
+    margin: 0.5em 0;
     font-size: 1.5rem;
     line-height: 22px;
 }
 
+h4 {
+    margin: 0.5em 0;
+    font-size: 15px;
+    font-size: 1.25rem;
+    line-height: 20px;
+    font-weight: normal;
+}
+
 p {
-    margin-bottom: 1.8em;
+    margin-top: 0.2em;
+    margin-bottom: 2.5em;
     font-size: 15px;
     font-size: 1.25rem;
     line-height: 20px;
@@ -232,6 +241,10 @@ p {
     justify-content: flex-end;
     padding-right: 5px;
 }
+.loc-box-content-between {
+    display: flex;
+    justify-content: space-between;
+}
 
 .z-3 {
     z-index: 1100;
@@ -288,6 +301,9 @@ p {
 
 .w-limit-60 {
     max-width: 60px;
+}
+.w-limit-120 {
+    min-width: 50px;
 }
 
 .w-limit-600 {

@@ -8,7 +8,9 @@ import EditorContent from './editor-content'
 import EditorContentHtml from './editor-content-html'
 import EditorContentView from './editor-content-view'
 
-
+const editor_Status_Normal = 'editor_Status_Normal';
+const editor_Status_Change = 'editor_Status_Change';
+const editor_Status_Save = 'editor_Status_Save';
 const _action_Handle_Save = 'Action_Handle_Save';
 export default class RichTextEditor extends React.Component {
     constructor(props) {
@@ -21,6 +23,7 @@ export default class RichTextEditor extends React.Component {
             editorContent: {},
             editorChange: false,
             tabIndex: 1,
+            refresh: false,
             willUpdate: true,
 
         };
@@ -36,6 +39,7 @@ export default class RichTextEditor extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        this.state.refresh = false;
         this.state.open = nextProps.open;
         if (nextProps.onSave) {
             let _action = { type: _action_Handle_Save, data: this.state.editorHtml };
@@ -43,6 +47,7 @@ export default class RichTextEditor extends React.Component {
             this.state.willUpdate = false;
         }
         else if (nextProps.onRefresh) {
+            this.state.refresh = true;
             this.state.willUpdate = true;
             this._parse_content_htm(nextProps.source)
         }
@@ -67,14 +72,17 @@ export default class RichTextEditor extends React.Component {
     }
 
     _handle_tab_editor(tab) {
+        this.state.refresh = false;
         this.state.willUpdate = true;
         this.setState({ tabIndex: 1 })
     }
     _handle_tab_html(tab) {
+        this.state.refresh = false;
         this.state.willUpdate = true;
         this.setState({ tabIndex: 2 })
     }
     _handle_tab_preview(tab) {
+        this.state.refresh = false;
         this.state.willUpdate = true;
         this.setState({ tabIndex: 3 })
     }
@@ -102,13 +110,20 @@ export default class RichTextEditor extends React.Component {
 
 
     render() {
+        //alert('editor - index  |' + this.state.tabIndex + this.state.refresh )
+        let _editorReset = true;
+        if (this.state.tabIndex !== 2 && this.state.refresh === false) {
+            _editorReset = false;
+        }
+
         let _editor = <div> </div>;
-        if (this.state.tabIndex !== 2) {
+        if (_editorReset === false) {
             _editor = <EditorContent
                 show={this.props.show && this.state.tabIndex === 1}
                 source={this.state.editorContent} change={this.state.editorChange}
                 dispatch={this._dispatch_tab_content_editor} />
         }
+
 
         return (
             <div className="draw-detail-editor-container">

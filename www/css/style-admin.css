@@ -73,8 +73,8 @@
     width: 95%;
     display: flex;
     justify-content: space-between;
-    align-content: center;
-    align-items: center;
+    align-content: flex-end;
+    align-items: flex-end;
     margin-left: 10px;
     border-top: 1px solid #E0E0E0;
 }
@@ -83,16 +83,16 @@
     width: 120px;
     display: flex;
     justify-content: flex-start;
-    align-content: center;
-    align-items: center;
+    align-content: flex-end;
+    align-items: flex-end;
 }
 
 .itemBox-console-box-right {
-    width: 120px;
+    width: 60px;
     display: flex;
     justify-content: flex-end;
-    align-content: center;
-    align-items: center;
+    align-content: flex-end;
+    align-items: flex-end;
 }
 
 

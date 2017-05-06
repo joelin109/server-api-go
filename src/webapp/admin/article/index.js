@@ -18,6 +18,7 @@ export default class AdminArticle extends React.Component {
             pageSize: service.request_page_size,
             total: 0,
             page: 1,
+            listUpdate: false,
             filterData: "ars-technica",
             filterVisible: false,
             editVisible: false,
@@ -98,6 +99,7 @@ export default class AdminArticle extends React.Component {
         this.state.filterVisible = false;
         this.state.detailVisible = false;
         this.state.editVisible = false;
+        this.state.listUpdate = true;
         this.state.willNeedUpdate = willUpdate;
     }
 
@@ -139,6 +141,17 @@ export default class AdminArticle extends React.Component {
     }
 
     _dispatch_list_item_article(action) {
+        switch (action.type) {
+            case act.Action_Handle_Cancel:
+                this._setDisable()
+                break;
+
+            default:
+                break;
+        }
+
+        this._setFilter(false);
+        return false;
 
     }
 
@@ -162,6 +175,7 @@ export default class AdminArticle extends React.Component {
     _setFilter(open = true) {
         this._component_should_update();
         this.setState({
+            listUpdate: false,
             filterVisible: open,
             editVisible: false
         });
@@ -171,8 +185,17 @@ export default class AdminArticle extends React.Component {
 
         this._component_should_update();
         this.setState({
+            listUpdate: false,
             filterVisible: false,
             editVisible: true,
+        });
+    }
+    _setDisable() {
+        this._component_should_update();
+        this.setState({
+            listUpdate: false,
+            filterVisible: false,
+            editVisible: false,
         });
     }
 
@@ -183,8 +206,13 @@ export default class AdminArticle extends React.Component {
     render() {
         let _filterVisible = this.state.filterVisible;
         let _editVisible = _filterVisible ? false : this.state.editVisible;
-        let _willUpdate = !_filterVisible && !_editVisible;
         let _pageSize = this.state.results.length >= this.state.pageSize ? this.state.results.length : this.state.pageSize
+
+        let _newAticle = <div></div>
+        if (_editVisible === true) {
+            _newAticle = <NewArticle open={_editVisible} source={this.state.editObject} dispatch_item_article={this._dispatch_list_item_article} />
+        }
+
         return (
             <div>
                 <List
@@ -192,7 +220,7 @@ export default class AdminArticle extends React.Component {
                     pageSize={_pageSize} total={this.state.total}
                     dispatch={this._dispatch_list}
                     dispatch_item={this._dispatch_list_item}
-                    filterOpen={!_willUpdate}
+                    shouldUpdate={this.state.listUpdate}
                     itemTag={tag.List_Item_Admin_Article}
                     admin={true}
                     updateItem={'id'}
@@ -203,11 +231,7 @@ export default class AdminArticle extends React.Component {
                     dispatch_filter={this._dispatch_list_filter}
                 />
 
-                <NewArticle
-                    open={_editVisible}
-                    source={this.state.editObject}
-                    dispatch_item_article={this._dispatch_list_item_article}
-                />
+                {_newAticle}
             </div>
         );
     }

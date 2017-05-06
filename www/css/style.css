@@ -86,7 +86,7 @@
 
 .itemBox {
     /*background: #E0E0E0*/
-    padding-bottom: 12px;
+    padding-bottom: 10px;
 }
 
 .itemBox:hover {
@@ -130,6 +130,9 @@
     border-radius: 30px;
     border: 3px solid #E0E0E0;
 }
+.itemBox-img-author p {
+    margin: 0em
+}
 
 .img-organization {
     background: #757575;
@@ -162,7 +165,7 @@
 
 .itemBox-text-box {
     padding: 20px 10px 5px 10px;
-    min-height: 130px;
+    min-height: 120px;
 }
 
 .itemBox-text-box a {
@@ -176,7 +179,8 @@
 }
 
 .itemBox-text-box p {
-    margin-bottom: 0.6em;
+    margin-bottom: 0.3em;
+    min-height: 6px;
 }
 
 .itemBox-text-title {
@@ -187,7 +191,7 @@
     margin-top: -8px;
     color: #9E9E9E;
     word-break: break-word;
-    margin-bottom: 0px;
+    margin-bottom: 0.6em;
 }
 
 .itemBox-text-text {
@@ -207,7 +211,8 @@
 .keyword li2 {
     float: left;
     margin-right: 5px;
-    margin-top: 0px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 .keyword li2:last-child {

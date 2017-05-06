@@ -50,13 +50,24 @@ export let updateStatus = (data) => {
         })
 }
 
-export let crawlArticle = (bodyData) => {
+export let crawlArticle = (filter) => {
 
-    let _bodyData = bodyData;
+    let _bodyData = filter;
     let _apiURL = baseURL + api.APIURL_Content_Crawler_Article;
     return request.post(_apiURL, _bodyData)
         .then(data => {
             return data
+        })
+
+}
+
+export let crawlHttpUrl = (filter) => {
+
+    let _bodyData = filter
+    let _apiURL = baseURL + api.APIURL_Content_Crawler_Http_URL;
+    return request.post(_apiURL, _bodyData)
+        .then(data => {
+            return data.result
         })
 
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconMenu, IconButton, MenuItem } from 'material-ui';
-import { Button, Icon, SIcon } from './../component/wui'
+import { Button, Icon } from './../component/wui'
 import * as act from './action'
 
 export default class DetailHeader extends React.Component {
@@ -38,10 +38,6 @@ export default class DetailHeader extends React.Component {
     _handle_more(event, value) {
         switch (value) {
             case '1':
-                this._handle_save();
-                break;
-
-            case '4':
                 this.props.dispatch({ type: act.Action_Handle_Refresh })
                 break;
 
@@ -63,22 +59,29 @@ export default class DetailHeader extends React.Component {
                     </div>
                 </div>
 
-                <div className="w-limit-60">
-                    <div className="float-button colr-dark loc-top-1">
-                        <IconMenu
-                            iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
-                            onChange={this._handle_more}
-                            value={this.state.actionValue}
-                            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-
-                        >
-                            <MenuItem value="1" primaryText="Save" />
-                            <MenuItem value="2" primaryText="Save & New" />
-                            <MenuItem value="3" primaryText="Publish" />
-                            <MenuItem value="4" primaryText="Refresh" />
-                            <MenuItem value="5" primaryText="Share" />
-                        </IconMenu>
+                <div className="loc-box-content-between w-limit-120">
+                    <div className="w-limit-60">
+                        <div className="float-button colr-dark loc-top-1">
+                            <Button id={'save'} onTouchTap={this._handle_save} />
+                        </div>
                     </div>
+                    <div className="w-limit-60">
+                        <div className="float-button colr-dark loc-top-1">
+                            <IconMenu
+                                iconButtonElement={<IconButton><Icon id={'more_horiz'} /></IconButton>}
+                                onChange={this._handle_more}
+                                value={this.state.actionValue}
+                                anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+
+                            >
+                                <MenuItem value="1" primaryText="Refresh" />
+                                <MenuItem value="2" primaryText="Save & New" />
+                                <MenuItem value="3" primaryText="Publish" />
+                                <MenuItem value="4" primaryText="Share" />
+                            </IconMenu>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         )
