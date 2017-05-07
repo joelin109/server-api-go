@@ -241,6 +241,7 @@ p {
     justify-content: flex-end;
     padding-right: 5px;
 }
+
 .loc-box-content-between {
     display: flex;
     justify-content: space-between;
@@ -302,6 +303,7 @@ p {
 .w-limit-60 {
     max-width: 60px;
 }
+
 .w-limit-120 {
     min-width: 50px;
 }
@@ -327,12 +329,20 @@ p {
     display: none;
 }
 
+.limit-line-0 {
+    max-height: 10px;
+}
+
+.limit-line-1 {
+    min-height: 15px;
+}
+
 .limit-line-2 {
     min-height: 30px;
 }
 
 .limit-line-3 {
-     min-height: 46px;
+    min-height: 46px;
 }
 
 

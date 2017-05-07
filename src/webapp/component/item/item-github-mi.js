@@ -82,7 +82,7 @@ export default class ItemGithub extends React.Component {
                         <img className={_repoAuthorClass} id={this.props.value.owner.html_url} src={_userThumb}
                             onClick={this._handleAuthor.bind(this)} />
 
-                        <label className="itemBox-img-below-right">{'...'}</label>
+                        <label className="itemBox-img-below loc-right-box">{'...'}</label>
                     </div>
 
                     <div className="itemBox-text-box">

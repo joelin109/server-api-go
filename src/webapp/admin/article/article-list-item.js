@@ -1,7 +1,7 @@
 import React from 'react';
 import * as service from './../../service';
 import { Card, } from 'material-ui/Card';
-import { SButton, Button, _colorLightGray, _colorSelected } from './../../component/wui'
+import { Button, _colorLightGray, _colorSelected, StarRating } from './../../component/wui'
 import * as act from './../action';
 
 const _action_List_Item_Edit = 'Action_List_Item_Edit';
@@ -114,12 +114,17 @@ export default class ArticleListItem extends React.Component {
         let _coverSrc = this.state.coverThumbSrc;
         let _title = this.state.title;
         let _recommend = this.state.isRecommend;
+        let _status = this.state.status;
+        let _body_match_level = this.props.value.body_match_level;
+
         let _recommendButton = <Button id={_recommend ? 'favorite' : 'favorite_border'}
             styleColor={_recommend ? _colorSelected : _colorLightGray} onTouchTap={this._handle_item_recommend} />;
-
-        let _upButton = <SButton id="thumb_up" selected={this.state.status === 1} onTouchTap={this._handle_item_approval} />;
-        let _downButton = <SButton id="thumb_down" selected={this.state.status === -1} onTouchTap={this._handle_item_unapproval} />;
-        let _editButton = <SButton id="edit" onTouchTap={this._handle_item_edit} />;
+        let _matchStarRating = <StarRating totalStar={_body_match_level} />
+        let _upButton = <Button id="thumb_up" styleColor={_status === 1 ? _colorSelected : _colorLightGray}
+            onTouchTap={this._handle_item_approval} />;
+        let _downButton = <Button id="thumb_down" styleColor={_status === -1 ? _colorSelected : _colorLightGray}
+            onTouchTap={this._handle_item_unapproval} />;
+        let _editButton = <Button id="edit" styleColor={_colorLightGray} onTouchTap={this._handle_item_edit} />;
 
         return (
 
@@ -132,11 +137,13 @@ export default class ArticleListItem extends React.Component {
                             src={_coverSrc}
                             onClick={this._handle_item_detail}
                         />
+
                         <div className="itemBox-recommend">
                             {_recommendButton}
                         </div>
-                        <div className="itemBox-text-rightcopy">
-                            <p className="itemBox-text-subTitle"></p>
+
+                        <div className="limit-line-0"> 
+                            {_matchStarRating}
                         </div>
                     </div>
 

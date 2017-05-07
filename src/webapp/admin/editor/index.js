@@ -61,6 +61,7 @@ export default class RichTextEditor extends React.Component {
         try {
             this.state.editorHtml = html;
             this.state.editorContent = convert.toEditorContent(html);
+
             return true;
         }
         catch (err) {
@@ -95,6 +96,9 @@ export default class RichTextEditor extends React.Component {
             let _editorContent = action.data;
             this.state.editorContent = _editorContent;
             this.state.editorHtml = convert.toHtml(_editorContent);
+
+            let _action = { type: _action_Handle_Save, data: this.state.editorHtml };
+            this.props.dispatch(_action);
         }
 
         this.state.editorChange = false;
@@ -103,6 +107,9 @@ export default class RichTextEditor extends React.Component {
     _dispatch_tab_content_html(action) {
         let _html = action.data;
         this.state.editorChange = this._parse_content_htm(_html)
+
+        let _action = { type: _action_Handle_Save, data: this.state.editorHtml };
+        this.props.dispatch(_action);
     }
 
     _dispatch_tab_content_preview(tab) {

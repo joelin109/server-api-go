@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextField, RadioButtonGroup, RadioButton, Toggle, Checkbox, DropDownMenu, MenuItem } from 'material-ui';
 import * as act from './../../../setting/action'
-import { SButton, Button } from './../../../component/wui'
+import { Button, _colorLightGray, _colorSelected } from './../../../component/wui'
 
 const _action_Handle_Save = 'Action_Handle_Save';
 export default class ArticleTabBasic extends React.Component {
@@ -63,7 +63,8 @@ export default class ArticleTabBasic extends React.Component {
 
         this.state.isNew = _isNew;
         this.state.articleID = _isNew ? '' : _item.id;
-        this.state.coverSrc = _isNew ? '' : _item.cover_thumbnail_src;
+        this.state.coverSrc = _isNew ? '' : _item.cover_src;
+        this.state.coverThumbSrc = _isNew ? '' : _item.cover_thumbnail_src;
         this.state.isRecommend = _isNew ? false : _item.is_recommend;
         this.state.status = _isNew ? 1 : _item.publish_status;
         this.state.title = _isNew ? '' : _item.title;
@@ -154,11 +155,16 @@ export default class ArticleTabBasic extends React.Component {
         let _fieldClassName = 'root-text-field-full';
 
         let _coverSrc = this.state.coverSrc;
+        let _coverThumbSrc = this.state.coverThumbSrc;
         let _recommend = this.state.isRecommend;
+        let _status = this.state.status;
         let _title = this.state.title;
-        let _recommendButton = <SButton id={_recommend ? 'favorite' : 'favorite_border'} selected={_recommend} onTouchTap={this._handle_item_recommend} />;
-        let _upButton = <SButton id="thumb_up" selected={this.state.status === 1} onTouchTap={this._handle_item_approval} />;
-        let _downButton = <SButton id="thumb_down" selected={this.state.status === -1} onTouchTap={this._handle_item_unapproval} />;
+        let _recommendButton = <Button id={_recommend ? 'favorite' : 'favorite_border'} styleColor={_recommend ? _colorSelected : _colorLightGray}
+            onTouchTap={this._handle_item_recommend} />;
+        let _upButton = <Button id="thumb_up" styleColor={_status === 1 ? _colorSelected : _colorLightGray}
+            onTouchTap={this._handle_item_approval} />;
+        let _downButton = <Button id="thumb_down" styleColor={_status === -1 ? _colorSelected : _colorLightGray}
+            onTouchTap={this._handle_item_unapproval} />;
 
         return (
 
@@ -167,7 +173,7 @@ export default class ArticleTabBasic extends React.Component {
                     <div className="content-line">
 
                         <div className="itemBox-img-box">
-                            <img className="itemBox-img-cover" src={_coverSrc} />
+                            <img className="itemBox-img-cover" src={_coverThumbSrc} />
                             <div className="itemBox-recommend">
                                 {_recommendButton}
                             </div>
@@ -200,14 +206,14 @@ export default class ArticleTabBasic extends React.Component {
 
                     <TextField
                         onChange={this._handle_item_coverSrc}
-                        defaultValue={this.state.articleID}
+                        defaultValue={_coverSrc}
                         className={_fieldClassName}
                         hintText="Image link"
                         floatingLabelText="Cover Src"
                         floatingLabelFixed={true}
                     />
                     <TextField
-                        defaultValue={_coverSrc}
+                        defaultValue={_coverThumbSrc}
                         className={_fieldClassName}
                         hintText="."
                         floatingLabelText="Cover Thumbnail Src"
@@ -222,6 +228,7 @@ export default class ArticleTabBasic extends React.Component {
                         floatingLabelFixed={true}
                     />
                     <TextField
+                        defaultValue={this.state.articleID}
                         className={_fieldClassName}
                         hintText="."
                         floatingLabelText="SubTitle"

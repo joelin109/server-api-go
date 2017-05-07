@@ -57,7 +57,7 @@ export default class ItemArticle extends React.Component {
                             src={_coverSrc}
                             onClick={this._handleDetail.bind(this)}
                         />
-                        <div className="itemBox-img-below-right">
+                        <div className="itemBox-img-below loc-right-box">
                             <p className="itemBox-text-subTitle">{_publish}</p>
                         </div>
                     </div>

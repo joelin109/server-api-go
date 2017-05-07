@@ -157,7 +157,7 @@ export default class NewArticle extends React.Component {
     _dispatch_tab_desc(action) {
         switch (action.type) {
             case act.Action_Handle_Save:
-                this.state.editorHtml = convert.toHtml(action.data);
+                this.state.editorHtml = action.data;
                 break;
 
             default:

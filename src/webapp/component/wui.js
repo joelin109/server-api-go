@@ -1,5 +1,8 @@
 import React from 'react';
 import { IconButton, FlatButton, FontIcon, FloatingActionButton } from 'material-ui';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ActionVisibility from 'material-ui/svg-icons/action/visibility';
+import ActionVisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 const Style = {
     button: {
         paddingTop: 8,
@@ -30,14 +33,6 @@ const BasicIcon = ({ id, styleColor }) => {
     let _color = styleColor;
     return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
 }
-
-
-export const SButton = ({ id, selected = false, onTouchTap }) => {
-    let _styleColor = selected ? _colorSelected : _colorDarkGray;
-    let _icon = <BasicIcon id={id} styleColor={_styleColor} />
-    return <IconButton className="base-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
-}
-
 
 export const Button = ({ id, styleColor, onTouchTap }) => {
 
@@ -98,5 +93,23 @@ export const Link = ({ id, to }) => {
     return <IconButton className="header-icon-button-link" href={to} >{_icon}</IconButton>
 }
 
+export const StarRating = ({ totalStar = 0 }) => {
+    //let _icon = <Icon id='star_border' />;
+    let _id = totalStar >= 0 ? 'star' : 'star_half';
+    let _nc = totalStar >= 0 ? _colorDefault : _colorSelected;
+    let _c = app_Theme_Primary_Color;
+    let _iconStyle = { maxHeight: 20, maxWidth: 20 };
+
+    // let _star1 = <FontIcon className="material-icons" color={totalStar >= 1 ? _c : _nc}>{_id}</FontIcon>
+    // let _star2 = <FontIcon className="material-icons" style={_iconStyle} color={totalStar >= 2 ? _c : _colorDefault}>{_id}</FontIcon>
+    let _star1A = <ActionGrade style={_iconStyle} color={totalStar >= 1 ? _c : _nc} />
+    let _star1B = <ActionVisibilityOff style={_iconStyle} color={totalStar >= 1 ? _c : _nc} />
+    let _star2 = <ActionGrade style={_iconStyle} color={totalStar >= 2 ? _c : _colorDefault} />
+    let _star3 = <ActionGrade style={_iconStyle} color={totalStar >= 3 ? _c : _colorDefault} />
+    let _star4 = <ActionGrade style={_iconStyle} color={totalStar >= 4 ? _c : _colorDefault} />
+    let _star5 = <ActionGrade style={_iconStyle} color={totalStar >= 5 ? _c : _colorDefault} />
+
+    return <div className="loc-right-box">{totalStar >= 0 ? _star1A : _star1B}{_star2}{_star3}{_star4}{_star5}</div>
+}
 
 
