@@ -83,13 +83,30 @@ export default class AdminArticle extends React.Component {
             });
     }
 
-    _listItemStatusUpdate(data) {
+    _listItemStatusUpdate(updatedItem) {
 
-        service.updateStatus(data)
+        service.updateStatus(updatedItem)
             .then(data => {
-
-
+                this._listItemUpdate(updatedItem, false)
             });
+
+    }
+
+    _listItemUpdate(updatedItem, willRefresh = true) {
+        // delete old item, then insert new updated item.
+        let _updatedResult = this.state.results.map(item => {
+            return item["id"] !== updatedItem["id"] ? item : updatedItem
+        });
+        /*let _updatedResult = this.state.results;
+        Array.from(_updatedResult, (item) => {
+            return item["id"] !== updatedItem["id"] ? item : updatedItem
+        })*/
+
+        this.state.listUpdate = willRefresh;
+        this.state.willNeedUpdate = willRefresh;
+        this.setState({
+            results: _updatedResult
+        });
     }
 
     _component_should_update(willUpdate = true, willScroll = false) {
@@ -143,16 +160,17 @@ export default class AdminArticle extends React.Component {
     _dispatch_list_item_article(action) {
         switch (action.type) {
             case act.Action_Handle_Cancel:
-                this._setDisable()
+                this._setFilter(false);
+                break;
+            case act.Action_Handle_Save:
+                this._listItemUpdate(action.data)
                 break;
 
             default:
                 break;
         }
 
-        this._setFilter(false);
         return false;
-
     }
 
 
@@ -190,17 +208,6 @@ export default class AdminArticle extends React.Component {
             editVisible: true,
         });
     }
-    _setDisable() {
-        this._component_should_update();
-        this.setState({
-            listUpdate: false,
-            filterVisible: false,
-            editVisible: false,
-        });
-    }
-
-
-
 
 
     render() {
@@ -210,7 +217,8 @@ export default class AdminArticle extends React.Component {
 
         let _newAticle = <div></div>
         if (_editVisible === true) {
-            _newAticle = <NewArticle open={_editVisible} source={this.state.editObject} dispatch_item_article={this._dispatch_list_item_article} />
+            _newAticle = <NewArticle open={_editVisible} source={this.state.editObject}
+                dispatch_item_article={this._dispatch_list_item_article} />
         }
 
         return (

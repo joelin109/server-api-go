@@ -74,18 +74,14 @@ export default class ArticleTabBasic extends React.Component {
     }
 
     _save() {
-        let _source = {
-            is_recommend: this.state.isRecommend,
-            publish_status: this.state.status,
-            cover_src: this.state.coverSrc,
-            cover_thumb_src: this.state.coverThumbSrc,
-            title: this.state.title,
-            subtitle: this.state.subTitle,
-            desc: this.state.desc,
-            channel_id: this.state.channel,
-            tag_id: this.state.tag,
-            id: this.state.articleID
-        };
+        let _source = this.props.source === null ? {} : this.props.source;
+        _source.is_recommend = this.state.isRecommend;
+        _source.publish_status = this.state.status;
+        _source.coverSrc = this.state.coverSrc;
+        _source.coverThumbSrc = this.state.coverThumbSrc;
+        _source.title = this.state.title;
+        _source.desc = this.state.desc;
+        _source.id = this.state.articleID;
 
         let _action = { type: _action_Handle_Save, data: _source };
         this.props.dispatch(_action);

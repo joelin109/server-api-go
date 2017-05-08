@@ -123,9 +123,9 @@ export default class List extends React.Component {
         let _new = '';
         let _refresh = '';
         if (this.props.admin !== null && this.props.admin) {
-            _new = <FloatingButton className="loc-right-box colr-selected loc-top-3 z-3"
+            _new = <FloatingButton className="loc-right-box colr-floating loc-top-3 z-3"
                 id="add" onTouchTap={this._handle_list_new} />
-            _refresh = <FloatingButton className="loc-right-box colr-selected loc-btm-1 z-3"
+            _refresh = <FloatingButton className="loc-right-box colr-floating loc-btm-1 z-3"
                 id="refresh" onTouchTap={this._handle_list_refresh} />
         }
 

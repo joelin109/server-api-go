@@ -65,12 +65,10 @@ export default class ArticleListItem extends React.Component {
             this.setState({ willUpdate: true });
         }
 
-        let _data = {
-            id: this.state.id,
-            is_recommend: this.state.isRecommend,
-            publish_status: this.state.status,
-        }
-        this.props.dispatch({ type: _action_List_Item_Update, data: _data })
+        let _updateItem = this.props.value;
+        _updateItem["is_recommend"] = this.state.isRecommend;
+        _updateItem["publish_status"] = this.state.status;
+        this.props.dispatch({ type: _action_List_Item_Update, data: _updateItem })
     }
 
     _handle_item_detail(e) {
@@ -142,7 +140,7 @@ export default class ArticleListItem extends React.Component {
                             {_recommendButton}
                         </div>
 
-                        <div className="limit-line-0"> 
+                        <div className="limit-line-0">
                             {_matchStarRating}
                         </div>
                     </div>

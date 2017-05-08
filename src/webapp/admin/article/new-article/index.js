@@ -15,7 +15,7 @@ export default class NewArticle extends React.Component {
     constructor(props) {
         super(props);
 
-        let _html = '<p></p><img src="https://cdn.arstechnica.net/wp-content/uploads/2016/09/Colossal-1-760x380.jpg " style="float:none;height: auto;width: 100%"/>';
+        let _html = '<p>...</p>';
         this.state = {
             open: props.open,
             source: props.source,
@@ -74,6 +74,9 @@ export default class NewArticle extends React.Component {
         _data.body_match_level = this.state.editorHtml.length > 100 ? 3 : 1;
         service.update(_data)
             .then(data => {
+                //Should update to the latest source.
+                let _action = { type: act.Action_Handle_Save, data: this.state.source };
+                this.props.dispatch_item_article(_action);   
                 alert('save successful')
             });
     }
