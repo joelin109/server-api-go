@@ -169,6 +169,7 @@
 .itemBox-text-box a {
     text-decoration: none;
     outline: none;
+      /*background: #455A64*/
     color: #455A64;
 }
 

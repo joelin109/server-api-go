@@ -147,7 +147,7 @@ export default class ArticleListItem extends React.Component {
                         </div>
                     </div>
 
-                    <div className="itemBox-text-box">
+                    <div className="itemBox-text-box-admin">
                         <h3 className="itemBox-text-title limit-line-3">
                             <a href={this.props.value.original_url} target="_blank">{_title}</a>
                         </h3>

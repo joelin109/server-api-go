@@ -58,15 +58,35 @@
     top: 15px;
     left: 10px;
     cursor: pointer;
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     background: #FAFAFA;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
+}
+
+.itemBox-text-box-admin {
+    padding: 20px 10px 5px 10px;
+    min-height: 120px;
+}
+
+.itemBox-text-box-admin a {
+    text-decoration: none;
+    outline: none;
+    color: #484848;
+}
+
+.itemBox-text-box-admin a:hover {
+    color: #455A64;
+}
+
+.itemBox-text-box-admin p {
+    margin-bottom: 0.3em;
+    min-height: 6px;
 }
 
 .itemBox-console-box {

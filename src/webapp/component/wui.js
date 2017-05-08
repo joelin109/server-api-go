@@ -70,7 +70,7 @@ export const FloatingButton = ({ id = 'save', className = 'colr-default loc-btm-
 
     let _styleColor = _colorDefault
     if (_className.indexOf('colr-floating') >= 0) {
-        _styleColor = _colorDefault
+        _styleColor = app_Theme_Floating_Color
     } else if (_className.indexOf('colr-dark') >= 0) {
         _styleColor = _colorDarkGray
     } else if (_className.indexOf('colr-selected') >= 0) {
@@ -98,7 +98,7 @@ export const StarRating = ({ totalStar = 0 }) => {
     let _id = totalStar >= 0 ? 'star' : 'star_half';
     let _nc = totalStar >= 0 ? _colorDefault : _colorSelected;
     let _c = app_Theme_Primary_Color;
-    let _iconStyle = { maxHeight: 20, maxWidth: 20 };
+    let _iconStyle = { maxHeight: 16, maxWidth: 16 };
 
     // let _star1 = <FontIcon className="material-icons" color={totalStar >= 1 ? _c : _nc}>{_id}</FontIcon>
     // let _star2 = <FontIcon className="material-icons" style={_iconStyle} color={totalStar >= 2 ? _c : _colorDefault}>{_id}</FontIcon>
