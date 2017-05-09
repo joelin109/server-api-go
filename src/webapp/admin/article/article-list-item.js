@@ -1,9 +1,10 @@
 import React from 'react';
 import * as service from './../../service';
 import { Card, } from 'material-ui/Card';
-import { Button, _colorLightGray, _colorSelected, StarRating } from './../../component/wui'
+import { Button, StarRating, _colorDefault, _colorLightGray, _colorSelected } from './../../component/wui'
 import * as act from './../action';
 
+const _action_List_Item_Cover = 'Action_List_Item_Cover';
 const _action_List_Item_Edit = 'Action_List_Item_Edit';
 const _action_List_Item_Update = 'Action_List_Item_Update';
 export default class ArticleListItem extends React.Component {
@@ -25,6 +26,7 @@ export default class ArticleListItem extends React.Component {
 
         this._initItem(props.value)
 
+        this._handle_item_cover = this._handle_item_cover.bind(this);
         this._handle_item_detail = this._handle_item_detail.bind(this);
         this._handle_item_tag = this._handle_item_tag.bind(this);
         this._handle_item_recommend = this._handle_item_recommend.bind(this);
@@ -71,10 +73,15 @@ export default class ArticleListItem extends React.Component {
         this.props.dispatch({ type: _action_List_Item_Update, data: _updateItem })
     }
 
-    _handle_item_detail(e) {
+
+    _handle_item_cover(e) {
+        this.props.dispatch({ type: _action_List_Item_Cover, data: this.props.value })
         //this.props.dispatch({ type: act.Action_List_Article_Detail, data: e.target.src })
     };
 
+    _handle_item_detail(e) {
+        //this.props.dispatch({ type: act.Action_List_Article_Detail, data: e.target.src })
+    };
 
     _handle_item_tag(e) {
         //this.props.dispatch({ type: act.Action_List_Article_Tag, data: e.target.innerHTML })
@@ -122,7 +129,7 @@ export default class ArticleListItem extends React.Component {
             onTouchTap={this._handle_item_approval} />;
         let _downButton = <Button id="thumb_down" styleColor={_status === -1 ? app_Theme_Primary_Color : _colorLightGray}
             onTouchTap={this._handle_item_unapproval} />;
-        let _editButton = <Button id="edit" styleColor={_colorLightGray} onTouchTap={this._handle_item_edit} />;
+        let _editButton = <Button id="edit" styleColor={_colorDefault} onTouchTap={this._handle_item_edit} />;
 
         return (
 
@@ -133,7 +140,7 @@ export default class ArticleListItem extends React.Component {
                         <img
                             className="itemBox-img-cover" id="im-user-id"
                             src={_coverSrc}
-                            onClick={this._handle_item_detail}
+                            onClick={this._handle_item_cover}
                         />
 
                         <div className="itemBox-recommend">

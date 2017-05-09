@@ -1,6 +1,7 @@
 export const Action_List_Filter = 'Action_List_Filter';
 export const Action_List_Filter_Confirm = 'Action_List_Filter_Confirm'
 export const Action_List_Item_New = 'Action_List_Item_New';
+export const Action_List_Item_Cover = 'Action_List_Item_Cover';
 export const Action_List_Item_Link = 'Action_List_Item_Link';
 export const Action_List_Item_Author = 'Action_List_Item_Author';
 export const Action_List_Item_Tag = 'Action_List_Item_Tag';
@@ -14,4 +15,3 @@ export const Action_Handle_Save = 'Action_Handle_Save';
 export const Action_Handle_SaveAndNew = 'Action_Handle_SaveAndNew';
 export const Action_Handle_Publish = 'Action_Handle_Publish';
 export const Action_Handle_Refresh = 'Action_Handle_Refresh';
-

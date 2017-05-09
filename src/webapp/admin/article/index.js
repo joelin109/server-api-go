@@ -149,6 +149,9 @@ export default class AdminArticle extends React.Component {
             case act.Action_List_Item_Edit:
                 this._setEditOrNew(action.data, false)
                 break;
+            case act.Action_List_Item_Cover:
+                this._setEditOrNew(action.data, false)
+                break;
 
             default:
                 break;
