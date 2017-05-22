@@ -74,21 +74,22 @@ export default class App extends React.Component {
         let _link = `/admin?_t=${_type}`;
 
         switch (action.type) {
-            case act.Action_Channel_Type_Github:
-                //_link = `/geek?_t=${_type}`;
+            case act.Action_Channel_Type_Article:
+                //_link = `/article?_s=${_type}`;
                 _link = `/`;
                 break;
 
-            case act.Action_Channel_Type_Word:
-                _link = `/deutsch?_t=${_type}`;
-                break;
-
-            case act.Action_Channel_Type_Article:
-                _link = `/article?_s=${_type}`;
+            case act.Action_Channel_Type_Github:
+                _link = `/geek?_t=${_type}`;
+                //_link = `/`;
                 break;
 
             case act.Action_Channel_Type_Grammar:
                 _link = `/channel?_t=${_type}`;
+                break;
+
+            case act.Action_Channel_Type_Word:
+                _link = `/deutsch?_t=${_type}`;
                 break;
 
             case act.Action_Admin_Channel_Type_Word:

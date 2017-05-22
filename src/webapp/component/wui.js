@@ -5,9 +5,9 @@ import ActionVisibility from 'material-ui/svg-icons/action/visibility';
 import ActionVisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 const Style = {
     button: {
-        paddingTop: 8,
-        paddingLeft: 8,
-        paddingBottom: 8,
+        paddingTop: 6,
+        paddingLeft: 6,
+        paddingBottom: 6,
     },
 }
 const _hoverColor = '#EF5350';
@@ -44,7 +44,7 @@ export const Button = ({ id, styleColor, onTouchTap }) => {
 
 export const TButton = ({ label, onTouchTap }) => {
     let _hoverBgColr = '#E57373';
-    let _style = { color: '#BDBDBD', fontWeight: 'bold', paddingBottom: 10 }
+    let _style = { color: '#BDBDBD', fontWeight: 'bold', paddingBottom: 8, maxWidth: 100 }
     return <FlatButton
         labelStyle={_style} hoverColor={_hoverBgColr}
         label={label} onTouchTap={onTouchTap}

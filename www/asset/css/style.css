@@ -124,7 +124,6 @@ p {
 
 .header-channel {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-end;
     align-content: flex-start;
