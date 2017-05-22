@@ -169,7 +169,7 @@
 .itemBox-text-box a {
     text-decoration: none;
     outline: none;
-      /*background: #455A64*/
+    /*background: #455A64*/
     color: #455A64;
 }
 
@@ -206,6 +206,7 @@
     align-items: flex-start;
     align-content: flex-start;
 }
+
 .itemBox-tag-box p {
     margin-bottom: 0.3em;
 }
@@ -418,17 +419,18 @@
 
 .recommend {
     background: transparent;
-    max-width: 1024px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
     align-content: flex-start;
+    max-width: 1024px;
     margin-bottom: 15px;
 }
 
 @media screen and (max-width:480px) {
     .recommend {
-        background: transparent;
+        background: red;
         max-width: 320px;
         display: flex;
         flex-wrap: wrap;
@@ -453,7 +455,6 @@
 }
 
 .recommend-widget-c {
-    width: 100%;
     max-width: 320px;
     height: auto;
     background: transparent;

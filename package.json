@@ -4,7 +4,7 @@
   "description": "React-Gin-Postgres",
   "main": "server.js",
   "scripts": {
-    "wp": "webpack",
+    "wp": "webpack -p",
     "start": "node server.js"
   },
   "repository": {

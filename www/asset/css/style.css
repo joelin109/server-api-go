@@ -266,6 +266,12 @@ p {
     top: 55px;
 }
 
+@media screen and (max-width:1024px) {
+    .loc-top-1-2 {
+        right: 10px;
+    }
+}
+
 .loc-top-2 {
     position: fixed;
     top: 70px;
