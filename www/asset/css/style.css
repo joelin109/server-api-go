@@ -129,8 +129,8 @@ p {
     align-items: flex-end;
     align-content: flex-start;
     background: #317298;
-    margin-top: 44px;
     height: 38px;
+    padding-top: 44px;
     padding-bottom: 6px;
 }
 
@@ -268,7 +268,7 @@ p {
 
 @media screen and (max-width:1024px) {
     .loc-top-1-2 {
-        right: 10px;
+        right: 6px;
     }
 }
 
