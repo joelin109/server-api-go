@@ -110,6 +110,7 @@ class Admin extends React.Component {
 
                             <Switch>
                                 <Route exact path='/' component={AdminArticle} />
+                                <Route path='/admin.:channel' component={AdminArticle} />
                                 <Route path='/article?_t=:channel' component={AdminArticle} />
                                 <Route path='/deutsch?_t=:channel' component={AdminWord} />
                             </Switch>
