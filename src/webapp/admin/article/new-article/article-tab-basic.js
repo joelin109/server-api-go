@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField, RadioButtonGroup, RadioButton, Toggle, Checkbox, DropDownMenu, MenuItem } from 'material-ui';
 import * as act from './../../../setting/action'
+import * as util from './../../../util'
 import { Button, _colorLightGray, _colorSelected } from './../../../component/wui'
 
 const _action_Handle_Save = 'Action_Handle_Save';
@@ -17,6 +18,7 @@ export default class ArticleTabBasic extends React.Component {
             tag: '',
             coverSrc: '',
             coverThumbSrc: '',
+            coverSrcReload: false,
             title: '',
             subTitle: '',
             originalUrl: '',
@@ -35,7 +37,7 @@ export default class ArticleTabBasic extends React.Component {
         this._handle_item_channel = this._handle_item_channel.bind(this);
         this._handle_item_tag = this._handle_item_tag.bind(this);
         this._handle_item_coverSrc = this._handle_item_coverSrc.bind(this);
-        this._handle_item_conver_thumbSrc = this._handle_item_conver_thumbSrc.bind(this);
+        this._handle_item_cover_thumbSrc = this._handle_item_cover_thumbSrc.bind(this);
         this._handle_item_title = this._handle_item_title.bind(this);
         this._handle_item_subTitle = this._handle_item_subTitle.bind(this);
         this._handle_item_desc = this._handle_item_desc.bind(this);
@@ -123,9 +125,17 @@ export default class ArticleTabBasic extends React.Component {
     //Add or edit the word info.
     _handle_item_coverSrc(event, newValue) {
         this.state.coverSrc = newValue;
+
+        if (util.isImage(newValue)) {
+            this.setState({ coverSrcReload: true });
+        }
     }
-    _handle_item_conver_thumbSrc(event, newValue) {
+    _handle_item_cover_thumbSrc(event, newValue) {
         this.state.coverThumbSrc = newValue;
+
+         if (util.isImage(newValue)) {
+            this.setState({ coverSrcReload: false });
+        }
     }
     _handle_item_title(event, newValue) {
         this.state.title = newValue;
@@ -152,6 +162,7 @@ export default class ArticleTabBasic extends React.Component {
 
         let _coverSrc = this.state.coverSrc;
         let _coverThumbSrc = this.state.coverThumbSrc;
+        let _coverSrcDisplay = this.state.coverSrcReload;
         let _recommend = this.state.isRecommend;
         let _status = this.state.status;
         let _title = this.state.title;
@@ -169,7 +180,7 @@ export default class ArticleTabBasic extends React.Component {
                     <div className="content-line">
 
                         <div className="itemBox-img-box">
-                            <img className="itemBox-img-cover" src={_coverThumbSrc} />
+                            <img className="itemBox-img-cover" src={_coverSrcDisplay ? _coverSrc : _coverThumbSrc} />
                             <div className="itemBox-recommend">
                                 {_recommendButton}
                             </div>
@@ -209,6 +220,7 @@ export default class ArticleTabBasic extends React.Component {
                         floatingLabelFixed={true}
                     />
                     <TextField
+                        onChange={this._handle_item_cover_thumbSrc}
                         defaultValue={_coverThumbSrc}
                         className={_fieldClassName}
                         hintText="."

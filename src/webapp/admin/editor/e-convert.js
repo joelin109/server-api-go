@@ -12,7 +12,9 @@ export let toHtml = (editorContent) => {
 export let toEditorContent = (html) => {
     //const _contentBlocks = convertFromHTML(html);
     let _html = html.trim();
-    let _htmlChanged = (_html.length<7 || _html.indexOf('<img')<7) ? '<p></p>'+_html  : _html;
+    
+    let _imgCase = 0<=_html.indexOf('<img') && _html.indexOf('<img')<7; 
+    let _htmlChanged = (_html.length<7 || _imgCase) ? '<p></p>'+_html  : _html;
     
     const _contentBlocks = htmlToDraft(_htmlChanged).contentBlocks;
     const _contentState = ContentState.createFromBlockArray(_contentBlocks);
