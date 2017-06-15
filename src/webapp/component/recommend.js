@@ -55,7 +55,7 @@ class Recommend extends React.Component {
     render() {
         let demo1_src = 'asset/img/demo-r1.png';
         let demo2_src = 'asset/img/demo-r2.png';
-        let demo3_src = 'asset/img/demo-r3.png';
+        let demo3_src = 'https://3w-static.s3.amazonaws.com/asset/img/demo-r1.png';
         return (
             <div className="recommend">
                 <div className="recommend-widget-c">

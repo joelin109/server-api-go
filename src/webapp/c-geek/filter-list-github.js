@@ -10,17 +10,18 @@ class FilterListGithub extends React.Component {
     constructor() {
         super();
 
-        const fourYearAgo = new Date();
-        fourYearAgo.setFullYear(fourYearAgo.getFullYear() - 4);
-        fourYearAgo.setHours(0, 0, 0, 0);
+        const twoYearAgo = new Date();
+        twoYearAgo.setFullYear(twoYearAgo.getFullYear() - 1);
+        twoYearAgo.setMonth(0, 1);
+        twoYearAgo.setHours(0, 0, 0, 0);
 
         this.state = {
             stepIndex: 0,
             stepValue: [0, 10],
             language: 'JavaScript',
-            starSlider: 3000,
-            createdAt: fourYearAgo,
-            fromCache: true,
+            starSlider: 6000,
+            createdAt: twoYearAgo,
+            fromCache: false,
 
         };
     }
