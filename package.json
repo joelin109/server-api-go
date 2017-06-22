@@ -16,18 +16,18 @@
     "compression": "^1.6.2",
     "express": "^4.15.3",
     "path": "^0.12.7",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",
     "react-markdown": "^2.4.5",
-    "material-ui": "^0.17.2",
+    "material-ui": "^0.18.3",
     "react-tap-event-plugin": "^2.0.1",
     "draft-js": "^0.10.1",
     "immutable": "^3.8.1",
     "react-draft-wysiwyg": "^1.10.0",
     "draftjs-to-html": "^0.7.2",
     "html-to-draftjs": "^0.1.0-beta7",
-    "webpack": "^2.6.1"
+    "webpack": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
