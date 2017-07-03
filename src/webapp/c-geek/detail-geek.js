@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Drawer, Divider, Avatar, FlatButton, RaisedButton } from 'material-ui';
+import { Drawer, Divider, Avatar, RaisedButton } from 'material-ui';
 import ListItem from 'material-ui/List/ListItem';
 import * as act from './../setting/action'
-import { Button } from './../component/wui'
+import { Button, FButton } from './../component/wui'
 
 /* Modified for material-ui/Drawer/Drawer.js (Line 233)
 width: this.props.width >= 736 ?  '100%' : this.props.width || theme.width,
@@ -87,13 +87,13 @@ export default class DetailGeek extends React.Component {
 
                     <div className={_classNameHeader}>
                         <div className='draw-detail-root-container-header-box'>
-                            <Button id={'arrow_back'} onTouchTap={this._dispatch_close.bind(this)} />
+                            <Button id={'arrow_back'} onTouch={this._dispatch_close.bind(this)} />
                             <ListItem className="draw-detail-root-container-header-thumb"
                                 leftAvatar={<Avatar src={_userThumb} size={30} />}
                             >
                                 AuthorName
                         </ListItem>
-                            <Button id={'refresh'} onTouchTap={this._dispatch_close.bind(this)} />
+                            <Button id={'refresh'} onTouch={this._dispatch_close.bind(this)} />
                         </div>
                     </div>
 

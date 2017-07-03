@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatButton, FontIcon, FloatingActionButton } from 'material-ui';
 
-export const Cancel = ({ id = 'arrow_back', onTouchTap }) => {
+export const Cancel = ({ id = 'arrow_back', onTouch }) => {
     //let _icon = <Icon id={id} />;
     let _hoverColor = "#EF5350"
     let _icon = <FontIcon className="material-icons" color={'#E0E0E0'} >{id}</FontIcon>;
@@ -11,7 +11,7 @@ export const Cancel = ({ id = 'arrow_back', onTouchTap }) => {
         <FloatingActionButton
             className="detail-root-back-button"
             zDepth={2} backgroundColor={_bgColor}
-            onTouchTap={onTouchTap}>
+            onTouchTap={onTouch}>
             {_icon}
         </FloatingActionButton>
     </div>

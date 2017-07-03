@@ -1,6 +1,7 @@
 import React from 'react';
-import { Dialog, RaisedButton, FlatButton } from 'material-ui';
+import { Dialog, RaisedButton} from 'material-ui';
 import { Step, Stepper, StepButton, } from 'material-ui/Stepper';
+import { FButton } from './../component/wui'
 
 
 export default class FilterListBeer extends React.Component {
@@ -36,16 +37,8 @@ export default class FilterListBeer extends React.Component {
     render() {
         const title = "Sort & Filter"
         const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onTouchTap={this._handleCancel.bind(this)}
-            />,
-            <FlatButton
-                label="Confirm"
-                primary={true}
-                onTouchTap={this._handleConfirm.bind(this)}
-            />,
+            <FButton label="Cancel" onTouch={this._handleCancel.bind(this)}/>,
+            <FButton label="Confirm" onTouch={this._handleConfirm.bind(this)}/>,
         ];
 
         let content = <div style={{ width: '100%', maxWidth: 700, margin: 'auto', height: 400, }}>

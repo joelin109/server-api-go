@@ -55,14 +55,14 @@ export default class DetailHeader extends React.Component {
             <div className="draw-detail-root-container-header-box">
                 <div className="w-limit-60">
                     <div className="float-button colr-dark loc-top-1">
-                        <Button id={'arrow_back'} onTouchTap={this._handle_close} />
+                        <Button id={'arrow_back'} onTouch={this._handle_close} />
                     </div>
                 </div>
 
                 <div className="loc-box-content-between w-limit-120">
                     <div className="w-limit-60">
                         <div className="float-button colr-dark loc-top-1">
-                            <Button id={'save'} onTouchTap={this._handle_save} />
+                            <Button id={'save'} onTouch={this._handle_save} />
                         </div>
                     </div>
                     <div className="w-limit-60">

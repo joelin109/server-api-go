@@ -4,7 +4,6 @@ import { FlatButton } from 'material-ui';
 let _backgroundColor = app_Theme_Primary_Color
 class Paginator extends React.Component {
 
-
     render() {
         let pages = Math.ceil(this.props.total / this.props.pageSize);
         let hoverColor = "#EF5350"
@@ -16,7 +15,7 @@ class Paginator extends React.Component {
                     <FlatButton labelStyle={style} hoverColor={hoverColor}
                         backgroundColor={(this.props.page <= 1 ? 'transparent' : _backgroundColor)}
                         label={'Previous'} disabled={(this.props.page <= 1)}
-                        onTouchTap={this.props.onPrevious} />
+                        onClick={this.props.onPrevious} />
 
 
                     <div className="legend">{this.props.total}  • page {this.props.page}/{pages}</div>
@@ -25,7 +24,7 @@ class Paginator extends React.Component {
                     <FlatButton labelStyle={style} hoverColor={hoverColor}
                         backgroundColor={(this.props.page >= pages ? 'transparent' : _backgroundColor)}
                         label={'Next'} disabled={(this.props.page >= pages)}
-                        onTouchTap={this.props.onNext} />
+                        onClick={this.props.onNext} />
 
                 </div>
             );

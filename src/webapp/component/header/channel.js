@@ -62,10 +62,10 @@ export default class HeaderChannel extends Component {
     let _content = <div className="header-channel-hidden" />;
     if (_hidden === false) {
       _content = <div className="header-channel">
-        <TButton label={_topnews} onTouchTap={this._linkHandler.bind(this)} />
-        <TButton label={_geek} onTouchTap={this._linkHandler.bind(this)} />
-        <TButton label={_channel} onTouchTap={this._linkHandler.bind(this)} />
-        <TButton label={_deutsch} onTouchTap={this._linkHandler.bind(this)} />
+        <TButton label={_topnews} onTouch={this._linkHandler.bind(this)} />
+        <TButton label={_geek} onTouch={this._linkHandler.bind(this)} />
+        <TButton label={_channel} onTouch={this._linkHandler.bind(this)} />
+        <TButton label={_deutsch} onTouch={this._linkHandler.bind(this)} />
       </div>
     }
 

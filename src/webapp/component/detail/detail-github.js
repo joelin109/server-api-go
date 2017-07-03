@@ -39,7 +39,7 @@ export default class DetailGithub extends React.Component {
                 <div className='detail-root-body'>
                     <h1>React-Router-History-Back-Style</h1>
                     <Image color={'#00838F'} />
-                    <Cancel onTouchTap={this.back.bind(this)} />
+                    <Cancel onTouch={this.back.bind(this)} />
                 </div>
             </div>
         );

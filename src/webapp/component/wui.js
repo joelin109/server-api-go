@@ -34,25 +34,29 @@ const BasicIcon = ({ id, styleColor }) => {
     return <FontIcon className="material-icons" color={_color} hoverColor={_hoverColor}>{id}</FontIcon>;
 }
 
-export const Button = ({ id, styleColor, onTouchTap }) => {
+export const Button = ({ id, styleColor, onTouch }) => {
 
     let _styleColor = (typeof (styleColor) !== "undefined" && styleColor !== null) ? styleColor : _colorDefault
     let _icon = <BasicIcon id={id} styleColor={_styleColor} />
 
-    return <IconButton className="base-button" onTouchTap={onTouchTap}>{_icon}</IconButton>
+    return <IconButton className="base-button" onTouchTap={onTouch}>{_icon}</IconButton>
 }
 
-export const TButton = ({ label, onTouchTap }) => {
+export const FButton = ({ label, onTouch }) => {
+
+    return  <FlatButton label={label} primary={true} onTouchTap={onTouch}/>
+}
+
+export const TButton = ({ label, onTouch }) => {
     let _hoverBgColr = '#E57373';
     let _style = { color: '#BDBDBD', fontWeight: 'bold', paddingBottom: 8, maxWidth: 100 }
     return <FlatButton
         labelStyle={_style} hoverColor={_hoverBgColr}
-        label={label} onTouchTap={onTouchTap}
+        label={label} onClick={onTouch}
     />
 }
 
-
-export const SuperButton = ({ id, label, onTouchTap }) => {
+export const SuperButton = ({ id, label, onTouch }) => {
     let _icon = <BasicIcon id={id} styleColor={_colorLightGray} />;
     let _labelStyle = { color: '#616161', fontWeight: 'normal', paddingBottom: 8 }
 
@@ -60,11 +64,11 @@ export const SuperButton = ({ id, label, onTouchTap }) => {
         style={Style.button}
         icon={_icon}
         labelStyle={_labelStyle}
-        label={label} onTouchTap={onTouchTap} />
+        label={label} onTouchTap={onTouch} />
 
 }
 
-export const FloatingButton = ({ id = 'save', className = 'colr-default loc-btm-1', onTouchTap }) => {
+export const FloatingButton = ({ id = 'save', className = 'colr-default loc-btm-1', onTouch }) => {
     let _containerClassName = `${className}`.indexOf('loc-right-box') >= 0 ? 'loc-right-box' : 'loc-left-box'
     let _className = `float-button ${className}`.replace('loc-right-box', '');
 
@@ -77,7 +81,7 @@ export const FloatingButton = ({ id = 'save', className = 'colr-default loc-btm-
         _styleColor = _colorSelected
     }
 
-    let _button = <Button id={id} styleColor={_styleColor} onTouchTap={onTouchTap} />
+    let _button = <Button id={id} styleColor={_styleColor} onTouchTap={onTouch} />
 
     return <div className={_containerClassName}>
         <div className={_className}>

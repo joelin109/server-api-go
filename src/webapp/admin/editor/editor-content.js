@@ -110,7 +110,7 @@ export default class EditorContent extends React.Component {
         let _toolbar = this._defautToolbar();
         let _btm = <FloatingButton
             id="translate" className="colr-selected loc-btm-4"
-            onTouchTap={this._dispatch_editor_save} />;
+            onTouch={this._dispatch_editor_save} />;
 
         return (
             <div className="draw-detail-tab-content-editor">

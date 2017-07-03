@@ -99,6 +99,7 @@ export default class NewWord extends React.Component {
         return (
             <div>
                 <Drawer
+                    openSecondary={true}
                     className={_className}
                     containerClassName="w-limit-808"
                     width={808}
@@ -133,7 +134,7 @@ export default class NewWord extends React.Component {
                     </div>
 
                     <div>
-                        <FloatingButton onTouchTap={this._handle_save} />
+                        <FloatingButton onTouch={this._handle_save} />
                     </div>
                 </Drawer>
             </div>

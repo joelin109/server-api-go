@@ -220,7 +220,7 @@ export default class NewArticle extends React.Component {
                     </div>
 
                     <div>
-                        <FloatingButton onTouchTap={this._handle_tab_save} />
+                        <FloatingButton onTouch={this._handle_tab_save} />
                     </div>
                 </Drawer>
             </div>

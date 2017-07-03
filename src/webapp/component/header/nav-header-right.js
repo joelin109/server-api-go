@@ -51,8 +51,8 @@ export default class HeaderRight extends Component {
     return (
       <div className="header-right">
 
-        <Button id={'search'} onTouchTap={this._linkHandler2.bind(this)} />
-        <Button id={'person'} onTouchTap={this._linkHandler.bind(this)} />
+        <Button id={'search'} onTouch={this._linkHandler2.bind(this)} />
+        <Button id={'person'} onTouch={this._linkHandler.bind(this)} />
         <Link id={'home'} to="/#" />
 
       </div>

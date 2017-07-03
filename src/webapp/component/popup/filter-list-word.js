@@ -1,9 +1,9 @@
 import React from 'react';
-import { Dialog, RaisedButton, FlatButton } from 'material-ui';
+import { Dialog, RaisedButton} from 'material-ui';
 import { RadioButtonGroup, RadioButton, Slider, DatePicker, Toggle } from 'material-ui';
-//import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import { FButton } from './../wui'
 
 
 class FilterListWord extends React.Component {
@@ -61,16 +61,8 @@ class FilterListWord extends React.Component {
     render() {
         const title = "Sort & Filter"
         const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onTouchTap={this._handleCancel.bind(this)}
-            />,
-            <FlatButton
-                label="Confirm"
-                primary={true}
-                onTouchTap={this._handleConfirm.bind(this)}
-            />,
+            <FButton label="Cancel" onTouch={this._handleCancel.bind(this)} />,
+            <FButton label="Confirm" onTouch={this._handleConfirm.bind(this)} />,
         ];
 
         let content = <div className="popup-content">

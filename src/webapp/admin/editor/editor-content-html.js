@@ -42,7 +42,7 @@ export default class EditorContentHtml extends React.Component {
         let _html = { __html: this.state.editorHtml };
         let _btm = <FloatingButton
             id="swap_horiz" className="colr-selected loc-btm-3"
-            onTouchTap={this._dispatch_editor_save} />;
+            onTouch={this._dispatch_editor_save} />;
 
         return (
             <div className="draw-detail-tab-content-html">

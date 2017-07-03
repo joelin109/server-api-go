@@ -167,11 +167,11 @@ export default class ArticleTabBasic extends React.Component {
         let _status = this.state.status;
         let _title = this.state.title;
         let _recommendButton = <Button id={_recommend ? 'favorite' : 'favorite_border'} styleColor={_recommend ? _colorSelected : _colorLightGray}
-            onTouchTap={this._handle_item_recommend} />;
+            onTouch={this._handle_item_recommend} />;
         let _upButton = <Button id="thumb_up" styleColor={_status === 1 ? app_Theme_Primary_Color : _colorLightGray}
-            onTouchTap={this._handle_item_approval} />;
+            onTouch={this._handle_item_approval} />;
         let _downButton = <Button id="thumb_down" styleColor={_status === -1 ? app_Theme_Primary_Color : _colorLightGray}
-            onTouchTap={this._handle_item_unapproval} />;
+            onTouch={this._handle_item_unapproval} />;
 
         return (
 
