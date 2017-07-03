@@ -1,5 +1,4 @@
 import React from 'react';
-import { FontIcon } from 'material-ui';
 import { FloatingButton } from './../wui'
 import ListCard from './list-card'
 import Paginator from './paginator';
@@ -73,11 +72,6 @@ export default class List extends React.Component {
     _handle_list_refresh() {
         this.props.dispatch({ type: List_Refresh, data: '' });
         return false;
-    }
-
-    _fontIcon(id, color = '#EEEEEE') {
-        let _hoverColor = "#EF5350"
-        return <FontIcon className="material-icons" color={color} hoverColor={_hoverColor}>{id}</FontIcon>;
     }
 
     _adjustResult(result) {
