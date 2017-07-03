@@ -1,5 +1,4 @@
 import React from 'react';
-import { FloatingActionButton, FlatButton, Icoutton, FontIcon } from 'material-ui';
 import * as productService from './../service/dem/product-service';
 import * as act from './../setting/action';
 

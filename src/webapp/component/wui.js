@@ -39,12 +39,12 @@ export const Button = ({ id, styleColor, onTouch }) => {
     let _styleColor = (typeof (styleColor) !== "undefined" && styleColor !== null) ? styleColor : _colorDefault
     let _icon = <BasicIcon id={id} styleColor={_styleColor} />
 
-    return <IconButton className="base-button" onTouchTap={onTouch}>{_icon}</IconButton>
+    return <IconButton className="base-button" onClick={onTouch}>{_icon}</IconButton>
 }
 
 export const FButton = ({ label, onTouch }) => {
 
-    return  <FlatButton label={label} primary={true} onTouchTap={onTouch}/>
+    return  <FlatButton label={label} primary={true} onClick={onTouch}/>
 }
 
 export const TButton = ({ label, onTouch }) => {
@@ -73,21 +73,27 @@ export const FloatingButton = ({ id = 'save', className = 'colr-default loc-btm-
     let _className = `float-button ${className}`.replace('loc-right-box', '');
 
     let _styleColor = _colorDefault
+    let _realFloating = false
     if (_className.indexOf('colr-floating') >= 0) {
         _styleColor = app_Theme_Floating_Color
+        _realFloating = true
     } else if (_className.indexOf('colr-dark') >= 0) {
         _styleColor = _colorDarkGray
     } else if (_className.indexOf('colr-selected') >= 0) {
         _styleColor = _colorSelected
     }
 
-    let _button = <Button id={id} styleColor={_styleColor} onTouchTap={onTouch} />
+    let _button =  <Button id={id} styleColor={_styleColor} onTouch={onTouch} />
+
+    let _floatingIcon = <FontIcon className="material-icons" color={_colorDefault} >{id}</FontIcon>;
+    let _floatingButton = <FloatingActionButton zDepth={2} backgroundColor={app_Theme_Floating_Color}
+            onClick={onTouch}>{_floatingIcon}</FloatingActionButton>
 
     return <div className={_containerClassName}>
-        <div className={_className}>
-            {_button}
+            <div className={_className}>
+                {_realFloating ? _floatingButton : _button}
+            </div>
         </div>
-    </div>
 }
 
 

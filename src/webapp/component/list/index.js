@@ -1,5 +1,5 @@
 import React from 'react';
-import { FloatingActionButton, FontIcon } from 'material-ui';
+import { FontIcon } from 'material-ui';
 import { FloatingButton } from './../wui'
 import ListCard from './list-card'
 import Paginator from './paginator';
@@ -123,9 +123,9 @@ export default class List extends React.Component {
         let _new = '';
         let _refresh = '';
         if (this.props.admin !== null && this.props.admin) {
-            _new = <FloatingButton className="loc-right-box colr-floating loc-top-3 z-3"
+            _new = <FloatingButton className="loc-right-box colr-selected loc-top-3 z-3"
                 id="add" onTouch={this._handle_list_new} />
-            _refresh = <FloatingButton className="loc-right-box colr-floating loc-btm-1 z-3"
+            _refresh = <FloatingButton className="loc-right-box colr-selected loc-btm-1 z-3"
                 id="refresh" onTouch={this._handle_list_refresh} />
         }
 
@@ -144,14 +144,11 @@ export default class List extends React.Component {
                     onNext={this._dispatch_list_page_next.bind(this)}
                 />
 
-                <div className="loc-right-box">
-                    <FloatingActionButton className="loc-top-1-2 z-3"
-                        zDepth={2}
-                        backgroundColor={this.state.listFilterButtonBground}
-                        onTouchTap={this._handle_list_filter}>
-                        {this._fontIcon('filter_list')}
-                    </FloatingActionButton>
-                </div>
+         
+                <FloatingButton className="loc-right-box colr-floating loc-top-1-2 z-3"
+                        id="filter_list" onTouch={this._handle_list_filter}
+                />
+                          
                 {_new}{_refresh}
             </div>
         );
