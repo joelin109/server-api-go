@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dialog, RaisedButton} from 'material-ui';
-import { Step, Stepper, StepButton, } from 'material-ui/Stepper';
+import { Step, Stepper, StepButton} from 'material-ui/Stepper';
 import { FButton } from './../component/wui'
 
 

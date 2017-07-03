@@ -1,9 +1,7 @@
 import React from 'react';
-import spacing from 'material-ui/styles/spacing';
-import transitions from 'material-ui/styles/transitions';
-import typography from 'material-ui/styles/typography';
+import {Paper} from 'material-ui';
+import {spacing, transitions, typography} from 'material-ui/styles';
 import {grey300 } from 'material-ui/styles/colors';
-import Paper from 'material-ui/Paper';
 import withWidth, { MEDIUM, LARGE } from 'material-ui/utils/withWidth'
 
 const desktopGutter = spacing.desktopGutter;
