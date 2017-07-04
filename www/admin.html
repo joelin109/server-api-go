@@ -12,14 +12,19 @@
     <link href="asset/css/style-admin.css" rel="stylesheet" type="text/css">
 
     <script>
-        const app_Theme_Primary_Color = '#317298';//#00AEEF';//'#2B688E';
-        const app_Theme_Secondary_Color = '#E0E0E0'//'#00ACAC';//#00AEEF';
-        const app_Theme_Floating_Color = '#ff7277'//#00ACAC'; //##ff7277
+        const app_Theme_Primary_Color = '#317298'; //#00AEEF';//'#2B688E';
+        const app_Theme_Secondary_Color = '#E0E0E0' //'#00ACAC';//#00AEEF';
+        const app_Theme_Floating_Color = '#ff7277' //#00ACAC'; //##ff7277
 
         const app_Base_Url = window.location.origin;
-        const app_API_Http_URL = app_Base_Url; // 'http://52.221.45.133:8000/';
+        const app_API_Http_URL = 'http://127.0.0.1:1058/';
         const baseAPI_HTTP_BodyData = {
-            "filter":{"letter":"", "page":2, "page_num":1, "page_size": 18},
+            "filter": {
+                "letter": "",
+                "page": 2,
+                "page_num": 1,
+                "page_size": 18
+            },
             "Word": "besichtigen"
         };
     </script>
@@ -28,7 +33,7 @@
 <body>
 
     <div id="main" class="body-main"></div>
-
+    <script src="vendor_admin.dll.js"></script>
     <script src="admin.bundle.js"></script>
 
 </body>

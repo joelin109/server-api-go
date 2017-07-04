@@ -1,4 +1,3 @@
-import { api_result_ts } from './../../setting/data/github'
 import { itemCovers } from './../../setting/data'
 const covers = itemCovers;
 
@@ -19,31 +18,21 @@ export let findAll = (data) => {
     let _language = data.filter.language.toLowerCase();
     let _createdAt = _toString(data.filter.created_at);
     let _star = data.filter.star;
-    let _isCache = data.filter.is_cache;
+    let _isCache = false // data.filter.is_cache;
 
-    if (typeof (_isCache) !== "undefined" && _isCache === false) {
+    if (typeof(_isCache) !== "undefined" && _isCache === false) {
 
         apiurl = _apiBase + _createdAt + '%20language:' + _language + '%20stars:>=' + _star + '&sort=stars&page=' + _page;
         return fetch(apiurl)
             .then(response => {
                 return response.json();
             })
-    }
-    else {
+    } else {
 
-        let api_result = api_result_ts;
-        switch ('_language') {
-            case "golang":
-                api_result = api_result_go;
-                break;
-            case "python":
-                api_result = api_result_py;
-                break;
-            case "javascript":
-                api_result = api_result_js;
-                break;
-            default:
-                break;
+        let api_result = {
+            "total_count": 0,
+            "incomplete_results": false,
+            "items": []
         }
 
         return _asyncDemo(apiurl)
@@ -67,8 +56,8 @@ function _adjustResult(result) {
 }
 
 function _asyncDemo(api) {
-    var promise = new Promise(function (resolve, reject) {
-        setTimeout(function () {
+    var promise = new Promise(function(resolve, reject) {
+        setTimeout(function() {
             console.log('asyncFn1 is done');
             resolve('asyncFn1 value');
         }, 1000);
@@ -79,7 +68,7 @@ function _asyncDemo(api) {
 function _toString(date) {
     let _createdAt = "2013-03-13";
 
-    if (typeof (date) !== "undefined" && date !== null) {
+    if (typeof(date) !== "undefined" && date !== null) {
         let _year = date.getFullYear();
         let _month = date.getMonth() + 1;
         let _day = date.getDate();

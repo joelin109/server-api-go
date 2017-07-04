@@ -5,8 +5,7 @@ module.exports = {
     cache: true,
     devtool: "eval",
     entry: {
-        "index": './src/webapp/index.js',
-        //"admin": './src/webapp/admin.js',
+        "admin": './src/webapp/admin.js',
     },
     output: {
         path: path.resolve(__dirname, 'www'),
@@ -32,10 +31,6 @@ module.exports = {
     devtool: 'source-map',
 
     plugins: [
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./www/dll/manifest-vendor-dll.json')
-        }),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./www/dll/manifest-vendor_admin-dll.json')
