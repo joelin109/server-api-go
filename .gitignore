@@ -5,6 +5,7 @@ node_modules/
 www/dll/
 .idea
 *.xml
+*.log
 .DS_Store
 webapp/.DS_Store
 .vscode/launch.json
