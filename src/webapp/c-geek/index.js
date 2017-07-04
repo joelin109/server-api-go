@@ -18,7 +18,7 @@ export default class Geek extends React.Component {
             pageSize: 30,
             total: 0,
             page: 1,
-            filterData: { language: 'JavaScript', star: 3000 },
+            filterData: { language: 'JavaScript', star: 10000, createdAt: new Date('2014-03-23')},
             filterVisible: false,
             detailObject: {},
             detailVisible: false,
