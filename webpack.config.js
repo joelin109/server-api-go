@@ -30,16 +30,13 @@ module.exports = {
     stats: {
         colors: true
     },
-    devtool: 'source-map',
+    devtool: 'eval',
+    //devtool: 'cheap-module-source-map',
 
     plugins: [
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./www/dll/manifest-vendor-dll.json')
-        }),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./www/dll/manifest-vendor_admin-dll.json')
         })
     ]
 };
