@@ -11,14 +11,14 @@ class FilterListGithub extends React.Component {
 
         const twoYearAgo = new Date();
         twoYearAgo.setFullYear(twoYearAgo.getFullYear() - 1);
-        twoYearAgo.setMonth(4, 1);
+        twoYearAgo.setMonth(3, 26);
         twoYearAgo.setHours(0, 0, 0, 0);
 
         this.state = {
             stepIndex: 0,
             stepValue: [0, 10],
             language: 'JavaScript',
-            starSlider: 6100,
+            starSlider: 6200,
             createdAt: twoYearAgo,
             fromCache: false,
 

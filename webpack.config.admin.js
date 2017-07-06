@@ -28,8 +28,8 @@ module.exports = {
     stats: {
         colors: true
     },
-    devtool: 'eval',
-   //devtool: 'cheap-module-source-map',
+    //devtool: 'eval',
+    devtool: 'cheap-module-source-map',
 
     plugins: [
         new webpack.DllReferencePlugin({

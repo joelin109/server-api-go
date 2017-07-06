@@ -5,8 +5,8 @@
     "main": "server.js",
     "scripts": {
         "dll": "webpack -p --config=webpack.dll.js",
-        "i": "webpack -p",
-        "a": "webpack -p --config=webpack.config.admin.js",
+        "i": "webpack -p --progress --colors",
+        "a": "webpack --progress --colors --config=webpack.config.admin.js",
         "start": "node server.js"
     },
     "repository": {
