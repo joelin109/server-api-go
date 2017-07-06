@@ -1,5 +1,6 @@
 # Distribution / packaging
 .vscode/
+vscode/
 vendor/
 node_modules/
 www/dll/
