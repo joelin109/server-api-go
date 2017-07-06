@@ -1,12 +1,13 @@
 package msql
 
 import (
-	"server-api-go/src/service/model"
-	"github.com/jinzhu/gorm"
-	"server-api-go/src/service/_conf"
-	"fmt"
 	"database/sql"
+	"fmt"
+	"server-api-go/src/service/_conf"
+	"server-api-go/src/service/model"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 /*func bar(baz interface{}) {
@@ -22,20 +23,19 @@ default: // f is some other type
 }
 }*/
 
-
 func InitGormDB2() {
 
 	/*
-	var err error
-	Db, err = gorm.Open("postgres", "user=puis sslmode=disable")
-	if err != nil {
-		revel.ERROR.Println("FATAL", err)
-		panic(err)
-	}
-	tab := &models.User{}
-	Db.AutoMigrate(tab)
-	Db.Model(tab).AddUniqueIndex("idx_user__gmail", "gmail")
-	Db.Model(tab).AddUniqueIndex("idx_user__pu_mail", "pu_mail")*/
+		var err error
+		Db, err = gorm.Open("postgres", "user=puis sslmode=disable")
+		if err != nil {
+			revel.ERROR.Println("FATAL", err)
+			panic(err)
+		}
+		tab := &models.User{}
+		Db.AutoMigrate(tab)
+		Db.Model(tab).AddUniqueIndex("idx_user__gmail", "gmail")
+		Db.Model(tab).AddUniqueIndex("idx_user__pu_mail", "pu_mail")*/
 
 	// db, err := gorm.Open("postgres", DB_Connection)
 	// defer db.Close()
@@ -60,7 +60,7 @@ func InitGormDB() []model.ContentWord {
 	fmt.Println("InitGormDB")
 	var _new_words = []model.ContentWord{}
 	for _, word := range words {
-		word.CreatedAt = word.CreateDate.Format("2006-01-02 15:04:05")
+		word.UpdatedAt = word.UpdateDate.Format("2006-01-02 15:04:05")
 		_new_words = append(_new_words, word)
 	}
 	return _new_words
@@ -68,23 +68,19 @@ func InitGormDB() []model.ContentWord {
 
 }
 
-
-
 func InitGoDB() []model.ContentWord {
 
 	fmt.Println("InitGoDB")
 	fmt.Println(conf.DB_Conn_Postgres)
 	db, err := sql.Open("postgres", conf.DB_Conn_Postgres)
 
-
 	var usersArray = []model.ContentWord{}
 
 	if err != nil {
 
 		fmt.Println(err)
-		return usersArray;
+		return usersArray
 	} else {
-
 
 		var sqlStr = "SELECT id, \"Wort\", \"WortSex\", \"En\", \"IsRegel\", \"UpdateDate\" " +
 			"FROM content_dictionary_de WHERE \"IsRecommend\" = 0"
@@ -110,7 +106,7 @@ func InitGoDB() []model.ContentWord {
 
 				err := rows.Scan(&word.ID, &word.Wort, &word.WortSex, &s, &word.IsRegel, &updatedate)
 
-				word.CreatedAt = updatedate.Format("2006-01-02 15:04:05")
+				word.UpdatedAt = updatedate.Format("2006-01-02 15:04:05")
 				word.En = ""
 				if s.Valid {
 					word.En = s.String
@@ -148,6 +144,6 @@ func InitGoDB() []model.ContentWord {
 		defer db.Close()
 
 		//fmt.Println(usersArray)
-		return usersArray;
+		return usersArray
 	}
 }
