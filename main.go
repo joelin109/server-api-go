@@ -17,6 +17,7 @@ func main() {
 		_fileAbsolutePath := "./www/" + _file
 		router.StaticFile(_file, _fileAbsolutePath)
 	}
+
 	router.LoadHTMLFiles("www/index.html")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
