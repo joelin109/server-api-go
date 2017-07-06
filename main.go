@@ -12,11 +12,11 @@ func main() {
 	router := gin.Default()
 	api.RegisterRoutes(router)
 
-	router.StaticFile("asset/css/style.css", "./www/asset/css/style.css")
-	router.StaticFile("asset/css/style-index.css", "./www/asset/css/style-index.css")
-	router.StaticFile("asset/img/demo-r1.png", "./www/asset/img/demo-r1.png")
-	router.StaticFile("vendor.dll.js", "./www/vendor.dll.js")
-	router.StaticFile("index.bundle.js", "./www/index.bundle.js")
+	files := [...]string{"asset/css/style.css", "asset/css/style-index.css", "asset/img/demo-r1.png", "vendor.dll.js", "index.bundle.js"}
+	for _, _file := range files {
+		_fileAbsolutePath := "./www/" + _file
+		router.StaticFile(_file, _fileAbsolutePath)
+	}
 	router.LoadHTMLFiles("www/index.html")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
