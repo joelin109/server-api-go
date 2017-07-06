@@ -1,0 +1,2 @@
+*.js linguist-language=Golang
+*.css linguist-language=Golang
