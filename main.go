@@ -8,15 +8,15 @@ import (
 )
 
 func main() {
-	// initialize gin
+	// initialize gin, register API
 	router := gin.Default()
 	api.RegisterRoutes(router)
 
-	router.StaticFile("asset/css/styles6.css", "./www/asset/css/styles6.css")
-	router.StaticFile("asset/css/styles.css", "./www/asset/css/styles.css")
-	router.StaticFile("assets/styles/salesforce-lightning-design-system.min.css", "./assets/styles/salesforce-lightning-design-system.min.css")
-	router.StaticFile("app.bundle.js", "./www/app.bundle.js")
-	router.StaticFile("app.bundle2.js", "./www/app.bundle2.js")
+	router.StaticFile("asset/css/style.css", "./www/asset/css/style.css")
+	router.StaticFile("asset/css/style-index.css", "./www/asset/css/style-index.css")
+	router.StaticFile("asset/img/demo-r1.png", "./www/asset/img/demo-r1.png")
+	router.StaticFile("vendor.dll.js", "./www/vendor.dll.js")
+	router.StaticFile("index.bundle.js", "./www/index.bundle.js")
 	router.LoadHTMLFiles("www/index.html")
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
