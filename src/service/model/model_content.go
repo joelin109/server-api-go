@@ -10,6 +10,7 @@ const (
 	ArticleStatusOffline
 )
 
+//ContentWord struct is the model for table,content_dictionary_de
 type ContentWord struct {
 	ID            int       `gorm:"primary_key"             json:"id"`
 	Wort          string    `gorm:"column:wort"             json:"wort"      sql:"not null;unique"  binding:"required"`
@@ -30,6 +31,7 @@ type ContentWord struct {
 	UpdatedAt     string    `gorm:"-"                       json:"last_update_date"`
 }
 
+// TableName is for setting tablename for ContentWord struct model
 func (*ContentWord) TableName() string {
 	return "content_dictionary_de"
 }
@@ -38,30 +40,25 @@ func (self *ContentWord) FormatDate() {
 	self.UpdatedAt = self.UpdateDate.Format("2006-01-02 15:04:05")
 }
 
-// 抓取的文章信息
+// Article struct is the model for table,content_article
 type Article struct {
-	ID        int    `json:"id" xorm:"pk autoincr"`
-	Domain    string `json:"domain"`
-	Name      string `json:"name"`
-	Title     string `json:"title"`
-	Cover     string `json:"cover"`
-	Author    string `json:"author"`
-	AuthorTxt string `json:"author_txt"`
-	Lang      int    `json:"lang"`
-	PubDate   string `json:"pub_date"`
-	URL       string `json:"url"`
-	Content   string `json:"content"`
-	Txt       string `json:"txt"`
-	Tags      string `json:"tags"`
-	CSS       string `json:"css"`
-	Viewnum   int    `json:"viewnum"`
-	Cmtnum    int    `json:"cmtnum"`
-	Likenum   int    `json:"likenum"`
-	Top       uint8  `json:"top"`
-	Status    int    `json:"status"`
-	OpUser    string `json:"op_user"`
+	ID                int       `gorm:"primary_key"                json:"id"`
+	CoverThumbnailSrc string    `gorm:"column:cover_thumbnail_src" json:"cover_thumbnail_src" sql:"not null"   binding:"required"`
+	CoverSrc          string    `gorm:"column:cover_src"           json:"cover_src"`
+	Title             string    `gorm:"column:title"               json:"title" sql:"not null"   binding:"required"`
+	SubTitle          string    `gorm:"column:subtitle"            json:"subtitle"`
+	OriginalURL       string    `gorm:"column:original_url"        json:"original_url"`
+	Desc              string    `gorm:"column:desc"                json:"desc"`
+	Formatype         string    `gorm:"column:format_type"         json:"format_type"`
+	BodyMatchLevel    int8      `gorm:"column:body_match_level"    json:"body_match_level"`
+	ChannelID         string    `gorm:"column:channel_id"          json:"channel_id"`
+	TagID             string    `gorm:"column:tag_id"              json:"tag_id"`
+	PublishAt         string    `gorm:"column:publish_at"          json:"publish_at"`
+	IsRecommend       int8      `gorm:"column:is_recommend"        json:"is_recommend"`
+	PublishStatus     int8      `gorm:"column:publish_status"      json:"publish_status"`
+	LastUpdateDate    time.Time `gorm:"column:last_update_date"    json:"last_update_date"`
 }
 
 func (*Article) TableName() string {
-	return "articles"
+	return "content_article"
 }
