@@ -9,6 +9,7 @@ $ glide --version
 <br>
 
 ### Setup
+```
 $ git clone https://github.com/joelin109/server-api-go.git
 $ cd server-api-go
 ```
