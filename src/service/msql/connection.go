@@ -3,7 +3,7 @@ package msql
 import (
 	"fmt"
 
-	"server-api-go/src/service/_conf"
+	"../_conf"
 
 	"strings"
 

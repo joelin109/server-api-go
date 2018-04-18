@@ -2,10 +2,10 @@ package logic
 
 import (
 	"fmt"
-	"server-api-go/src/service/model"
-	"server-api-go/src/service/msql"
-	"server-api-go/src/service/util"
 	"time"
+	"../model"
+	"../msql"
+	"../util"
 )
 
 type DictionaryLogic struct{}

@@ -3,8 +3,8 @@ package api
 import (
 	"fmt"
 
-	"server-api-go/src/service/model"
-	"server-api-go/src/service/logic"
+	"../model"
+	"../logic"
 
 	"github.com/gin-gonic/gin"
 )

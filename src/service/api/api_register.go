@@ -2,9 +2,8 @@ package api
 
 import (
 	"net/http"
-
-	"server-api-go/src/service/_conf"
 	"github.com/gin-gonic/gin"
+	"../_conf"
 )
 
 func RegisterRoutes(router *gin.Engine) {

@@ -2,9 +2,8 @@ package main
 
 import (
 	"net/http"
-	"server-api-go/src/service/api"
-
 	"github.com/gin-gonic/gin"
+	"./src/service/api"
 )
 
 func main() {

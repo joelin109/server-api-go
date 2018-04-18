@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"encoding/json"
 
-	"server-api-go/src/service/util"
+	"../util"
 )
 
 
